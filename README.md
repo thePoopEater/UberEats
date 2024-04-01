@@ -1,2 +1,2 @@
-# uberEats
-This is a uber eats full stack developer project.
+# UberEats
+This is a Uber Eats backend course project.
