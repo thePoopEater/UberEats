@@ -6,7 +6,9 @@ Con el auge de las aplicaciones de entrega de alimentos, como Uber Eats, surge l
 una gestión eficiente de repartidores y pedidos. El equipo se enfrenta al desafio de diseñar una 
 plataforma integral que no solo asigne óptimamente pedidos a repartidores en tiempo real, considerando la distancia y la carga de trabajo, sino que también brinde herramientas de seguimiento 
 y comunicación para garantizar la satisfacción del cliente y la seguridad de los repartidores.
-**Problema Clave:** La asignación ineficiente de repartidores a pedidos está causando tiempos de 
+
+### **Problema Clave** 
+La asignación ineficiente de repartidores a pedidos está causando tiempos de 
 entrega prolongados y una experiencia insatisfactoria para los clientes.
 
 ## Frontend
