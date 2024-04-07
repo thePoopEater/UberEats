@@ -1,7 +1,7 @@
 # UberEats
 _This is a Uber Eats project Course_
 ___________________________________
-Equipo de Gestión de Reparto de Pedidos *(Uber Eats)*:
+## Equipo de Gestión de Reparto de Pedidos *(Uber Eats)*
 Con el auge de las aplicaciones de entrega de alimentos, como Uber Eats, surge la necesidad de 
 una gestión eficiente de repartidores y pedidos. El equipo se enfrenta al desafio de diseñar una 
 plataforma integral que no solo asigne óptimamente pedidos a repartidores en tiempo real, considerando la distancia y la carga de trabajo, sino que también brinde herramientas de seguimiento 
