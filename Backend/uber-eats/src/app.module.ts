@@ -1,19 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ControllersModule } from './controllers/controllers.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DatabaseModule } from './database/database.module';
-import { LocalService } from './providers/local/local.service';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { DatabaseModule } from './database/database.module'; 
 
 @Module({
-  imports: [ControllersModule,
-    ConfigModule.forRoot({
-      isGlobal:true,
-    }),
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
+      imports: [ConfigModule], 
       useFactory: (configService: ConfigService) => ({
         type: 'mysql',
         host: configService.get('DB_HOST'),
@@ -21,15 +17,14 @@ import { LocalService } from './providers/local/local.service';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [__dirname + 'dist/**/*.entity{.ts,.js}'],
         synchronize: true,
         autoLoadEntities: true,
       }),
-      inject:[ConfigService]
+      inject: [ConfigService],  
     }),
-    DatabaseModule
+    DatabaseModule,  
   ],
   controllers: [AppController],
-  providers: [AppService, LocalService],
+  providers: [AppService],
 })
 export class AppModule {}

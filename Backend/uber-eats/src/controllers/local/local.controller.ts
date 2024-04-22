@@ -1,4 +1,6 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
+import { LocalService }  from 'src/providers/local/local.service';
 
-@Controller('local')
-export class LocalController {}
+@Controller('local')  
+export class LocalController {
+}

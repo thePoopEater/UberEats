@@ -1,10 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({name:'local'})
-export class Local{
-    @PrimaryGeneratedColumn()
-    id: number
+@Entity()
+export class Local {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    fnombre: string
+  @Column()
+  nombre: string;
+
 }
