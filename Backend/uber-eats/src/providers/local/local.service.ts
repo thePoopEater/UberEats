@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository  } from '@nestjs/typeorm'
-import { Local } from  './local.entity'
-import { Repository, FindManyOptions} from 'typeorm'
+import { Local } from  'src/database/entities/local.entity'
+import { Repository} from 'typeorm'
 
 @Injectable()
 export class LocalService {
     constructor(
-        @InjectRepository(Local)
-        private readonly: localRepository: Repository<Local>,
+        @InjectRepository(Local) private readonly localRepository: Repository<Local>,
+
     ){}
 
     public async getAllLocals(): Promise<Local[]>  {
@@ -22,3 +22,4 @@ export class LocalService {
             throw new Error(error);
         }
     }
+}
