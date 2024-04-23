@@ -8,4 +8,19 @@ export class Local {
   @Column()
   nombre: string;
 
+  @Column()
+  horario: string;
+
+  @Column()
+    tarifa_base: number;
+
+  @Column()
+    dirección: string;
+
+  @Column()
+    categoría: string;
+    
+  @Column()
+    calificacion_total: number;
+
 }
