@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { UserController } from './user/user.controller';
 import { LocalController } from './local/local.controller';
+import { ProductController } from './product/product.controller';
 
 @Module({
     imports:[],
-    controllers: [UserController, LocalController],
+    controllers: [LocalController, ProductController],
     providers:[]
 })
 export class ControllersModule {}
