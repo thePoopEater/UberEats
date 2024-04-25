@@ -6,6 +6,8 @@ import { ClienteService } from 'src/providers/cliente/cliente.service',
 
 @Controller('cliente')
 export class ClienteController {
+    constructor(private readonly ClienteService: ClienteService) {}
+
     @Post()
     async postCliente(@Body() request: IPostClienteRequest): Promise <IPostClienteResponse> {
         console.log('@POST');
