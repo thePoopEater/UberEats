@@ -15,7 +15,7 @@ export class Cliente {
   @Column()
   contraseña: string;
 
-  @OneToMany(()=> Direccion, (direccion) => direccion.cliente)
-  direcciones: Direccion[];
+  @OneToMany(() => Direccion, (direccion) => direccion.cliente)
+  direcciones: Direccion[]; 
 
 }

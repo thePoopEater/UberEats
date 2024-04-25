@@ -13,6 +13,6 @@ export class Direccion {
   descripcion: string;
 
   @ManyToOne(() => Cliente, (cliente) => cliente.direcciones)
-  @JoinColumn({name:'cliente_id'})
-  cliente:  Cliente;
+  @JoinColumn({ name: 'cliente_id' })
+  cliente: Cliente; 
 }
