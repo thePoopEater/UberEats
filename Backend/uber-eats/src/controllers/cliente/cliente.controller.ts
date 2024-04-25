@@ -2,7 +2,7 @@ import { Controller, Post, Body} from '@nestjs/common';
 import { IPostClienteRequest } from './dto/IPostClienteRequest';
 import { IPostClienteResponse } from './dto/IPostClienteResponse';
 import { Cliente } from  'src/database/entities/cliente.entity';
-import { ClienteService } from 'src/providers/cliente/cliente.service',
+import { ClienteService } from 'src/providers/cliente/cliente.service';
 
 @Controller('cliente')
 export class ClienteController {
@@ -21,6 +21,7 @@ export class ClienteController {
         if  (request) {
 
             const newCliente: Cliente={
+                id: request.id,
                 nombre: request.nombre,
                 apellido: request.apellido,
                 contraseña:  request.contraseña,

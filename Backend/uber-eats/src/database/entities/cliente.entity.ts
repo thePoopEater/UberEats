@@ -12,6 +12,6 @@ export class Cliente {
   apellido: string;
 
   @Column()
-  contraseña: number;
+  contraseña: string;
 
 }

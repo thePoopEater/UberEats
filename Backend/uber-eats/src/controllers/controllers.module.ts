@@ -15,4 +15,4 @@ import { ClienteService }  from 'src/providers/cliente/cliente.service';
     controllers:[LocalController, ClienteController],
     providers:[LocalService, ClienteService]
 })
-export class ControllersModule {}
+export class ControllersModule {} 
