@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
+import { Cliente } from 'src/database/entities/cliente.entity';
 
 @Entity()
 export class Direccion {
@@ -11,4 +12,7 @@ export class Direccion {
   @Column()
   descripcion: string;
 
+  @ManyToOne(() => Cliente, (cliente) => cliente.direcciones)
+  @JoinColumn({name:'cliente_id'})
+  cliente:  Cliente;
 }
