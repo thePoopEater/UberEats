@@ -8,7 +8,7 @@ export class LocalCreateDTO {
     
     @IsNotEmpty()
     @IsString()
-    direction : string;
+    address : string;
     
     @IsString()
     schedule : string;

@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm';
+import { ProductEntity } from './product.entity';
 
 @Entity({name : 'local'})
 export class LocalEntity {
@@ -16,5 +17,11 @@ export class LocalEntity {
 
     @Column()
     address : string;
+
+    @Column()
+    schedule : string;
+
+    @OneToMany(() => ProductEntity, (product) => product.local)
+    products : ProductEntity[]
     
 }

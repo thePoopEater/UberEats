@@ -13,4 +13,9 @@ export class LocalService {
         const result = this.localRepository.create(local);
         return await this.localRepository.save(result);
     }
+
+    async getLocal(idLocal : number) : Promise<LocalEntity> {
+        return await this.localRepository.findOne({where:{id:idLocal}});
+    }
+
 }

@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn,ManyToOne ,Column, JoinColumn} from 'typeorm';
+import { LocalEntity } from './local.entity';
 
 @Entity({name : 'product'})
 export class ProductEntity {
@@ -20,4 +21,8 @@ export class ProductEntity {
     @Column()
     images : string;
 
+    //NOTE:Esta es para hacer la foreing key de local con producto
+    @ManyToOne(() => LocalEntity, (local) => local.products)
+    @JoinColumn({name: 'local_id'})
+    local : LocalEntity;
 }

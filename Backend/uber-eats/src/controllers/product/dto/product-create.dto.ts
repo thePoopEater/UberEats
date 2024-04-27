@@ -14,4 +14,8 @@ export class ProductCreateDTO {
 
     @IsString()
     images : string;
+
+    @IsNotEmpty()
+    @IsNumber()
+    local_id : number;
 }
