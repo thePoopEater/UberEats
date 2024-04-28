@@ -1,0 +1,221 @@
+
+
+.product-pag {
+    max-width: 27rem;
+    margin: auto;
+    background-color: #F4F4F4;
+    border: none;
+    margin-left: -1px;
+
+}
+
+.product-pag div {
+    margin-bottom: .2rem;
+}
+/*CSS para header (botton)*/
+
+.header-product {
+    position: relative;
+    background-color: #fff;
+}
+
+.button-back {
+    position: absolute;
+}
+
+.button-back button {
+    background-color: #fff;
+    border: none;
+    clip-path: circle(50%);
+    width: 2rem;
+    height: 2rem;
+}
+
+.button-back svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: auto;
+}
+.button-back {
+    padding: .5rem;
+}
+
+/* CSS Header img */
+.image-product {
+    max-width: 25rem;
+    max-height: 10rem;
+}
+.image-product img{
+    width: 27rem;
+    height: 10rem;
+}
+
+/*CSS Para la descripción */
+.description-prod h2, h3 {
+    font-size: 1.2rem;
+    padding-left: .5rem;
+}
+
+.description-prod p{
+    font-size: 0.8rem;
+    color:#5a6876cd; 
+    padding: .5rem 0;
+    padding-left: .5rem;
+}
+.description-prod h3 {
+    color: #5a6876;
+    padding-left: .5rem;
+}
+
+.description-prod {
+    padding: 1.5rem 0;
+}
+
+.description-prod, .compra-juntos, .special-inst {
+    background-color: #fff;
+}
+
+/*CSS Instrucciones especiales*/
+
+.aditional-ins{
+    width: 96%;
+    height: 6rem;
+    margin: 1rem .5rem;
+    border: none;
+    background-color: #F4F4F4;
+    border-radius: 10px;
+}
+
+.aditional-ins h3 {
+    font-size: 1rem;
+}
+.aditional-ins::placeholder {
+    font-size: 10px;
+    top: -12px;
+    left: 0;
+}
+
+textarea{
+    resize:none;
+    font-size: 10px;
+}
+
+textarea:focus {
+    box-shadow: none;
+    outline: none;
+    background-position:0 0;
+}
+
+
+textarea::-webkit-scrollbar {
+    width: 0 !important;
+
+}
+
+/*Boton mas menos*/
+
+.buttons-incDec-container {
+    padding: .5rem;
+}
+.buttons-span {
+    background-color: #D1D1D1;
+    width: 5rem;
+    height: 1.2rem;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons-span span {
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.minus, .plus{
+    cursor: pointer;
+}
+
+.num {
+    cursor: default;
+}
+
+.minus {
+    color: grey ;
+}
+.buttons-span span.num {
+    font-size: 8px;
+}
+
+/* Suelen acompañarse*/
+
+.compra-juntos {
+    padding-top: .5rem;
+    display: grid;
+    grid-template-columns: 1fr .4fr;
+}
+
+.container-commpra-juntos {
+    padding-top: .5rem;
+    background-color: #fff;
+}
+.other-prod h3, .other-prod h4, .other-prod p {
+    padding: 0 .5rem;
+}
+
+.compra-juntos {
+    height: 8rem;
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+.span-button {
+
+    position: relative;
+}
+
+.span-plus {
+    position: absolute;
+    margin-top: -2.2rem;
+    margin-left: 4.8rem;
+    background-color: #fff;
+    border-radius: 15px;
+    width: 2rem;
+    height: 2rem;
+}
+.span-plus span{
+    margin-left: .6rem;
+    margin-top: .6rem;
+    text-align: center;
+}
+.img-extra-food {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 8px;
+}
+/*Boton agregar al carrito*/
+.agregar-carrito-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding-top: 0.5rem;
+
+}
+
+.button-add-car button{
+    color: white;
+    background-color: black;
+    border:none;
+    border-radius: 5px;
+    height: 3rem;
+
+}
+.button-add-car {
+    margin-left: 6rem;
+    width: 95%;
+}
+

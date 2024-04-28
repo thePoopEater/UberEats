@@ -1,0 +1,125 @@
+<div class="botones-superiores">
+  
+  <button class="boton">
+    <img class="img-superior" src="assets\imagenes\iconocerrar.png">
+  </button>
+
+  <div class ="botones-superiores-izq">
+    <button class="boton">
+      <img class="img-superior" src="assets\imagenes\iconobuscarlocal.png">
+    </button>
+
+    <button class="boton">
+      <img class="img-superior" src="assets\imagenes\iconocorazonlocal.png">
+    </button>
+
+    <button class="boton">
+      <img class="img-superior" src="assets\imagenes\iconoinfolocal.png">
+    </button>
+  </div>
+
+</div>
+
+
+
+<div >
+  <img class = "img-encabezado" src="assets\imagenes\encabezadorestaurante.jpeg">
+</div>
+
+<div>
+  <p class = "titulo">Nombre Restaurante</p>
+  <p class = "texto-superior"> 
+    <a style="color:black">4.5 </a>
+    <img class = "img-texto-superior" src="assets\imagenes\estrellalocal.png"> 
+     (500+) · Costo de envío: CLP 500 · 2.2 km
+  </p>
+</div>
+
+<div class="tabla-contenedor">
+  <table>
+    <thead> 
+      <tr> 
+        <th>
+          Costo de envío: CLP 500
+          <div style="color: grey">
+            Precios y tarifas
+          </div>
+        </th> 
+        <th class="separator"></th> 
+        <th style="width: 500px;">
+          15-30 min
+          <div style="color: grey">
+            Hora de entrega
+          </div>
+        </th> 
+      </tr> 
+    </thead> 
+  </table>
+</div>
+
+
+
+
+
+
+
+
+<div>
+
+  <p class = "titulo-categoria">Promociones</p>
+
+  
+        
+    <div *ngFor="let producto of productos" class="producto">
+      
+      <div class="productos-container">
+        <a class="enlace-producto" href="#">
+        <div class="info">
+
+          <h3 class="titulo-producto">{{ producto.nombre }}</h3>
+          <p class="precio-producto">${{ producto.precio }}</p>
+          <p class="info-producto">{{ producto.descripcion }}</p>
+          
+        </div>
+        <img [src]="producto.imagenUrl" alt="{{ producto.nombre }}">
+        
+        </a>
+      
+      </div>
+      <hr>
+  </div>
+
+  <hr class="hr-final">
+  
+  
+  
+        
+
+</div>
+
+<div>
+  
+  <p class = "titulo-categoria">Promociones</p>
+        
+    <div *ngFor="let producto of productos" class="producto">
+
+<!-- AQUI FALTA LA FUNCION DE AGREGAR VARIAS OPCIONES APRETANDO EL BOTON "+" -->
+      
+      <div class="productos-container">
+        <a class="enlace-producto" href="#">
+        <div class="info">
+          <h3 class="titulo-producto">{{ producto.nombre }}</h3>
+          <p class="precio-producto">${{ producto.precio }}</p>
+          <p class="info-producto">{{ producto.descripcion }}</p>
+        </div>
+        <img [src]="producto.imagenUrl" alt="{{ producto.nombre }}">
+        
+        </a>
+      
+      </div>
+      <hr>
+  </div>
+
+  <hr class="hr-final">
+
+</div>

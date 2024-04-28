@@ -1,0 +1,81 @@
+<div>
+  <a href="">
+    <img class = "botones-superiores" src="assets/imagenes/imagenes-carrito/iconocerrarnegro.png">
+
+  </a>
+  <h1 class = "titulo-carrito">Nombre Restaurante</h1>
+</div>
+
+<div>
+  <div *ngFor="let producto of productos" class="producto">
+    <div class="productos-container">
+      <div class="enlace-producto">
+        <img [src]="producto.imagenUrl" alt="{{ producto.nombre }}">
+        <div class="info">
+          <h3 class="titulo-producto">{{ producto.nombre }}</h3>
+          <p class="precio-producto">${{ producto.precio }}</p>
+        </div>
+        <div class="grid-container">
+          <div class="producto">
+            <button class="boton-agregar">
+              <img style="height: 10px; width: 10px;" src="assets/imagenes/imagenes-carrito/iconoeliminarcarrito.png">
+            </button>
+            <span class="cantidad">{{producto.cantidad}}</span>
+            <button class="boton-eliminar">
+              <img style="height: 10px; width: 10px;" src="assets/imagenes/imagenes-carrito/iconoagregarcarrito.png">
+            </button>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+  </div>
+  
+  <hr class="hr-final">
+  
+</div>
+
+<div>
+  <div class="productos-container">
+    <img class = "img-opciones" src="assets/imagenes/imagenes-carrito/iconocubiertoscarrito.png">
+    <h1 class = "texto-opciones">Pide curbiertos, etc</h1>
+    <a href="#">
+      <img class = "img-cubiertos" src="assets/imagenes/imagenes-carrito/iconocubiertosicarrito.png" >
+    </a>
+  </div>
+
+  <hr>
+
+  <div class="productos-container">
+    <img class = "img-opciones" style="height: 20px; width: 20px; margin-left: 25px;" src="assets/imagenes/imagenes-carrito/icononotacarrito.png">
+    <h1 class = "texto-opciones" style="margin-top: 20px;">Agregar nota</h1>
+    <img class = "img-opciones" style= "margin-left: 200px;" src="assets/imagenes/imagenes-carrito/iconoflechacarrito.png" >
+  </div>
+
+  <hr>
+
+  <div class="productos-container">
+    <p class="text-subtotal"> Subtotal</p>
+    <p class="text-subtotal" style="margin-left: 250px;"> $5.000</p>
+  </div>
+
+</div>
+
+<footer>
+  <section class="wrapper">
+        <nav>
+            <ul>
+
+              <button class = "boton-continuar">Continuar</button>
+                
+            </ul>
+    </nav>
+    </section>
+</footer>
+
+
+
+
+

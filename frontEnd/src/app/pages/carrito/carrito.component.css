@@ -1,0 +1,153 @@
+.botones-superiores{
+    width: 20px;
+    height: 20px;
+    margin: 20px;
+}
+
+.titulo-carrito{
+    font-family: "Rubik", sans-serif;
+    font-size: 30px;
+    margin: 15px;
+}
+
+.titulo-producto{
+    margin-top: 10px;
+    font-family: "Rubik", sans-serif;
+    font-size: 18px;
+    
+  }
+
+  .precio-producto{
+    font-family: "Rubik", sans-serif;
+    font-size: 15px;
+    color:#707070
+  }
+
+  .productos-container {
+    display: flex;
+    flex-wrap: wrap; 
+  }
+
+  .enlace-producto {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .enlace-producto .info {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .enlace-producto img {
+    width: 100px;
+    height: auto;
+    border-radius: 12%;
+    margin: 15px;
+    width: 70px;;
+  }
+
+  .grid-container {
+    display: grid;
+    background-color: #f2f2f2;
+    border-radius: 40px;
+    width: 100px;
+    height: 40px;
+    margin-left: 100px;
+  }
+  
+  .producto {
+    display: flex;
+    align-items: center;
+
+  }
+  
+  .boton-agregar, .boton-eliminar {
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    height: 40px;
+  }
+
+  
+  .cantidad {
+    font-family: "Rubik", sans-serif;
+    font-size: 10px;
+  }
+  .hr-final {
+    border: none;
+    border-bottom: 5px solid #bebcbc; 
+    margin: 0;
+    height: 20px;
+  }
+
+  .hr{
+    border: none;
+    border-bottom: 1px solid #bebcbc; 
+    margin: 0;
+  }
+
+  .img-opciones{
+    width: 30px;
+    height: 30px;
+    margin: 20px;
+    margin-bottom: 10px;
+  }
+
+  .texto-opciones{
+    font-family: "Rubik", sans-serif;
+    font-size: 18px;
+    margin-top: 25px;
+  }
+
+  .img-cubiertos{
+    width: 27px;
+    height: 27px;
+    margin-left: 150px;
+    margin-top: 20px
+  }
+
+  .text-subtotal{
+    margin-top: 10px;
+    font-style: bold;
+    font-family: "Rubik", sans-serif;
+    font-size: 20px;
+    margin-left: 20px;
+    
+  }
+
+  .wrapper {
+    overflow:hidden;
+    margin-left: 0;
+  }
+
+  footer {
+    position: absolute;
+    background: white;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  }
+
+  .container_footer{
+    display: flex;
+    flex-direction: column;
+  }
+
+
+.boton-continuar{
+  color:white;
+  background-color: black;
+  border-radius: 20px;
+  margin-top: 20px;
+  width: 370px;
+  height: 50px;
+  left:0;
+}
+
+  
