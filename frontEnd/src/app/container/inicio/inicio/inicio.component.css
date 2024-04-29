@@ -1,0 +1,15 @@
+a {
+    text-decoration: none;
+}
+a:link, :visited, :hover, :active{
+    color: #000;
+}
+
+.container-inicio {
+    max-width: 25rem;
+    margin: auto;
+}
+
+/*.scrollable-tabs-container ul::-webkit-scrollbar {
+    display: none;
+}*/

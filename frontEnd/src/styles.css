@@ -2,3 +2,9 @@
 .body-class {
     margin: auto;
 }
+a {
+    text-decoration: none;
+}
+a:link, :visited, :hover, :active{
+    color: #000;
+}
