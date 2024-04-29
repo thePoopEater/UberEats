@@ -9,11 +9,12 @@ export class LocalService {
         @InjectRepository(Local) private readonly localRepository: Repository<Local>,
 
     ){}
-
+    //función que permite obtener todos los locales de la Base de datos
     public async getAllLocals(): Promise<Local[]>  {
         const result = this.localRepository.find();
         return result;
     }
+    //función que permite obtener un local por su id en la Base de datos
     public async getLocal(id: number): Promise <Local>{
         try{
             const result = await this.localRepository.createQueryBuilder('local').where("local.id= :id", {id}).getOne();
