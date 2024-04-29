@@ -43,11 +43,11 @@
 /* CSS Header img */
 .image-product {
     max-width: 25rem;
-    max-height: 10rem;
+    max-height: 15rem;
 }
 .image-product img{
     width: 27rem;
-    height: 10rem;
+    height: 15rem;
 }
 
 /*CSS Para la descripción */
@@ -79,7 +79,7 @@
 
 .aditional-ins{
     width: 96%;
-    height: 6rem;
+    height: 8rem;
     margin: 1rem .5rem;
     border: none;
     background-color: #F4F4F4;
@@ -203,7 +203,6 @@ textarea::-webkit-scrollbar {
     justify-content: center;
     background-color: white;
     padding-top: 0.5rem;
-
 }
 
 .button-add-car button{
