@@ -21,6 +21,9 @@ export class ProductEntity {
     @Column()
     images : string;
 
+    @Column()
+    price : number;
+
     //NOTE:Esta es para hacer la foreing key de local con producto
     @ManyToOne(() => LocalEntity, (local) => local.products)
     @JoinColumn({name: 'local_id'})

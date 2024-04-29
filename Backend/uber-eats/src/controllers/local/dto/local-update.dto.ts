@@ -1,25 +1,25 @@
-import { IsNotEmpty, IsString} from 'class-validator';
+import { IsOptional, IsString} from 'class-validator';
 
+export class LocalUpdateDTO{
 
-export class LocalCreateDTO {
-    
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     name : string;
     
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     address : string;
     
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     schedule : string;
     
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     description : string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     category : string;
+
 }

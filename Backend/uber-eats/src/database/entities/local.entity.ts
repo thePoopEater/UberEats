@@ -21,7 +21,10 @@ export class LocalEntity {
     @Column()
     schedule : string;
 
+    @Column()
+    category : string;
+
     @OneToMany(() => ProductEntity, (product) => product.local)
     products : ProductEntity[]
-    
+
 }

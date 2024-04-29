@@ -9,7 +9,8 @@ export class ProductCreateDTO {
     @IsString()
     ingredients : string;
 
-    @IsString()
+    @IsNotEmpty()
+    @IsString() 
     description : string;
 
     @IsString()
@@ -18,4 +19,8 @@ export class ProductCreateDTO {
     @IsNotEmpty()
     @IsNumber()
     local_id : number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    price : number;
 }
