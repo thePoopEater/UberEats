@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {IsNotEmpty, isNotEmpty, isNumber, isString} from "class-validator";
 
 @Entity()
 export class Cliente {
