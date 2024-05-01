@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Product } from '../../container/inicio/clases';
 
 @Component({
   selector: 'app-producto',
@@ -7,6 +8,9 @@ import { Component } from '@angular/core';
   templateUrl: './producto.component.html',
   styleUrl: './producto.component.css'
 })
+
+
+
 export class ProductoComponent {
 
   // Variables cantidad prod
@@ -19,6 +23,9 @@ export class ProductoComponent {
   // info del producto
   price = 1000;
   total_price = this.price;
+
+  // test class product and send to cart
+  producto : Product = new Product(12, 'completo', 'tiene mayo ajo', 10);
 
   addProductCant(){
     if(this.product_stock > 0 && this.product_stock > this.cant_prod){

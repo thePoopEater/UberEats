@@ -1,5 +1,7 @@
 <div class="container-inicio">
     <app-super-local></app-super-local>
-    <app-producto></app-producto>
+    <div *ngFor="let item of [1,2,3,4,5,6,7,8,9]" >
+        <app-producto></app-producto>
+    </div>
     <app-footer-home></app-footer-home>
 </div>
