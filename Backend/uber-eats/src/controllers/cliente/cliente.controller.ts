@@ -7,7 +7,11 @@ import { ClienteService } from 'src/providers/cliente/cliente.service';
 @Controller('cliente')
 export class ClienteController {
     constructor(private readonly ClienteService: ClienteService) {}
-//función que permite crear un cliente en la Base de datos
+//función que permite crear un cliente en la Base de datos, tiene como parámetro el request
+//del dto IPostClienteRequest y devuelve una respuesta de acuerdo al statuscode.
+//Si se acepta el request se crea el objeto cliente en la base de datos, con su id, nombre,
+//apellido y contraseña.
+
     @Post()
     async postCliente(@Body() request: IPostClienteRequest): Promise <IPostClienteResponse> {
         console.log('@POST');
