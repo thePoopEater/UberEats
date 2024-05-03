@@ -6,6 +6,7 @@ import { ProductoComponent } from './pages/producto/producto.component';
 import { FooterHomeComponent } from './container/inicio/components/footer-home/footer-home.component';
 import { PagoComponent } from './pages/pago/pago.component';
 import { TestAPIComponent } from './test-components/test-api/test-api.component';
+import { ConfirmacionPedidoComponent } from './pages/confirmacion-pedido/confirmacion-pedido.component';
 
 
 export const routes: Routes = [
@@ -16,4 +17,5 @@ export const routes: Routes = [
     {path: 'footer', component: FooterHomeComponent},
     {path: 'pagos', component: PagoComponent},
     {path: 'test', component: TestAPIComponent},
+    {path: 'confirmacion-pedido', component: ConfirmacionPedidoComponent}
 ];
