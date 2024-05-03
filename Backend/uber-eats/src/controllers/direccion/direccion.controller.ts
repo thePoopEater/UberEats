@@ -8,7 +8,6 @@ import { Cliente } from 'src/database/entities/cliente.entity';
 @Controller('direccion')
 export class DireccionController {
   constructor(private readonly direccionService: DireccionService) {}
-
   @Post()
   async addDireccion(@Body() request: IPostDireccionRequest): Promise<IPostDireccionResponse> {
     if (!request.cliente_id) {
