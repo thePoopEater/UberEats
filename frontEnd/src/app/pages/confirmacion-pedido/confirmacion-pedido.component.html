@@ -1,8 +1,76 @@
-<div>
-  <img src="assets/imagenes/imagenes-confirmacion-pago/fondoconfirmacion.jpg" class = "imagen-fondo">
+<div class = "fondo-imagen" style="background-image: url('assets/imagenes/imagenes-confirmacion-pago/fondoconfirmacion.jpg');">
+    
 </div>
 
+<div class = "container">  
+    <p class = "titulo-confirmacion">Haciendo el pedido...</p>
 
-<div class = "grid-container">
-    <p>Haciendo el pedido...</p>
+    <div>
+
+        <div class="productos-container">
+            <img class = "img-opciones" src="assets/imagenes/imagenes-pago/iconodireccionpago.png">
+            <div class = "texto-direccion">
+                <p class = "texto-opciones">Dirección</p>
+                <p class = "info-direccion">Tipo de entrega</p>
+            </div>
+      
+        <hr>
+      
+        <div class="productos-container">
+            <img class = "img-opciones" src="assets/imagenes/imagenes-pago/iconotiempopago.png">
+            <div class = "texto-direccion" style="white-space: nowrap;">
+                <p class = "texto-opciones">Entrega básica: 10-25 min</p>
+            </div>
+        </div>
+      
+        <hr>
+
+        <div class="productos-container">
+            <img class = "img-opciones" src="assets/imagenes/imagenes-confirmacion-pago/restauranteconfirmacion.png">
+            <div class = "texto-direccion" style="white-space: nowrap;">
+                <p class = "texto-opciones">Nombre restaurante</p>
+
+                <!--Aqui va un for por la cantidad de productos que haya en el pedido-->
+                <div>
+                    <div style="display: flex;">
+                        <div class="container-cantidad">2</div>
+                        <p>Producto 1</p>
+                    </div>
+                    
+                    <div style="display: flex;">
+                        <div class="container-cantidad">3</div>
+                        <p>Producto 2</p>
+                    </div>
+
+                    <div style="display: flex;">
+                        <div class="container-cantidad">1</div>
+                        <p>Producto 3</p>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+
+        <hr>
+
+        <section class="wrapper">
+            <nav>
+
+                <ul>
+
+                    <button class="boton-continuar" (click)="cancelarPedido()">
+                        <span class="progress-text" *ngIf="countdown > 0">Confirmando pedido ({{ countdownString }})</span>
+                        <span class="progress-text" *ngIf="countdown <= 0">Pedido confirmado</span>
+                        <div class="progress-bar" [style.transitionDuration]="countdown + 's'" [style.width]="progressWidth + '%'" [style.right]="progressWidth === 100 ? '0' : '100%'"></div>
+                      </button>
+                      
+                
+                    <button class = "boton-volver"  routerLink="/pagos">Volver</button> 
+                      
+                </ul>
+        </nav>
+        </section>
+      
+    </div>
 </div>
