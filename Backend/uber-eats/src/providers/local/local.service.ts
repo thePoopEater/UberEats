@@ -16,10 +16,13 @@ export class LocalService {
         return await this.localRepository.save(result);
     }
     // Esta funcion busca UN SOLO local, dado por una ID.
-    public async getLocal(idLocal : number) : Promise<LocalEntity> {
-        const local = await this.localRepository.findOne({where:{id:idLocal}});
-        return local;
-        
+    public async getLocal(idLocal: number): Promise <LocalEntity>{
+        try{
+            const local = await this.localRepository.createQueryBuilder('local').where("id= :idLocal", {idLocal}).getOne();
+            return local;
+        }catch (error:any){
+            throw new Error(error);
+        }
     }
     // Esta funcion actualiza un registro dado por un request de tipo LocalUpdateDTO y un id.
     public async updateLocal(local_id : number, local : LocalUpdateDTO) : Promise<UpdateResult> {
@@ -35,6 +38,5 @@ export class LocalService {
         return this.localRepository.find();
     }
 
-
-
 }
+
