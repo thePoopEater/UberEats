@@ -1,7 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import {IsNotEmpty, isNotEmpty, isNumber, isString} from "class-validator";
 
-@Entity()
+@Entity({name: 'Cliente'})
 export class Cliente {
   @PrimaryGeneratedColumn()
   id: number;

@@ -25,7 +25,6 @@ export class ClienteController {
         if  (request) {
 
             const newCliente: Cliente={
-                id: request.id,
                 nombre: request.nombre,
                 apellido: request.apellido,
                 contraseña:  request.contraseña,

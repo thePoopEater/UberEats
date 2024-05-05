@@ -3,8 +3,6 @@ import {IsNotEmpty, IsNumber, IsString} from "class-validator";
 export class IPostClienteRequest {
 
     @IsNotEmpty()
-    id: number;
-    @IsNotEmpty()
     @IsString()
     nombre: string;
     @IsNotEmpty()
