@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany,ManyToOne} from 'typeorm';
 import { LocalEntity } from './local.entity';
+import { OrderProductEntity } from './order-products.entity';
 
-@Entity({name : 'order'})
+@Entity({name :'order'})
 export class OrderEntity {
     constructor(private data : Partial<OrderEntity>){
         Object.assign(this, data);
@@ -11,7 +12,7 @@ export class OrderEntity {
     order_id : number;
 
     @Column()
-    date : Date;
+    date : string;
 
     @Column()
     state : string;
@@ -25,7 +26,11 @@ export class OrderEntity {
     @Column()
     amount : number;
 
-    @OneToOne(() => LocalEntity)
+    @ManyToOne(() => (LocalEntity),(local) => local.id)
     @JoinColumn({name:'local_id'})
     local : LocalEntity;
+
+    @OneToMany(() => OrderProductEntity, (orderproduct) => orderproduct.order)
+    @JoinColumn({name:'order_id'})
+    order_products : OrderProductEntity[];
 }

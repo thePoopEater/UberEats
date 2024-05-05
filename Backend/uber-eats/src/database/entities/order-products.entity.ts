@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn,OneToMany} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn,ManyToOne} from 'typeorm';
 import { ProductEntity } from './product.entity';
 import { OrderEntity } from './order.entity';
 
-@Entity({name : 'order_product_entity'})
+@Entity({name : 'order_product'})
 export class OrderProductEntity {
     
     constructor(private data : Partial<OrderProductEntity>) {
@@ -12,7 +12,7 @@ export class OrderProductEntity {
     id : number;
 
     @JoinColumn({name:'product_id'})
-    @OneToOne(()=> ProductEntity)
+    @ManyToOne(()=> ProductEntity, (product) => product.order_products, {cascade:true})
     product : ProductEntity;
 
     @Column()
@@ -21,7 +21,7 @@ export class OrderProductEntity {
     @Column()
     specification : string;
 
-    @OneToOne(() => OrderEntity)
-    @JoinColumn({name: 'order_id'})
+    @ManyToOne(() => OrderEntity, (order) => order.order_products)
+    @JoinColumn({name:'order_id'})
     order : OrderEntity;
 }
