@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-footer-home',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './footer-home.component.html',
   styleUrls: ['./footer-home.component.css']
 })

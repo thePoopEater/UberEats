@@ -1,9 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { Product } from '../../container/inicio/clases';
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-producto',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './producto.component.html',
   styleUrl: './producto.component.css'
 })
