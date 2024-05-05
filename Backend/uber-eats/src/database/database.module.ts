@@ -13,23 +13,23 @@ import { OrderEntity } from './entities/order.entity';
 //FIXME: NOTA IMPORTANTE ARREGLAR LOS CONFIGSERVICE.
 
 @Module({
-    imports: [ TypeOrmModule.forFeature([LocalEntity,ProductEntity,OrderProductEntity,OrderEntity]),
+    imports: [
         TypeOrmModule.forRootAsync({
             imports: [ConfigModule],
             useFactory: (configService : ConfigService) => ({
                 type : 'mysql',
                 host : 'localhost',
                 port : +configService.get('DB_PORT'),
-                username : 'admin',
-                password : '123',
-                database : 'nestdb',
+                username : configService.get('DB_USERNAME'),
+                password : configService.get('DB_PASSWORD'),
+                database : configService.get('DB_NAME'),
                 entities : [join(process.cwd(), 'dist/**/*.entity{.ts,.js}')],
                 synchronize : true,
                 autoLoadEntities : true,
             }),
             inject : [ConfigService],
         }),   
-       
+        TypeOrmModule.forFeature([LocalEntity,ProductEntity,OrderProductEntity,OrderEntity]),
     ],
     exports:[],
     providers: [],
