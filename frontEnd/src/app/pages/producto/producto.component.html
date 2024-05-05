@@ -26,7 +26,7 @@
         <div class="buttons-span">
           <!-- Cambiar el color y desactivar boton minus y plus-->
           <span class="minus" (click)="subProductCant()">-</span>
-          <span class="num">{{cant_prod}}</span>
+          <span class="num">{{cant_prod()}}</span>
           <span class="plus" (click)="addProductCant()">+</span>
         </div>
   
@@ -44,12 +44,13 @@
     <div class="button-plus">
       <div class="span-button">
         <img class="img-extra-food" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Chacarero-Fuente-Mardoqueo.jpg/536px-Chacarero-Fuente-Mardoqueo.jpg" alt="extra-pedido">
-        <div class="span-plus">
-          <span (click)="addProduct(2)">+</span>
-        </div>
+
       </div>
     </div>
   </a>
+  <div class="span-plus">
+    <span (click)="addProduct(2)">+</span>
+  </div>
     <!-- for each product -->
     <a class="compra-juntos" href="/">
       <!--mostrar otros productos del mismo local-->
@@ -61,18 +62,18 @@
     <div class="button-plus">
       <div class="span-button">
         <img class="img-extra-food" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Chacarero-Fuente-Mardoqueo.jpg/536px-Chacarero-Fuente-Mardoqueo.jpg" alt="extra-pedido">
-        <div class="span-plus">
-          <span (click)="addProduct(2)">+</span>
-        </div>
       </div>
     </div>
   </a>
+  <div class="span-plus">
+    <span (click)="addProduct(2)">+</span>
+  </div>
     <!-- for each product -->
   </div>
 
   <div class="agregar-carrito-container">
     <div class="button-add-car">
-      <button> Agregar {{cant_prod}} al Carrito • CLP{{total_price}}</button>
+      <button> Agregar {{cant_prod()}} al Carrito • CLP{{total_price}}</button>
     </div>
   </div>
 </div>

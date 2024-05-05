@@ -1,7 +1,16 @@
 <div class="container-inicio">
     <app-super-local></app-super-local>
     <div *ngFor="let item of [1,2,3,4,5,6,7,8,9]" >
-        <app-producto></app-producto>
+        <div class="card border-0">
+            <a class="" routerLink="/producto">
+                <img src="https://img.freepik.com/foto-gratis/surtido-plano-deliciosa-comida-brasilena_23-2148739179.jpg"
+                    class="card-img-top img-card" alt="test-img">
+                <div class="card-body">
+                    <h5 class="card-title">Donde mi Suegro</h5>
+                    <p class="card-text">Costo de envío: CLP 1200 20-35min</p>
+                </div>
+            </a>
+        </div>
     </div>
     <app-footer-home></app-footer-home>
 </div>
