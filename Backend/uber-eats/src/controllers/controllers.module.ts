@@ -15,11 +15,15 @@ import { OrderProductController } from './order-product/order-product.controller
 import { OrderProductService } from 'src/providers/order-product/order-product.service';
 import { ClienteService } from 'src/providers/cliente/cliente.service';
 import { ClienteController } from './cliente/cliente.controller';
+import { Direccion } from  'src/database/entities/direccion.entity';
+import { DireccionService }  from 'src/providers/direccion/direccion.service';
+import { DireccionController } from './direccion/direccion.controller';
 import { Cliente } from  'src/database/entities/cliente.entity';
 
+
 @Module({
-    imports:[DatabaseModule,TypeOrmModule.forFeature([Cliente, ProductEntity,LocalEntity,OrderEntity,OrderProductEntity])],
-    controllers: [ProductController,LocalController, OrderController, OrderProductController, ClienteController],
-    providers:[ProductService,LocalService,OrderService,OrderProductService, ClienteService]
+    imports:[DatabaseModule,TypeOrmModule.forFeature([Cliente, ProductEntity,LocalEntity,OrderEntity,OrderProductEntity, Direccion])],
+    controllers: [ProductController,LocalController, OrderController, OrderProductController, ClienteController, DireccionController],
+    providers:[ProductService,LocalService,OrderService,OrderProductService, ClienteService, DireccionService]
 })
 export class ControllersModule {}
