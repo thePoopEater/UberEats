@@ -12,10 +12,10 @@ export class ClientController {
         private readonly clientService: ClientService,
         private readonly orderService : OrderService
         ) {}
-//función que permite crear un cliente en la Base de datos, tiene como parámetro el request
-//del dto IPostClienteRequest y devuelve una respuesta de acuerdo al statuscode.
-//Si se acepta el request se crea el objeto cliente en la base de datos, con su id, nombre,
-//apellido y contraseña.
+    //función que permite crear un cliente en la Base de datos, tiene como parámetro el request
+    //del dto IPostClienteRequest y devuelve una respuesta de acuerdo al statuscode.
+    //Si se acepta el request se crea el objeto cliente en la base de datos, con su id, nombre,
+    //apellido y contraseña.
 
     @Post()
     async postClient(@Body() request: ClientCreateDTO): Promise <ClientResponseDTO> {
@@ -25,7 +25,6 @@ export class ClientController {
             statusDescription:"Cliente Agregado",
             error: null
         };
-
         if (request) {
             const new_client: ClientEntity = {
                 name: request.name,

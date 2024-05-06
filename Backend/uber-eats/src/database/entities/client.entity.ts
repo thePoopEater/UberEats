@@ -4,6 +4,9 @@ import { OrderEntity } from './order.entity';
 
 @Entity({name: 'client'})
 export class ClientEntity {
+  constructor(private data : Partial<ClientEntity>){
+    Object.assign(this, data);
+  }
   @PrimaryGeneratedColumn()
   client_id: number;
 

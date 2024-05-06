@@ -29,7 +29,7 @@ import { AddressEntity } from 'src/database/entities/address.entity';
             }),
             inject : [ConfigService],
         }),   
-        TypeOrmModule.forFeature([LocalEntity,ProductEntity,OrderProductEntity,OrderEntity, ClientEntity, AddressEntity]),
+        TypeOrmModule.forFeature([ClientEntity,LocalEntity,ProductEntity,OrderProductEntity,OrderEntity, AddressEntity]),
     ],
     exports:[],
     providers: [],
