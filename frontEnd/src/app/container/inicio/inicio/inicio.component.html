@@ -1,0 +1,17 @@
+<div class="container-inicio">
+    <app-super-local></app-super-local>
+    <div *ngFor="let local of local_list" >
+        <div class="card border-0">
+            <a class="" routerLink="local/{{local.getName()}}">
+                <p></p>
+                <img src={{local.getImg()}}
+                    class="card-img-top img-card" alt="test-img">
+                <div class="card-body">
+                    <h5 class="card-title">{{local.getName()}}</h5>
+                    <p class="card-text">Costo de envío: CLP 1200 20-35min</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <app-footer-home></app-footer-home>
+</div>
