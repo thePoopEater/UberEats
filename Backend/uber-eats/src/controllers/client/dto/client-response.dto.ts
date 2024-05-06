@@ -1,4 +1,4 @@
-export interface IPostDireccionResponse {
+export interface ClientResponseDTO {
     data : any;
     statusCode : number;
     statusDescription : string;

@@ -1,14 +1,17 @@
 import {IsNotEmpty, IsNumber, IsString} from "class-validator";
 
-export class IPostClienteRequest {
+export class ClientCreateDTO {
+    
+    @IsNotEmpty()
+    @IsString()
+    name: string;
 
     @IsNotEmpty()
     @IsString()
-    nombre: string;
+    
+    last_name: string;
+    
     @IsNotEmpty()
     @IsString()
-    apellido: string;
-    @IsNotEmpty()
-    @IsString()
-    contraseña: string;
+    password: string;
 }

@@ -5,8 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module'; 
 import { ControllersModule } from './controllers/controllers.module'; 
-import { ClienteService } from './providers/cliente/cliente.service';
-import { DireccionService } from './providers/direccion/direccion.service';
+import { ClientService } from './providers/client/client.service';
+import { AddressService } from './providers/address/address.service';
 
 @Module({
   imports: [ConfigModule.forRoot({isGlobal:true}),ControllersModule, DatabaseModule],

@@ -1,14 +1,14 @@
 import {IsNotEmpty, IsNumber, IsString} from "class-validator";
-export class IPostDireccionRequest {
+export class AddressCreateDTO {
     @IsNotEmpty()
     @IsNumber()
-    cliente_id: number;
+    client_id: number;
 
     @IsString()
     @IsNotEmpty()
-    nombre: string;
+    name: string;
 
     @IsString()
     @IsNotEmpty()
-    descripcion: string;
+    description: string;
 }

@@ -13,17 +13,17 @@ import { OrderEntity } from 'src/database/entities/order.entity';
 import { OrderProductEntity } from 'src/database/entities/order-products.entity';
 import { OrderProductController } from './order-product/order-product.controller';
 import { OrderProductService } from 'src/providers/order-product/order-product.service';
-import { ClienteService } from 'src/providers/cliente/cliente.service';
-import { ClienteController } from './cliente/cliente.controller';
-import { Direccion } from  'src/database/entities/direccion.entity';
-import { DireccionService }  from 'src/providers/direccion/direccion.service';
-import { DireccionController } from './direccion/direccion.controller';
-import { Cliente } from  'src/database/entities/cliente.entity';
+import { ClientService } from 'src/providers/client/client.service';
+import { ClientController } from './client/client.controller';
+import { AddressEntity } from  'src/database/entities/address.entity';
+import { AddressService }  from 'src/providers/address/address.service';
+import { AddressController } from './address/address.controller';
+import { ClientEntity } from  'src/database/entities/client.entity';
 
 
 @Module({
-    imports:[DatabaseModule,TypeOrmModule.forFeature([Cliente, ProductEntity,LocalEntity,OrderEntity,OrderProductEntity, Direccion])],
-    controllers: [ProductController,LocalController, OrderController, OrderProductController, ClienteController, DireccionController],
-    providers:[ProductService,LocalService,OrderService,OrderProductService, ClienteService, DireccionService]
+    imports:[DatabaseModule,TypeOrmModule.forFeature([ClientEntity, ProductEntity,LocalEntity,OrderEntity,OrderProductEntity, AddressEntity])],
+    controllers: [ProductController,LocalController, OrderController, OrderProductController, ClientController, AddressController],
+    providers:[ProductService,LocalService,OrderService,OrderProductService, ClientService, AddressService]
 })
 export class ControllersModule {}
