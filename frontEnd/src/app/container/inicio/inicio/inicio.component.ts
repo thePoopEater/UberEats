@@ -7,6 +7,8 @@ import { Input } from '@angular/core';
 import { LocalService } from '../../../services/local-service/local.service';
 import { LocalEat } from '../../../services/local-service/local-eat';
 import { NgFor } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-inicio',
@@ -17,13 +19,23 @@ import { NgFor } from '@angular/common';
 })
 export class InicioComponent implements OnInit{
 
-  @Input('local_nombre') nombre_producto! : string;
-  ngOnInit() {
-  }
+  constructor(private http: HttpClient){}
 
+  @Input('local_nombre') nombre_producto! : string;
+  locales  : any;
+  url = "http://localhost:3000/local"
+  error= null;
+  ngOnInit(){
+    this.http.get(this.url).subscribe(
+      (data => {
+        this.locales = data;
+      })
+    )
+    console.log(JSON.stringify(this.locales));
+  }
   
   private localSer = inject(LocalService);
-  local_list = this.localSer.getLocals()();
+  
 
 
 }

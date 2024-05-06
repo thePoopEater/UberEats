@@ -13,8 +13,6 @@ export class LocalEat {
         this._products = product_list;
         this._img = img;
     }
-
-
     addProduc(prod : Product){
         this._products.push(prod);
     }

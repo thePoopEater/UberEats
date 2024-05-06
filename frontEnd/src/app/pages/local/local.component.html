@@ -19,15 +19,12 @@
   </div>
 
 </div>
-
-
-
 <div >
   <img class = "img-encabezado" src="assets\imagenes\encabezadorestaurante.jpeg">
 </div>
 
 <div>
-  <p class = "titulo">{{this.local?.getName()}}</p>
+  <p class = "titulo">{{local.name}}</p>
   <p class = "texto-superior"> 
     <a style="color:black">4.5 </a>
     <img class = "img-texto-superior" src="assets\imagenes\estrellalocal.png"> 
@@ -67,21 +64,23 @@
 <div>
 
   <p class = "titulo-categoria">Promociones</p>
-
-  
-        
+      
     <div *ngFor="let producto of product" class="producto">
       
       <div class="productos-container">
-        <a class="enlace-producto" href="#">
-        <div class="info">
+        
+        <!-- FALTA ARREGLAR EL ENRUTAMIENTO -->
+        <a class="enlace-producto">
+        
+          
+          <div class="info">
 
           <h3 class="titulo-producto">{{ producto.name }}</h3>
-          <p class="precio-producto">${{ producto.price }}</p>
-          <p class="info-producto">{{ producto.description }}</p>
+          <p class="precio-producto">${{ producto.price}}</p>
+          <p class="info-producto">{{ producto.description}}</p>
           
         </div>
-        <img [src]="producto.img" alt="{{ producto.name }}">
+        <img [src]="producto.images" alt="{{ producto.images }}">
         
         </a>
       
@@ -91,35 +90,5 @@
 
   <hr class="hr-final">
   
-  
-  
-        
-
-</div>
-
-<div>
-  
-  <p class = "titulo-categoria">Promociones</p>
-        
-    <div *ngFor="let producto of product" class="producto">
-
-<!-- AQUI FALTA LA FUNCION DE AGREGAR VARIAS OPCIONES APRETANDO EL BOTON "+" -->
-      
-      <div class="productos-container">
-        <a class="enlace-producto" href="#">
-        <div class="info">
-          <h3 class="titulo-producto">{{ producto.name }}</h3>
-          <p class="precio-producto">${{ producto.price }}</p>
-          <p class="info-producto">{{ producto.description }}</p>
-        </div>
-        <img [src]="producto.img" alt="{{ producto.name }}">
-        
-        </a>
-      
-      </div>
-      <hr>
-  </div>
-
-  <hr class="hr-final">
 
 </div>
