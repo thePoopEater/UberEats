@@ -7,6 +7,10 @@ export class OrderCreateDTO {
     local_id : number;
 
     @IsNotEmpty()
+    @IsNumber()
+    client_id : number;
+
+    @IsNotEmpty()
     @IsString()
     date : string;
 
@@ -25,4 +29,5 @@ export class OrderCreateDTO {
     @IsNotEmpty()
     @IsNumber()
     amount : number;
+
 }

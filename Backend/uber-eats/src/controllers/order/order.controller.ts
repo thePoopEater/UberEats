@@ -21,20 +21,16 @@ export class OrderController {
 
     @Post()
     public async postOrder(@Body() new_order : OrderCreateDTO) : Promise<OrderResponseDTO> {
-        const local = await this.localService.getLocal(new_order.local_id);
-        if (local) {
-            const order = new OrderEntity(new_order);
-            order.local = local;
-            this.orderService.createOrder(order);
+        if (this.orderService.createOrder(new_order)){
             const response : OrderResponseDTO = {
                 data : null,
                 statusCode : 200,
                 statusDescription : "Listo",
                 error : null
             };
-            return response;  
-        } 
-        throw new NotFoundException('Ese local no existe');
+            return response;   
+        }
+               
     }
     @Get('/products/:id')
     public async getAllProducts(@Param('id') order_id : number){ 

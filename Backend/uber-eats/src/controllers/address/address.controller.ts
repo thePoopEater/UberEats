@@ -14,12 +14,12 @@ export class AddressController {
     if (!request.client_id) {
       throw new BadRequestException("Ingresa un 'cliente_id'");
     }
-    const newDireccion = new AddressEntity();
-    newDireccion.client = { client_id: request.client_id } as ClientEntity; 
-    newDireccion.name = request.name;
-    newDireccion.description = request.description;
+    const newAddress = new AddressEntity();
+    newAddress.client = { client_id: request.client_id } as ClientEntity; 
+    newAddress.name = request.name;
+    newAddress.description = request.description;
   
-    await this.addressService.addAddress(newDireccion); 
+    await this.addressService.addAddress(newAddress); 
 
     const response: AddressResponseDTO =  {
         data: null,
@@ -27,7 +27,6 @@ export class AddressController {
         statusDescription:"Direccion Agregada",
         error: null
     };
-
     return response;
   }
 }

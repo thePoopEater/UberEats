@@ -32,6 +32,7 @@ export class OrderEntity {
     local : LocalEntity;
 
     @ManyToOne(() => ClientEntity, (client) => client.orders)
+    @JoinColumn({name:'client_id'})
     client: ClientEntity;
 
     @OneToMany(() => OrderProductEntity, (orderproduct) => orderproduct.order)
