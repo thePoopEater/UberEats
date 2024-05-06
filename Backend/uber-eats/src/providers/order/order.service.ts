@@ -34,9 +34,6 @@ export class OrderService {
     }
     public async findOrdersFromOneLocal(local: LocalEntity) : Promise<OrderEntity[]> {
         let orders : OrderEntity[] = await this.orderRepository.findBy({'local': local});
-        for (let order of orders){
-            console.log(order.order_products);
-        } 
         return orders;
     }
 
