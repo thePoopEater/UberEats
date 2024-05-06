@@ -1,8 +1,8 @@
 <div class="botones-superiores">
   
-  <button class="boton">
+  <a class="boton" routerLink="/">
     <img class="img-superior" src="assets\imagenes\iconocerrar.png">
-  </button>
+  </a>
 
   <div class ="botones-superiores-izq">
     <button class="boton">
@@ -27,7 +27,7 @@
 </div>
 
 <div>
-  <p class = "titulo">Nombre Restaurante</p>
+  <p class = "titulo">{{this.local?.getName()}}</p>
   <p class = "texto-superior"> 
     <a style="color:black">4.5 </a>
     <img class = "img-texto-superior" src="assets\imagenes\estrellalocal.png"> 
@@ -70,18 +70,18 @@
 
   
         
-    <div *ngFor="let producto of productos" class="producto">
+    <div *ngFor="let producto of product" class="producto">
       
       <div class="productos-container">
         <a class="enlace-producto" href="#">
         <div class="info">
 
-          <h3 class="titulo-producto">{{ producto.nombre }}</h3>
-          <p class="precio-producto">${{ producto.precio }}</p>
-          <p class="info-producto">{{ producto.descripcion }}</p>
+          <h3 class="titulo-producto">{{ producto.name }}</h3>
+          <p class="precio-producto">${{ producto.price }}</p>
+          <p class="info-producto">{{ producto.description }}</p>
           
         </div>
-        <img [src]="producto.imagenUrl" alt="{{ producto.nombre }}">
+        <img [src]="producto.img" alt="{{ producto.name }}">
         
         </a>
       
@@ -101,18 +101,18 @@
   
   <p class = "titulo-categoria">Promociones</p>
         
-    <div *ngFor="let producto of productos" class="producto">
+    <div *ngFor="let producto of product" class="producto">
 
 <!-- AQUI FALTA LA FUNCION DE AGREGAR VARIAS OPCIONES APRETANDO EL BOTON "+" -->
       
       <div class="productos-container">
         <a class="enlace-producto" href="#">
         <div class="info">
-          <h3 class="titulo-producto">{{ producto.nombre }}</h3>
-          <p class="precio-producto">${{ producto.precio }}</p>
-          <p class="info-producto">{{ producto.descripcion }}</p>
+          <h3 class="titulo-producto">{{ producto.name }}</h3>
+          <p class="precio-producto">${{ producto.price }}</p>
+          <p class="info-producto">{{ producto.description }}</p>
         </div>
-        <img [src]="producto.imagenUrl" alt="{{ producto.nombre }}">
+        <img [src]="producto.img" alt="{{ producto.name }}">
         
         </a>
       

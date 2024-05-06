@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { Product } from '../../container/inicio/clases';
 import { RouterLink } from '@angular/router';
 
@@ -13,6 +13,7 @@ import { RouterLink } from '@angular/router';
 
 
 export class ProductoComponent {
+
 
   // Variables cantidad prod
   cant_prod = signal(1);
@@ -55,5 +56,7 @@ export class ProductoComponent {
   addProduct(id : number){
     console.log("funciona");
   }
+
+  
 
 }

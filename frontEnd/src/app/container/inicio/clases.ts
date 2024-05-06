@@ -15,22 +15,3 @@ export class Product {
     }
 }
 
-
-export class Local{
-
-    private _name :string;
-    private _costDeliv:number;
-
-    constructor(name : string, cost_del : number){
-        this._name = name;
-        this._costDeliv = cost_del;
-    }
-
-    public getName(){
-        return this._name;
-    }
-
-    public getCostDel(){
-        return this._costDeliv;
-    }
-}

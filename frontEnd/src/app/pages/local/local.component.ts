@@ -1,24 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject, input} from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { LocalEat } from '../../services/local-service/local-eat';
+import { LocalService } from '../../services/local-service/local.service';
+import { RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from '../../container/inicio/clases';
 @Component({
   selector: 'app-local',
   standalone: true, 
   templateUrl: './local.component.html',
   styleUrls: ['./local.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule, RouterLink]
 })
 export class LocalComponent implements OnInit {
 
-  productos = [
-    { nombre: 'Producto 1', descripcion: 'Descripción del producto 1', precio: 10, imagenUrl: "assets/imagenes/producto1.jpg" },
-    { nombre: 'Producto 2', descripcion: 'Descripción del producto 2', precio: 20, imagenUrl: "assets/imagenes/producto2.jpg" },
-  ];
-  
-  constructor() { }
 
-  ngOnInit() {
+
+  private localServ = inject(LocalService);
+
+
+
+  // Este hijo recibe el id del local
+  local_name:string = '';
+  local:LocalEat|undefined = new LocalEat(0, '', [], '')
+  product:Product[] = [];
+  constructor(private route: ActivatedRoute){
+    
   }
+
+  ngOnInit() : void{
+    this.route.params.subscribe( (params) => this.local_name = params["nombre_local"]);
+
+    if(this.local === undefined){
+      console.log('caca');
+    }else{
+      this.local = this.localServ.searchLocal(this.local_name);
+      if(this.local === undefined){
+        console.log('casi')
+        
+      }else{
+        this.product = this.local.getProducts();
+        console.log(this.local_name);
+        console.log(this.local);
+      }
+
+    }
+  }
+
+
+
+  
 
 }
 
