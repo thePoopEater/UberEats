@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { Product } from '../../container/inicio/clases';
 import { LocalEat } from './local-eat';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -20,6 +21,7 @@ export class LocalService {
 
   // create a two locals
 
+  
   private locals =  signal([
     new LocalEat(1, "Donde mi Suego", this.productos(), "https://img.freepik.com/foto-gratis/surtido-plano-deliciosa-comida-brasilena_23-2148739179.jpg")
   ])
@@ -32,5 +34,5 @@ export class LocalService {
     let local = this.locals().find((local => local.getName() == name));
     return local;
   }
-  constructor() { }
+  constructor(){}
 }

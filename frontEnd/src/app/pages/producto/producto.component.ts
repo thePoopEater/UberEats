@@ -56,7 +56,7 @@ export class ProductoComponent {
   addProduct(id : number){
     console.log("funciona");
   }
-
+  
   
 
 }

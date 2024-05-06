@@ -22,4 +22,9 @@ export class LocalCreateDTO {
     @IsNotEmpty()
     @IsString()
     category : string;
+
+    @IsNotEmpty()
+    @IsString()
+    image : string;
+
 }

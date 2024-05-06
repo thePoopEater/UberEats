@@ -31,4 +31,7 @@ export class LocalEntity {
     @OneToMany(() => ProductEntity, (product) => product.local)
     products : ProductEntity[]
 
+    @Column()
+    image_url : string; 
+
 }
