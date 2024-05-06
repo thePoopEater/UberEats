@@ -4,8 +4,9 @@ import { AddressCreateDTO } from './dto/address-create.dto';
 import { AddressResponseDTO } from './dto/address-response.dto';
 import { AddressEntity } from 'src/database/entities/address.entity';
 import { ClientEntity } from 'src/database/entities/client.entity';
+import { ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags('Address')
 @Controller('address')
 export class AddressController {
   constructor(private readonly addressService: AddressService) {}

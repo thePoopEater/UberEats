@@ -5,7 +5,8 @@ import { OrderService } from 'src/providers/order/order.service';
 import { ProductService } from 'src/providers/product/product.service';
 import { OrderProductEntity } from 'src/database/entities/order-products.entity';
 import { OrderResponseDTO } from '../order/dto/order-response.dto';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('Order Product')
 @Controller('order-product')
 export class OrderProductController {
     constructor(

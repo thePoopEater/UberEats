@@ -4,7 +4,9 @@ import { OrderCreateDTO } from './dto/order-create.dto';
 import { OrderResponseDTO } from './dto/order-response.dto';
 import { OrderEntity } from 'src/database/entities/order.entity';
 import { LocalService } from 'src/providers/local/local.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Order')
 @Controller('order')
 export class OrderController {
     

@@ -7,7 +7,8 @@ import { LocalService } from 'src/providers/local/local.service';
 import { LocalEntity } from 'src/database/entities/local.entity';
 import { UpdateResult } from 'typeorm';
 import { ProductUpdateDTO } from './dto/product-update.dto';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('Product')
 @Controller('product')
 export class ProductController {
     

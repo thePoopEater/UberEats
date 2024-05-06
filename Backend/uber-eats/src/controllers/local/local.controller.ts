@@ -10,7 +10,10 @@ import { UpdateResult } from 'typeorm';
 import { OrderService } from 'src/providers/order/order.service';
 import { OrderEntity } from 'src/database/entities/order.entity';
 import { OrderProductService } from 'src/providers/order-product/order-product.service';
+import { ApiTags } from '@nestjs/swagger';
 
+
+@ApiTags('local')
 @Controller('local')
 export class LocalController {
     constructor(

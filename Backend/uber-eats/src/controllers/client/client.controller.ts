@@ -5,7 +5,9 @@ import { ClientEntity } from  'src/database/entities/client.entity';
 import { ClientService } from 'src/providers/client/client.service';
 import { OrderService } from 'src/providers/order/order.service';
 import { OrderEntity } from 'src/database/entities/order.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Client')
 @Controller('client')
 export class ClientController {
     constructor(
