@@ -10,6 +10,8 @@ export class AddressService {
         @InjectRepository(AddressEntity) private readonly addressRepository: Repository<AddressEntity>,
         @InjectRepository(ClientEntity) private readonly clientRepository: Repository<ClientEntity>,
     ){}
+    //función que permite crear una dirección en el repositorio, primero comprueba que exista 
+    //el id del cliente ingresado para crear la dirección.
     public async addAddress (data : AddressEntity){
         const client = await this.clientRepository.findOne({
             where: { client_id: data.client?.client_id },

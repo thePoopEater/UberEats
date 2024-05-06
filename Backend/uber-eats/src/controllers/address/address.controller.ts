@@ -9,6 +9,9 @@ import { ClientEntity } from 'src/database/entities/client.entity';
 @Controller('address')
 export class AddressController {
   constructor(private readonly addressService: AddressService) {}
+  //función que permite crear una nueva dirección, tiene como parámetro los atributos de
+  //la entidad Address, se debe ingresar obligatoriamente un cliente_id para permitir la relación
+  //de la entidad address y client. Si el cliente se agregó correctamente se retorna el mensaje response.
   @Post()
   async addDireccion(@Body() request: AddressCreateDTO): Promise<AddressResponseDTO> {
     if (!request.client_id) {
@@ -24,7 +27,7 @@ export class AddressController {
     const response: AddressResponseDTO =  {
         data: null,
         statusCode:200,
-        statusDescription:"Direccion Agregada",
+        statusDescription:"Dirección Agregada",
         error: null
     };
     return response;
