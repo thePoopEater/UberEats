@@ -23,4 +23,18 @@ export class AddressService {
           return await this.addressRepository.save(data);
         
     }
+
+    //Función que busca una dirección específica de la tabla 'address' de acuerdo a un id.
+    public async getAddress(idAddress: number): Promise <AddressEntity>{
+      try{
+          const address = await this.addressRepository.createQueryBuilder('address').where("address_id = :idAddress", { idAddress }).getOne();
+          return address;
+      }catch (error:any){
+          throw new Error(error);
+      }
+  }
+  //Función que busca todas las direcciones del repositorio de 'address'.
+    public async getAllAddresses() : Promise<AddressEntity[]>{
+      return this.addressRepository.find();
+}
 }
