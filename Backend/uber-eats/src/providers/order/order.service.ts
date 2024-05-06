@@ -34,9 +34,6 @@ export class OrderService {
     }
     public async findOrdersFromOneLocal(local: LocalEntity) : Promise<OrderEntity[]> {
         let orders : OrderEntity[] = await this.orderRepository.findBy({'local': local});
-        for (let order of orders){
-            console.log(order.order_products);
-        } 
         return orders;
     }
 
@@ -45,14 +42,14 @@ export class OrderService {
         return this.orderRepository.findBy({client:client});
     }
 
-    async findProductsFromOrder(id : number){
+    public async findProductsFromOrder(id : number){
     return await this.orderRepository.createQueryBuilder('order')
-    .innerJoin('order.order_products','order_product')
-    .innerJoin('order_product.product','product')
-    .where('order.order_id = :id',{id})
-    .select('product')
-    .addSelect('order_product.quantity')
-    .addSelect('order_product.specification')
-    .execute()
+        .innerJoin('order.order_products','order_product')
+        .innerJoin('order_product.product','product')
+        .where('order.order_id = :id',{id})
+        .select('product')
+        .addSelect('order_product.quantity')
+        .addSelect('order_product.specification')
+        .execute()
     }
 }
