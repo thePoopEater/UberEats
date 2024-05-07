@@ -82,6 +82,7 @@ export class LocalController {
         return await this.localService.getAllLocals();
     }
 
+    
     @Get('/orders/:id')
     public async getAllOrders(@Param('id') id : number ) : Promise<OrderEntity[]> {
         const local = await this.localService.getLocal(id);

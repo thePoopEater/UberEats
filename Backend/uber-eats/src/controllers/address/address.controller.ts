@@ -42,7 +42,7 @@ export class AddressController {
 
     //Función que permite obtener por un id específico una dirección.
     @Get(':id')
-    public async getInfo(@Param('id') address_id : number) : Promise<AddressEntity> {
+    public async getAddress(@Param('id') address_id : number) : Promise<AddressEntity> {
         const address : Promise<AddressEntity> = this.addressService.getAddress(address_id);
         return address;
     }

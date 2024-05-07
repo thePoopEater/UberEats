@@ -37,6 +37,18 @@ export class ClientController {
         }
     }
 
+    //función que retorna todos los clientes de la base de datos.
+    @Get()
+    public async getAllClients() : Promise<ClientEntity[]>{
+        return await this.clientService.getAllClients();
+    }
+    //Función que retorna un cliente por ID.
+    @Get(':id')
+    public async getClient(@Param('id') client_id : number) : Promise<ClientEntity> {
+        const client : Promise<ClientEntity> = this.clientService.getClient(client_id);
+        return client;
+    }
+
     @Get('/order/:id')
     public async getOrders(@Param('id') client_id : number) : Promise<OrderEntity[]>{
         return await this.orderService.findOrdersFromOneClient(client_id);
