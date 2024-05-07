@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../container/inicio/clases';
 import { HttpClient } from '@angular/common/http';
+import { Local } from '../../class/local';
 @Component({
   selector: 'app-local',
   standalone: true, 
@@ -17,36 +18,39 @@ export class LocalComponent implements OnInit {
 
 
 
-  private localServ = inject(LocalService);
+  private localSer = inject(LocalService);
   url_local = "http://localhost:3000/local/"
   url_product = "http://localhost:3000/local/products/"
 
   // Este hijo recibe el id del local
-  local_name : string = '';
+  local_id : string = '';
   local : any;
   product : any[] = [];
-  constructor(private route: ActivatedRoute, private http : HttpClient){
+  constructor(private route: ActivatedRoute, private http : HttpClient, private localService : LocalService){
     
   }
 
+  local_test:any;
   ngOnInit() : void{
-    this.route.params.subscribe( (params) => this.local_name = params["nombre_local"]);
+
+    this.route.params.subscribe( (params) => this.local_id = params["nombre_local"]);
+
+    this.localSer.getLocales().subscribe(
+      (resp) => {
+        console.log(resp);
+        this.local = resp;
+        this.local_test = this.local[parseInt(this.local_id)-1];
+        console.log(this.local_test)
+      }
+    )
+    // Se debe pedir todos los productos pertenecientes al local "no se como"
+    this.localSer.getProducts(this.local_id).subscribe(
+
+    )
 
     
-      this.http.get<any>(this.url_local+this.local_name).subscribe(data=>{
-        this.local = data;
-      })
-      
-      this.http.get<any>(this.url_product+this.local_name).subscribe(
-        data =>{
-          this.product = data;
-        }
-      )
-      console.log(this.local_name);
-      console.log(this.local);
-      
-    
   }
+
 
 }
 

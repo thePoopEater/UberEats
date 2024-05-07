@@ -2,6 +2,7 @@ import { Component, signal, inject } from '@angular/core';
 import { Product } from '../../container/inicio/clases';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ProductosService } from '../../services/producto-service/productos.service';
 
 @Component({
   selector: 'app-producto',
@@ -30,7 +31,10 @@ export class ProductoComponent {
   // test class product and send to cart
   url_product = "http://localhost:3000/product/";
 
+  private productServ = inject(ProductosService);
   ngOnInit(){
+    
+    this.productServ.getProducts();
     this.route.params.subscribe( (params) => this.product_id = params["product_id"]);
     this.http.get<any>(this.url_product +  this.product_id).subscribe(
       data =>{

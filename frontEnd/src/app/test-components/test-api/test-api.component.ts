@@ -17,7 +17,7 @@ export class TestAPIComponent implements OnInit{
 
   private postService = inject(ProductosService);
   ngOnInit(): void {
-    this.loadPosts();
+    // this.loadPosts();
   }
 
 
@@ -38,13 +38,13 @@ export class TestAPIComponent implements OnInit{
   // }
 
   //suscribirse al service para llamar a los posts
-  loadPosts(){
-    this.postService.getPosts().subscribe({
-      next: (posts: any) => {
-        this.posts = posts;
-        console.log("Post fetched");
-      },
-      error: (error ) => console.log('Error fetched')
-    })
-  }
+  // loadPosts(){
+  //   this.postService.getPosts().subscribe({
+  //     next: (posts: any) => {
+  //       this.posts = posts;
+  //       console.log("Post fetched");
+  //     },
+  //     error: (error ) => console.log('Error fetched')
+  //   })
+  // }
 }

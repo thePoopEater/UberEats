@@ -4,11 +4,12 @@ import { FooterHomeComponent } from '../components/footer-home/footer-home.compo
 import { SuperLocalComponent } from '../components/super-local/super-local.component';
 import { ActivatedRoute, RouterLink} from '@angular/router';
 import { Input } from '@angular/core';
-import { LocalService } from '../../../services/local-service/local.service';
 import { LocalEat } from '../../../services/local-service/local-eat';
 import { NgFor } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { LocalService } from '../../../services/local-service/local.service';
+import { Local } from '../../../class/local';
 
 @Component({
   selector: 'app-inicio',
@@ -19,22 +20,26 @@ import { Observable } from 'rxjs';
 })
 export class InicioComponent implements OnInit{
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private localService: LocalService){}
+
 
   @Input('local_nombre') nombre_producto! : string;
-  locales  : any;
-  url = "http://localhost:3000/local"
-  error= null;
+  private localSer = inject(LocalService);
+  
+  locales:any = [];
   ngOnInit(){
-    this.http.get(this.url).subscribe(
-      (data => {
-        this.locales = data;
-      })
+
+    this.localSer.getLocales().subscribe(
+      (resp) => {
+        console.log(resp);
+        this.locales = resp;
+        console.log(this.locales[0]);
+      }
     )
-    console.log(JSON.stringify(this.locales));
+
   }
   
-  private localSer = inject(LocalService);
+
   
 
 

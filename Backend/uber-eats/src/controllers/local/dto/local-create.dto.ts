@@ -1,30 +1,27 @@
-import { IsNotEmpty, IsString} from 'class-validator';
-
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class LocalCreateDTO {
-    
-    @IsNotEmpty()
-    @IsString()
-    name : string;
-    
-    @IsNotEmpty()
-    @IsString()
-    address : string;
-    
-    @IsNotEmpty()
-    @IsString()
-    schedule : string;
-    
-    @IsNotEmpty()
-    @IsString()
-    description : string;
+  @IsNotEmpty()
+  @IsString()
+  name: string;
 
-    @IsNotEmpty()
-    @IsString()
-    category : string;
+  @IsNotEmpty()
+  @IsString()
+  address: string;
 
-    @IsNotEmpty()
-    @IsString()
-    image : string;
+  @IsNotEmpty()
+  @IsString()
+  schedule: string;
 
+  @IsNotEmpty()
+  @IsString()
+  description: string;
+
+  @IsNotEmpty()
+  @IsString()
+  category: string;
+
+  @IsNotEmpty()
+  @IsString()
+  image: string;
 }
