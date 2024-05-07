@@ -27,10 +27,11 @@ import { ClientController } from './client/client.controller';
 import { AddressEntity } from  'src/database/entities/address.entity';
 import { AddressService }  from 'src/providers/address/address.service';
 import { AddressController } from './address/address.controller';
+import { UserController } from './user/user.controller';
 
 @Module({
     imports:[DatabaseModule, TypeOrmModule.forFeature([ClientEntity,ProductEntity,LocalEntity,OrderEntity,OrderProductEntity, AddressEntity])],
-    controllers: [ProductController,LocalController, OrderController, OrderProductController,ClientController, AddressController],
+    controllers: [ProductController,LocalController, OrderController, OrderProductController,ClientController, AddressController, UserController],
     providers:[ProductService,LocalService,OrderService,OrderProductService,ClientService,AddressService]
 })
 export class ControllersModule {}
