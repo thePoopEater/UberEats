@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Param, Put, BadRequestException} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, BadRequestException, UseGuards} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { LocalCreateDTO } from './dto/local-create.dto';
 import { LocalResponseDTO } from './dto/local-response.dto';
 import { LocalService } from '../../providers/local/local.service';
@@ -12,6 +13,7 @@ import { OrderEntity } from 'src/database/entities/order.entity';
 import { OrderProductService } from 'src/providers/order-product/order-product.service';
 
 @Controller('local')
+@UseGuards(AuthGuard('jwt'))
 export class LocalController {
     constructor(
         private localService : LocalService, 
