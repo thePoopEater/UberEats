@@ -13,10 +13,12 @@ export const routes: Routes = [
     {path: '', component: InicioComponent},
     {
         path: 'local/:idLocal', 
-        component: LocalComponent
-        
+        component: LocalComponent,
     },
-    {path: 'producto', component: ProductoComponent},
+    {
+        path : 'local/:idLocal/product/:idProd',
+        component : ProductoComponent
+    },
     {path: 'carrito', component: CarritoComponent},
     {path: 'footer', component: FooterHomeComponent},
     {path: 'pagos', component: PagoComponent},

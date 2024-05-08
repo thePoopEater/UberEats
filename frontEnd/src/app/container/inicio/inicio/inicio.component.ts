@@ -23,7 +23,7 @@ export class InicioComponent implements OnInit{
   constructor(private http: HttpClient, private localService: LocalService){}
 
 
-  @Input('idLocal') nombre_producto! : string;
+  @Input('idLocal') idLocal! : string;
   private localSer = inject(LocalService);
   
   locales:any = [];

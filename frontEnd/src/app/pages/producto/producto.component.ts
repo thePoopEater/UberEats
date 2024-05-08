@@ -3,7 +3,8 @@ import { Product } from '../../container/inicio/clases';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ProductosService } from '../../services/producto-service/productos.service';
-
+import { OnInit } from '@angular/core';
+import { LocalService } from '../../services/local-service/local.service';
 @Component({
   selector: 'app-producto',
   standalone: true,
@@ -14,33 +15,43 @@ import { ProductosService } from '../../services/producto-service/productos.serv
 
 
 
-export class ProductoComponent {
+export class ProductoComponent implements OnInit{
 
   constructor(private route : ActivatedRoute, private http: HttpClient){}
+
+  // Recibir parametro producto
+
   // Variables cantidad prod
-  cant_prod = signal(1);
+  cant_prod = signal(0);
   button_plus_enable = true;
   button_sub_enable = true;
   // obtener de la base de datos el stock
   product_stock = 10;
   product : any;
   // info del producto
-  price = 1000;
+  price = 0;
   total_price = this.price;
-  product_id = 0;
+  productId:any;
   // test class product and send to cart
-  url_product = "http://localhost:3000/product/";
 
-  private productServ = inject(ProductosService);
+  private localServ = inject(LocalService);
   ngOnInit(){
     
-    this.productServ.getProducts();
-    this.route.params.subscribe( (params) => this.product_id = params["product_id"]);
-    this.http.get<any>(this.url_product +  this.product_id).subscribe(
-      data =>{
-        this.product = data;
-       }
-      )
+    
+    this.route.params.subscribe( (params) => this.productId = params["idProd"]);
+    this.localServ.getProduct(this.productId).subscribe(
+      (resp) => {
+        this.product = resp;
+        this.product = this.product[0];
+        this.price = this.product.price;
+      }
+    );
+
+    // this.http.get<any>(this.url_product +  this.productId).subscribe(
+    //   data =>{
+    //     this.product = data;
+    //    }
+    //   )
 
   }
 
@@ -48,7 +59,7 @@ export class ProductoComponent {
     if(this.product_stock > 0 && this.product_stock > this.cant_prod()){
       this.button_sub_enable = true;
       this.cant_prod.set(this.cant_prod() + 1);
-      this.total_price += this.price;
+      this.total_price += this.product.price;
       console.log("cant dis: " + this.cant_prod);
       console.log("hola funciono");
     }else{
@@ -59,7 +70,7 @@ export class ProductoComponent {
   subProductCant(){
     if(this.cant_prod() > 0){
       this.cant_prod.set(this.cant_prod() - 1);
-      this.total_price -= this.price;
+      this.total_price -= this.product.price;
       console.log("funciona menos", this.cant_prod);
       if(!this.button_plus_enable){
         this.button_plus_enable = true;
