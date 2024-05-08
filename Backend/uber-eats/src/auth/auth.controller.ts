@@ -1,8 +1,10 @@
-import { Controller, Post, Body, UseGuards, Request } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Request, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDTO } from './dto/register.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { UserEntity } from 'src/database/entities/user.entity';
+import { LoginDTO } from './dto/login.dto';
+import { LoginResponseDTO } from './dto/login-response.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -14,8 +16,19 @@ export class AuthController {
   }
 
   @Post('login')
-  @UseGuards(AuthGuard('local'))
-  login(@Request() req: any){
-   return this.authService.login(req.user);
+  async postLogin(@Body() request: LoginDTO): Promise<LoginResponseDTO> {
+    const user = await this.authService.validateUser(request.username, request.password);
+
+    if (!user) {
+      throw new UnauthorizedException('User incorrecto');
+    }
+
+    const token = await this.authService.login(user); 
+    const response: LoginResponseDTO = {
+      access_token: token.access_token, 
+    };
+
+    return response;
   }
 }
+
