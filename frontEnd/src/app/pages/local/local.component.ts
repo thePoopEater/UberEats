@@ -25,7 +25,7 @@ export class LocalComponent implements OnInit {
   // Este hijo recibe el id del local
   local_id : string = '';
   local : any;
-  product : any[] = [];
+  product : any;
   constructor(private route: ActivatedRoute, private http : HttpClient, private localService : LocalService){
     
   }
@@ -33,7 +33,7 @@ export class LocalComponent implements OnInit {
   local_test:any;
   ngOnInit() : void{
 
-    this.route.params.subscribe( (params) => this.local_id = params["nombre_local"]);
+    this.route.params.subscribe( (params) => this.local_id = params["idLocal"]);
 
     this.localSer.getLocales().subscribe(
       (resp) => {
@@ -45,7 +45,10 @@ export class LocalComponent implements OnInit {
     )
     // Se debe pedir todos los productos pertenecientes al local "no se como"
     this.localSer.getProducts(this.local_id).subscribe(
-
+      ( resp ) => {
+        this.product = resp;
+        console.log(resp)
+      }
     )
 
     

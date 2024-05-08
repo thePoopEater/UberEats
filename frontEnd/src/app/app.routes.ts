@@ -11,7 +11,11 @@ import { SeguimientoPedidoComponent } from './pages/seguimiento-pedido/seguimien
 
 export const routes: Routes = [
     {path: '', component: InicioComponent},
-    {path: 'local/:nombre_local', component: LocalComponent},
+    {
+        path: 'local/:idLocal', 
+        component: LocalComponent
+        
+    },
     {path: 'producto', component: ProductoComponent},
     {path: 'carrito', component: CarritoComponent},
     {path: 'footer', component: FooterHomeComponent},
