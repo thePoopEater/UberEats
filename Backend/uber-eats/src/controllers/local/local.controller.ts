@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Param, Put, BadRequestException, UseGuards} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Put,
+  BadRequestException,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { LocalCreateDTO } from './dto/local-create.dto';
 import { LocalResponseDTO } from './dto/local-response.dto';
@@ -11,16 +20,17 @@ import { UpdateResult } from 'typeorm';
 import { OrderService } from 'src/providers/order/order.service';
 import { OrderEntity } from 'src/database/entities/order.entity';
 import { OrderProductService } from 'src/providers/order-product/order-product.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('local')
-@UseGuards(AuthGuard('jwt'))
+@ApiTags('Local')
 export class LocalController {
-    constructor(
-        private localService : LocalService, 
-        private productService : ProductService,
-        private orderService : OrderService,
-        private orderProductService : OrderProductService
-        ) {}
+  constructor(
+    private localService: LocalService,
+    private productService: ProductService,
+    private orderService: OrderService,
+    private orderProductService: OrderProductService,
+  ) {}
 
     // Funcion para guardar un nuevo local en el repositorio de locales, tiene como parametro una peticion BODY de tipo LocalCreateDTO
     // esta a su vez esta compuesto de los siguientes datos : name, address, schedule, description (todos strings) 
@@ -30,15 +40,15 @@ export class LocalController {
             const newLocal : LocalEntity = new LocalEntity(request); 
             this.localService.create(newLocal);
             const response : LocalResponseDTO = {
-                data : "Se creó un usuario",
+                data : "Se creó un local",
                 statusCode: 200,
                 statusDescription : 'Listo',
                 error : null
             } as LocalResponseDTO;
 
-            return response;
-        }
+      return response;
     }
+  }
 
     // Esta funcion retorna todos los productos de un local, tiene que como parametro la ID de este local,
     // llama al local service y hace un peticion al repositorio de productos.
@@ -76,19 +86,18 @@ export class LocalController {
         return servResponse;
         
     }
-     
 
-    // Esta funcion retornar todos los locales guardados en el repositorio. Sencillito
-    @Get()
-    public async getAllLocals() : Promise<LocalEntity[]>{
-        return await this.localService.getAllLocals();
-    }
 
-    
-    @Get('/orders/:id')
-    public async getAllOrders(@Param('id') id : number ) : Promise<OrderEntity[]> {
-        const local = await this.localService.getLocal(id);
-        const orders = await this.orderService.findOrdersFromOneLocal(local);
-        return orders; 
-    }
+  // Esta funcion retornar todos los locales guardados en el repositorio. Sencillito
+  @Get()
+  public async getAllLocals(): Promise<LocalEntity[]> {
+    return await this.localService.getAllLocals();
+  }
+
+  @Get('/orders/:id')
+  public async getAllOrders(@Param('id') id: number): Promise<OrderEntity[]> {
+    const local = await this.localService.getLocal(id);
+    const orders = await this.orderService.findOrdersFromOneLocal(local);
+    return orders;
+  }
 }

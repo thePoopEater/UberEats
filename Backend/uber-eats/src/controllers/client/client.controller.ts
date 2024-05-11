@@ -1,21 +1,23 @@
-import { Controller, Post, Body, Get, Param} from '@nestjs/common';
+import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { ClientCreateDTO } from './dto/client-create.dto';
 import { ClientResponseDTO } from './dto/client-response.dto';
-import { ClientEntity } from  'src/database/entities/client.entity';
+import { ClientEntity } from 'src/database/entities/client.entity';
 import { ClientService } from 'src/providers/client/client.service';
 import { OrderService } from 'src/providers/order/order.service';
 import { OrderEntity } from 'src/database/entities/order.entity';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('client')
+@ApiTags('Client')
 export class ClientController {
-    constructor(
-        private readonly clientService: ClientService,
-        private readonly orderService : OrderService
-        ) {}
-    //función que permite crear un cliente en la Base de datos, tiene como parámetro el request
-    //del dto IPostClienteRequest y devuelve una respuesta de acuerdo al statuscode.
-    //Si se acepta el request se crea el objeto cliente en la base de datos, con su id, nombre,
-    //apellido y contraseña.
+  constructor(
+    private readonly clientService: ClientService,
+    private readonly orderService: OrderService,
+  ) {}
+  //función que permite crear un cliente en la Base de datos, tiene como parámetro el request
+  //del dto IPostClienteRequest y devuelve una respuesta de acuerdo al statuscode.
+  //Si se acepta el request se crea el objeto cliente en la base de datos, con su id, nombre,
+  //apellido y contraseña.
 
     @Post()
     async postClient(@Body() request: ClientCreateDTO): Promise <ClientResponseDTO> {

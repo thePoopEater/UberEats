@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, BadRequestException, NotFoundException} from '@nestjs/common';
+import { Controller,Get,Post,Body,Param,Put,BadRequestException,NotFoundException} from '@nestjs/common';
 import { ProductCreateDTO } from './dto/product-create.dto';
 import { ProductResponseDTO } from './dto/product-response.dto';
 import { ProductService } from 'src/providers/product/product.service';
@@ -7,12 +7,15 @@ import { LocalService } from 'src/providers/local/local.service';
 import { LocalEntity } from 'src/database/entities/local.entity';
 import { UpdateResult } from 'typeorm';
 import { ProductUpdateDTO } from './dto/product-update.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('product')
+@ApiTags('Product')
 export class ProductController {
-    
-    constructor(private productService : ProductService,
-                private localService : LocalService){}
+  constructor(
+    private productService: ProductService,
+    private localService: LocalService,
+  ) {}
 
     // Esta funcion guarda un Producto en el repositorio de los productos, recibe un dato de tipo ProductCreateDTO,
     // la funcion busca el id de local y le asigna un local a este producto.
@@ -46,5 +49,4 @@ export class ProductController {
     public async putProduct(@Param('id') productId : number, @Body() request : ProductUpdateDTO) : Promise<UpdateResult> {
         return this.productService.updateProduct(productId, request);
     }
-
 }
