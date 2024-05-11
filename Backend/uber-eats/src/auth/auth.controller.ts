@@ -25,7 +25,7 @@ export class AuthController {
 
     const token = await this.authService.login(user); 
     const response: LoginResponseDTO = {
-      access_token: token.access_token, 
+      accessToken: token.accessToken, 
     };
 
     return response;

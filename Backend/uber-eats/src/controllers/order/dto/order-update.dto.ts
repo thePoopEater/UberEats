@@ -12,7 +12,7 @@ export class OrderUpdateDTO {
 
     @IsOptional()
     @IsString()
-    pay_method : number;
+    payMethod : number;
 
     @IsOptional()
     @IsNumber()

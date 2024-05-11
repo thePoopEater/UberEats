@@ -15,12 +15,12 @@ export class OrderProductService {
         return await this.orderProductRepository.save(order);
     }
 
-    public async getOrderProduct(order_product_id : number) : Promise<OrderProductEntity>{
-        return await this.orderProductRepository.findOneBy({id:order_product_id});
+    public async getOrderProduct(orderProductId : number) : Promise<OrderProductEntity>{
+        return await this.orderProductRepository.findOneBy({id:orderProductId});
     }
 
-    public async getAllProductsFromOrder(order_id : number) : Promise<OrderProductEntity[]>{
-        return this.orderProductRepository.findBy({id:order_id});
+    public async getAllProductsFromOrder(orderId : number) : Promise<OrderProductEntity[]>{
+        return this.orderProductRepository.findBy({id:orderId});
     }
 
     

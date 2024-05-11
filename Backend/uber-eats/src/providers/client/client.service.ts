@@ -20,12 +20,12 @@ export class ClientService {
     }
 
     public async findClient(id : number) : Promise<ClientEntity> {
-        return await this.clientRepository.findOneBy({client_id: id});
+        return await this.clientRepository.findOneBy({clientId: id});
     }
     //Función para obtener un cliente en específico por ID del repositorio.
     public async getClient(idClient: number): Promise <ClientEntity>{
       try{
-          const client = await this.clientRepository.createQueryBuilder('client').where("client_id = :idClient", { idClient }).getOne();
+          const client = await this.clientRepository.createQueryBuilder('client').where("clientId = :idClient", { idClient }).getOne();
           return client;
       }catch (error:any){
           throw new Error(error);

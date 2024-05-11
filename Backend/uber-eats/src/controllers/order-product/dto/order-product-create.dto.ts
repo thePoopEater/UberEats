@@ -12,9 +12,9 @@ export class OrderProductCreateDTO {
 
     @IsNotEmpty()
     @IsNumber()
-    product_id : number;
+    productId : number;
 
     @IsNotEmpty()
     @IsNumber()
-    order_id : number;
+    orderId : number;
 }

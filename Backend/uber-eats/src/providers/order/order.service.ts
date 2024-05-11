@@ -17,19 +17,19 @@ export class OrderService {
         ) {}
 
     public findOrder(id : number) : Promise<OrderEntity> {
-        return this.orderRepository.findOneBy({order_id:id});
+        return this.orderRepository.findOneBy({orderId:id});
     }
     public async createOrder(order : OrderCreateDTO) : Promise<OrderEntity>{
-        const local = await this.localService.getLocal(order.local_id);
-        const client = await this.clientService.findClient(order.client_id);
+        const local = await this.localService.getLocal(order.localId);
+        const client = await this.clientService.findClient(order.clientId);
         if (local && client){
-            const new_order = new OrderEntity(order);
-            new_order.client = client;
-            new_order.local = local;
-            return await this.orderRepository.save(new_order);
+            const newOrder = new OrderEntity(order);
+            newOrder.client = client;
+            newOrder.local = local;
+            return await this.orderRepository.save(newOrder);
         }
-        if (local == undefined) throw new NotFoundException("No existe ese local");
-        if (client == undefined) throw new NotFoundException("No existe ese cliente");
+        if (!local) throw new NotFoundException("No existe ese local");
+        if (!client) throw new NotFoundException("No existe ese cliente");
         return undefined;
     }
     public async findOrdersFromOneLocal(local: LocalEntity) : Promise<OrderEntity[]> {
@@ -37,19 +37,19 @@ export class OrderService {
         return orders;
     }
 
-    public async findOrdersFromOneClient(client_id : number) {
-        const client = await this.clientService.findClient(client_id);
+    public async findOrdersFromOneClient(clientId : number) {
+        const client = await this.clientService.findClient(clientId);
         return this.orderRepository.findBy({client:client});
     }
 
     public async findProductsFromOrder(id : number){
     return await this.orderRepository.createQueryBuilder('order')
-        .innerJoin('order.order_products','order_product')
-        .innerJoin('order_product.product','product')
-        .where('order.order_id = :id',{id})
+        .innerJoin('order.orderProducts','orderProduct')
+        .innerJoin('orderProduct.product','product')
+        .where('order.orderId = :id',{id})
         .select('product')
-        .addSelect('order_product.quantity')
-        .addSelect('order_product.specification')
+        .addSelect('orderProduct.quantity')
+        .addSelect('orderProduct.specification')
         .execute()
     }
 }

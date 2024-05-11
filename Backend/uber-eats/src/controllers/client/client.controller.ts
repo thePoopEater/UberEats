@@ -26,13 +26,13 @@ export class ClientController {
             error: null
         };
         if (request) {
-            const new_client: ClientEntity = {
+            const newClient: ClientEntity = {
                 name: request.name,
-                last_name: request.last_name,
+                lastName: request.lastName,
                 password:  request.password,
 
             } as ClientEntity;
-            await this.clientService.create(new_client);
+            await this.clientService.create(newClient);
             return response;
         }
     }
@@ -44,13 +44,13 @@ export class ClientController {
     }
     //Función que retorna un cliente por ID.
     @Get(':id')
-    public async getClient(@Param('id') client_id : number) : Promise<ClientEntity> {
-        const client : Promise<ClientEntity> = this.clientService.getClient(client_id);
+    public async getClient(@Param('id') clientId : number) : Promise<ClientEntity> {
+        const client : Promise<ClientEntity> = this.clientService.getClient(clientId);
         return client;
     }
 
     @Get('/order/:id')
-    public async getOrders(@Param('id') client_id : number) : Promise<OrderEntity[]>{
-        return await this.orderService.findOrdersFromOneClient(client_id);
+    public async getOrders(@Param('id') clientId : number) : Promise<OrderEntity[]>{
+        return await this.orderService.findOrdersFromOneClient(clientId);
     }
 }

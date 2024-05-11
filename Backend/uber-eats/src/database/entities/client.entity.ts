@@ -8,13 +8,13 @@ export class ClientEntity {
     Object.assign(this, data);
   }
   @PrimaryGeneratedColumn()
-  client_id: number;
+  clientId: number;
 
   @Column()
   name: string;
 
   @Column()
-  last_name : string;
+  lastName : string;
 
   @Column()
   password: string;

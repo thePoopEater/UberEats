@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn,ManyToOne
 import { ProductEntity } from './product.entity';
 import { OrderEntity } from './order.entity';
 
-@Entity({name : 'order_product'})
+@Entity({name : 'order-product'})
 export class OrderProductEntity {
     
     constructor(private data : Partial<OrderProductEntity>) {
@@ -11,8 +11,8 @@ export class OrderProductEntity {
     @PrimaryGeneratedColumn()
     id : number;
 
-    @JoinColumn({name:'product_id'})
-    @ManyToOne(()=> ProductEntity, (product) => product.order_products, {cascade:true})
+    @JoinColumn({name:'productId'})
+    @ManyToOne(()=> ProductEntity, (product) => product.orderProducts, {cascade:true})
     product : ProductEntity;
 
     @Column()
@@ -21,7 +21,7 @@ export class OrderProductEntity {
     @Column()
     specification : string;
 
-    @ManyToOne(() => OrderEntity, (order) => order.order_products)
-    @JoinColumn({name:'order_id'})
+    @ManyToOne(() => OrderEntity, (order) => order.orderProducts)
+    @JoinColumn({name:'orderId'})
     order : OrderEntity;
 }

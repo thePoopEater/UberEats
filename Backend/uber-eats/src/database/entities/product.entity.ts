@@ -8,7 +8,7 @@ export class ProductEntity {
         Object.assign(this, data);
     }
     @PrimaryGeneratedColumn()
-    product_id : number;
+    productId : number;
 
     @Column()
     name : string;
@@ -27,9 +27,9 @@ export class ProductEntity {
 
     //NOTE:Esta es para hacer la foreing key de local con producto
     @ManyToOne(() => LocalEntity, (local) => local.products)
-    @JoinColumn({name: 'local_id'})
+    @JoinColumn({name: 'localId'})
     local : LocalEntity;
 
     @OneToMany(()=>OrderProductEntity,(orderProduct) => orderProduct.product)
-    order_products : OrderProductEntity[]
+    orderProducts : OrderProductEntity[]
 }

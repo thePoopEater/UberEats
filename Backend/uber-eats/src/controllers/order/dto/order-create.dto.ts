@@ -4,15 +4,15 @@ export class OrderCreateDTO {
 
     @IsNotEmpty()
     @IsNumber()
-    local_id : number;
+    localId : number;
 
     @IsNotEmpty()
     @IsNumber()
-    client_id : number;
+    clientId : number;
 
     @IsNotEmpty()
     @IsString()
-    date : string;
+    date : Date;
 
     @IsNotEmpty()
     @IsString() 
@@ -24,7 +24,7 @@ export class OrderCreateDTO {
 
     @IsNotEmpty()
     @IsString()
-    pay_method : string;
+    payMethod : string;
 
     @IsNotEmpty()
     @IsNumber()

@@ -14,14 +14,14 @@ export class OrderController {
         ){}
 
     @Get(':id')
-    public async getOrder(@Param('id') order_id : number)  {
-        const order = await this.orderService.findOrder(order_id);
+    public async getOrder(@Param('id') orderId : number)  {
+        const order = await this.orderService.findOrder(orderId);
         return order;
     }
 
     @Post()
-    public async postOrder(@Body() new_order : OrderCreateDTO) : Promise<OrderResponseDTO> {
-        if (this.orderService.createOrder(new_order)){
+    public async postOrder(@Body() newOrder : OrderCreateDTO) : Promise<OrderResponseDTO> {
+        if (this.orderService.createOrder(newOrder)){
             const response : OrderResponseDTO = {
                 data : null,
                 statusCode : 200,
@@ -33,8 +33,8 @@ export class OrderController {
                
     }
     @Get('/products/:id')
-    public async getAllProducts(@Param('id') order_id : number){ 
-        const result = await this.orderService.findProductsFromOrder(order_id);
+    public async getAllProducts(@Param('id') orderId : number){ 
+        const result = await this.orderService.findProductsFromOrder(orderId);
         return result;
     }
 }

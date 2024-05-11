@@ -30,7 +30,7 @@ export class LocalController {
             const newLocal : LocalEntity = new LocalEntity(request); 
             this.localService.create(newLocal);
             const response : LocalResponseDTO = {
-                data : "Se creo un usuario",
+                data : "Se creó un usuario",
                 statusCode: 200,
                 statusDescription : 'Listo',
                 error : null
@@ -43,28 +43,28 @@ export class LocalController {
     // Esta funcion retorna todos los productos de un local, tiene que como parametro la ID de este local,
     // llama al local service y hace un peticion al repositorio de productos.
     @Get('/products/:id')
-    public async getProducts(@Param('id') local_id : number) : Promise<ProductEntity[]>{
-        const products = this.productService.findAllProductsFromLocal(local_id);
+    public async getProducts(@Param('id') localId : number) : Promise<ProductEntity[]>{
+        const products = this.productService.findAllProductsFromLocal(localId);
         return products;
     }
 
     // Esta funcion retorna la informacion de un local(id,nombre,descripcion,horario,dirección), tiene como parametro la ID
     //, llama al local service y hace un peticion.
     @Get(':id')
-    public async getInfo(@Param('id') local_id : number) : Promise<LocalEntity> {
-        const local : Promise<LocalEntity> = this.localService.getLocal(local_id);
+    public async getInfo(@Param('id') localId : number) : Promise<LocalEntity> {
+        const local : Promise<LocalEntity> = this.localService.getLocal(localId);
         return local;
     }
 
     // Esta funcion modifica la informacion de un local dado una id, esta informacion actualizada viene como parametro request de tipo LocalUpdateDTO,
     // , llama al repositorio de local y pide actualizar columnas de un registro.
     @Put(':id')
-    public async putLocal(@Param('id') id_local : number, @Body() request : LocalUpdateDTO) : Promise<UpdateResult | LocalResponseDTO> {
+    public async putLocal(@Param('id') idLocal : number, @Body() request : LocalUpdateDTO) : Promise<UpdateResult | LocalResponseDTO> {
         if (Object.keys(request).length == 0){
             throw new BadRequestException('Viene vacio');
         }
-        const serv_response = await this.localService.updateLocal(id_local,request);
-        if (serv_response != undefined){
+        const servResponse = await this.localService.updateLocal(idLocal,request);
+        if (servResponse != undefined){
             const response : LocalResponseDTO = {
                 data : null,
                 statusCode: 200,
@@ -73,7 +73,7 @@ export class LocalController {
                 } as LocalResponseDTO;
             return response;
         }
-        return serv_response;
+        return servResponse;
         
     }
      

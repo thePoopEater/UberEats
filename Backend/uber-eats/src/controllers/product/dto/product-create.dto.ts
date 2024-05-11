@@ -18,7 +18,7 @@ export class ProductCreateDTO {
 
     @IsNotEmpty()
     @IsNumber()
-    local_id : number;
+    localId : number;
 
     @IsNotEmpty()
     @IsNumber()

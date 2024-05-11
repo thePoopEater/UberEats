@@ -9,7 +9,7 @@ export class ClientCreateDTO {
     @IsNotEmpty()
     @IsString()
     
-    last_name: string;
+    lastName: string;
     
     @IsNotEmpty()
     @IsString()

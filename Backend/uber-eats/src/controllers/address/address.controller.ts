@@ -14,11 +14,11 @@ export class AddressController {
   //de la entidad address y client. Si el cliente se agregó correctamente se retorna el mensaje response.
   @Post()
   async addDireccion(@Body() request: AddressCreateDTO): Promise<AddressResponseDTO> {
-    if (!request.client_id) {
-      throw new BadRequestException("Ingresa un 'cliente_id'");
+    if (!request.clientId) {
+      throw new BadRequestException("Ingresa un 'clienteId'");
     }
     const newAddress = new AddressEntity();
-    newAddress.client = { client_id: request.client_id } as ClientEntity; 
+    newAddress.client = { clientId: request.clientId } as ClientEntity; 
     newAddress.name = request.name;
     newAddress.description = request.description;
   
@@ -42,8 +42,8 @@ export class AddressController {
 
     //Función que permite obtener por un id específico una dirección.
     @Get(':id')
-    public async getAddress(@Param('id') address_id : number) : Promise<AddressEntity> {
-        const address : Promise<AddressEntity> = this.addressService.getAddress(address_id);
+    public async getAddress(@Param('id') addressId : number) : Promise<AddressEntity> {
+        const address : Promise<AddressEntity> = this.addressService.getAddress(addressId);
         return address;
     }
 }

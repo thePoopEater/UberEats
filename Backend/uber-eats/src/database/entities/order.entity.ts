@@ -10,10 +10,10 @@ export class OrderEntity {
     }
 
     @PrimaryGeneratedColumn()
-    order_id : number;
+    orderId : number;
 
     @Column()
-    date : string;
+    date : Date;
 
     @Column()
     state : string;
@@ -22,20 +22,20 @@ export class OrderEntity {
     address : string;
 
     @Column()
-    pay_method : string;
+    payMethod : string;
 
     @Column()
     amount : number;
 
     @ManyToOne(() => (LocalEntity),(local) => local.id)
-    @JoinColumn({name:'local_id'})
+    @JoinColumn({name:'localId'})
     local : LocalEntity;
 
     @ManyToOne(() => ClientEntity, (client) => client.orders)
-    @JoinColumn({name:'client_id'})
+    @JoinColumn({name:'clientId'})
     client: ClientEntity;
 
-    @OneToMany(() => OrderProductEntity, (orderproduct) => orderproduct.order)
-    @JoinColumn({name:'order_id'})
-    order_products : OrderProductEntity[];
+    @OneToMany(() => OrderProductEntity, (orderProduct) => orderProduct.order)
+    @JoinColumn({name:'orderId'})
+    orderProducts : OrderProductEntity[];
 }

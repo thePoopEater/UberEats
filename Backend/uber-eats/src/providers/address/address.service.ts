@@ -14,7 +14,7 @@ export class AddressService {
     //el id del cliente ingresado para crear la dirección.
     public async addAddress (data : AddressEntity){
         const client = await this.clientRepository.findOne({
-            where: { client_id: data.client?.client_id },
+            where: { clientId: data.client?.clientId },
           });  
           if (!client) {
             throw new NotFoundException("Cliente no encontrado");
@@ -27,7 +27,7 @@ export class AddressService {
     //Función que busca una dirección específica de la tabla 'address' de acuerdo a un id.
     public async getAddress(idAddress: number): Promise <AddressEntity>{
       try{
-          const address = await this.addressRepository.createQueryBuilder('address').where("address_id = :idAddress", { idAddress }).getOne();
+          const address = await this.addressRepository.createQueryBuilder('address').where("addressId = :idAddress", { idAddress }).getOne();
           return address;
       }catch (error:any){
           throw new Error(error);

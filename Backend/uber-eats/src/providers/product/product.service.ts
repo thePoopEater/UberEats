@@ -15,26 +15,26 @@ export class ProductService {
     ){}
 
     // Esta funcion crea un registro de un producto en la tabla de los productos.
-    public async createProduct(product_data : ProductEntity) : Promise<ProductEntity>{
-        return this.productRepository.save(product_data);        
+    public async createProduct(productData : ProductEntity) : Promise<ProductEntity>{
+        return this.productRepository.save(productData);        
     }
 
     // Esta funcion busca en el repositorio de productos todos los productos de un local dado por una id.
-    public async findAllProductsFromLocal(local_id : number) : Promise<ProductEntity[]> {
-        const local : LocalEntity = await this.localRepository.findOneBy({id : local_id});
+    public async findAllProductsFromLocal(localId : number) : Promise<ProductEntity[]> {
+        const local : LocalEntity = await this.localRepository.findOneBy({id : localId});
         const products : Promise<ProductEntity[]> = this.productRepository.findBy({local:local});
         return products;
 
     }
     // Esta funcion busca UN SOLO producto dado un id, llama al repostorio de los productos.
-    public async findOneProduct(product_id : number) : Promise<ProductEntity>{
-        const product : Promise<ProductEntity> = this.productRepository.findOneBy({product_id:product_id});
+    public async findOneProduct(productId : number) : Promise<ProductEntity>{
+        const product : Promise<ProductEntity> = this.productRepository.findOneBy({productId:productId});
         return product;
     }
 
     // Esta funcion actualiza un producto, dado un request de tipo ProducUpdateDTO y un id.
-    public async updateProduct(product_id : number, product : ProductUpdateDTO): Promise<UpdateResult> {
-        const result : UpdateResult = await this.productRepository.update(product_id, product);
+    public async updateProduct(productId : number, product : ProductUpdateDTO): Promise<UpdateResult> {
+        const result : UpdateResult = await this.productRepository.update(productId, product);
         if (result.affected == 0){
             return undefined;
         }

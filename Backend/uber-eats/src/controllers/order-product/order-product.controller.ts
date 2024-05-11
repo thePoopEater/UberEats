@@ -6,7 +6,7 @@ import { ProductService } from 'src/providers/product/product.service';
 import { OrderProductEntity } from 'src/database/entities/order-products.entity';
 import { OrderResponseDTO } from '../order/dto/order-response.dto';
 
-@Controller('order-product')
+@Controller('orderProduct')
 export class OrderProductController {
     constructor(
         private orderProductService : OrderProductService,
@@ -16,17 +16,17 @@ export class OrderProductController {
 
         
     @Post()
-    public async postOrderProduct(@Body() new_order_product : OrderProductCreateDTO) {
-        const order = await this.orderService.findOrder(new_order_product.order_id);
+    public async postOrderProduct(@Body() newOrderProduct : OrderProductCreateDTO) {
+        const order = await this.orderService.findOrder(newOrderProduct.orderId);
 
-        const product = await this.productService.findOneProduct(new_order_product.product_id);
+        const product = await this.productService.findOneProduct(newOrderProduct.productId);
         
         if (order && product) {
-            const order_product = new OrderProductEntity(new_order_product);
-            order_product.order = order;
-            order_product.product = product;
+            const orderProduct = new OrderProductEntity(newOrderProduct);
+            orderProduct.order = order;
+            orderProduct.product = product;
 
-            let data = this.orderProductService.saveOrderProduct(order_product);
+            let data = this.orderProductService.saveOrderProduct(orderProduct);
             
             const response : OrderResponseDTO = { 
                 data : data,
@@ -36,9 +36,9 @@ export class OrderProductController {
             }
             return response;
         }
-        if (order == null)
+        if (!order)
             throw new NotFoundException('No existe esa orden');
-        if (product == null)
+        if (!product)
             throw new NotFoundException('No existe ese producto');
     }
 }

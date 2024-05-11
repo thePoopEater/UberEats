@@ -25,8 +25,8 @@ export class LocalService {
         }
     }
     // Esta funcion actualiza un registro dado por un request de tipo LocalUpdateDTO y un id.
-    public async updateLocal(local_id : number, local : LocalUpdateDTO) : Promise<UpdateResult> {
-        const result : UpdateResult = await this.localRepository.update(local_id, local);
+    public async updateLocal(localId : number, local : LocalUpdateDTO) : Promise<UpdateResult> {
+        const result : UpdateResult = await this.localRepository.update(localId, local);
 
         if (result.affected == 0){ 
             return undefined;

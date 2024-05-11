@@ -4,7 +4,7 @@ import { ClientEntity } from 'src/database/entities/client.entity';
 @Entity({name:'address'})
 export class AddressEntity {
   @PrimaryGeneratedColumn()
-  address_id: number;
+  addressId: number;
   
   @Column()
   name: string;
@@ -13,6 +13,6 @@ export class AddressEntity {
   description: string;
 
   @ManyToOne(() => ClientEntity, (client) => client.addresses)
-  @JoinColumn({ name: 'client_id' })
+  @JoinColumn({ name: 'clientId' })
   client : ClientEntity; 
 }
