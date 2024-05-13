@@ -1,0 +1,81 @@
+<div class="product-pag">
+  <div class="header-product">
+    <div class="button-back">
+      <a routerLink="/">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 12l14 0" />
+            <path d="M5 12l6 6" />
+            <path d="M5 12l6 -6" />
+          </svg>
+        </a>
+    </div>
+    <div class="image-product">
+      <img src="https://st3.depositphotos.com/3541157/13870/i/450/depositphotos_138709374-stock-photo-beautiful-potatoes-fried-in-korean.jpg" alt="product-img" />
+    </div>
+  </div>
+  <div class="description-prod">
+    <h2 class="title-prod">{{product.name}}</h2>
+    <h3>{{product.price}} clp</h3>
+    <p>{{product.description}}</p>
+  </div>
+  <div class="special-inst">
+    <h3>Instrucciones especiales</h3>
+      <textarea class="aditional-ins" type="text" placeholder="Agregar una nota (salsa adicional, sin cebolla, etc.)" id="instr-aditional"></textarea>
+      <div class="buttons-incDec-container">
+        <div class="buttons-span">
+          <!-- Cambiar el color y desactivar boton minus y plus-->
+          <span class="minus" (click)="subProductCant()">-</span>
+          <span class="num">{{cant_prod()}}</span>
+          <span class="plus" (click)="addProductCant()">+</span>
+        </div>
+  
+    </div>
+  </div>
+  <div class="container-commpra-juntos">
+    <h3>Suelen comprarse juntos</h3>
+    <a class="compra-juntos" href="/">
+      <!--mostrar otros productos del mismo local-->
+      <div class="other-prod">
+        <h3>charero charron</h3>
+        <h4>Price</h4>
+      <p>Descripción</p>
+    </div>
+    <div class="button-plus">
+      <div class="span-button">
+        <img class="img-extra-food" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Chacarero-Fuente-Mardoqueo.jpg/536px-Chacarero-Fuente-Mardoqueo.jpg" alt="extra-pedido">
+
+      </div>
+    </div>
+  </a>
+  <div class="span-plus">
+    <span (click)="addProduct(2)">+</span>
+  </div>
+    <!-- for each product -->
+    <a class="compra-juntos" href="/">
+      <!--mostrar otros productos del mismo local-->
+      <div class="other-prod">
+        <h3>charero charron</h3>
+        <h4>Price</h4>
+      <p>Descripción</p>
+    </div>
+    <div class="button-plus">
+      <div class="span-button">
+        <img class="img-extra-food" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Chacarero-Fuente-Mardoqueo.jpg/536px-Chacarero-Fuente-Mardoqueo.jpg" alt="extra-pedido">
+      </div>
+    </div>
+  </a>
+  <div class="span-plus">
+    <span (click)="addProduct(2)">+</span>
+  </div>
+    <!-- for each product -->
+  </div>
+
+  <div class="agregar-carrito-container">
+    <div class="button-add-car">
+      <button> Agregar {{cant_prod()}} al Carrito • CLP{{total_price}}</button>
+    </div>
+  </div>
+</div>
+
+
