@@ -1,0 +1,7 @@
+1. Debe aparecer una pantalla tal cual como aparece en la app (verde fondo y logo ubereats).
+
+    1.1 La tarea anterior no sé si realizarla con sobreponer la imagen y el fondo para luego quitarlo con un desvanecimiento al pasar x tiempo. Considerar el archivo index.html
+
+    1.2 También puede abrirse otra página y que esta después de un determinado tiempo rederidiga a otra.
+    
+2. Luego aparece el menu principal:

@@ -1,0 +1,163 @@
+.botones-superiores{
+    width: 30px;
+    height: 30px;
+    margin: 20px;
+}
+
+.titulo-pago{
+    font-family: "Rubik", sans-serif;
+    font-size: 30px;
+    margin: 15px;
+}
+
+.img-opciones{
+    width: 20px;
+    height: 25px;
+    margin: 20px;
+  }
+
+
+  .productos-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .texto-opciones {
+    font-family: "Rubik", sans-serif;
+    margin: 5px; 
+    font-size: 20px;
+    white-space: nowrap
+  }
+  
+  .info-direccion {
+    font-family: "Rubik", sans-serif;
+    margin: 5px; 
+    font-size: 15px;
+    color: grey;
+}
+.info-entrega {
+    font-family: "Rubik", sans-serif;
+    margin: 5px; 
+    font-size: 15px;
+    color: #06C167;
+}
+  .texto-direccion{
+    flex-direction: column;
+    margin: 2px;
+  }
+  
+
+  
+  .enlace-producto img {
+    width: 100px;
+    height: auto;
+    border-radius: 12%;
+  }
+
+  .hr-final {
+    border: none;
+    border-bottom: 8px solid #bebcbc; 
+  
+  }
+
+  .wrapper {
+    overflow:hidden;
+    margin-left: 0;
+  }
+
+  footer {
+    position: sticky;
+    background: white;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  }
+
+  .container_footer{
+    display: flex;
+    flex-direction: column;
+  }
+
+
+.boton-continuar{
+  color:white;
+  background-color: black;
+  border-radius: 20px;
+  margin-top: 20px;
+  width: 370px;
+  height: 50px;
+  left:0;
+}
+
+.tiempo-espera{
+    font-family: "Rubik", sans-serif;
+    margin: 5px; 
+    font-size: 20px;
+    color: grey;
+    margin-left: 70px;
+}
+
+.img-container{
+
+    margin: 20px;
+    height: 20px; 
+    width: 20px; 
+    margin-left: 25px;
+}
+
+.titulo-resumen-pedido{
+    font-family: "Rubik", sans-serif;
+    font-size: 25px;
+    margin: 15px;
+}
+
+.img-local{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin: 10px;
+    margin-left: 20px;
+}
+
+.texto-descripcion-pedido{
+    color: grey;
+    font-family: "Rubik", sans-serif;
+    font-size: 20px;
+    margin: 20px;
+    white-space: nowrap;
+
+}
+ .texto-izquierda-pedido{
+    margin-left: 250px;
+ }
+
+ .img-informacion{
+    width: 15px;
+    height: 15px;
+    margin: 10px;
+    margin-top: -3px
+ }
+
+ .texto-total-pedido{
+    font-family: "Rubik", sans-serif;
+    font-size: 30px;
+    margin: 15px;
+ }
+
+ .img-tarjeta{
+  width: 50px;
+  height: 30px;
+  margin: 20px;
+ }
+
+ .texto-tarjeta{
+  font-family: "Rubik", sans-serif;
+    font-size: 20px;
+    margin: 0;    
+    white-space: nowrap;
+
+ }
+

@@ -1,0 +1,30 @@
+<div class="login-container">
+    <h1 class="titulo-login">¡Bienvenido!</h1>
+    <label for="username" class="requerimientos">Usuario</label>
+    <br />
+    <input
+      type="text"
+      id="username"
+      placeholder="Usuario"
+      [(ngModel)]="user"
+      class="inputs"
+    />
+    <br />
+    <label for="password" class="requerimientos">Contraseña</label>
+    <br />
+    <input
+      type="password"
+      id="password"
+      placeholder="Contraseña"
+      [(ngModel)]="password"
+      class="inputs"
+    />
+    <br />
+    <button type="button" (click)="login()" class="boton-iniciar-sesion">
+      Iniciar Sesión
+      <img
+        src="assets/imagenes/flechacontinuarlogin.png"
+        class="imagen-continuar"
+      />
+    </button>
+  </div>

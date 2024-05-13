@@ -1,0 +1,107 @@
+.fondo-imagen{
+    height: 932px;
+    width: 430px;
+}
+
+.container{
+    background-color: white;
+    top: 350px;
+    position: absolute;
+    width: 410px;
+    left: 10px;
+    border-radius: 15px;
+}
+
+.titulo-confirmacion{
+    font-family: "Rubik", sans-serif;
+    font-size: 30px;
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
+.productos-container {
+    display: flex;
+    flex-wrap: wrap; 
+  }
+
+  .img-opciones{
+    width: 20px;
+    height: 20px;
+    margin: 15px;
+    margin-top: 20px;
+  }
+
+  .texto-opciones{
+    font-family: "Rubik", sans-serif;
+    font-size: 18px;
+    margin-top: 15px;
+  }
+
+
+  .info-direccion {
+    font-family: "Rubik", sans-serif;
+    font-size: 15px;
+    color: grey;
+}
+
+
+
+  .hr{
+    border: none;
+    border-bottom: 1px solid #bebcbc; 
+    margin: 0;
+  }
+
+  .boton-continuar {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.699);
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-left: -25px;
+    width: 370px;
+    height: 50px;
+    left: 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .progress-text {
+    position: relative;
+    z-index: 1;
+  }
+  .progress-bar {
+    background-color: black;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    transition: width linear;
+  }
+  
+
+  .boton-volver{
+    color:black;
+    border-color: white;
+    background-color: white;
+    border-radius: 20px;
+    width: 370px;
+    height: 50px;
+    margin-left: -25px;
+    box-shadow: none;
+  }
+
+
+  .container-cantidad{
+    background-color: #e2e0e0;
+    display: inline-block;
+    padding-inline: 7px;
+    font-family: "Rubik", sans-serif;
+    height: 25px;
+    width: 25px;
+    margin-right:10px;
+    text-align: center;
+  }
