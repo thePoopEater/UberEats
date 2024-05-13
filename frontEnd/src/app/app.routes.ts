@@ -6,19 +6,48 @@ import { ProductoComponent } from './features/pages/producto/producto.component'
 import { PagoComponent } from './features/pages/pago/pago.component';
 import { ConfirmacionPedidoComponent } from './features/pages/confirmacion-pedido/confirmacion-pedido.component';
 import { SeguimientoPedidoComponent } from './features/pages/seguimiento-pedido/seguimiento-pedido.component';
+import { notLogged, authGuard } from './core/auth/guards/login-guard/login.guard';
+import { LoginComponent } from './features/pages/login/login/login.component';
+
 
 export const routes: Routes = [
-    {path: '', component: InicioComponent},
-    {
-        path: 'local/:idLocal', 
-        component: LocalComponent,
-    },
-    {
-        path : 'local/:idLocal/product/:idProd',
-        component : ProductoComponent
-    },
-    {path: 'carrito', component: CarritoComponent},
-    {path: 'pagos', component: PagoComponent},
-    {path: 'confirmacion-pedido', component: ConfirmacionPedidoComponent},
-    {path: 'seguimiento-pedido', component: SeguimientoPedidoComponent}
+    {path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',},
+
+    {path: 'login', 
+    component: LoginComponent},
+
+    {path: 'inicio', 
+    component: InicioComponent, 
+    canActivate: [authGuard]},
+
+    {path: 'local/:nombre_local', 
+    component: LocalComponent, 
+    canActivate: [authGuard]},
+
+    {path: 'producto', 
+    component: ProductoComponent, 
+    canActivate: [authGuard]},
+
+    {path: 'carrito', 
+    component: CarritoComponent, 
+    canActivate: [authGuard]},
+
+
+    {path: 'pagos', 
+    component: PagoComponent, 
+    canActivate: [authGuard]},
+
+
+    {path: 'confirmacion-pedido', 
+    component: ConfirmacionPedidoComponent, 
+    canActivate: [authGuard]},
+
+    {path: 'seguimiento-pedido', 
+    component: SeguimientoPedidoComponent, 
+    canActivate: [authGuard]},
+
+    {path: '**',
+    redirectTo: 'inicio'},
 ];

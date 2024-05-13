@@ -1,0 +1,42 @@
+.titulo-login {
+    font-family: "Rubik", sans-serif;
+    font-size: 30px;
+    margin-top: 40px;
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  .requerimientos {
+    font-family: "Rubik", sans-serif;
+    color: black;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-left: 15px;
+  }
+  
+  .inputs {
+    border-color: black;
+    font-family: "Rubik", sans-serif;
+    border: 2px solid black;
+    margin: 15px;
+    margin-top: 10px;
+    height: 35px;
+    width: 380px;
+    border-radius: 5px;
+  }
+  
+  .boton-iniciar-sesion {
+    color: white;
+    background-color: black;
+    border-radius: 20px;
+    margin-top: 20px;
+    width: 370px;
+    height: 50px;
+    margin-left: 20px;
+  }
+  
+  .imagen-continuar {
+    display: inline-block;
+    height: 18px;
+    margin-left: 5px;
+  }
