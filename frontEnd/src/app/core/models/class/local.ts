@@ -1,12 +1,12 @@
-export interface Local {
+export class Local {
 
-    id : number;
-    name : string;
-    address : string;
-    schedule : string;
-    description : string;
-    category : string;
-    img : string;
+    id : number = 0;
+    name : string = '';
+    address : string = '';
+    schedule : string = '';
+    description : string = '';
+    category : string = '';
+    img : string = '';
 
     // constructor(
     //     id : number,

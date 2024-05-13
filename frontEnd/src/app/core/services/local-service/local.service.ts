@@ -1,8 +1,8 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Local, Product } from '../../../features/pages/inicio/clases';
+import { Local } from '../../models/class/local';
 import { ObjectMapper } from 'json-object-mapper';
-const URL_LOCAL = "http://localhost:3000/local";
+const URL_ALL_LOCAL = "http://localhost:3000/local";
 const URL_PRODUCTS = "http://localhost:3000/local/products/:";
 const URL_PRODUCT = "http://localhost:3000/local/products/"
 @Injectable({
@@ -15,14 +15,7 @@ export class LocalService {
 
   
   getLocales(){
-    return this.http.get<Local>(URL_LOCAL);
+    return this.http.get<Local[]>(URL_ALL_LOCAL);
   }
 
-  getProducts(id : string){
-    return this.http.get<Product>(URL_PRODUCTS+id);
-  }
-
-  getProduct(id : string){
-    return this.http.get<Product>(URL_PRODUCT+id)
-  }
 }
