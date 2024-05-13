@@ -18,4 +18,5 @@ export class LocalService {
     return this.http.get<Local[]>(URL_ALL_LOCAL);
   }
 
+  
 }

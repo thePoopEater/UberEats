@@ -34,7 +34,10 @@ export class InicioComponent implements OnInit{
         this.locals = locals;
       }
     )
+  }
 
+  getLocals() : Local[] {
+    return this.locals;
   }
   
 

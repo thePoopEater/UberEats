@@ -1,8 +1,9 @@
 import { Component, signal, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../inicio/clases';
+import { Product } from '../../../core/models/class/product';
 import { LocalService } from '../../../core/services/local-service/local.service';
+import { ProductosService } from '../../../core/services/producto-service/productos.service';
 import { OnInit } from '@angular/core';
 @Component({
   selector: 'app-producto',
@@ -33,12 +34,12 @@ export class ProductoComponent implements OnInit{
   productId:any;
   // test class product and send to cart
 
-  private localServ = inject(LocalService);
+  private productServ = inject(ProductosService);
   ngOnInit(){
     
     
     this.route.params.subscribe( (params) => this.productId = params["idProd"]);
-    this.localServ.getProduct(this.productId).subscribe(
+    this.productServ.getProduct(this.productId).subscribe(
       (resp) => {
         this.product = resp;
         this.product = this.product[0];
