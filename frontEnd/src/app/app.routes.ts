@@ -48,6 +48,4 @@ export const routes: Routes = [
     component: SeguimientoPedidoComponent, 
     canActivate: [authGuard]},
 
-    {path: '**',
-    redirectTo: 'inicio'},
 ];
