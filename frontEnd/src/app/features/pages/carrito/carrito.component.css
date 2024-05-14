@@ -124,7 +124,7 @@
   }
 
   footer {
-    position: absolute;
+    position: sticky;
     background: white;
     bottom: 0;
     left: 0;
