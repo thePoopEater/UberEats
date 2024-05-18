@@ -7,6 +7,9 @@ export class UserEntity {
   userId: number;
 
   @Column()
+  role: string;
+
+  @Column()
   username: string;
 
   @Column()

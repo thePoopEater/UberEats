@@ -7,17 +7,21 @@ import { LocalService } from 'src/providers/local/local.service';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('order')
 @ApiBearerAuth()
 @ApiTags('Order')
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard('jwt'), RolesGuard)
+@Roles('user')
 export class OrderController {
   constructor(
     private orderService: OrderService,
     private localService: LocalService,
   ) {}
 
+    @Roles('admin')
     @Get(':id')
     public async getOrder(@Param('id') orderId : number)  {
         const order = await this.orderService.findOrder(orderId);

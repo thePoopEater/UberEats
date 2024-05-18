@@ -6,6 +6,10 @@ export class RegisterDTO{
 
     @IsString()
     @IsNotEmpty()
+    "role": string;
+
+    @IsString()
+    @IsNotEmpty()
     "password": string;
 
 }
