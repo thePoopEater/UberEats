@@ -25,11 +25,11 @@ export class InicioComponent implements OnInit{
   private locals : Local[] = [];
 
   @Input('idLocal') idLocal! : string;
-  private localSer = inject(LocalService);
+  private localSer$ = inject(LocalService);
   
   ngOnInit(){
 
-  this.localSer.getLocales().subscribe(
+  this.localSer$.getLocales().subscribe(
       (locals) => {
         this.locals = locals;
       }

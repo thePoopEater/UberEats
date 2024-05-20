@@ -8,19 +8,23 @@ import { ConfirmacionPedidoComponent } from './features/pages/confirmacion-pedid
 import { SeguimientoPedidoComponent } from './features/pages/seguimiento-pedido/seguimiento-pedido.component';
 import { notLogged, authGuard } from './core/auth/guards/login-guard/login.guard';
 import { LoginComponent } from './features/pages/login/login/login.component';
-
+import { NotFoundComponent } from './features/pages/not-found/not-found/not-found.component';
 
 export const routes: Routes = [
-    {path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',},
+    {
+        path: '',
+        redirectTo: '/login',
+        pathMatch: 'full',
+    },// inicio
 
     {path: 'login', 
     component: LoginComponent},
 
-    {path: 'inicio', 
-    component: InicioComponent, 
-    canActivate: [authGuard]},
+    {
+        path: 'inicio', 
+        component: InicioComponent, 
+        canActivate: [authGuard]
+    },
 
     {path: 'local/:nombre_local', 
     component: LocalComponent, 
@@ -40,14 +44,24 @@ export const routes: Routes = [
     canActivate: [authGuard]},
 
 
-    {path: 'confirmacion-pedido', 
-    component: ConfirmacionPedidoComponent, 
-    canActivate: [authGuard]},
+    {
+        path: 'confirmacion-pedido', 
+        component: ConfirmacionPedidoComponent, 
+        canActivate: [authGuard]
+    },
 
     {path: 'seguimiento-pedido', 
     component: SeguimientoPedidoComponent, 
     canActivate: [authGuard]},
 
-    {path: '**',
-    redirectTo: 'inicio'},
+    {
+        path : 'not-found',
+        component :NotFoundComponent
+    },
+
+    {
+        path: '**',
+        redirectTo: '/not-found',
+        pathMatch: 'full' 
+    },
 ];

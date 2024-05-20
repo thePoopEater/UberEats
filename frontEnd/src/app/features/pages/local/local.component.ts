@@ -44,7 +44,7 @@ export class LocalComponent implements OnInit {
       }
     )
     // Se debe pedir todos los productos pertenecientes al local "no se como"
-    this.prodServ.getProduct(this.local_id).subscribe(
+    this.prodServ.getProductsFromLocal(this.local_id).subscribe(
       ( resp ) => {
         this.product = resp;
         console.log(this.product);

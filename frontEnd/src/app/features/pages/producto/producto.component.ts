@@ -39,7 +39,7 @@ export class ProductoComponent implements OnInit{
     
     
     this.route.params.subscribe( (params) => this.productId = params["idProd"]);
-    this.productServ.getProduct(this.productId).subscribe(
+    this.productServ.getProductsFromLocal(this.productId).subscribe(
       (resp) => {
         this.product = resp;
         this.product = this.product[0];
