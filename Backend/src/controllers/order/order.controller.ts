@@ -21,7 +21,6 @@ export class OrderController {
     private localService: LocalService,
   ) {}
 
-    @Roles('admin')
     @Get(':id')
     public async getOrder(@Param('id') orderId : number)  {
         const order = await this.orderService.findOrder(orderId);

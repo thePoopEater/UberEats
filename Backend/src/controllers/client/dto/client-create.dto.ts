@@ -1,4 +1,4 @@
-import {IsNotEmpty, IsNumber, IsString} from "class-validator";
+import {IsNotEmpty, IsString} from "class-validator";
 
 export class ClientCreateDTO {
     
@@ -8,7 +8,6 @@ export class ClientCreateDTO {
 
     @IsNotEmpty()
     @IsString()
-    
     lastName: string;
     
     @IsNotEmpty()

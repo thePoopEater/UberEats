@@ -15,8 +15,13 @@ export class RolesGuard implements CanActivate {
        return true;
     }
     //se compara que el rol del token sea igual al del usuario obteniendo los datos del request de user
-    //en el payload
+    //en el payload.
     const {user} = context.switchToHttp().getRequest()
+    //si el rol es admin, tiene acceso a todo.
+    if(user.role === 'admin'){
+      return true;
+    }
+
     return role === user.role;
   }
 }

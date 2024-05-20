@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from 'src/providers/user/user.service';
 import { RegisterDTO } from './dto/register.dto';
 import { hash, compare } from 'bcrypt';
@@ -25,7 +25,10 @@ export class AuthService {
             return user;
     } return null;
 }
-async login(user: any): Promise<LoginResponseDTO> {
+async login(user: any, role: string): Promise<LoginResponseDTO> {
+  if (user.role !== role) {
+    throw new UnauthorizedException('No coincide el rol con el usuario');
+  }
     const payload = { role: user.role, sub: user.id }; 
     const token = this.jwtService.sign(payload); 
     return { accessToken: token } as LoginResponseDTO;
