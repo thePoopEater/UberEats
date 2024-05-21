@@ -28,24 +28,22 @@ export class LocalComponent implements OnInit {
   private prodServ$ = inject(ProductosService);
   // Este hijo recibe el id del local
   private local_id : string = '';
-  local!:Local;
+  local:Local = new Local();
   product : Product[] = [];
+
+  
   @Input('idProd') idProduct! :string;
   
   ngOnInit() : void{
     
     this.route.params.subscribe( (params) => 
       {
-        
-        this.local_id = params['{idLocal}']
-  
+        this.local_id = params['{idLocal}'];
       });
 
 
     this.localSer$.getLocal(this.local_id).subscribe(
       (resp) => {
-        console.log(this.local_id);
-        console.log(resp);
         this.local = resp;
       }
     )
@@ -53,7 +51,6 @@ export class LocalComponent implements OnInit {
     this.prodServ$.getProductsFromLocal(this.local_id).subscribe(
       ( resp ) => {
         this.product = resp;
-        console.log(this.product);
       }
     )
 

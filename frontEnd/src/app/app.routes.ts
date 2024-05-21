@@ -32,7 +32,7 @@ export const routes: Routes = [
     component: LocalComponent, 
     canActivate: [authGuard]},
 
-    {path: 'producto', 
+    {path: 'producto/:{{idProd}}', 
     component: ProductoComponent, 
     canActivate: [authGuard]},
 
