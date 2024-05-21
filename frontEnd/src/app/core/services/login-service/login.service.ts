@@ -1,59 +1,43 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { User, UserResponse } from '../../models/class/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private regularUser: string = 'user';
-  private regularPassword: string = 'user';
+  private USER_LOGIN_POST_URL = 'http://localhost:3000/auth/login';
 
   constructor(
-    private location: Location,
-    private router: Router,
+    private httpClient : HttpClient,
+    private location : Location
   ) { }
 
-  public login(username: string, password: string): Observable<boolean> {
-    const isRegularUser = username === this.regularUser && password === this.regularPassword;
+  public login(userName: string, userPass: string): Observable<UserResponse> {
+    const user = new User(userName, userPass);
+    return this.httpClient.post<UserResponse>(this.USER_LOGIN_POST_URL,user);
+  }
 
-    if (isRegularUser) {
-      const token: string = btoa(username + ';' + password);
-      sessionStorage.setItem('token', token);
+  public logout(): Observable<boolean> {
+    if (sessionStorage.getItem('token')) sessionStorage.clear();
       return of(true);
     }
+
+  public isAuth() : Observable<boolean> {
+    if (sessionStorage.getItem('token')) return of(true);
 
     return of(false);
   }
 
-  public logout(): boolean {
+  public isLoggedIn() : Observable<boolean> {
     if (sessionStorage.getItem('token')) {
-      sessionStorage.removeItem('token');
-      return true;
-    }
-
-    return false;
-  }
-
-  public isLoggedIn(): Observable<boolean> {
-    let token = sessionStorage.getItem('token');
-
-    if (token) {
-      let user: string = atob(token);
-      return of(true);
-    }
-
-    this.location.back();
-    return of(false);
-  }
-
-  public isAlreadyLogged(): Observable<boolean>{
-    if (sessionStorage.getItem('token')) {
-      this.router.navigateByUrl('inicio');
       return of(false);
-    } 
 
+      this.location.back();
+    }
     return of(true);
   }
 

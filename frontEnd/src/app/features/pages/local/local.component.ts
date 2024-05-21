@@ -18,38 +18,45 @@ export class LocalComponent implements OnInit {
 
 
 
-  private localSer = inject(LocalService);
-  private prodServ = inject(ProductosService);
-  // Este hijo recibe el id del local
-  local_id : string = '';
-  local : any;
-  product : any;
+
+
   constructor(private route: ActivatedRoute, private http : HttpClient, private localService : LocalService){
     
   }
+
+  private localSer$ = inject(LocalService);
+  private prodServ$ = inject(ProductosService);
+  // Este hijo recibe el id del local
+  private local_id : string = '';
+  local!:Local;
+  product : Product[] = [];
   @Input('idProd') idProduct! :string;
-
-  local_test:any;
+  
   ngOnInit() : void{
+    
+    this.route.params.subscribe( (params) => 
+      {
+        
+        this.local_id = params['{idLocal}']
+  
+      });
 
-    this.route.params.subscribe( (params) => this.local_id = params["idLocal"]);
 
-
-    this.localSer.getLocales().subscribe(
+    this.localSer$.getLocal(this.local_id).subscribe(
       (resp) => {
+        console.log(this.local_id);
         console.log(resp);
         this.local = resp;
-        this.local_test = this.local[parseInt(this.local_id)-1];
-        console.log(this.local_test)
       }
     )
     // Se debe pedir todos los productos pertenecientes al local "no se como"
-    this.prodServ.getProductsFromLocal(this.local_id).subscribe(
+    this.prodServ$.getProductsFromLocal(this.local_id).subscribe(
       ( resp ) => {
         this.product = resp;
         console.log(this.product);
       }
     )
+
 
     
   }

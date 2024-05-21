@@ -1,30 +1,27 @@
-<div class="login-container">
-    <h1 class="titulo-login">¡Bienvenido!</h1>
-    <label for="username" class="requerimientos">Usuario</label>
-    <br />
-    <input
-      type="text"
-      id="username"
-      placeholder="Usuario"
-      [(ngModel)]="user"
-      class="inputs"
-    />
-    <br />
-    <label for="password" class="requerimientos">Contraseña</label>
-    <br />
-    <input
-      type="password"
-      id="password"
-      placeholder="Contraseña"
-      [(ngModel)]="password"
-      class="inputs"
-    />
-    <br />
-    <button type="button" (click)="login()" class="boton-iniciar-sesion">
-      Iniciar Sesión
-      <img
-        src="assets/images/flechacontinuarlogin.png"
-        class="imagen-continuar"
-      />
-    </button>
+<div class="container w-75  mt-5 rounded shadow-sm">
+  
+  <div class="row align-items">
+    <div class="col">
+      <h2 class="fw-bold text-center py-5">Bienvenido </h2>
+
+        <!-- login -->
+        <form action="#" class="" [formGroup]="loginForm" >
+
+          <div class="mb-4">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" formControlName="userName" class="form-control" name="email">
+          </div>
+
+          <div class="mb-4">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" formControlName="userPass" class="form-control" name="password">
+          </div>
+
+          <div class="d-grid">
+            <button class="btn btn-dark" (click)="login()">Ingresar</button>
+          </div>
+        </form>
+      </div>
+        
   </div>
+</div>

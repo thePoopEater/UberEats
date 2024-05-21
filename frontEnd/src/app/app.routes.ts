@@ -6,7 +6,7 @@ import { ProductoComponent } from './features/pages/producto/producto.component'
 import { PagoComponent } from './features/pages/pago/pago.component';
 import { ConfirmacionPedidoComponent } from './features/pages/confirmacion-pedido/confirmacion-pedido.component';
 import { SeguimientoPedidoComponent } from './features/pages/seguimiento-pedido/seguimiento-pedido.component';
-import { notLogged, authGuard } from './core/auth/guards/login-guard/login.guard';
+import {authGuard, loginGuard } from './core/auth/guards/login-guard/login.guard';
 import { LoginComponent } from './features/pages/login/login/login.component';
 import { NotFoundComponent } from './features/pages/not-found/not-found/not-found.component';
 
@@ -17,8 +17,10 @@ export const routes: Routes = [
         pathMatch: 'full',
     },// inicio
 
-    {path: 'login', 
-    component: LoginComponent},
+    {
+        path: 'login', 
+        component: LoginComponent,
+    },
 
     {
         path: 'inicio', 
@@ -26,7 +28,7 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
 
-    {path: 'local/:nombre_local', 
+    {path: 'local/:{idLocal}', 
     component: LocalComponent, 
     canActivate: [authGuard]},
 

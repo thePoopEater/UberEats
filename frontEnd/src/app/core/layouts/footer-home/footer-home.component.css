@@ -24,9 +24,9 @@
   }
   
   nav {
-    float: center; 
-    
+    float: center;
   }
+
   nav ul {
     list-style: none;
     overflow: hidden; 
@@ -67,3 +67,4 @@
   margin: auto;
   background-color: #d0d3d6;
 }
+

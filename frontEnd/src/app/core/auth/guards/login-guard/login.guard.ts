@@ -5,11 +5,11 @@ import { LoginService } from '../../../services/login-service/login.service';
 export const authGuard: CanActivateFn = (route, state) => {
   const login = inject(LoginService);
 
-  return login.isLoggedIn();
+  return login.isAuth();
 };
 
-export const notLogged: CanActivateFn = (route, state) => {
+export const loginGuard : CanActivateFn = (route, state) => {
   const login = inject(LoginService);
 
-  return login.isAlreadyLogged();
-};
+  return login.isLoggedIn();
+}

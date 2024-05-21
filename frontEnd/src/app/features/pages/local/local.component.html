@@ -1,6 +1,7 @@
 <div class="botones-superiores">
   
-  <a class="boton" routerLink="/">
+  <!-- Volver atrás no al inicio-->
+  <a class="boton" routerLink="/inicio"> 
     <img class="img-superior" src="assets\images\iconocerrar.png">
   </a>
 
@@ -24,8 +25,7 @@
 </div>
 
 <div>
-  <p class = "titulo">{{local_test.name
-  }}</p>
+  <p class = "titulo">{{local.name}}</p>
   <p class = "texto-superior"> 
     <a style="color:black">4.5 </a>
     <img class = "img-texto-superior" src="assets\images\estrellalocal.png"> 
@@ -76,7 +76,7 @@
           
           <div class="info">
 
-          <h3 class="titulo-producto">{{ producto.name }}</h3>
+          <h3 class="titulo-producto">{{ producto.name}}</h3>
           <p class="precio-producto">${{ producto.price}}</p>
           <p class="info-producto">{{ producto.description}}</p>
           

@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class LocalService {
   private URL_ALL_LOCAL = "http://localhost:3000/local";
+  private URL_LOCAL = "http://localhost:3000/local/:";
   constructor(private http : HttpClient){  }
 
 
@@ -16,5 +17,7 @@ export class LocalService {
     return this.http.get<Local[]>(this.URL_ALL_LOCAL);
   }
 
-  
+  public getLocal(id : string) : Observable<Local> {
+    return this.http.get<Local>(this.URL_LOCAL + id);
+  }
 }

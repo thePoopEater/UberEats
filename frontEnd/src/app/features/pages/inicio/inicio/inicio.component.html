@@ -2,9 +2,10 @@
     <app-super-local></app-super-local>
     <div *ngFor="let local of getLocals()" >
         <div class="card border-0">
-            <a class="" routerLink="local/{{local.id}}">
-                <p></p>
-                <img src={{local.img}}
+            <a class="" routerLink="/local/{{local.id}}">
+
+                <p>{{local.id}}</p>
+                <img src={{local.image}}
                     class="card-img-top img-card" alt="test-img">
                 <div class="card-body">
                     <h5 class="card-title text-3xl font-bold underline">{{local.name}}</h5>
