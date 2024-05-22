@@ -1,8 +1,6 @@
 import {Controller,Post,Body,UseGuards,Request,UnauthorizedException} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDTO } from './dto/register.dto';
-import { AuthGuard } from '@nestjs/passport';
-import { UserEntity } from 'src/database/entities/user.entity';
 import { LoginDTO } from './dto/login.dto';
 import { LoginResponseDTO } from './dto/login-response.dto';
 import { ApiTags } from '@nestjs/swagger';
