@@ -1,0 +1,14 @@
+services:
+  mysql:
+    container_name: database-UberEats
+    image: mysql
+    restart: always
+    ports:
+      - '3307:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=P4SS#UberEats
+    volumes:
+      - mysqlvolume:/var/lib/mysql
+  
+volumes:
+  mysqlvolume:
