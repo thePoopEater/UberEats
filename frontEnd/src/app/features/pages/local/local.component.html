@@ -89,4 +89,9 @@
   <hr class="hr-final">
   
 
+  <div class="agregar-carrito-container" *ngIf="isCartEmpty">
+    <div class="button-add-car">
+      <button (click)="goToCart()"> ver carrito</button>
+    </div>
+  </div>
 </div>

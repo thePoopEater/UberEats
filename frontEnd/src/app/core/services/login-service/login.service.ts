@@ -26,7 +26,7 @@ export class LoginService {
       return of(true);
     }
 
-  public isAuth() : Observable<boolean> {
+  public  isAuth() : Observable<boolean> {
     if (sessionStorage.getItem('token')) return of(true);
 
     return of(false);

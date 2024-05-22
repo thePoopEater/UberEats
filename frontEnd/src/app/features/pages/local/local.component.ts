@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Local } from '../../../core/models/class/local';
 import { Product } from '../../../core/models/class/product';
 import { HttpClient } from '@angular/common/http';
+import { CarritoService } from '../../../core/services/carrito-service/carrito.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-local',
   standalone: true, 
@@ -20,16 +22,18 @@ export class LocalComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute, private http : HttpClient, private localService : LocalService){
+  constructor(private route: ActivatedRoute, private http : HttpClient, private localService : LocalService, private router :Router){
     
   }
 
   private localSer$ = inject(LocalService);
   private prodServ$ = inject(ProductosService);
+  private cartServ$ = inject(CarritoService);
   // Este hijo recibe el id del local
   private local_id : string = '';
   local:Local = new Local();
   product : Product[] = [];
+  public isCartEmpty : boolean = false;
 
   
   @Input('idProd') idProduct! :string;
@@ -51,15 +55,17 @@ export class LocalComponent implements OnInit {
     this.prodServ$.getProductsFromLocal(this.local_id).subscribe(
       ( resp ) => {
         this.product = resp;
-
-        console.log('Hola soy el id',this.product[0].productId);
       }
     )
 
+    this.isCartEmpty = this.cartServ$.isCartWithOrder;
 
     
   }
 
+  goToCart(){
+    this.router.navigate(['/carrito']);
+  }
 
 }
 

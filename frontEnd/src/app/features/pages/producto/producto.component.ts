@@ -45,7 +45,6 @@ export class ProductoComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       (params) => {
-        console.log(params);
         this.productId = params['{idProd}']
       
 
@@ -71,8 +70,6 @@ export class ProductoComponent implements OnInit {
       this.button_sub_enable = true;
       this.cant_prod.set(this.cant_prod() + 1);
       this.total_price += this.product.price;
-      console.log("cant dis: " + this.cant_prod);
-      console.log("hola funciono");
     } else {
       this.button_plus_enable = false;
     }
@@ -82,7 +79,6 @@ export class ProductoComponent implements OnInit {
     if (this.cant_prod() > 0) {
       this.cant_prod.set(this.cant_prod() - 1);
       this.total_price -= this.product.price;
-      console.log("funciona menos", this.cant_prod);
       if (!this.button_plus_enable) {
         this.button_plus_enable = true;
       }
@@ -94,7 +90,6 @@ export class ProductoComponent implements OnInit {
   addProductToCart() {
     if(this.cant_prod() > 0){
         this.cartSer$.addToCart(this.product, this.cant_prod(), this.specifications());
-        console.log("funciona");
     }else{
       console.log(this.specifications());
       console.log("no hay productos seleccionados")

@@ -6,10 +6,10 @@ export class ProductOrder {
     orderId : number = 0;
 
 
-    constructor(quantity : number, specification : string, productId : number){
+    constructor(quantity : number, specification : string, productId : number, orderId : number){
         this.quantity = quantity;
         this.specification = specification;
         this.productId = productId;
-        this.orderId++;
+        this.orderId = orderId;
     }
 }
