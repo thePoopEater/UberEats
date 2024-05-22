@@ -11,14 +11,18 @@ import { Product } from '../../models/class/product';
 export class ProductosService {
 
   constructor(private http: HttpClient) { }
-  private URL_ALL_PRODS_FROM_LOCAL = "http://localhost:3000/local/products/:";
+  private readonly URL_ALL_PRODS_FROM_LOCAL = "http://localhost:3000/local/products/:";
+  private readonly URL_PROD = "http://localhost:3000/product/";
 
 
-  getProductsFromLocal(local_id : string) : Observable<Product[]>{
-    return this.http.get<Product[]>(this.URL_ALL_PRODS_FROM_LOCAL + local_id);
+  getProductsFromLocal(localId : string) : Observable<Product[]>{
+    return this.http.get<Product[]>(this.URL_ALL_PRODS_FROM_LOCAL + localId);
     
   }
   
+  getProduct(prodId : string) : Observable<Product>{
+    return this.http.get<Product>(this.URL_PROD + prodId)
+  } 
 
 
 }
