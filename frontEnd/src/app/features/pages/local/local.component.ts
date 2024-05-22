@@ -51,6 +51,8 @@ export class LocalComponent implements OnInit {
     this.prodServ$.getProductsFromLocal(this.local_id).subscribe(
       ( resp ) => {
         this.product = resp;
+
+        console.log('Hola soy el id',this.product[0].productId);
       }
     )
 
