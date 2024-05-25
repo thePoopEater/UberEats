@@ -16,13 +16,16 @@
             <a class="nav-link" href="#">el pp</a>
           </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/signup">Registrarse</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Iniciar sesion</a>
-          </li>
+        <ul class="navbar-nav ml-auto">  
+          <li class="nav-item"*ngIf="!isLoggedIn">
+                <a class="nav-link" href="/signup">Registrarse</a>
+            </li>
+            <li class="nav-item"*ngIf="!isLoggedIn">
+                <a class="nav-link" href="/login">Iniciar sesion</a>
+            </li>
+            <li class="nav-item"*ngIf="isLoggedIn">
+                <button class="nav-link" (click)="loginOut()">Cerrar sesion</button>
+            </li>
         </ul>
       </div>
     </div>
