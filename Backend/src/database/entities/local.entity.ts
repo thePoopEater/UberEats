@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn} from 'typeorm';
 import { ProductEntity } from './product.entity';
 import { OrderEntity } from './order.entity';
+import { LocalAdminEntity } from './local-admin.entity';
 
 @Entity({name : 'local'})
 export class LocalEntity {
@@ -30,5 +31,9 @@ export class LocalEntity {
 
     @OneToMany(() => ProductEntity, (product) => product.local)
     products : ProductEntity[]
+
+    @ManyToOne(()=>(LocalAdminEntity), (localAdmin)=> localAdmin.locals)
+    @JoinColumn({ name: 'localAdminId' })
+    localAdmin: LocalAdminEntity; 
 
 }

@@ -9,7 +9,7 @@ export class LocalService {
         @InjectRepository(LocalEntity)
         private readonly localRepository : Repository<LocalEntity>,
     ) {}
-
+    
     // Esta funcion crea un local, recibe como parametro un objeto de tipo LocalEntity.
     public async create(local : LocalEntity) : Promise<LocalEntity> {
         const result = this.localRepository.create(local);
