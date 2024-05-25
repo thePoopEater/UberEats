@@ -51,6 +51,7 @@ Go to the project directory
 
 ```bash
   cd UberEats
+  cd frontend
 ```
 
 Install dependencies
