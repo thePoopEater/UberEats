@@ -14,7 +14,7 @@ import { JwtStrategy } from './strategy/jwt.strategy';
   imports: [JwtModule.registerAsync({
     useFactory:(configService: ConfigService) => ({
       secret: configService.get('JWT_SECRET'),
-      signOptions:{expiresIn:'1h'}
+      signOptions:{expiresIn:'15m'}
     }),
     inject: [ConfigService]
 }),TypeOrmModule.forFeature([UserEntity])],

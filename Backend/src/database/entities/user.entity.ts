@@ -9,7 +9,7 @@ export class UserEntity {
   @Column()
   role: string;
 
-  @Column()
+  @Column({unique: true})
   username: string;
 
   @Column()

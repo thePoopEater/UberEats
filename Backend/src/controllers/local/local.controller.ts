@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Put,
-  BadRequestException,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller,Get,Post,Body,Param,Put,BadRequestException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { LocalCreateDTO } from './dto/local-create.dto';
 import { LocalResponseDTO } from './dto/local-response.dto';
@@ -21,6 +12,7 @@ import { OrderService } from 'src/providers/order/order.service';
 import { OrderEntity } from 'src/database/entities/order.entity';
 import { OrderProductService } from 'src/providers/order-product/order-product.service';
 import { ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('local')
 @ApiTags('Local')
@@ -35,6 +27,7 @@ export class LocalController {
     // Funcion para guardar un nuevo local en el repositorio de locales, tiene como parametro una peticion BODY de tipo LocalCreateDTO
     // esta a su vez esta compuesto de los siguientes datos : name, address, schedule, description (todos strings) 
     @Post()
+    @Roles('localAdmin')
     public async postLocal(@Body() request : LocalCreateDTO) : Promise<LocalResponseDTO> {
         if (request) {
             const newLocal : LocalEntity = new LocalEntity(request); 

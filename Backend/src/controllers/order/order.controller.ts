@@ -14,7 +14,6 @@ import { RolesGuard } from 'src/auth/guards/roles.guard';
 @ApiBearerAuth()
 @ApiTags('Order')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
-@Roles('user')
 export class OrderController {
   constructor(
     private orderService: OrderService,
@@ -28,6 +27,7 @@ export class OrderController {
     }
 
     @Post()
+    @Roles('client')
     public async postOrder(@Body() newOrder : OrderCreateDTO) : Promise<OrderResponseDTO> {
         if (this.orderService.createOrder(newOrder)){
             const response : OrderResponseDTO = {

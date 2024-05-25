@@ -14,7 +14,12 @@ export class AuthService {
   ) {}
 
   async register(data: RegisterDTO) {
-    const { password } = data;
+    const { username, password } = data;
+    const buscarUser = await this.userService.findByUsername(username);
+    if (buscarUser){
+      throw new UnauthorizedException('Ya existe ese nombre de usuario')
+    }
+    
     const toHash = await hash(password, 10);
     data = { ...data, password: toHash };
     return this.userService.register(data);

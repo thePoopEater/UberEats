@@ -5,14 +5,20 @@ import { AddressResponseDTO } from './dto/address-response.dto';
 import { AddressEntity } from 'src/database/entities/address.entity';
 import { ClientEntity } from 'src/database/entities/client.entity';
 import { ApiTags } from '@nestjs/swagger';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('address')
+@UseGuards(AuthGuard('jwt'), RolesGuard)
 @ApiTags('Address')
 export class AddressController {
   constructor(private readonly addressService: AddressService) {}
   //función que permite crear una nueva dirección, tiene como parámetro los atributos de
   //la entidad Address, se debe ingresar obligatoriamente un cliente_id para permitir la relación
   //de la entidad address y client. Si el cliente se agregó correctamente se retorna el mensaje response.
+  @Roles('client')
   @Post()
   async addDireccion(@Body() request: AddressCreateDTO): Promise<AddressResponseDTO> {
     if (!request.clientId) {
@@ -36,6 +42,7 @@ export class AddressController {
 
   //Función que permite obtener todos las direcciones almacenadas en la tabla 'address'
   //de la base de datos.
+  @Roles('admin')
   @Get()
   public async getAllAdress(): Promise<AddressEntity[]> {
     return await this.addressService.getAllAddresses();
