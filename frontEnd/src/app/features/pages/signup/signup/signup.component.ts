@@ -9,7 +9,7 @@ import {
 import { AuthService } from "../../../../core/services/auth-service/auth.service";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
-import { firstValueFrom } from "rxjs";
+import { first, firstValueFrom } from "rxjs";
 
 @Component({
   selector: "app-signup",
@@ -37,11 +37,10 @@ export class SignupComponent {
     const username = this.user_register_form.controls["username"].value;
     const password = this.user_register_form.controls["password"].value;
     const role = this.user_register_form.controls["role"].value;
-    this.authService
-      .register(username, password, role)
-      .subscribe((response) => {
-        console.log(response);
-      });
+    const register_response = await firstValueFrom(
+      this.authService.register(username, password, role)
+    );
+    console.log(register_response);
     const login_response = await firstValueFrom(
       this.authService.login(username, password, role)
     );

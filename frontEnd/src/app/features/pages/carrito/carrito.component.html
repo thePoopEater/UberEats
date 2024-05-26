@@ -18,18 +18,6 @@
           </div>
 
         </div>
-        <div class="grid-container" *ngFor="let quantity of listaOrderProd()">
-          <div class="producto">
-            <button class="boton-agregar" (click)="addToCart()">
-              <img style="height: 10px; width: 10px;" src="assets/images/imagenes-carrito/iconoeliminarcarrito.png">
-            </button>
-            <span class="cantidad">{{quantity.quantity}}</span>
-            <button class="boton-eliminar" (click)="deleteFromCart()">
-              <img style="height: 10px; width: 10px;" src="assets/images/imagenes-carrito/iconoagregarcarrito.png">
-            </button>
-            <hr>
-          </div>
-        </div>
         <button class="btn btn-danger" (click)="emptyCart()">Vaciar Carrito</button>
       </div>
     </div>
@@ -42,23 +30,6 @@
 </div>
 
 <div>
-  <div class="productos-container">
-    <img class = "img-opciones" src="assets/images/imagenes-carrito/iconocubiertoscarrito.png">
-    <h1 class = "texto-opciones">Pide curbiertos, etc</h1>
-    <a>
-      <img class = "img-cubiertos" src="assets/images/imagenes-carrito/iconocubiertosicarrito.png" >
-    </a>
-  </div>
-
-  <hr>
-
-  <div class="productos-container">
-    <img class = "img-opciones" style="height: 20px; width: 20px; margin-left: 25px;" src="assets/images/imagenes-carrito/icononotacarrito.png">
-    <h1 class = "texto-opciones" style="margin-top: 20px;">Agregar nota</h1>
-    <img class = "img-opciones" style= "margin-left: 200px;" src="assets/images/imagenes-carrito/iconoflechacarrito.png" >
-  </div>
-
-  <hr>
 
   <div class="productos-container">
     <p class="text-subtotal"> Subtotal</p>
