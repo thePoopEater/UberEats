@@ -10,25 +10,27 @@
   <div  class="producto">
     <div class="productos-container">
       <div class="enlace-producto">
-        <div class="enlace-producto enlace-producto__producto" *ngFor="let producto of listaProd">
+        <div class="enlace-producto enlace-producto__producto" *ngFor="let producto of listaProd()">
           <img [src]="producto.images" alt="{{ producto.name }}">
           <div class="info">
             <h3 class="titulo-producto">{{ producto.name }}</h3>
             <p class="precio-producto">${{ producto.price}}</p>
           </div>
+
         </div>
-        <div class="grid-container" *ngFor="let quantity of listaOrderProd">
+        <div class="grid-container" *ngFor="let quantity of listaOrderProd()">
           <div class="producto">
-            <button class="boton-agregar">
+            <button class="boton-agregar" (click)="addToCart()">
               <img style="height: 10px; width: 10px;" src="assets/images/imagenes-carrito/iconoeliminarcarrito.png">
             </button>
             <span class="cantidad">{{quantity.quantity}}</span>
-            <button class="boton-eliminar">
+            <button class="boton-eliminar" (click)="deleteFromCart()">
               <img style="height: 10px; width: 10px;" src="assets/images/imagenes-carrito/iconoagregarcarrito.png">
             </button>
             <hr>
           </div>
         </div>
+        <button class="btn btn-danger" (click)="emptyCart()">Vaciar Carrito</button>
       </div>
     </div>
     <hr>

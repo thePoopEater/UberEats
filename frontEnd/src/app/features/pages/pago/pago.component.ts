@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CarritoService } from '../../../core/services/carrito-service/carrito.service';
 
 @Component({
   selector: 'app-pago',
@@ -12,7 +13,12 @@ export class PagoComponent implements OnInit {
 
   constructor() { }
 
+  private readonly _cartService$ =inject(CarritoService); 
+
   ngOnInit() {
   }
 
+  generateOrder(){
+    
+  }
 }
