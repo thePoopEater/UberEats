@@ -1,8 +1,11 @@
-import { IsNotEmpty, IsString} from 'class-validator';
-
+import { IsNotEmpty, IsString, IsNumber} from 'class-validator';
 
 export class LocalCreateDTO {
     
+    @IsNotEmpty()
+    @IsNumber()
+    localAdminId : number;
+
     @IsNotEmpty()
     @IsString()
     name : string;

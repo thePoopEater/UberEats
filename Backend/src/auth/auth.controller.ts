@@ -14,7 +14,7 @@ export class AuthController {
   register(@Body(ValidationPipe) data: RegisterDTO) {
     return this.authService.register(data);
   }
-  //nuevo: desde aquí
+
   @Post('login')
   async postLogin(@Body(ValidationPipe) request: LoginDTO): Promise<LoginResponseDTO> {
     const user = await this.authService.validateUser(

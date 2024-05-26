@@ -14,7 +14,6 @@ export class RegisterDTO{
     @IsString()
     @IsNotEmpty()
     password: string;
-//nuevo: desde aquí
     //solo para users con rol 'client'
     name?: string;
     lastName?:  string;

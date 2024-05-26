@@ -36,14 +36,12 @@ export class ClientController {
             const newClient: ClientEntity = {
                 name: request.name,
                 lastName: request.lastName,
-                //nuevo: se eliminó password
             } as ClientEntity;
             await this.clientService.create(newClient);
             return response;
         }
     }
 
-    //función que retorna todos los clientes de la base de datos.
     @Roles('admin')
     @Get()
     public async getAllClients() : Promise<ClientEntity[]>{

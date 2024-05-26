@@ -29,9 +29,8 @@ export class LocalController {
     @Post()
     @Roles('localAdmin')
     public async postLocal(@Body(ValidationPipe) request : LocalCreateDTO) : Promise<LocalResponseDTO> {
-        if (request) {
-            const newLocal : LocalEntity = new LocalEntity(request); 
-            this.localService.create(newLocal);
+        if (request) { 
+          await this.localService.create(request);
             const response : LocalResponseDTO = {
                 data : "Se creó un local",
                 statusCode: 200,
@@ -40,6 +39,7 @@ export class LocalController {
             } as LocalResponseDTO;
 
       return response;
+
     }
   }
 
