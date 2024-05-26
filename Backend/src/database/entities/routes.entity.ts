@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, IntegerType} from 'typeorm';
 
 @Entity({name:'routes'})
 export class RoutesEntity {
@@ -14,10 +14,10 @@ export class RoutesEntity {
   @Column()
   destination: string;
 
-  @Column()
-  distance: string;
+  @Column({ type: 'decimal'})
+  distance: number;
 
-  @Column()
-  duration: string;
+  @Column({ type: 'decimal'})
+  duration: number;
 
 }

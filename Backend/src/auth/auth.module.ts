@@ -8,6 +8,8 @@ import { LocalStrategy } from './strategy/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './strategy/jwt.strategy';
+import { ClientService } from 'src/providers/client/client.service'; //nuevo
+import { ClientEntity } from 'src/database/entities/client.entity'; //nuevo
 
 //agregar JWT_SECRET=secret en el archivo .env
 @Module({
@@ -17,9 +19,9 @@ import { JwtStrategy } from './strategy/jwt.strategy';
       signOptions:{expiresIn:'15m'}
     }),
     inject: [ConfigService]
-}),TypeOrmModule.forFeature([UserEntity])],
+}),TypeOrmModule.forFeature([UserEntity, ClientEntity])], //nuevo: cliente
   
   controllers: [AuthController],
-  providers: [AuthService, UserService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, UserService, LocalStrategy, JwtStrategy, ClientService], //nuevo:cliente
 })
 export class AuthModule {}

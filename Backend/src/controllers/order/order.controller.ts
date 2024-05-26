@@ -1,4 +1,4 @@
-import {Controller,Get,Param,Put,Post,Body,NotFoundException} from '@nestjs/common';
+import {Controller,Get,Param,Put,Post,Body,NotFoundException, ValidationPipe, ParseIntPipe} from '@nestjs/common';
 import { OrderService } from 'src/providers/order/order.service';
 import { OrderCreateDTO } from './dto/order-create.dto';
 import { OrderResponseDTO } from './dto/order-response.dto';
@@ -28,7 +28,7 @@ export class OrderController {
 
     @Post()
     @Roles('client')
-    public async postOrder(@Body() newOrder : OrderCreateDTO) : Promise<OrderResponseDTO> {
+    public async postOrder(@Body(ValidationPipe) newOrder : OrderCreateDTO) : Promise<OrderResponseDTO> {
         if (this.orderService.createOrder(newOrder)){
             const response : OrderResponseDTO = {
                 data : null,
@@ -41,7 +41,7 @@ export class OrderController {
                
     }
     @Get('/products/:id')
-    public async getAllProducts(@Param('id') orderId : number){ 
+    public async getAllProducts(@Param('id', ParseIntPipe) orderId : number){ 
         const result = await this.orderService.findProductsFromOrder(orderId);
         return result;
     }

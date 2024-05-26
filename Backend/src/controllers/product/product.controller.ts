@@ -1,4 +1,4 @@
-import { Controller,Get,Post,Body,Param,Put,BadRequestException,NotFoundException} from '@nestjs/common';
+import { Controller,Get,Post,Body,Param,Put,BadRequestException,NotFoundException, ValidationPipe, ParseIntPipe} from '@nestjs/common';
 import { ProductCreateDTO } from './dto/product-create.dto';
 import { ProductResponseDTO } from './dto/product-response.dto';
 import { ProductService } from 'src/providers/product/product.service';
@@ -22,7 +22,7 @@ export class ProductController {
     // la funcion busca el id de local y le asigna un local a este producto.
     @Roles('localAdmin')
     @Post()
-    public async postProduct(@Body() newProduct : ProductCreateDTO) : Promise<ProductResponseDTO> {        
+    public async postProduct(@Body(ValidationPipe) newProduct : ProductCreateDTO) : Promise<ProductResponseDTO> {        
         const local = await this.localService.getLocal(newProduct.localId);
         if (local) {
             const product = new ProductEntity(newProduct);
@@ -42,14 +42,14 @@ export class ProductController {
 
     // Esta funcion retorna la informacion de un producto, tiene como parametro el ID de este producto.
     @Get(':id')
-    public async getInfo(@Param('id') productId : number) : Promise<ProductEntity> {
+    public async getInfo(@Param('id', ParseIntPipe) productId : number) : Promise<ProductEntity> {
         return await this.productService.findOneProduct(productId);
     }
 
     // Esta funcion actualiza un registro de algun producto, tiene como parametro lo que se quiere actualizar y un id.
     @Roles('localAdmin')
     @Put(':id')
-    public async putProduct(@Param('id') productId : number, @Body() request : ProductUpdateDTO) : Promise<UpdateResult> {
+    public async putProduct(@Param('id', ParseIntPipe) productId : number, @Body() request : ProductUpdateDTO) : Promise<UpdateResult> {
         return this.productService.updateProduct(productId, request);
     }
 }

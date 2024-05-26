@@ -15,9 +15,9 @@ export class RouteCreateDTO {
     destination : string;
 
     @IsString()
-    distance : string;
+    distance : number;
 
     @IsNotEmpty()
     @IsNumber()
-    duration : string;
+    duration : number;
 }

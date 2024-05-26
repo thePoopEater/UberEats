@@ -1,4 +1,4 @@
-import {Controller,Post,Body,UseGuards,Request,UnauthorizedException} from '@nestjs/common';
+import {Controller,Post,Body,UnauthorizedException, ValidationPipe} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDTO } from './dto/register.dto';
 import { LoginDTO } from './dto/login.dto';
@@ -11,12 +11,12 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  register(@Body() data: RegisterDTO) {
+  register(@Body(ValidationPipe) data: RegisterDTO) {
     return this.authService.register(data);
   }
-
+  //nuevo: desde aquí
   @Post('login')
-  async postLogin(@Body() request: LoginDTO): Promise<LoginResponseDTO> {
+  async postLogin(@Body(ValidationPipe) request: LoginDTO): Promise<LoginResponseDTO> {
     const user = await this.authService.validateUser(
       request.username,
       request.password,
@@ -24,11 +24,9 @@ export class AuthController {
     if (!user) {
       throw new UnauthorizedException('User incorrecto');
     }
-    const token = await this.authService.login(user, request.role);
-    const response: LoginResponseDTO = {
-      accessToken: token.accessToken, 
-    };
-
-    return response;
+  
+    const { accessToken, clientId } = await this.authService.login(user, request.role);
+  
+    return { accessToken, clientId };
   }
 }

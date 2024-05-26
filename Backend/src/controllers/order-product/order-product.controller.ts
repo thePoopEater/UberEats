@@ -1,4 +1,4 @@
-import { Controller, Post, Body, NotFoundException } from '@nestjs/common';
+import { Controller, Post, Body, NotFoundException, ValidationPipe } from '@nestjs/common';
 import { OrderProductService } from 'src/providers/order-product/order-product.service';
 import { OrderProductCreateDTO } from './dto/order-product-create.dto';
 import { OrderService } from 'src/providers/order/order.service';
@@ -16,7 +16,7 @@ export class OrderProductController {
 
         
     @Post()
-    public async postOrderProduct(@Body() newOrderProduct : OrderProductCreateDTO) {
+    public async postOrderProduct(@Body(ValidationPipe) newOrderProduct : OrderProductCreateDTO) {
         const order = await this.orderService.findOrder(newOrderProduct.orderId);
 
         const product = await this.productService.findOneProduct(newOrderProduct.productId);

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, ValidationPipe, ParseIntPipe } from '@nestjs/common';
 import { ClientCreateDTO } from './dto/client-create.dto';
 import { ClientResponseDTO } from './dto/client-response.dto';
 import { ClientEntity } from 'src/database/entities/client.entity';
@@ -25,7 +25,7 @@ export class ClientController {
   //apellido y contraseña.
 
     @Post()
-    async postClient(@Body() request: ClientCreateDTO): Promise <ClientResponseDTO> {
+    async postClient(@Body(ValidationPipe) request: ClientCreateDTO): Promise <ClientResponseDTO> {
         const response: ClientResponseDTO = {
             data: null,
             statusCode:200,
@@ -36,8 +36,7 @@ export class ClientController {
             const newClient: ClientEntity = {
                 name: request.name,
                 lastName: request.lastName,
-                password:  request.password,
-
+                //nuevo: se eliminó password
             } as ClientEntity;
             await this.clientService.create(newClient);
             return response;
@@ -54,7 +53,7 @@ export class ClientController {
     @Roles('admin')
     @Roles('client')
     @Get(':id')
-    public async getClient(@Param('id') clientId : number) : Promise<ClientEntity> {
+    public async getClient(@Param('id', ParseIntPipe) clientId : number) : Promise<ClientEntity> {
         const client : Promise<ClientEntity> = this.clientService.getClient(clientId);
         return client;
     }
@@ -62,7 +61,7 @@ export class ClientController {
     @Roles('admin')
     @Roles('client')
     @Get('/order/:id')
-    public async getOrders(@Param('id') clientId : number) : Promise<OrderEntity[]>{
+    public async getOrders(@Param('id', ParseIntPipe) clientId : number) : Promise<OrderEntity[]>{
         return await this.orderService.findOrdersFromOneClient(clientId);
     }
 }

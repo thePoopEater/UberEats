@@ -1,12 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm';
 import { AddressEntity } from 'src/database/entities/address.entity';
 import { OrderEntity } from './order.entity';
 
-@Entity({name: 'client'})
+@Entity({ name: 'client' })
 export class ClientEntity {
-  constructor(private data : Partial<ClientEntity>){
-    Object.assign(this, data);
-  }
   @PrimaryGeneratedColumn()
   clientId: number;
 
@@ -14,15 +11,22 @@ export class ClientEntity {
   name: string;
 
   @Column()
-  lastName : string;
-
-  @Column()
-  password: string;
+  lastName: string;
 
   @OneToMany(() => AddressEntity, (address) => address.client)
-  addresses: AddressEntity[]; 
+  addresses: AddressEntity[];
 
   @OneToMany(() => OrderEntity, (order) => order.client)
   @JoinColumn()
-  orders : OrderEntity[];
+  orders: OrderEntity[];
+  
+ //nueva columna, se eliminó password
+  @Column()
+  userId: number;
+
+  constructor(data?: Partial<ClientEntity>) {
+    if (data) {
+      Object.assign(this, data);
+    }
+  }
 }
