@@ -1,8 +1,6 @@
 import { ProductOrder } from "./product-order";
 import { BehaviorSubject, Observable } from "rxjs";
 export class Cart {
-
-
     private _listOrderProds:BehaviorSubject<ProductOrder[]> = new BehaviorSubject<ProductOrder[]>([]); 
     
     private _productOrders : Observable<ProductOrder[]> = this._listOrderProds.asObservable();

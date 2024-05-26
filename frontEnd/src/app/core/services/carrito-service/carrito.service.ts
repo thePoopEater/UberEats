@@ -7,9 +7,10 @@ import { Location } from "@angular/common";
 import { ProductosService } from "../producto-service/productos.service";
 import { BehaviorSubject } from "rxjs";
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CarritoService {
+  constructor(private local: Location) {}
 
   
   private LOCAL_STORAGE_PRODUCT_KEY = 'products';
@@ -41,7 +42,6 @@ export class CarritoService {
         }
         i++;
     }
-
     return find;
   }
 
@@ -49,16 +49,17 @@ export class CarritoService {
     console.log(product);
     
     let incidence = this.searchIncidence(product.productId, specification);
-    if( incidence == -1){
+    if (incidence == -1) {
       this._orderId++;
-      let productOrder : ProductOrder = new ProductOrder(
+      let productOrder: ProductOrder = new ProductOrder(
         cant,
         specification,
         product.productId,
         this._orderId
-      )
+      );
       this._cart.addToCart(productOrder, product.price);
       this.isCartWithOrder = true;
+
     }else{
       this._cart.getCart()[incidence].quantity = this._cart.getCart()[incidence].quantity +  cant;
     }
@@ -72,23 +73,25 @@ export class CarritoService {
     this.local.back();
   }
 
-  public delToCart(idProd : number){
+  public delToCart(idProd: number) {
     this._cart.deleteProduct(idProd);
   }
 
-  public getCart(){
+  public getCart() {
     return this._cart;
   }
 
-  public getProductsCart() : Product[] {
-    let productsList : Product[] = [];
-    let orderList : ProductOrder[] = this._cart.getCart();
-    let producto : Product;
-    for (let i = 0; i < orderList.length; i++){
-      this.productServ$.getProduct(orderList[i].productId.toString()).subscribe((param) => {
+  public getProductsCart(): Product[] {
+    let productsList: Product[] = [];
+    let orderList: ProductOrder[] = this._cart.getCart();
+    let producto: Product;
+    for (let i = 0; i < orderList.length; i++) {
+      this.productServ$
+        .getProduct(orderList[i].productId.toString())
+        .subscribe((param) => {
           producto = param;
           productsList.push(producto);
-      });
+        });
     }
     return productsList;
   }

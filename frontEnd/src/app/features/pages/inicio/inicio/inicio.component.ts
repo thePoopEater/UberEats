@@ -12,41 +12,40 @@ import { LocalService } from '../../../../core/services/local-service/local.serv
 import { Local } from '../../../../core/models/class/local';
 import { LoginService } from '../../../../core/services/login-service/login.service';
 @Component({
-  selector: 'app-inicio',
+  selector: "app-inicio",
   standalone: true,
-  imports: [CommonModule, FooterHomeComponent, SuperLocalComponent, RouterLink, NgFor, HeaderComponent],
-  templateUrl: './inicio.component.html',
-  styleUrl: './inicio.component.css'
+  imports: [
+    CommonModule,
+    FooterHomeComponent,
+    SuperLocalComponent,
+    RouterLink,
+    NgFor,
+    HeaderComponent,
+  ],
+  templateUrl: "./inicio.component.html",
+  styleUrl: "./inicio.component.css",
 })
-export class InicioComponent implements OnInit{
+export class InicioComponent implements OnInit {
+  constructor(private http: HttpClient, private localService: LocalService) {}
 
-  constructor(
-    private http: HttpClient, 
-    private localService: LocalService){}
+  private locals: Local[] = [];
 
-  private locals : Local[] = [];
-
-  @Input('idLocal') idLocal! : string;
+  @Input("idLocal") idLocal!: string;
   private localSer$ = inject(LocalService);
-  private readonly _loginService$ = inject(LoginService);
-  ngOnInit(){
-    
 
-  this.localSer$.getLocales().subscribe(
-      (locals) => {
-        this.locals = locals;
-      }
-    )
+  ngOnInit() {
+    this.localSer$.getLocales().subscribe((locals) => {
+      this.locals = locals;
+    });
   }
 
-  getLocals() : Local[] {
+  getLocals(): Local[] {
     return this.locals;
   }
-  
+
+
   logout(){
     this._loginService$.logout()
   }
   
-
-
 }

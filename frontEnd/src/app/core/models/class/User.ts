@@ -1,17 +1,24 @@
 export class User {
-    username : string = '';
-    password : string = '';
-
-    constructor(userName : string, userPass : string){
-        this.username = userName;
-        this.password = userPass;
-    }
-
-
-    // falta registrar
+  username: string = "";
+  password: string = "";
+  constructor(username: string, password: string) {
+    this.username = username;
+    this.password = password;
+  }
+}
+export class UserCreateDTO {
+  username: string = "";
+  password: string = "";
+  role: string = "";
+  constructor(username: string, password: string, role: string) {
+    this.username = username;
+    this.password = password;
+    this.role = role;
+  }
 }
 
 export class UserResponse {
-    userId : number = 0;
-    accessToken : string = '';
+  accessToken: string = "";
+  userId: number = 0;
+  role: string = "";
 }
