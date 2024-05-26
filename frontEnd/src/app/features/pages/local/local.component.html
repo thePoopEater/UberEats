@@ -71,12 +71,9 @@
       <div class="productos-container">
         
         <!-- FALTA ARREGLAR EL ENRUTAMIENTO -->
-        <a class="enlace-producto" routerLink="/producto/{{producto.product_id}}">
-        
-          
+        <a class="enlace-producto" routerLink="/producto/{{producto.productId}}">          
           <div class="info">
-
-          <h3 class="titulo-producto">{{ producto.name}}</h3>
+          <h3 class="titulo-producto">{{ producto.name}} </h3>
           <p class="precio-producto">${{ producto.price}}</p>
           <p class="info-producto">{{ producto.description}}</p>
           
@@ -92,4 +89,9 @@
   <hr class="hr-final">
   
 
+  <div class="agregar-carrito-container" *ngIf="isCartEmpty">
+    <div class="button-add-car">
+      <button (click)="goToCart()"> ver carrito</button>
+    </div>
+  </div>
 </div>

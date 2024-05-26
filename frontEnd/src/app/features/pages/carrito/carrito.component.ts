@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../../core/services/carrito-service/carrito.service';
-
+import { Product } from '../../../core/models/class/product';
+import { ProductOrder } from '../../../core/models/class/product-order';
 @Component({
   selector: 'app-carrito',
   standalone: true,
@@ -12,15 +13,21 @@ import { CarritoService } from '../../../core/services/carrito-service/carrito.s
 })
 export class CarritoComponent implements OnInit {
 
-  productos = [
-    { nombre: 'Producto 1', precio: 10, imagenUrl: "assets/images/producto1.jpg", cantidad: 2 },
-    { nombre: 'Producto 2', precio: 20, imagenUrl: "assets/images/producto2.jpg", cantidad: 3 },
-    { nombre: 'Producto 3', precio: 30, imagenUrl: "assets/images/producto2.jpg", cantidad: 1 }
-  ];
+
+  private cartService$ = inject(CarritoService);
+  listaProd : Product[] = [];
+  listaOrderProd : ProductOrder[] = [];
+  public total : number = 0;
+
 
   constructor() { }
 
   ngOnInit() {
+    this.listaProd = this.cartService$.getProductsCart();
+    this.listaOrderProd = this.cartService$.getCart().getCart();
+    this.total = this.cartService$.total;
+
   }
+
 
 }
