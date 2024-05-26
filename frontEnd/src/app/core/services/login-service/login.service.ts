@@ -10,19 +10,23 @@ import { User, UserResponse } from '../../models/class/User';
 })
 export class LoginService {
   private USER_LOGIN_POST_URL = 'http://localhost:3000/auth/login';
+  private readonly USER_REGISTER_POST_URL = 'http://localhost:3000/auth/register';
 
   constructor(
     private httpClient : HttpClient,
     private location : Location
   ) { }
 
-  public login(userName: string, userPass: string): Observable<UserResponse> {
+  public login(
+    userName: string,
+    userPass: string): Observable<UserResponse> {
     const user = new User(userName, userPass);
     return this.httpClient.post<UserResponse>(this.USER_LOGIN_POST_URL,user);
   }
 
   public logout(): Observable<boolean> {
     if (sessionStorage.getItem('token')) sessionStorage.clear();
+      
       return of(true);
     }
 
@@ -36,7 +40,6 @@ export class LoginService {
     if (sessionStorage.getItem('token')) {
       return of(false);
 
-      this.location.back();
     }
     return of(true);
   }
