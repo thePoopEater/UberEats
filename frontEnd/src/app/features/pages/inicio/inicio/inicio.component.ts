@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LocalService } from '../../../../core/services/local-service/local.service';
 import { Local } from '../../../../core/models/class/local';
+import { LoginService } from '../../../../core/services/login-service/login.service';
 @Component({
   selector: 'app-inicio',
   standalone: true,
@@ -27,7 +28,7 @@ export class InicioComponent implements OnInit{
 
   @Input('idLocal') idLocal! : string;
   private localSer$ = inject(LocalService);
-  
+  private readonly _loginService$ = inject(LoginService);
   ngOnInit(){
     
 
@@ -42,7 +43,9 @@ export class InicioComponent implements OnInit{
     return this.locals;
   }
   
-
+  logout(){
+    this._loginService$.logout()
+  }
   
 
 

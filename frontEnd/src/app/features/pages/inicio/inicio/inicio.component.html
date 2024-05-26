@@ -1,5 +1,6 @@
 <div class="container-inicio">
     <app-super-local></app-super-local>
+    <button class="btn btn-danger" (click)="logout()">Logout</button>
     <div *ngFor="let local of getLocals()" >
         <div class="card border-0">
             <a class="" routerLink="/local/{{local.id}}">

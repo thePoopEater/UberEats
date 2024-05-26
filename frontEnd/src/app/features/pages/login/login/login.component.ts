@@ -6,6 +6,7 @@ import { User, UserResponse } from "../../../../core/models/class/User";
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
 
+
 @Component({
   selector: "app-login",
   standalone: true,
@@ -16,7 +17,6 @@ import { Router } from "@angular/router";
 export class LoginComponent implements OnInit {
   /*Usuario genérico*/
   userResponse: UserResponse = new UserResponse();
-
   // activa otra ventana
   isLogged: boolean = false;
   private readonly _loginForm = inject(FormBuilder);
@@ -38,16 +38,18 @@ export class LoginComponent implements OnInit {
   userLoginOn: boolean = false;
   ngOnInit() {}
 
-  public async login() {
+  public login() {
     const user = this.loginForm.controls.userName.value;
     const password = this.loginForm.controls.userPass.value;
 
     console.log(user, password);
     this.loginService.login(user, password).subscribe((response) => {
       this.userResponse = response;
+  
+      console.log(response.userId);
     });
     sessionStorage.setItem("token", this.userResponse.accessToken);
-    sessionStorage.setItem("client_id", this.userResponse.userId + "");
+    sessionStorage.setItem("userId", this.userResponse.userId + '');
     this.router.navigate(["/inicio"]);
   }
 }
