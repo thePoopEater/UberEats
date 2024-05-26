@@ -1,16 +1,16 @@
-import { Component, OnInit, inject} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FooterHomeComponent } from '../../../../core/layouts/footer-home/footer-home.component';
-import { SuperLocalComponent } from '../components/super-local/super-local.component';
-import { HeaderComponent } from '../components/header/header.component';
-import { ActivatedRoute, RouterLink} from '@angular/router';
-import { Input } from '@angular/core';
-import { NgFor } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { LocalService } from '../../../../core/services/local-service/local.service';
-import { Local } from '../../../../core/models/class/local';
-import { LoginService } from '../../../../core/services/login-service/login.service';
+import { Component, OnInit, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FooterHomeComponent } from "../../../../core/layouts/footer-home/footer-home.component";
+import { SuperLocalComponent } from "../components/super-local/super-local.component";
+import { HeaderComponent } from "../components/header/header.component";
+import { ActivatedRoute, RouterLink } from "@angular/router";
+import { Input } from "@angular/core";
+import { NgFor } from "@angular/common";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { LocalService } from "../../../../core/services/local-service/local.service";
+import { Local } from "../../../../core/models/class/local";
+import { AuthService } from "../../../../core/services/auth-service/auth.service";
 @Component({
   selector: "app-inicio",
   standalone: true,
@@ -26,7 +26,7 @@ import { LoginService } from '../../../../core/services/login-service/login.serv
   styleUrl: "./inicio.component.css",
 })
 export class InicioComponent implements OnInit {
-  constructor(private http: HttpClient, private localService: LocalService) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   private locals: Local[] = [];
 
@@ -43,9 +43,7 @@ export class InicioComponent implements OnInit {
     return this.locals;
   }
 
-
-  logout(){
-    this._loginService$.logout()
+  logout() {
+    this.authService.logout();
   }
-  
 }

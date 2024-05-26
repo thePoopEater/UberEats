@@ -10,44 +10,44 @@ import { BehaviorSubject } from "rxjs";
   providedIn: "root",
 })
 export class CarritoService {
-  constructor(private local: Location) {}
+  private LOCAL_STORAGE_PRODUCT_KEY = "products";
 
-  
-  private LOCAL_STORAGE_PRODUCT_KEY = 'products';
-  
-  
-  private _orderId : number = 0;
-  private _cart:Cart = new Cart();
-  public isCartWithOrder : boolean = false;
+  private _orderId: number = 0;
+  private _cart: Cart = new Cart();
+  public isCartWithOrder: boolean = false;
   private productServ$ = inject(ProductosService);
-  public total : number = 0;
-  
+  public total: number = 0;
+
   // ????
-  constructor(private local : Location) { 
-    let localData = localStorage.getItem(this.LOCAL_STORAGE_PRODUCT_KEY)+'';
-    if(localData != ''){
+  constructor(private local: Location) {
+    let localData = localStorage.getItem(this.LOCAL_STORAGE_PRODUCT_KEY) + "";
+    if (localData != "") {
       this._cart.getProductOrder().next(JSON.parse(localData));
     }
   }
 
-  private searchIncidence(idProd : number, desc: string) : number {
-    let i :  number = 0;
-    let find : number = -1;
+  private searchIncidence(idProd: number, desc: string): number {
+    let i: number = 0;
+    let find: number = -1;
     let lenghtCart = this._cart.getCart().length;
-    let orderList:ProductOrder[] = this._cart.getCart();
-    while(i < lenghtCart){
-        let product : ProductOrder = orderList[i];
-        if(product.productId == idProd && product.specification == desc){
-          find = i;
-        }
-        i++;
+    let orderList: ProductOrder[] = this._cart.getCart();
+    while (i < lenghtCart) {
+      let product: ProductOrder = orderList[i];
+      if (product.productId == idProd && product.specification == desc) {
+        find = i;
+      }
+      i++;
     }
     return find;
   }
 
-  public addToCart(product : Product, cant : number, specification : string) : void{
+  public addToCart(
+    product: Product,
+    cant: number,
+    specification: string
+  ): void {
     console.log(product);
-    
+
     let incidence = this.searchIncidence(product.productId, specification);
     if (incidence == -1) {
       this._orderId++;
@@ -59,9 +59,9 @@ export class CarritoService {
       );
       this._cart.addToCart(productOrder, product.price);
       this.isCartWithOrder = true;
-
-    }else{
-      this._cart.getCart()[incidence].quantity = this._cart.getCart()[incidence].quantity +  cant;
+    } else {
+      this._cart.getCart()[incidence].quantity =
+        this._cart.getCart()[incidence].quantity + cant;
     }
     this.total += cant * product.price;
     // Preguntar pe
@@ -97,7 +97,7 @@ export class CarritoService {
   }
 
   public cleanShoppingCart() {
-    localStorage.setItem(this.LOCAL_STORAGE_PRODUCT_KEY, '');
+    localStorage.setItem(this.LOCAL_STORAGE_PRODUCT_KEY, "");
     return this._cart.getProductOrder().next([]);
   }
 }

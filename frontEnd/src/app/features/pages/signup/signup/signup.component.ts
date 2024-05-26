@@ -8,6 +8,8 @@ import {
 } from "@angular/forms";
 import { AuthService } from "../../../../core/services/auth-service/auth.service";
 import { CommonModule } from "@angular/common";
+import { Router } from "@angular/router";
+import { firstValueFrom } from "rxjs";
 
 @Component({
   selector: "app-signup",
@@ -19,7 +21,10 @@ import { CommonModule } from "@angular/common";
 export class SignupComponent {
   user_register_form: FormGroup = new FormGroup({});
 
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {}
   ngOnInit() {
     this.user_register_form = new FormGroup({
       username: new FormControl<string>("", Validators.required),
@@ -28,7 +33,7 @@ export class SignupComponent {
       address: new FormControl<string>(""),
     });
   }
-  public register() {
+  public async register() {
     const username = this.user_register_form.controls["username"].value;
     const password = this.user_register_form.controls["password"].value;
     const role = this.user_register_form.controls["role"].value;
@@ -37,5 +42,12 @@ export class SignupComponent {
       .subscribe((response) => {
         console.log(response);
       });
+    const login_response = await firstValueFrom(
+      this.authService.login(username, password, role)
+    );
+    sessionStorage.setItem("token", login_response.accessToken);
+    sessionStorage.setItem("client_id", login_response.userId + "");
+    sessionStorage.setItem("client_role", login_response.role);
+    this.router.navigate(["inicio"]);
   }
 }
