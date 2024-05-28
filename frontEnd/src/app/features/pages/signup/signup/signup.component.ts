@@ -29,7 +29,7 @@ export class SignupComponent {
     this.user_register_form = new FormGroup({
       username: new FormControl<string>("", Validators.required),
       password: new FormControl<string>("", Validators.required),
-      role: new FormControl<string>("Cliente"),
+      role: new FormControl<string>("client"),
       address: new FormControl<string>(""),
     });
   }
@@ -45,7 +45,7 @@ export class SignupComponent {
       this.authService.login(username, password, role)
     );
     sessionStorage.setItem("token", login_response.accessToken);
-    sessionStorage.setItem("client_id", login_response.userId + "");
+    sessionStorage.setItem("client_id", login_response.clientId + "");
     sessionStorage.setItem("client_role", login_response.role);
     this.router.navigate(["inicio"]);
   }

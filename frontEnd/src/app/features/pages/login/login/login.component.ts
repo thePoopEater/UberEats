@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { Component, OnInit, WritableSignal, inject, signal } from "@angular/core";
 import { FormGroup, FormsModule, Validators } from "@angular/forms";
 import { FormControl, ReactiveFormsModule, FormBuilder } from "@angular/forms";
 import { AuthService } from "../../../../core/services/auth-service/auth.service";
@@ -16,13 +16,11 @@ import { firstValueFrom } from "rxjs";
   styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
-  isLogged: boolean = false;
   private readonly _loginForm = inject(FormBuilder);
   loginForm = this._loginForm.nonNullable.group({
     userName: ["", [Validators.required, Validators.email]],
     userPass: ["", Validators.required],
   });
-  userLoginOn: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -33,13 +31,17 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.controls.userPass.value;
     try {
       const userResponse = await firstValueFrom(
-        this.authService.login(user, password, "Cliente")
+        this.authService.login(user, password, "client")
       );
-      sessionStorage.setItem("token", userResponse.accessToken);
-      sessionStorage.setItem("client_id", userResponse.userId + "");
-      sessionStorage.setItem("client_role", userResponse.role + "");
 
-      this.router.navigate(["/inicio"]);
+      console.log(userResponse);
+      this.router.navigate(['/', 'home']);
+      sessionStorage.setItem("token", userResponse.accessToken);
+      sessionStorage.setItem("client_id", userResponse.clientId + "");
+      sessionStorage.setItem("client_role", userResponse.role + "");
+      this.authService.loggedIn.set(true);
+      console.log(this.authService.loggedIn());
+      console.log(sessionStorage.getItem("client_id"))
     } catch (error) {
       console.error("Error al iniciar sesion", error);
     }

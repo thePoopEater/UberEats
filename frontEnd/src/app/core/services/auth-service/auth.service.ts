@@ -1,17 +1,17 @@
 import { Location } from "@angular/common";
-import { Injectable } from "@angular/core";
+import { Injectable, WritableSignal, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable, of } from "rxjs";
-import { User, UserCreateDTO, UserResponse } from "../../models/class/user";
+import { Observable, of } from "rxjs";
+import { UserCreateDTO, UserResponse } from "../../models/class/user";
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
   private USER_LOGIN_POST_URL = "http://localhost:3000/auth/login";
   private USER_REGISTER_POST_URL = "http://localhost:3000/auth/register";
-  private loggedIn = new BehaviorSubject<boolean>(false);
-  constructor(private httpClient: HttpClient, private location: Location) {}
+  loggedIn : WritableSignal<boolean> = signal(false);
+  constructor(private httpClient: HttpClient, private location: Location, private route : Router) {}
 
   public login(
     username: string,
@@ -19,6 +19,8 @@ export class AuthService {
     role: string
   ): Observable<UserResponse> {
     const user = new UserCreateDTO(username, password, role);
+    this.loggedIn.set(true);
+
     return this.httpClient.post<UserResponse>(this.USER_LOGIN_POST_URL, user);
   }
   public register(

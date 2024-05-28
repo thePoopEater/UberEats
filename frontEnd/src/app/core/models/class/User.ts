@@ -19,6 +19,6 @@ export class UserCreateDTO {
 
 export class UserResponse {
   accessToken: string = "";
-  userId: number = 0;
+  clientId: number = 0;
   role: string = "";
 }
