@@ -16,7 +16,7 @@ export class AuthController {
   }
 
   @Post('login')
-  async postLogin(@Body(ValidationPipe) request: LoginDTO): Promise<LoginResponseDTO> {
+  async postLogin(@Body(ValidationPipe) request: LoginDTO, role:string): Promise<LoginResponseDTO> {
     const user = await this.authService.validateUser(
       request.username,
       request.password,
@@ -24,9 +24,8 @@ export class AuthController {
     if (!user) {
       throw new UnauthorizedException('User incorrecto');
     }
-  
     const { accessToken, clientId } = await this.authService.login(user, request.role);
   
-    return { accessToken, clientId };
+    return { accessToken, clientId, role: request.role };
   }
 }
