@@ -16,12 +16,19 @@ export class OrderProductService {
     }
 
     public async getOrderProduct(orderProductId : number) : Promise<OrderProductEntity>{
-        return await this.orderProductRepository.findOneBy({id:orderProductId});
+        return await this.orderProductRepository.findOneBy({orderProductId:orderProductId});
     }
 
     public async getAllProductsFromOrder(orderId : number) : Promise<OrderProductEntity[]>{
-        return this.orderProductRepository.findBy({id:orderId});
+        return this.orderProductRepository.findBy({orderProductId:orderId});
     }
+
+    public async deleteOrderProduct(orderProductId: number) : Promise<OrderProductEntity>{
+        const result= await this.orderProductRepository.findOneBy({orderProductId:orderProductId});
+        await this.orderProductRepository.remove(result);
+        return result;
+    }
+
 
     
 }

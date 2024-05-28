@@ -1,4 +1,4 @@
-import { Controller, Post, Body, NotFoundException, ValidationPipe } from '@nestjs/common';
+import { Controller, Post, Body, NotFoundException, ValidationPipe, Delete, Param, ParseIntPipe } from '@nestjs/common';
 import { OrderProductService } from 'src/providers/order-product/order-product.service';
 import { OrderProductCreateDTO } from './dto/order-product-create.dto';
 import { OrderService } from 'src/providers/order/order.service';
@@ -40,5 +40,24 @@ export class OrderProductController {
             throw new NotFoundException('No existe esa orden');
         if (!product)
             throw new NotFoundException('No existe ese producto');
+    }
+
+
+    @Delete(':id')
+    public async deleteOrderProduct(@Param('id', ParseIntPipe) idLocal : number, @Body(ValidationPipe) newOrderProduct : OrderProductEntity){
+        const orderProduct = await this.orderProductService.getOrderProduct(newOrderProduct.orderProductId);
+        if (orderProduct) {
+            const data = this.orderProductService.deleteOrderProduct(orderProduct.orderProductId);
+            const response : OrderResponseDTO = {
+                data : null, //????
+                statusCode : 200,
+                statusDescription : "Se ha eliminado el producto de la orden correctamente",
+                error : null
+                }
+                return response;
+                }
+                if (!orderProduct)
+                    throw new NotFoundException('No existe ese producto');
+                
     }
 }

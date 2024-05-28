@@ -9,7 +9,7 @@ export class OrderProductEntity {
         Object.assign(this, data);
     }
     @PrimaryGeneratedColumn()
-    id : number;
+    orderProductId : number;
 
     @JoinColumn({name:'productId'})
     @ManyToOne(()=> ProductEntity, (product) => product.orderProducts, {cascade:true})
