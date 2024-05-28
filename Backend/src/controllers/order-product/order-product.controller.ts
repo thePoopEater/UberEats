@@ -44,7 +44,7 @@ export class OrderProductController {
 
 
     @Delete(':id')
-    public async deleteOrderProduct(@Param('id', ParseIntPipe) idLocal : number, @Body(ValidationPipe) newOrderProduct : OrderProductEntity){
+    public async deleteOrderProduct(@Param('id', ParseIntPipe) idOrderProduct : number, @Body(ValidationPipe) newOrderProduct : OrderProductEntity){
         const orderProduct = await this.orderProductService.getOrderProduct(newOrderProduct.orderProductId);
         if (orderProduct) {
             const data = this.orderProductService.deleteOrderProduct(orderProduct.orderProductId);
