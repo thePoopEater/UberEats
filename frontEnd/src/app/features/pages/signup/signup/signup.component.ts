@@ -8,6 +8,7 @@ import {
 } from "@angular/forms";
 import { AuthService } from "../../../../core/services/auth-service/auth.service";
 import { CommonModule } from "@angular/common";
+import { firstValueFrom } from "rxjs";
 
 @Component({
   selector: "app-signup",
@@ -28,14 +29,26 @@ export class SignupComponent {
       address: new FormControl<string>(""),
     });
   }
-  public register() {
+  public async register() {
     const username = this.user_register_form.controls["username"].value;
     const password = this.user_register_form.controls["password"].value;
     const role = this.user_register_form.controls["role"].value;
-    this.authService
-      .register(username, password, role)
-      .subscribe((response) => {
-        console.log(response);
-      });
+    try {
+      const register_response = await firstValueFrom(
+        this.authService.register(username, password, role)
+      );
+
+      console.log("Register response");
+      console.log(register_response);
+
+      // ahora lo loggeamos
+
+      const login_response = await firstValueFrom(
+        this.authService.login(username, password, role)
+      );
+      console.log(login_response);
+    } catch (error) {
+      console.log("Error register ->", error);
+    }
   }
 }
