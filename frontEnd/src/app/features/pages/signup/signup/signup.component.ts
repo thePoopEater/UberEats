@@ -9,6 +9,7 @@ import {
 import { AuthService } from "../../../../core/services/auth-service/auth.service";
 import { CommonModule } from "@angular/common";
 import { firstValueFrom } from "rxjs";
+import { User, UserResponse } from "../../../../core/models/class/user";
 
 @Component({
   selector: "app-signup",
@@ -43,9 +44,12 @@ export class SignupComponent {
 
       // ahora lo loggeamos
 
-      const login_response = await firstValueFrom(
+      const login_response: UserResponse = await firstValueFrom(
         this.authService.login(username, password, role)
       );
+      sessionStorage.setItem("client_id", login_response.userId.toString());
+      sessionStorage.setItem("role", login_response.role);
+
       console.log(login_response);
     } catch (error) {
       console.log("Error register ->", error);

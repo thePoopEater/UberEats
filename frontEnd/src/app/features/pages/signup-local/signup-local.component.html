@@ -1,0 +1,51 @@
+<div style="padding:3rem;width:30rem" [formGroup] = "signup_local_form">
+    <h1>Registrarse como dueño de un local</h1>
+    <div class="form-group">
+        <label for="username_label">Nombre de usuario</label>
+        <input type="text" class="form-control" formControlName="username" required>
+        <small id="username_help" class="form-text text-muted">Ingrese un nombre de usuario para registrarse</small>
+        <div *ngIf="signup_local_form.controls['username'].invalid && 
+            (signup_local_form.controls['username'].dirty || signup_local_form.controls['username'].touched)" class="alert alert-danger">
+            <div *ngIf="signup_local_form.controls['username'].errors?.['required']">El nombre es requerido</div>
+            
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="password_label">Contraseña</label>
+        <input type="text" class="form-control" formControlName="password" required>
+        <small id="password_help" class="form-text text-muted">Escribe una contraseña segura para su cuenta</small>
+        <div *ngIf="signup_local_form.controls['password'].invalid && 
+            (signup_local_form.controls['password'].dirty || signup_local_form.controls['password'].touched)"class="alert alert-danger">
+            <div *ngIf="signup_local_form.controls['password'].errors?.['required']">La contraseña es requerida</div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="address_label">Dirección del local</label>
+        <input type="text" class="form-control" formControlName="address" required>
+        <small id="address_help" class="form-text text-muted">Ingrese su dirección</small>
+        <div *ngIf="signup_local_form.controls['address'].invalid && 
+            (signup_local_form.controls['address'].dirty || signup_local_form.controls['address'].touched)"class="alert alert-danger">
+            <div *ngIf="signup_local_form.controls['address'].errors?.['required']">La dirección es requerida</div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="country_label">Pais</label>
+        <select type="text" class="form-control">
+            <option selected>Seleccióne un pais</option>
+            <option value="Chile">Chile</option>
+            <option value="Titirilquen">Titirilquen</option>
+            <option value="VillaQuien">Villaquien</option>
+        </select>
+    </div>
+    <br>
+    <div class="form-group">
+        <button class="btn btn-success form-control" (click)="register()" 
+        [disabled]="signup_local_form.controls['username'].invalid || 
+        signup_local_form.controls['password'].invalid ||
+        signup_local_form.controls['address'].invalid"
+        >Registrarse</button>
+    </div>
+</div>
