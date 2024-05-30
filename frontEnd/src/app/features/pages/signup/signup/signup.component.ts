@@ -24,10 +24,18 @@ export class SignupComponent {
   constructor(private readonly authService: AuthService) {}
   ngOnInit() {
     this.user_register_form = new FormGroup({
-      username: new FormControl<string>("", Validators.required),
-      password: new FormControl<string>("", Validators.required),
-      role: new FormControl<string>("Cliente"),
-      address: new FormControl<string>(""),
+      email: new FormControl<string>("", [
+        Validators.required,
+        Validators.email,
+      ]),
+      name: new FormControl<string>("", Validators.required),
+      last_name: new FormControl<string>("", Validators.required),
+      password: new FormControl<string>("", [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      address: new FormControl<string>("", Validators.required),
+      role: new FormControl<string>("Client"),
     });
   }
   public async register() {

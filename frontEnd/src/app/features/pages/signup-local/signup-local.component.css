@@ -1,0 +1,18 @@
+.is-invalid {
+    border-color: #dc3545;
+  }
+  
+  .is-valid {
+    border-color: #28a745;
+  }
+  
+  .invalid-feedback {
+    display: block;
+    color: #dc3545;
+  }
+  
+  .valid-feedback {
+    display: block;
+    color: #28a745;
+  }
+  

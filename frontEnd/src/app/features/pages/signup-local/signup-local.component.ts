@@ -5,6 +5,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from "@angular/forms";
 import { AuthService } from "../../../core/services/auth-service/auth.service";
 import { Router } from "@angular/router";
@@ -25,20 +26,27 @@ export class SignupLocalComponent {
   ) {}
   ngOnInit() {
     this.signup_local_form = new FormGroup({
-      username: new FormControl<string>(""),
-      password: new FormControl<string>(""),
-      category: new FormControl<string>(""),
-      address: new FormControl<string>(""),
-      country: new FormControl<string>(""),
+      email: new FormControl<string>("", [
+        Validators.required,
+        Validators.email,
+      ]),
+      name: new FormControl<string>("", Validators.required),
+      last_name: new FormControl<string>("", Validators.required),
+      password: new FormControl<string>("", [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      address: new FormControl<string>("", Validators.required),
     });
   }
 
   public register() {
-    const username: string = this.signup_local_form.controls["username"].value;
+    const name: string = this.signup_local_form.controls["name"].value;
+    const last_name: string =
+      this.signup_local_form.controls["last_name"].value;
+    const email: string = this.signup_local_form.controls["email"].value;
     const password: string = this.signup_local_form.controls["password"].value;
-    const category: string = this.signup_local_form.controls["category"].value;
     const address: string = this.signup_local_form.controls["address"].value;
-    const country: string = this.signup_local_form.controls["country"].value;
 
     this.router.navigate(["local/admin"]);
   }
