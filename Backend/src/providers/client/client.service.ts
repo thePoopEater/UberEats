@@ -35,4 +35,16 @@ export class ClientService {
     public async getAllClients() : Promise<ClientEntity[]>{
       return this.clientRepository.find();
 }
+
+    public async getClientUser(userId: number): Promise<ClientEntity | undefined> {
+        try {
+        const client = await this.clientRepository.createQueryBuilder('client')
+            .where("client.userId = :userId", { userId })
+            .getOne();
+        return client;
+        } catch (error: any) {
+        throw new Error(error);
+        }
+    }
+  
 }

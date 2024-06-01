@@ -19,4 +19,24 @@ export class LocalAdminService {
     public async getAllLocalAdmins() : Promise<LocalAdminEntity[]>{
             return this.localAdminRepository.find();
         }
+    public async getLocalAdmin(idLocalAdmin: number): Promise <LocalAdminEntity>{
+        try{
+            const localAdmin = await this.localAdminRepository.createQueryBuilder('localAdmin').where("localAdminId = :idLocalAdmin", { idLocalAdmin }).getOne();
+            return localAdmin;
+        }catch (error:any){
+                throw new Error(error);
+        }
+    }
+    public async getLocalAdminUser(userId: number): Promise<LocalAdminEntity | undefined> {
+        try {
+        const localAdmin = await this.localAdminRepository.createQueryBuilder('localAdmin')
+            .where("localAdmin.userId = :userId", { userId })
+            .getOne();
+        return localAdmin;
+        } catch (error: any) {
+        throw new Error(error);
+        }
+    }
+        
+
 }

@@ -9,7 +9,16 @@ export class LocalAdminEntity {
   @Column()
   name: string;
 
+  @Column()
+  userId: number
+
 
   @OneToMany(() => LocalEntity, (local) => local.localAdmin)
   locals : LocalEntity[]; 
+
+  constructor(data?: Partial<LocalAdminEntity>) {
+    if (data) {
+      Object.assign(this, data);
+    }
+  }
 }
