@@ -38,7 +38,7 @@ Aca van imagenes de demostracion del frontend funcionando**
 [Bootstrap Documentation](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 
 ## Installation Steps
-remember that before executing this project you must have node.js downloaded.
+Remember that before executing this project you must have node.js downloaded.
 
 Clone the project
 
