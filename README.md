@@ -25,7 +25,7 @@ Some of the features in this proyect:
 
 
 ## DataBase Model
-![image](https://github.com/thePoopEater/UberEats/assets/106935477/fe722186-a8f1-4567-a831-47496a5536ff)
+![Modelo de Base de Datos](https://github.com/thePoopEater/UberEats/assets/106935477/8b853cdd-b270-4047-9eb9-eb9b00a4c31f)
 
 ## Installation Steps
 Remember that before executing this project you must have node.js downloaded.
