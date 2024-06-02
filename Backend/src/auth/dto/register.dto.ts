@@ -1,6 +1,4 @@
-import {IsNotEmpty, IsString} from 'class-validator';
-import { AddressEntity } from 'src/database/entities/address.entity'; //nuevo
-import { OrderEntity } from 'src/database/entities/order.entity'; //nuevo
+import {IsNotEmpty, IsString, IsEmail} from 'class-validator';
 
 export class RegisterDTO{
     @IsString()
@@ -11,7 +9,7 @@ export class RegisterDTO{
     @IsNotEmpty()
     lastName:  string;
     
-    @IsString()
+    @IsEmail()
     @IsNotEmpty()
     email: string;
 
@@ -22,8 +20,5 @@ export class RegisterDTO{
     @IsString()
     @IsNotEmpty()
     password: string;
-    //solo para users con rol 'client'
-    addresses?: AddressEntity[]; 
-    orders? :  OrderEntity[];
 
 }

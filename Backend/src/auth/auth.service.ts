@@ -9,6 +9,7 @@ import { ClientService } from 'src/providers/client/client.service';
 import { ClientEntity } from 'src/database/entities/client.entity'; 
 import { LocalAdminEntity } from 'src/database/entities/local-admin.entity';
 import { LocalAdminService } from 'src/providers/local-admin/local-admin.service';
+import { LocalAdminCreateDTO } from 'src/controllers/local-admin/dto/local-admin-create.dto';
 
 @Injectable()
 export class AuthService {
@@ -35,7 +36,7 @@ export class AuthService {
       await this.clientService.create(newClient);
     }
     if (role === 'localAdmin'){
-      const newLocalAdmin= new LocalAdminEntity({
+      const newLocalAdmin= new LocalAdminCreateDTO({
         userId: newUser.userId, locals: []
       })
       await this.localAdminService.create(newLocalAdmin);
