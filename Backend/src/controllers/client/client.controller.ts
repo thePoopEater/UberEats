@@ -34,8 +34,6 @@ export class ClientController {
         };
         if (request) {
             const newClient: ClientEntity = {
-                name: request.name,
-                lastName: request.lastName,
             } as ClientEntity;
             await this.clientService.create(newClient);
             return response;

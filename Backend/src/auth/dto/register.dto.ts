@@ -5,7 +5,15 @@ import { OrderEntity } from 'src/database/entities/order.entity'; //nuevo
 export class RegisterDTO{
     @IsString()
     @IsNotEmpty()
-    username: string;
+    name: string;
+
+    @IsString()
+    @IsNotEmpty()
+    lastName:  string;
+    
+    @IsString()
+    @IsNotEmpty()
+    email: string;
 
     @IsString()
     @IsNotEmpty()
@@ -15,8 +23,6 @@ export class RegisterDTO{
     @IsNotEmpty()
     password: string;
     //solo para users con rol 'client'
-    name?: string;
-    lastName?:  string;
     addresses?: AddressEntity[]; 
     orders? :  OrderEntity[];
 

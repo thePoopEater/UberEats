@@ -29,7 +29,6 @@ export class ProductController {
             product.local = local;
             const createdProduct  = await this.productService.createProduct(product);
             const response : ProductResponseDTO = {
-                // ACA HAY ALGO RARO 
                 data : createdProduct,
                 statusCode : 200,
                 statusDescription : "Listo",

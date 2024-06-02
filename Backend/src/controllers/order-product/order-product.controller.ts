@@ -44,20 +44,24 @@ export class OrderProductController {
 
 
     @Delete(':id')
-    public async deleteOrderProduct(@Param('id', ParseIntPipe) idOrderProduct : number, @Body(ValidationPipe) newOrderProduct : OrderProductEntity){
+    public async deleteOrderProduct(@Param('id', ParseIntPipe) idOrderProduct : number, 
+    @Body(ValidationPipe) newOrderProduct : OrderProductEntity){
         const orderProduct = await this.orderProductService.getOrderProduct(newOrderProduct.orderProductId);
         if (orderProduct) {
-            const data = this.orderProductService.deleteOrderProduct(orderProduct.orderProductId);
+            const data = this.orderProductService.deleteOrderProduct(idOrderProduct);
+            if (data != undefined){
             const response : OrderResponseDTO = {
-                data : null, //????
+                data : null,
                 statusCode : 200,
                 statusDescription : "Se ha eliminado el producto de la orden correctamente",
                 error : null
                 }
-                return response;
+                return data;
+                }
+                
                 }
                 if (!orderProduct)
                     throw new NotFoundException('No existe ese producto');
                 
-    }
+    } 
 }

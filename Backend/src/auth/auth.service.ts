@@ -20,31 +20,31 @@ export class AuthService {
   ) {}
 
   async register(data: RegisterDTO) {
-    const { username, password, role, name, lastName } = data; 
-    const buscarUser = await this.userService.findByUsername(username);
-    if (buscarUser) {
-      throw new UnauthorizedException('Ya existe ese nombre de usuario');
+    const { email, password, role } = data; 
+    const buscarEmail = await this.userService.findByEmail(email);
+    if (buscarEmail) {
+      throw new UnauthorizedException('Ya existe una cuenta registrada con este email');
     }
     
     const hashedPassword = await hash(password, 10);
     const newUser = await this.userService.register({ ...data, password: hashedPassword });
     if (role === 'client') {
       const newClient = new ClientEntity({
-        userId: newUser.userId, name, lastName, addresses: [], orders: []     
+        userId: newUser.userId, addresses: [], orders: []     
       });
       await this.clientService.create(newClient);
     }
     if (role === 'localAdmin'){
       const newLocalAdmin= new LocalAdminEntity({
-        userId: newUser.userId, name, locals: []
+        userId: newUser.userId, locals: []
       })
       await this.localAdminService.create(newLocalAdmin);
     }
     return newUser;
   }  
   
-  async validateUser(username: string, password: string) {
-    const user = await this.userService.findByUsername(username);
+  async validateEmail(email: string, password: string) {
+    const user = await this.userService.findByEmail(email);
     if (user && await compare(password, user.password)) {
       return user;
     }

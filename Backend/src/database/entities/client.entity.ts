@@ -7,12 +7,6 @@ export class ClientEntity {
   @PrimaryGeneratedColumn()
   clientId: number;
 
-  @Column()
-  name: string;
-
-  @Column()
-  lastName: string;
-
   @OneToMany(() => AddressEntity, (address) => address.client)
   addresses: AddressEntity[];
 

@@ -9,8 +9,14 @@ export class UserEntity {
   @Column()
   role: string;
 
+  @Column()
+  name: string;
+
+  @Column()
+  lastName: string;
+
   @Column({unique: true})
-  username: string;
+  email: string;
 
   @Column()
   password: string;

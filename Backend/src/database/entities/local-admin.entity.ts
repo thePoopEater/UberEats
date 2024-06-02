@@ -5,9 +5,7 @@ import { LocalEntity } from './local.entity';
 export class LocalAdminEntity {
   @PrimaryGeneratedColumn()
   localAdminId: number;
-  
-  @Column()
-  name: string;
+
 
   @Column()
   userId: number

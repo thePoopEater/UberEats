@@ -13,7 +13,6 @@ import { ClientEntity } from 'src/database/entities/client.entity';
 import { LocalAdminService } from 'src/providers/local-admin/local-admin.service';
 import { LocalAdminEntity } from 'src/database/entities/local-admin.entity';
 
-//agregar JWT_SECRET=secret en el archivo .env
 @Module({
   imports: [JwtModule.registerAsync({
     useFactory:(configService: ConfigService) => ({

@@ -15,8 +15,8 @@ export class UserService {
     const { password, ...result } = user;
     return result;
   }
-  findByUsername(username: string) {
-    return this.userRepository.findOneBy({ username });
+  findByEmail(email: string) {
+    return this.userRepository.findOneBy({ email });
   }
   getAll() {
     return this.userRepository.find();
