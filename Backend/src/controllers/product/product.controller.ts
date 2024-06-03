@@ -1,10 +1,10 @@
 import { Controller,Get,Post,Body,Param,Put,BadRequestException,NotFoundException} from '@nestjs/common';
 import { ProductCreateDTO } from './dto/product-create.dto';
 import { ProductResponseDTO } from './dto/product-response.dto';
-import { ProductService } from 'src/providers/product/product.service';
-import { ProductEntity } from 'src/database/entities/product.entity';
-import { LocalService } from 'src/providers/local/local.service';
-import { LocalEntity } from 'src/database/entities/local.entity';
+import { ProductService } from '../../providers/product/product.service';
+import { ProductEntity } from '../../database/entities/product.entity';
+import { LocalService } from '../../providers/local/local.service';
+import { LocalEntity } from '../../database/entities/local.entity';
 import { UpdateResult } from 'typeorm';
 import { ProductUpdateDTO } from './dto/product-update.dto';
 import { ApiTags } from '@nestjs/swagger';

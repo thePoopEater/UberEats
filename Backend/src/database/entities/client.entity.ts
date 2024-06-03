@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn} from 'typeorm';
-import { AddressEntity } from 'src/database/entities/address.entity';
+import { AddressEntity } from '../../database/entities/address.entity';
 import { OrderEntity } from './order.entity';
 
 @Entity({name: 'client'})

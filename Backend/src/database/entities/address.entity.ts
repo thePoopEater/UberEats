@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
-import { ClientEntity } from 'src/database/entities/client.entity';
+import { ClientEntity } from '../../database/entities/client.entity';
 
 @Entity({name:'address'})
 export class AddressEntity {

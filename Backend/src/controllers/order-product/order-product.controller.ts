@@ -1,9 +1,9 @@
 import { Controller, Post, Body, NotFoundException } from '@nestjs/common';
-import { OrderProductService } from 'src/providers/order-product/order-product.service';
+import { OrderProductService } from '../../providers/order-product/order-product.service';
 import { OrderProductCreateDTO } from './dto/order-product-create.dto';
-import { OrderService } from 'src/providers/order/order.service';
-import { ProductService } from 'src/providers/product/product.service';
-import { OrderProductEntity } from 'src/database/entities/order-products.entity';
+import { OrderService } from '../../providers/order/order.service';
+import { ProductService } from '../../providers/product/product.service';
+import { OrderProductEntity } from '../../database/entities/order-products.entity';
 import { OrderResponseDTO } from '../order/dto/order-response.dto';
 
 @Controller('orderProduct')

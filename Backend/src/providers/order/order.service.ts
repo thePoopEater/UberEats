@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { OrderCreateDTO } from "src/controllers/order/dto/order-create.dto";
-import { LocalEntity } from "src/database/entities/local.entity";
-import { OrderEntity } from "src/database/entities/order.entity";
+import { OrderCreateDTO } from "../../controllers/order/dto/order-create.dto";
+import { LocalEntity } from "../../database/entities/local.entity";
+import { OrderEntity } from "../../database/entities/order.entity";
 import { Repository, UpdateResult } from 'typeorm';
 import { LocalService } from "../local/local.service";
 import { ClientService } from "../client/client.service";

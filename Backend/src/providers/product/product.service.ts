@@ -1,10 +1,10 @@
 import { Repository, FindManyOptions, UpdateResult} from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
-import { ProductEntity } from "src/database/entities/product.entity";
-import { LocalEntity } from 'src/database/entities/local.entity';
-import { ProductCreateDTO } from 'src/controllers/product/dto/product-create.dto';
-import { ProductUpdateDTO } from 'src/controllers/product/dto/product-update.dto';
+import { ProductEntity } from "../../database/entities/product.entity";
+import { LocalEntity } from '../../database/entities/local.entity';
+import { ProductCreateDTO } from '../../controllers/product/dto/product-create.dto';
+import { ProductUpdateDTO } from '../../controllers/product/dto/product-update.dto';
 
 @Injectable()
 export class ProductService {

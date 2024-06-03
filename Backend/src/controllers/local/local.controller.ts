@@ -12,14 +12,14 @@ import { AuthGuard } from '@nestjs/passport';
 import { LocalCreateDTO } from './dto/local-create.dto';
 import { LocalResponseDTO } from './dto/local-response.dto';
 import { LocalService } from '../../providers/local/local.service';
-import { LocalEntity } from 'src/database/entities/local.entity';
-import { ProductEntity } from 'src/database/entities/product.entity';
-import { ProductService } from 'src/providers/product/product.service';
+import { LocalEntity } from '../../database/entities/local.entity';
+import { ProductEntity } from '../../database/entities/product.entity';
+import { ProductService } from '../../providers/product/product.service';
 import { LocalUpdateDTO } from './dto/local-update.dto';
 import { UpdateResult } from 'typeorm';
-import { OrderService } from 'src/providers/order/order.service';
-import { OrderEntity } from 'src/database/entities/order.entity';
-import { OrderProductService } from 'src/providers/order-product/order-product.service';
+import { OrderService } from '../../providers/order/order.service';
+import { OrderEntity } from '../../database/entities/order.entity';
+import { OrderProductService } from '../../providers/order-product/order-product.service';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('local')

@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { LocalUpdateDTO } from "src/controllers/local/dto/local-update.dto";
-import { LocalEntity } from "src/database/entities/local.entity"
+import { LocalEntity } from "../../database/entities/local.entity"
 import { Repository, UpdateResult } from 'typeorm';
 @Injectable()
 export class LocalService {

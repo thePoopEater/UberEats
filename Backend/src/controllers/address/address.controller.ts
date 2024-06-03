@@ -1,9 +1,9 @@
 import { Controller,Post,Get,Body,Param,BadRequestException } from '@nestjs/common';
-import { AddressService } from 'src/providers/address/address.service';
+import { AddressService } from '../../providers/address/address.service';
 import { AddressCreateDTO } from './dto/address-create.dto';
 import { AddressResponseDTO } from './dto/address-response.dto';
-import { AddressEntity } from 'src/database/entities/address.entity';
-import { ClientEntity } from 'src/database/entities/client.entity';
+import { AddressEntity } from '../../database/entities/address.entity';
+import { ClientEntity } from '../../database/entities/client.entity';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('address')

@@ -1,9 +1,9 @@
 import {Controller,Get,Param,Put,Post,Body,NotFoundException} from '@nestjs/common';
-import { OrderService } from 'src/providers/order/order.service';
+import { OrderService } from '../../providers/order/order.service';
 import { OrderCreateDTO } from './dto/order-create.dto';
 import { OrderResponseDTO } from './dto/order-response.dto';
-import { OrderEntity } from 'src/database/entities/order.entity';
-import { LocalService } from 'src/providers/local/local.service';
+import { OrderEntity } from '../../database/entities/order.entity';
+import { LocalService } from '../../providers/local/local.service';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
