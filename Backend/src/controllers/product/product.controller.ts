@@ -25,10 +25,10 @@ export class ProductController {
         if (local) {
             const product = new ProductEntity(newProduct);
             product.local = local;
-            const createdProduct  = await this.productService.createProduct(product);
+            await this.productService.createProduct(product);
             const response : ProductResponseDTO = {
                 // ACA HAY ALGO RARO 
-                data : createdProduct,
+                data : null,
                 statusCode : 200,
                 statusDescription : "Listo",
                 error : null
