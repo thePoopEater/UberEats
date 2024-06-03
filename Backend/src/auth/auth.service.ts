@@ -66,6 +66,6 @@ export class AuthService {
     }
     const payload = { role: user.role, sub: user.userId };
     const token = this.jwtService.sign(payload);
-    return { accessToken: token, clientId: clientId, localAdminId: localAdminId} as LoginResponseDTO;
+    return { accessToken: token, role: user.role, clientId: clientId, localAdminId: localAdminId} as LoginResponseDTO;
   }
 }
