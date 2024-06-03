@@ -19,16 +19,12 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
-    this.authService.isAuth().subscribe((status) => {
-      this.isLoggedIn.set(this.authService.loggedIn());
-    });
-
     console.log(this.isLoggedIn());
   }
 
   public loginOut() {
     this.authService.logout();
     this.isLoggedIn.set(false);
-    this.route.navigate(['/', 'login']);
+    this.route.navigate(["/", "login"]);
   }
 }

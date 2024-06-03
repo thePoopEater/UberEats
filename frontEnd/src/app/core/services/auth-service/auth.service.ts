@@ -19,7 +19,6 @@ export class AuthService {
     const user = new User(email, password);
     console.log(user);
     return this.httpClient.post<UserResponse>(env.USER_LOGIN_POST_URL, user);
-
   }
   public register(
     name: string,
