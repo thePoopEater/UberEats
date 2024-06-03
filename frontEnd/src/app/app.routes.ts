@@ -84,20 +84,24 @@ export const routes: Routes = [
     data : { role : "client" }
   },
 
-  { path: "pagos", component: PagoComponent, canActivate: [authGuard] },
+  {  path: "pagos",
+     component: PagoComponent, 
+      canActivate: [hasRoleGuard],
+      data : { role : "client"},
+    },
 
   {
     path: "confirmacion-pedido",
     component: ConfirmacionPedidoComponent,
     canActivate: [hasRoleGuard],
-    data : { role : "cliente"}
+    data : { role : "client"}
   },
 
   {
     path: "seguimiento-pedido",
     component: SeguimientoPedidoComponent,
     canActivate: [hasRoleGuard],
-    data : { role : "cliente" }
+    data : { role : "client" }
   },
 
   {
