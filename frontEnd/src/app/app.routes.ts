@@ -49,6 +49,8 @@ export const routes: Routes = [
   {
     path: "local/admin",
     component: LocalAdminComponent,
+    data : { role : "localAdmin" },
+
   },
   {
     path: "login",
@@ -65,29 +67,37 @@ export const routes: Routes = [
   {
     path: "local/:{idLocal}",
     component: LocalComponent,
-    canActivate: [authGuard],
+    canActivate: [hasRoleGuard],
+    data : { role : "client" },
   },
 
   {
     path: "producto/:{idProd}",
     component: ProductoComponent,
-    canActivate: [authGuard],
+    canActivate: [hasRoleGuard],
+    data : { role : "client" }
   },
 
-  { path: "carrito", component: CarritoComponent, canActivate: [authGuard] },
+  { path: "carrito",
+    component: CarritoComponent, 
+    canActivate: [hasRoleGuard],
+    data : { role : "client" }
+  },
 
   { path: "pagos", component: PagoComponent, canActivate: [authGuard] },
 
   {
     path: "confirmacion-pedido",
     component: ConfirmacionPedidoComponent,
-    canActivate: [authGuard],
+    canActivate: [hasRoleGuard],
+    data : { role : "cliente"}
   },
 
   {
     path: "seguimiento-pedido",
     component: SeguimientoPedidoComponent,
-    canActivate: [authGuard],
+    canActivate: [hasRoleGuard],
+    data : { role : "cliente" }
   },
 
   {

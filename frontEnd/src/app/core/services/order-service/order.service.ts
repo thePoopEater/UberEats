@@ -9,13 +9,12 @@ import { ProductOrder } from "../../models/class/product-order";
 import { Response } from "../../models/class/response";
 import { catchError, finalize, throwError } from "rxjs";
 import { CarritoService } from "../carrito-service/carrito.service";
+import { env } from "../../enviroment/enviroment";
 @Injectable({
   providedIn: "root",
 })
 export class OrderService {
-  private URL_POST_ORDER = "http://localhost:3000/order";
-  private URL_GET_ORDER = "http://localhost:3000/order/";
-  private URL_POST_ORDER_PRODUCT = "http://localhost:3000/order-product";
+
   private readonly _cartService$ = inject(CarritoService);
   constructor(private httpClient: HttpClient) {}
 
@@ -25,17 +24,15 @@ export class OrderService {
     products: ProductOrder[]
   ) {
     let token = "";
-    if (sessionStorage.getItem("token") + "") {
-      token = sessionStorage.getItem("token") + "";
-      console.log("el token", token);
+    if (sessionStorage.getItem("accessToken") + "") {
+      token = sessionStorage.getItem("accessToken") + "";
     }
 
-    const headers = new HttpHeaders().set("Autorization", "Bearer ${token}");
+    const header = new HttpHeaders().set('Autorization', 'Bearer ${token}');
     const order = new OrderCreateDTO(localId, clientId);
     this.httpClient
-      .post<Response<Order>>(this.URL_POST_ORDER, order, {
-        headers: headers,
-      })
+      .post<Response<Order>>(env.URL_POST_ORDER, order, {headers : header}
+      )
       .subscribe((response) => {
         this.addProductsToOrder(products, response.data.orderId);
       });
@@ -43,7 +40,7 @@ export class OrderService {
 
   public async addProductToOrder(orderProduct: ProductOrder) {
     return this.httpClient
-      .post<ProductOrder>(this.URL_POST_ORDER_PRODUCT, orderProduct)
+      .post<ProductOrder>(env.URL_POST_ORDER_PRODUCT, orderProduct)
       .pipe(catchError(this.handleError));
   }
 

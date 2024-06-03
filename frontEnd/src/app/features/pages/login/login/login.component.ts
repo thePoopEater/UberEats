@@ -35,11 +35,20 @@ export class LoginComponent implements OnInit {
         this.authService.login(email, password)
       );
       console.log(userResponse);
-      sessionStorage.setItem("token", userResponse.accessToken);
-      sessionStorage.setItem("client_id", userResponse.clientId + "");
+      sessionStorage.setItem("accessToken", userResponse.accessToken);
       sessionStorage.setItem("role", userResponse.role);
 
-      this.router.navigate(["/inicio"]);
+
+      if(sessionStorage.getItem("role") === "client"){
+        sessionStorage.setItem("client_id", userResponse.clientId + "");
+        this.router.navigate(["/inicio"]);
+      }
+
+      if(sessionStorage.getItem("role") === "localAdmin"){
+       sessionStorage.setItem("admin_id", userResponse.localAdminId + "");
+
+        this.router.navigate(["local/admin"]);
+      }
 
     } catch (error) {
       console.error("Error al iniciar sesion", error);

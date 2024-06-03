@@ -32,5 +32,6 @@ export class UserCreateDTO {
 export class UserResponse {
   accessToken: string = "";
   clientId: number = 0;
+  localAdminId: number = 0;
   role: string = "";
 }

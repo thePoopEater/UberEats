@@ -38,6 +38,7 @@ export class ConfirmacionPedidoComponent implements OnInit {
       let preOrderOfCart : ProductOrder[] = this._cartService$.getCart().getCart();
 
       console.log("Productos del carrito: ", prodOfCart);
+      console.log("ordenes del carrito:", preOrderOfCart);
       // necesito el clientId, está invalido
       this._orderService$.createOrder(1, clientId,  preOrderOfCart);
 

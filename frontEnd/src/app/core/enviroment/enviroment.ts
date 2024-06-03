@@ -3,4 +3,11 @@ export const env = {
   USER_LOGIN_POST_URL: "http://localhost:3000/auth/login",
   USER_REGISTER_POST_URL: "http://localhost:3000/auth/register",
   LOCAL_ADMIN_REGISTER_URL: "http://localhost:3000/local-admin",
+  URL_POST_ORDER : "http://localhost:3000/order",
+  URL_GET_ORDER : "http://localhost:3000/order/",
+  URL_POST_ORDER_PRODUCT : "http://localhost:3000/order-product",
+  URL_ALL_LOCAL : "http://localhost:3000/local",
+  URL_LOCAL : "http://localhost:3000/local/",
+  URL_ALL_PRODS_FROM_LOCAL : "http://localhost:3000/local/products/",
+  URL_PROD : "http://localhost:3000/product/",
 };
