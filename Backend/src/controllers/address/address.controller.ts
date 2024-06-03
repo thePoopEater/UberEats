@@ -4,7 +4,7 @@ import { AddressCreateDTO } from './dto/address-create.dto';
 import { AddressResponseDTO } from './dto/address-response.dto';
 import { AddressEntity } from 'src/database/entities/address.entity';
 import { ClientEntity } from 'src/database/entities/client.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Roles } from 'src/auth/decorators/roles.decorator';
@@ -12,6 +12,7 @@ import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('address')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
+@ApiBearerAuth()
 @ApiTags('Address')
 export class AddressController {
   constructor(private readonly addressService: AddressService) {}
@@ -42,7 +43,6 @@ export class AddressController {
 
   //Función que permite obtener todos las direcciones almacenadas en la tabla 'address'
   //de la base de datos.
-  @Roles('admin')
   @Get()
   public async getAllAdress(): Promise<AddressEntity[]> {
     return await this.addressService.getAllAddresses();

@@ -62,6 +62,7 @@ export class LocalController {
     // Esta funcion modifica la informacion de un local dado una id, esta informacion actualizada viene como parametro request de tipo LocalUpdateDTO,
     // , llama al repositorio de local y pide actualizar columnas de un registro.
     @Put(':id')
+    @Roles('localAdmin')
     public async putLocal(@Param('id', ParseIntPipe) idLocal : number, @Body() request : LocalUpdateDTO) : Promise<UpdateResult | LocalResponseDTO> {
         if (Object.keys(request).length == 0){
             throw new BadRequestException('Viene vacio');
@@ -81,13 +82,13 @@ export class LocalController {
     }
 
 
-  // Esta funcion retornar todos los locales guardados en el repositorio. Sencillito
-  @Get()
+  // Esta funcion retornar todos los locales guardados en el repositorio.
   public async getAllLocals(): Promise<LocalEntity[]> {
     return await this.localService.getAllLocals();
   }
 
   @Get('/orders/:id')
+  @Roles('localAdmin')
   public async getAllOrders(@Param('id', ParseIntPipe) id: number): Promise<OrderEntity[]> {
     const local = await this.localService.getLocal(id);
     const orders = await this.orderService.findOrdersFromOneLocal(local);

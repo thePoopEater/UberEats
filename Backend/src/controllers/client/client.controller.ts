@@ -5,7 +5,7 @@ import { ClientEntity } from 'src/database/entities/client.entity';
 import { ClientService } from 'src/providers/client/client.service';
 import { OrderService } from 'src/providers/order/order.service';
 import { OrderEntity } from 'src/database/entities/order.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Roles } from 'src/auth/decorators/roles.decorator';
@@ -13,6 +13,7 @@ import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('client')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
+@ApiBearerAuth()
 @ApiTags('Client')
 export class ClientController {
   constructor(
