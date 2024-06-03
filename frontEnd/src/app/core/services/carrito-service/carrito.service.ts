@@ -64,6 +64,7 @@ export class CarritoService {
         this._cart.getCart()[incidence].quantity + cant;
     }
     this.total += cant * product.price;
+    console.log(this.total);
     // Preguntar pe
     localStorage.setItem(
       this.LOCAL_STORAGE_PRODUCT_KEY,
