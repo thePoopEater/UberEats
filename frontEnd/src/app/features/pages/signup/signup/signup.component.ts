@@ -10,6 +10,7 @@ import { AuthService } from "../../../../core/services/auth-service/auth.service
 import { CommonModule } from "@angular/common";
 import { firstValueFrom } from "rxjs";
 import { User, UserResponse } from "../../../../core/models/class/user";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-signup",
@@ -21,7 +22,10 @@ import { User, UserResponse } from "../../../../core/models/class/user";
 export class SignupComponent {
   user_register_form: FormGroup = new FormGroup({});
 
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private router: Router
+  ) {}
   ngOnInit() {
     this.user_register_form = new FormGroup({
       email: new FormControl<string>("", [
@@ -35,32 +39,36 @@ export class SignupComponent {
         Validators.minLength(6),
       ]),
       address: new FormControl<string>("", Validators.required),
-      role: new FormControl<string>("Client"),
+      role: new FormControl<string>("client"),
     });
   }
   public async register() {
-    const username = this.user_register_form.controls["username"].value;
+    const name = this.user_register_form.controls["name"].value;
+    const last_name = this.user_register_form.controls["last_name"].value;
     const password = this.user_register_form.controls["password"].value;
+    const email = this.user_register_form.controls["email"].value;
     const role = this.user_register_form.controls["role"].value;
     try {
       const register_response = await firstValueFrom(
-        this.authService.register(username, password, role)
+        this.authService.register(name, last_name, email, password, "client")
       );
 
       console.log("Register response");
       console.log(register_response);
-
-      // ahora lo loggeamos
-
+    } catch (register_error) {
+      console.log("Register error", register_error);
+    }
+    try {
       const login_response: UserResponse = await firstValueFrom(
-        this.authService.login(username, password, role)
+        this.authService.login(email, password)
       );
-      sessionStorage.setItem("client_id", login_response.userId.toString());
-      sessionStorage.setItem("role", login_response.role);
-
       console.log(login_response);
-    } catch (error) {
-      console.log("Error register ->", error);
+      sessionStorage.setItem("client_id", login_response.clientId + "");
+      sessionStorage.setItem("token", login_response.accessToken);
+      sessionStorage.setItem("role", login_response.role);
+      this.router.navigateByUrl("inicio");
+    } catch (login_error) {
+      console.log("Login error", login_error);
     }
   }
 }

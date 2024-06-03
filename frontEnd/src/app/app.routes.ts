@@ -59,7 +59,7 @@ export const routes: Routes = [
     path: "inicio",
     component: InicioComponent,
     canActivate: [hasRoleGuard],
-    data: { role: "Cliente" },
+    data: { role: "client" },
   },
 
   {

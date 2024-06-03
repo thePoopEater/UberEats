@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
   isLogged: boolean = false;
   private readonly _loginForm = inject(FormBuilder);
   loginForm = this._loginForm.nonNullable.group({
-    userName: ["", [Validators.required, Validators.email]],
-    userPass: ["", Validators.required],
+    email: ["", [Validators.required, Validators.email]],
+    password: ["", Validators.required],
   });
   userLoginOn: boolean = false;
 
@@ -28,15 +28,17 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
   //en esta funcion falta describir el caso cuando el usuario no esta en la BD.
   public async login() {
-    const user = this.loginForm.controls.userName.value;
-    const password = this.loginForm.controls.userPass.value;
+    const email = this.loginForm.controls["email"].value;
+    const password = this.loginForm.controls["password"].value;
     try {
+      console.log(email, password);
       const userResponse = await firstValueFrom(
-        this.authService.login(user, password, "Cliente")
+        this.authService.login(email, password)
       );
+      console.log(userResponse);
       sessionStorage.setItem("token", userResponse.accessToken);
-      sessionStorage.setItem("client_id", userResponse.userId + "");
-      sessionStorage.setItem("client_role", userResponse.role + "");
+      sessionStorage.setItem("client_id", userResponse.clientId + "");
+      sessionStorage.setItem("role", userResponse.role);
 
       this.router.navigate(["/inicio"]);
     } catch (error) {

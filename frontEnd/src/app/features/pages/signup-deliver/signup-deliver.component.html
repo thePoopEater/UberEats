@@ -1,4 +1,4 @@
-<div style="padding:3rem;width:30rem" [formGroup] = "signup_delivery_form">
+<div style="padding:3rem;width:35rem" [formGroup] = "signup_delivery_form">
     <h1>Registrarse como repartidor</h1>
     <div class="form-group">
         <div class="row">
@@ -88,7 +88,11 @@
         
         <div class="form-group">
             <label for="address_label">Dirección</label>
-            <input type="text" class="form-control" formControlName="address"
+            <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="address"
             [ngClass]="{
                 'is-invalid': signup_delivery_form.get('address')?.touched && signup_delivery_form.get('address')?.invalid,
                 'is-valid': signup_delivery_form.get('address')?.touched && signup_delivery_form.get('address')?.valid
@@ -101,7 +105,6 @@
             </div>
             <small id="address_help" class="form-text text-muted">Ingrese su dirección</small>
         </div>
-
         <br>
         <div class="form-group">
             <button class="btn btn-success form-control" (click)="register()" 
@@ -110,4 +113,5 @@
             signup_delivery_form.controls['address'].invalid"
             >Registrarse</button>
         </div>
+       
 </div>

@@ -15,4 +15,6 @@
     display: block;
     color: #28a745;
   }
-  
+  .list-group-item-action {
+    cursor: pointer;
+  }
