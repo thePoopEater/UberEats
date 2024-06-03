@@ -17,7 +17,7 @@ export class LocalAdminController {
             statusDescription:"Admin de local creado",
             error: null
         } as LocalAdminResponseDTO 
-        return localAdmin;
+        return localAdmin;                  
     }
 }
 

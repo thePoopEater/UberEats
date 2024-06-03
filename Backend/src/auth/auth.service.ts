@@ -44,7 +44,7 @@ export class AuthService {
     return newUser;
   }  
   
-  async validateEmail(email: string, password: string) {
+  async validateEmail(email: string, password: string, ) {
     const user = await this.userService.findByEmail(email);
     if (user && await compare(password, user.password)) {
       return user;
@@ -52,10 +52,7 @@ export class AuthService {
     return null;
   }
 
-  async login(user: UserDTO, role: string): Promise<LoginResponseDTO> {
-    if (user.role !== role) {
-      throw new UnauthorizedException('No coincide el rol con el usuario');
-    }
+  async login(user: UserDTO): Promise<LoginResponseDTO> {
     let clientId: number;
     let localAdminId: number;
 

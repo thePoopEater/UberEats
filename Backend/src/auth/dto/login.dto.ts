@@ -6,10 +6,6 @@ export class LoginDTO{
 
     @IsString()
     @IsNotEmpty()
-    role: string;
-
-    @IsString()
-    @IsNotEmpty()
     password: string;
 
 }
