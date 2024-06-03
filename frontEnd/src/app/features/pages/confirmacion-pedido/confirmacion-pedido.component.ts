@@ -25,8 +25,10 @@ export class ConfirmacionPedidoComponent implements OnInit {
   private readonly _orderService$ = inject(OrderService);
   private readonly _cartService$ = inject(CarritoService);
   
+  listProds : Product[] = [];
   ngOnInit() {
     this.startTimer();
+    this.listProds = this._cartService$.getProductsCart();
   }
 
   generateAnOrder(){
@@ -34,9 +36,11 @@ export class ConfirmacionPedidoComponent implements OnInit {
       let clientId : number = parseInt(sessionStorage.getItem('client_id')+'');
       let prodOfCart : Product[] = this._cartService$.getProductsCart();
       let preOrderOfCart : ProductOrder[] = this._cartService$.getCart().getCart();
-      
+
+      console.log("Productos del carrito: ", prodOfCart);
       // necesito el clientId, está invalido
-      this._orderService$.createOrder(prodOfCart[0].localId, clientId,  preOrderOfCart);
+      this._orderService$.createOrder(1, clientId,  preOrderOfCart);
+
     }
   }
 

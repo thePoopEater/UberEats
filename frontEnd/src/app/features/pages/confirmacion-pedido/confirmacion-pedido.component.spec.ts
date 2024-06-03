@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { ConfirmacionPedidoComponent } from './confirmacion-pedido.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 describe('ConfirmacionPedidoComponent', () => {
   let component: ConfirmacionPedidoComponent;
@@ -11,7 +13,7 @@ describe('ConfirmacionPedidoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmacionPedidoComponent ]
+      imports : [ConfirmacionPedidoComponent, HttpClientModule, RouterModule.forRoot([])],
     })
     .compileComponents();
   }));

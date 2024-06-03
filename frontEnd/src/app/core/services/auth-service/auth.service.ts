@@ -36,16 +36,16 @@ export class AuthService {
   }
 
   public logout(): Observable<boolean> {
-    if (sessionStorage.getItem("token")) sessionStorage.clear();
+    if (sessionStorage.getItem("accessToken")) sessionStorage.clear();
     return of(true);
   }
 
   public isAuth(): Observable<boolean> {
-    if (sessionStorage.getItem("token")) return of(true);
+    if (sessionStorage.getItem("accessToken")) return of(true);
     return of(false);
   }
   public isLoggedIn(): Observable<boolean> {
-    if (sessionStorage.getItem("token")) {
+    if (sessionStorage.getItem("accessToken")) {
       return of(false);
     }
     return of(true);

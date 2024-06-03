@@ -10,7 +10,7 @@ export class Order {
     amount : number = 0;
 }
 
-export class GenerateOrder{
+export class OrderCreateDTO{
     localId: number = 0;
     clientId: number = 0;
     date! :Date;

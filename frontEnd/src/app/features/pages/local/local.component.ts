@@ -48,6 +48,7 @@ export class LocalComponent implements OnInit {
       .subscribe((products_response) => {
         this.products = products_response;
       });
+
     this.isCartEmpty = this.cartService.isCartWithOrder;
   }
 

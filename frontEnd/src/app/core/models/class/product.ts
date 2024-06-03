@@ -4,8 +4,8 @@ export class Product{
     description : string = '';
     ingredients : string = '';
     price       : number = 0;
-    localId    : number = 0;
     images      : string = '';
+    localId    : number = 0;
 
     
 }

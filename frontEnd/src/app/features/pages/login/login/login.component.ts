@@ -35,13 +35,14 @@ export class LoginComponent implements OnInit {
       );
 
       console.log(userResponse);
-      this.router.navigate(['/', 'home']);
       sessionStorage.setItem("token", userResponse.accessToken);
       sessionStorage.setItem("client_id", userResponse.clientId + "");
       sessionStorage.setItem("client_role", userResponse.role + "");
+      if(sessionStorage.getItem("client_role") === 'client'){
+        this.router.navigate(['/', 'inicio']);
+      }
       this.authService.loggedIn.set(true);
       console.log(this.authService.loggedIn());
-      console.log(sessionStorage.getItem("client_id"))
     } catch (error) {
       console.error("Error al iniciar sesion", error);
     }

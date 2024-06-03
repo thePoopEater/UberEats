@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { CarritoComponent } from './carrito.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 describe('CarritoComponent', () => {
   let component: CarritoComponent;
@@ -11,7 +13,8 @@ describe('CarritoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CarritoComponent ]
+      imports: [CarritoComponent, HttpClientModule, RouterModule.forRoot([])],
+
     })
     .compileComponents();
   }));

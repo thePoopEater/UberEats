@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { FooterHomeComponent } from './footer-home.component';
+import { RouterModule } from '@angular/router';
 
 describe('FooterHomeComponent', () => {
   let component: FooterHomeComponent;
@@ -11,7 +12,7 @@ describe('FooterHomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FooterHomeComponent ]
+      imports: [FooterHomeComponent, RouterModule.forRoot([])],
     })
     .compileComponents();
   }));

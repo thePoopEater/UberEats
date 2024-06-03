@@ -69,7 +69,7 @@ export class CarritoService {
       this.LOCAL_STORAGE_PRODUCT_KEY,
       JSON.stringify(this._cart.getCart())
     );
-
+    // funciona si recibe el carro los productos
     this.local.back();
   }
 
@@ -86,11 +86,13 @@ export class CarritoService {
     let orderList: ProductOrder[] = this._cart.getCart();
     let producto: Product;
     for (let i = 0; i < orderList.length; i++) {
+      console.log("Id del producto",orderList[i].productId)
       this.productServ$
         .getProduct(orderList[i].productId.toString())
         .subscribe((param) => {
           producto = param;
           productsList.push(producto);
+          console.log("Agregando desde aquí", producto.localId);
         });
     }
     return productsList;

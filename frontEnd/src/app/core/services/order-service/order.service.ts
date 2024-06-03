@@ -1,5 +1,5 @@
 import { Injectable, inject} from '@angular/core';
-import { GenerateOrder, Order } from '../../models/class/orders';
+import { Order, OrderCreateDTO } from '../../models/class/orders';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { ProductOrder } from '../../models/class/product-order';
 import { ResponseDTO } from '../../models/class/response';
@@ -24,12 +24,13 @@ export class OrderService {
     let token = '';
     if(sessionStorage.getItem('token')+''){
       token = sessionStorage.getItem('token')+'';
+      console.log("el token", token);
     }
 
     const headers = new HttpHeaders().set('Autorization', 'Bearer ${token}');
-    const order = new  GenerateOrder(localId, clientId);
+    const order = new  OrderCreateDTO(localId, clientId);
     this.httpClient
-    .post<ResponseDTO<Order>>(this.URL_POST_ORDER_PRODUCT, order, {
+    .post<ResponseDTO<Order>>(this.URL_POST_ORDER, order, {
       headers : headers,
     })
     .subscribe( (response) => {

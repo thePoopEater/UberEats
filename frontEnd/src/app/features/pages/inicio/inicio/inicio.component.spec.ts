@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { InicioComponent } from './inicio.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 describe('InicioComponent', () => {
   let component: InicioComponent;
@@ -8,7 +9,7 @@ describe('InicioComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InicioComponent]
+      imports: [InicioComponent, HttpClientModule, RouterModule.forRoot([])]
     })
     .compileComponents();
     
