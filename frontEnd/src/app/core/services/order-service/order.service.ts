@@ -10,6 +10,7 @@ import { Response } from "../../models/class/response";
 import { catchError, finalize, throwError } from "rxjs";
 import { CarritoService } from "../carrito-service/carrito.service";
 import { env } from "../../enviroment/enviroment";
+import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
@@ -18,24 +19,22 @@ export class OrderService {
   private readonly _cartService$ = inject(CarritoService);
   constructor(private httpClient: HttpClient) {}
 
-  public createOrder(
+  public createOrder (
     localId: number,
     clientId: number,
     products: ProductOrder[]
-  ) {
+  ) : Observable<Response<Order>>  {
     let token = "";
     if (sessionStorage.getItem("accessToken") + "") {
       token = sessionStorage.getItem("accessToken") + "";
     }
 
-    const header = new HttpHeaders().set('Autorization', 'Bearer ${token}');
+    const header = new HttpHeaders().set('Authorization', 'Bearer ${token}');
     const order = new OrderCreateDTO(localId, clientId);
-    this.httpClient
-      .post<Response<Order>>(env.URL_POST_ORDER, order, {headers : header}
-      )
-      .subscribe((response) => {
-        this.addProductsToOrder(products, response.data.orderId);
-      });
+    console.log("el token", token);
+    return this.httpClient
+      .post<Response<Order>>(env.URL_POST_ORDER, order, {headers : header})
+      
   }
 
   public async addProductToOrder(orderProduct: ProductOrder) {
