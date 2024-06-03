@@ -46,8 +46,6 @@ export class ProductoComponent implements OnInit {
     this.route.params.subscribe(
       (params) => {
         this.productId = params['{idProd}']
-      
-
       }
     );
     this.productServ.getProduct(this.productId).subscribe((resp) => {
@@ -55,11 +53,8 @@ export class ProductoComponent implements OnInit {
       this.price = this.product.price;
     });
 
-    // this.http.get<any>(this.url_product +  this.productId).subscribe(
-    //   data =>{
-    //     this.product = data;
-    //    }
-    //   )
+
+
   }
 
   toBack(){

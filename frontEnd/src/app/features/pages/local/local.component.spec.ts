@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { LocalComponent } from './local.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 describe('LocalComponent', () => {
   let component: LocalComponent;
@@ -11,7 +13,7 @@ describe('LocalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocalComponent ]
+      imports : [LocalComponent, HttpClientModule, RouterModule.forRoot([])]
     })
     .compileComponents();
   }));

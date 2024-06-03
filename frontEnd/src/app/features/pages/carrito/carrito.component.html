@@ -10,25 +10,15 @@
   <div  class="producto">
     <div class="productos-container">
       <div class="enlace-producto">
-        <div class="enlace-producto enlace-producto__producto" *ngFor="let producto of listaProd">
+        <div class="enlace-producto enlace-producto__producto" *ngFor="let producto of listaProd()">
           <img [src]="producto.images" alt="{{ producto.name }}">
           <div class="info">
             <h3 class="titulo-producto">{{ producto.name }}</h3>
             <p class="precio-producto">${{ producto.price}}</p>
           </div>
+
         </div>
-        <div class="grid-container" *ngFor="let quantity of listaOrderProd">
-          <div class="producto">
-            <button class="boton-agregar">
-              <img style="height: 10px; width: 10px;" src="assets/images/imagenes-carrito/iconoeliminarcarrito.png">
-            </button>
-            <span class="cantidad">{{quantity.quantity}}</span>
-            <button class="boton-eliminar">
-              <img style="height: 10px; width: 10px;" src="assets/images/imagenes-carrito/iconoagregarcarrito.png">
-            </button>
-            <hr>
-          </div>
-        </div>
+        <button class="btn btn-danger" (click)="emptyCart()">Vaciar Carrito</button>
       </div>
     </div>
     <hr>
@@ -40,23 +30,6 @@
 </div>
 
 <div>
-  <div class="productos-container">
-    <img class = "img-opciones" src="assets/images/imagenes-carrito/iconocubiertoscarrito.png">
-    <h1 class = "texto-opciones">Pide curbiertos, etc</h1>
-    <a>
-      <img class = "img-cubiertos" src="assets/images/imagenes-carrito/iconocubiertosicarrito.png" >
-    </a>
-  </div>
-
-  <hr>
-
-  <div class="productos-container">
-    <img class = "img-opciones" style="height: 20px; width: 20px; margin-left: 25px;" src="assets/images/imagenes-carrito/icononotacarrito.png">
-    <h1 class = "texto-opciones" style="margin-top: 20px;">Agregar nota</h1>
-    <img class = "img-opciones" style= "margin-left: 200px;" src="assets/images/imagenes-carrito/iconoflechacarrito.png" >
-  </div>
-
-  <hr>
 
   <div class="productos-container">
     <p class="text-subtotal"> Subtotal</p>

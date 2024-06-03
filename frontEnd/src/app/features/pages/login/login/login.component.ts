@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { Component, OnInit, WritableSignal, inject, signal } from "@angular/core";
 import { FormGroup, FormsModule, Validators } from "@angular/forms";
 import { FormControl, ReactiveFormsModule, FormBuilder } from "@angular/forms";
 import { AuthService } from "../../../../core/services/auth-service/auth.service";
@@ -6,6 +6,7 @@ import { User, UserResponse } from "../../../../core/models/class/user";
 import { Subscription } from "rxjs";
 import { Router, RouterLink } from "@angular/router";
 import { firstValueFrom } from "rxjs";
+
 
 @Component({
   selector: "app-login",
@@ -15,13 +16,11 @@ import { firstValueFrom } from "rxjs";
   styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
-  isLogged: boolean = false;
   private readonly _loginForm = inject(FormBuilder);
   loginForm = this._loginForm.nonNullable.group({
     email: ["", [Validators.required, Validators.email]],
     password: ["", Validators.required],
   });
-  userLoginOn: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -41,6 +40,7 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem("role", userResponse.role);
 
       this.router.navigate(["/inicio"]);
+
     } catch (error) {
       console.error("Error al iniciar sesion", error);
     }

@@ -12,6 +12,7 @@ import { firstValueFrom } from "rxjs";
 import { User, UserResponse } from "../../../../core/models/class/user";
 import { Router } from "@angular/router";
 
+
 @Component({
   selector: "app-signup",
   standalone: true,
@@ -45,6 +46,7 @@ export class SignupComponent {
   public async register() {
     const name = this.user_register_form.controls["name"].value;
     const last_name = this.user_register_form.controls["last_name"].value;
+
     const password = this.user_register_form.controls["password"].value;
     const email = this.user_register_form.controls["email"].value;
     const role = this.user_register_form.controls["role"].value;
@@ -70,5 +72,6 @@ export class SignupComponent {
     } catch (login_error) {
       console.log("Login error", login_error);
     }
+
   }
 }

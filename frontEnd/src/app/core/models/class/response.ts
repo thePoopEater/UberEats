@@ -7,3 +7,4 @@ export class Response<T> {
     this.data = type;
   }
 }
+

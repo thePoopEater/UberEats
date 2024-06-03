@@ -18,29 +18,27 @@ import { Router } from "@angular/router";
   imports: [CommonModule, RouterLink],
 })
 export class LocalComponent implements OnInit {
-  constructor(
-    private route: ActivatedRoute,
-    private localService: LocalService,
-    private productService: ProductosService,
-    private router: Router
-  ) {}
-  private localSer$ = inject(LocalService);
-  private prodServ$ = inject(ProductosService);
-  private cartServ$ = inject(CarritoService);
   // Este hijo recibe el id del local
   private local_id: string = "";
   local: Local = new Local();
   products: Product[] = [];
-  public isCartEmpty: boolean = false;
+  isCartEmpty: boolean = false;
 
   @Input("idProd") idProduct!: string;
+  constructor(
+    private route: ActivatedRoute,
+    private readonly productService: ProductosService,
+    private readonly localService: LocalService,
+    private readonly cartService: CarritoService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.params.subscribe((params) => {
       this.local_id = params["{idLocal}"];
     });
 
-    this.localSer$.getLocal(this.local_id).subscribe((resp) => {
+    this.localService.getLocal(this.local_id).subscribe((resp) => {
       this.local = resp;
     });
     // Se debe pedir todos los productos pertenecientes al local "no se como"
@@ -50,7 +48,8 @@ export class LocalComponent implements OnInit {
       .subscribe((products_response) => {
         this.products = products_response;
       });
-    this.isCartEmpty = this.cartServ$.isCartWithOrder;
+
+    this.isCartEmpty = this.cartService.isCartWithOrder;
   }
 
   goToCart() {

@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { PagoComponent } from './pago.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 describe('PagoComponent', () => {
   let component: PagoComponent;
@@ -11,7 +13,7 @@ describe('PagoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PagoComponent ]
+      imports : [PagoComponent, HttpClientModule, RouterModule.forRoot([])]
     })
     .compileComponents();
   }));
