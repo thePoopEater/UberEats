@@ -17,15 +17,20 @@ On the backend
 ## Features
 Some of the features in this proyect:
 
-- Roles to access: Administrator, Customer, Delivery-man and Local's Manager
-- Register as an Role
-- Create an order
-- Create a product to an local
-- Bind a product with an order from a customer
-
+1. Roles to access: Administrator, Customer, Delivery-man and Local's Manager
+2. Register as an Role
+3. Create an order
+4. Create a product to an local
+5. Bind a product with an order from a customer
 
 ## DataBase Model
 ![Modelo de Base de Datos](https://github.com/thePoopEater/UberEats/assets/106935477/8b853cdd-b270-4047-9eb9-eb9b00a4c31f)
+
+## Build With
+- Nest 10.3.2
+
+## Documentation
+[Nest Documentation](https://docs.nestjs.com)
 
 ## Installation Steps
 Remember that before executing this project you must have node.js downloaded.
