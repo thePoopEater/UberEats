@@ -8,8 +8,10 @@ import {
 } from "@angular/forms";
 import { AuthService } from "../../../../core/services/auth-service/auth.service";
 import { CommonModule } from "@angular/common";
+import { firstValueFrom } from "rxjs";
+import { User, UserResponse } from "../../../../core/models/class/user";
 import { Router } from "@angular/router";
-import { first, firstValueFrom } from "rxjs";
+
 
 @Component({
   selector: "app-signup",
@@ -23,30 +25,53 @@ export class SignupComponent {
 
   constructor(
     private readonly authService: AuthService,
-    private readonly router: Router
+    private router: Router
   ) {}
   ngOnInit() {
     this.user_register_form = new FormGroup({
-      username: new FormControl<string>("", Validators.required),
-      password: new FormControl<string>("", Validators.required),
+      email: new FormControl<string>("", [
+        Validators.required,
+        Validators.email,
+      ]),
+      name: new FormControl<string>("", Validators.required),
+      last_name: new FormControl<string>("", Validators.required),
+      password: new FormControl<string>("", [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      address: new FormControl<string>("", Validators.required),
       role: new FormControl<string>("client"),
-      address: new FormControl<string>(""),
     });
   }
   public async register() {
-    const username = this.user_register_form.controls["username"].value;
+    const name = this.user_register_form.controls["name"].value;
+    const last_name = this.user_register_form.controls["last_name"].value;
+
     const password = this.user_register_form.controls["password"].value;
+    const email = this.user_register_form.controls["email"].value;
     const role = this.user_register_form.controls["role"].value;
-    const register_response = await firstValueFrom(
-      this.authService.register(username, password, role)
-    );
-    console.log(register_response);
-    const login_response = await firstValueFrom(
-      this.authService.login(username, password, role)
-    );
-    sessionStorage.setItem("token", login_response.accessToken);
-    sessionStorage.setItem("client_id", login_response.clientId + "");
-    sessionStorage.setItem("client_role", login_response.role);
-    this.router.navigate(["inicio"]);
+    try {
+      const register_response = await firstValueFrom(
+        this.authService.register(name, last_name, email, password, "client")
+      );
+
+      console.log("Register response");
+      console.log(register_response);
+    } catch (register_error) {
+      console.log("Register error", register_error);
+    }
+    try {
+      const login_response: UserResponse = await firstValueFrom(
+        this.authService.login(email, password)
+      );
+      console.log(login_response);
+      sessionStorage.setItem("client_id", login_response.clientId + "");
+      sessionStorage.setItem("token", login_response.accessToken);
+      sessionStorage.setItem("role", login_response.role);
+      this.router.navigateByUrl("inicio");
+    } catch (login_error) {
+      console.log("Login error", login_error);
+    }
+
   }
 }

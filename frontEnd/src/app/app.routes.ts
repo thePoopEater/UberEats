@@ -15,6 +15,10 @@ import { NotFoundComponent } from "./features/pages/not-found/not-found/not-foun
 import { SignupComponent } from "./features/pages/signup/signup/signup.component";
 import { hasRoleGuard } from "./core/auth/guards/has-role-guard/has-role.guard";
 import { HomeComponent } from "./features/pages/home/home.component";
+import { SignupDeliverComponent } from "./features/pages/signup-deliver/signup-deliver.component";
+import { DeliverComponent } from "./features/pages/deliver/deliver.component";
+import { SignupLocalComponent } from "./features/pages/signup-local/signup-local.component";
+import { LocalAdminComponent } from "./features/pages/local-admin/local-admin.component";
 
 export const routes: Routes = [
   {
@@ -29,6 +33,22 @@ export const routes: Routes = [
   {
     path: "signup",
     component: SignupComponent,
+  },
+  {
+    path: "signup/delivery",
+    component: SignupDeliverComponent,
+  },
+  {
+    path: "deliver",
+    component: DeliverComponent,
+  },
+  {
+    path: "signup/local",
+    component: SignupLocalComponent,
+  },
+  {
+    path: "local/admin",
+    component: LocalAdminComponent,
   },
   {
     path: "login",

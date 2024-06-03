@@ -1,17 +1,29 @@
 export class User {
-  username: string = "";
+  email: string = "";
   password: string = "";
-  constructor(username: string, password: string) {
-    this.username = username;
+  role: string = "";
+  constructor(email: string, password: string) {
+    this.email = email;
     this.password = password;
   }
 }
+
 export class UserCreateDTO {
-  username: string = "";
+  name: string = "";
+  lastName: string = "";
+  email: string = "";
   password: string = "";
   role: string = "";
-  constructor(username: string, password: string, role: string) {
-    this.username = username;
+  constructor(
+    name: string,
+    last_name: string,
+    email: string,
+    password: string,
+    role: string
+  ) {
+    this.name = name;
+    this.lastName = last_name;
+    this.email = email;
     this.password = password;
     this.role = role;
   }
