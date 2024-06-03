@@ -20,14 +20,6 @@ describe('ProductController', () => {
   let localService: LocalService;
 
   beforeEach(async () => {
-    const mockLocalRepository = {
-      findOne: jest.fn(),
-      createQueryBuilder: jest.fn(() => ({
-        where: jest.fn().mockReturnThis(),
-        getOne: jest.fn(),
-      }))
-    };
-
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ProductController],
       providers: [
@@ -56,9 +48,7 @@ describe('ProductController', () => {
         {provide: getRepositoryToken(ProductEntity),
           useValue: {}
         },
-        {provide: getRepositoryToken(LocalEntity),
-          useValue: {mockLocalRepository}
-        }
+        
       ]
     }).compile();
 
