@@ -6,7 +6,9 @@ import { User, UserResponse } from "../../../../core/models/class/user";
 import { Subscription } from "rxjs";
 import { Router, RouterLink } from "@angular/router";
 import { firstValueFrom } from "rxjs";
-
+import { jwtDecode } from 'jwt-decode';
+import { JwtPayload } from "jwt-decode";
+import { JwtDecoderService } from "../../../../core/services/jwt-decoder/jwt-decoder.service";
 
 @Component({
   selector: "app-login",
@@ -17,6 +19,9 @@ import { firstValueFrom } from "rxjs";
 })
 export class LoginComponent implements OnInit {
   private readonly _loginForm = inject(FormBuilder);
+  private _jwtDecode$ = inject(JwtDecoderService);
+
+
   loginForm = this._loginForm.nonNullable.group({
     email: ["", [Validators.required, Validators.email]],
     password: ["", Validators.required],
@@ -29,24 +34,23 @@ export class LoginComponent implements OnInit {
   public async login() {
     const email = this.loginForm.controls["email"].value;
     const password = this.loginForm.controls["password"].value;
+
+
     try {
       console.log(email, password);
-      const userResponse = await firstValueFrom(
+      const userResponse : UserResponse= await firstValueFrom(
         this.authService.login(email, password)
       );
       console.log(userResponse);
-      sessionStorage.setItem("accessToken", userResponse.accessToken);
-      sessionStorage.setItem("role", userResponse.role);
 
+      const decodeJWT = this._jwtDecode$.decodetoken(userResponse.accessToken);
+      console.log("Este es el token decodificado", decodeJWT.clientId);
 
-      if(sessionStorage.getItem("role") === "client"){
-        sessionStorage.setItem("client_id", userResponse.clientId + "");
+      if(decodeJWT.clientId !== undefined){
         this.router.navigate(["/inicio"]);
       }
 
-      if(sessionStorage.getItem("role") === "localAdmin"){
-       sessionStorage.setItem("admin_id", userResponse.localAdminId + "");
-
+      if(decodeJWT.localAdminId !== undefined){
         this.router.navigate(["local/admin"]);
       }
 

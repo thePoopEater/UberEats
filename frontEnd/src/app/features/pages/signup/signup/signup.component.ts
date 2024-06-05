@@ -64,12 +64,6 @@ export class SignupComponent {
       const login_response: UserResponse = await firstValueFrom(
         this.authService.login(email, password)
       );
-      console.log(login_response.role);
-      console.log(login_response);
-      sessionStorage.setItem("client_id", login_response.clientId + "");
-      sessionStorage.setItem("accessToken", login_response.accessToken);
-      sessionStorage.setItem("role", login_response.role);
-      this.router.navigateByUrl("inicio");
     } catch (login_error) {
       console.log("Login error", login_error);
     }
