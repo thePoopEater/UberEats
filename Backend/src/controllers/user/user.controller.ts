@@ -9,7 +9,6 @@ import { RolesGuard } from 'src/auth/guards/roles.guard';
 @Controller('user')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 @ApiTags('User')
-@Roles('admin')
 export class UserController {
   constructor(private readonly userService: UserService) {}
   //función que devuelve todos los usuarios utilizando un token.

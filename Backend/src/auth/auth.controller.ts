@@ -24,8 +24,8 @@ export class AuthController {
     if (!user) {
       throw new UnauthorizedException('User incorrecto');
     }
-    const { accessToken, clientId, localAdminId, role} = await this.authService.login(user);
+    const { accessToken } = await this.authService.login(user);
   
-    return { accessToken, clientId, localAdminId , role};
+    return { accessToken };
   }
 }
