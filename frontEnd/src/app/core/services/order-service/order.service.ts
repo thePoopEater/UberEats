@@ -11,12 +11,14 @@ import { catchError, finalize, throwError } from "rxjs";
 import { CarritoService } from "../carrito-service/carrito.service";
 import { env } from "../../enviroment/enviroment";
 import { Observable } from "rxjs";
+import { JwtDecoderService } from "../jwt-decoder/jwt-decoder.service";
 @Injectable({
   providedIn: "root",
 })
 export class OrderService {
 
   private readonly _cartService$ = inject(CarritoService);
+  private readonly _dataJWT$ = inject(JwtDecoderService);
   constructor(private httpClient: HttpClient) {}
 
   public createOrder (
@@ -25,8 +27,8 @@ export class OrderService {
     products: ProductOrder[]
   ) : Observable<Response<Order>>  {
     let token = "";
-    if (sessionStorage.getItem("accessToken") + "") {
-      token = sessionStorage.getItem("accessToken") + "";
+    if (this._dataJWT$.tokenJWT) {
+      token = this._dataJWT$.tokenJWT;
     }
 
     const header = new HttpHeaders().set('Authorization', 'Bearer ${token}');

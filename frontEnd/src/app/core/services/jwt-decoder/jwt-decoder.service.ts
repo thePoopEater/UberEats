@@ -10,8 +10,10 @@ export class JwtDecoderService {
   constructor() { }
 
   dataPayload! : JwtData;
+  tokenJWT!:string;
 
   public decodetoken(token : string){
+    this.tokenJWT = token;
     const base64Url = token.split('.')[1]; // tomar el payload
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const jsonPayload = decodeURIComponent(atob(base64).split('').map(

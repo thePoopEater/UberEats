@@ -6,6 +6,7 @@ import { OrderService } from '../../../core/services/order-service/order.service
 import { CarritoService } from '../../../core/services/carrito-service/carrito.service';
 import { Product } from '../../../core/models/class/product';
 import { ProductOrder } from '../../../core/models/class/product-order';
+import { JwtDecoderService } from '../../../core/services/jwt-decoder/jwt-decoder.service';
 
 @Component({
   selector: 'app-confirmacion-pedido',
@@ -24,23 +25,23 @@ export class ConfirmacionPedidoComponent implements OnInit {
 
   private readonly _orderService$ = inject(OrderService);
   private readonly _cartService$ = inject(CarritoService);
-  
+  private readonly _dataJWT$ = inject(JwtDecoderService);
   listProds : Product[] = [];
   ngOnInit() {
     this.startTimer();
     this.listProds = this._cartService$.getProductsCart();
   }
 
-  generateAnOrder(){
-    if(sessionStorage.getItem('client_id') + ''){
-      let clientId : number = parseInt(sessionStorage.getItem('client_id')+'');
-      let prodOfCart : Product[] = this._cartService$.getProductsCart();
-      let preOrderOfCart : ProductOrder[] = this._cartService$.getCart().getCart();
+  async generateAnOrder(){
+    if(this._dataJWT$.dataPayload){
+      const clientId : number = this._dataJWT$.dataPayload.clientId as number;
+      const prodOfCart : Product[] = this._cartService$.getProductsCart();
+      const preOrderOfCart : ProductOrder[] = this._cartService$.getCart().getCart();
 
       console.log("Productos del carrito: ", prodOfCart);
       console.log("ordenes del carrito:", preOrderOfCart);
       // necesito el clientId, está invalido
-      const orderResponse = this._orderService$.createOrder(1, clientId,  preOrderOfCart).subscribe((response) => {
+      const orderResponse =  await this._orderService$.createOrder(1, clientId,  preOrderOfCart).subscribe((response) => {
         this._orderService$.addProductsToOrder(preOrderOfCart, response.data.orderId);
       });
 
