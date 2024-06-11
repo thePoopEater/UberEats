@@ -1,6 +1,5 @@
-
-export class JwtData{
-    clientId? : number;
-    role : string = "";
-    localAdminId?: number ;
+export class JwtData {
+  clientId?: number;
+  role: string = "";
+  localAdminId?: number;
 }

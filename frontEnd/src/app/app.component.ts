@@ -1,6 +1,5 @@
 import { Component, WritableSignal, signal } from "@angular/core";
 import { Router, RouterOutlet } from "@angular/router";
-import { InicioComponent } from "./features/pages/inicio/inicio/inicio.component";
 import { CommonModule } from "@angular/common";
 import { AuthService } from "./core/services/auth-service/auth.service";
 @Component({

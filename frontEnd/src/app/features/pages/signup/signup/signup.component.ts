@@ -12,7 +12,6 @@ import { firstValueFrom } from "rxjs";
 import { User, UserResponse } from "../../../../core/models/class/user";
 import { Router } from "@angular/router";
 
-
 @Component({
   selector: "app-signup",
   standalone: true,
@@ -46,27 +45,26 @@ export class SignupComponent {
   public async register() {
     const name = this.user_register_form.controls["name"].value;
     const last_name = this.user_register_form.controls["last_name"].value;
-
     const password = this.user_register_form.controls["password"].value;
     const email = this.user_register_form.controls["email"].value;
     const role = this.user_register_form.controls["role"].value;
+
     try {
       const register_response = await firstValueFrom(
         this.authService.register(name, last_name, email, password, "client")
       );
-
-      console.log("Register response");
       console.log(register_response);
     } catch (register_error) {
       console.log("Register error", register_error);
     }
+
     try {
-      const login_response: UserResponse = await firstValueFrom(
-        this.authService.login(email, password)
+      const login_response: UserResponse = await this.authService.login(
+        email,
+        password
       );
     } catch (login_error) {
       console.log("Login error", login_error);
     }
-
   }
 }

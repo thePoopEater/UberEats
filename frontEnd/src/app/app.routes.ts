@@ -1,5 +1,4 @@
 import { Routes } from "@angular/router";
-import { InicioComponent } from "./features/pages/inicio/inicio/inicio.component";
 import { LocalComponent } from "./features/pages/local/local.component";
 import { CarritoComponent } from "./features/pages/carrito/carrito.component";
 import { ProductoComponent } from "./features/pages/producto/producto.component";
@@ -10,14 +9,15 @@ import {
   authGuard,
   loginGuard,
 } from "./core/auth/guards/login-guard/login.guard";
-import { LoginComponent } from "./features/pages/login/login/login.component";
 import { NotFoundComponent } from "./features/pages/not-found/not-found/not-found.component";
-import { SignupComponent } from "./features/pages/signup/signup/signup.component";
 import { hasRoleGuard } from "./core/auth/guards/has-role-guard/has-role.guard";
 import { HomeComponent } from "./features/pages/home/home.component";
 import { SignupDeliverComponent } from "./features/pages/signup-deliver/signup-deliver.component";
 import { DeliverComponent } from "./features/pages/deliver/deliver.component";
 import { SignupLocalComponent } from "./features/pages/signup-local/signup-local.component";
+import { InicioComponent } from "./features/pages/inicio/inicio/inicio.component";
+import { LoginComponent } from "./features/pages/login/login/login.component";
+import { SignupComponent } from "./features/pages/signup/signup/signup.component";
 import { LocalAdminComponent } from "./features/pages/local-admin/local-admin.component";
 
 export const routes: Routes = [
@@ -49,8 +49,7 @@ export const routes: Routes = [
   {
     path: "local/admin",
     component: LocalAdminComponent,
-    data : { role : "localAdmin" },
-
+    data: { role: "localAdmin" },
   },
   {
     path: "login",
@@ -68,40 +67,42 @@ export const routes: Routes = [
     path: "local/:{idLocal}",
     component: LocalComponent,
     canActivate: [hasRoleGuard],
-    data : { role : "client" },
+    data: { role: "client" },
   },
 
   {
     path: "producto/:{idProd}",
     component: ProductoComponent,
     canActivate: [hasRoleGuard],
-    data : { role : "client" }
+    data: { role: "client" },
   },
 
-  { path: "carrito",
-    component: CarritoComponent, 
+  {
+    path: "carrito",
+    component: CarritoComponent,
     canActivate: [hasRoleGuard],
-    data : { role : "client" }
+    data: { role: "client" },
   },
 
-  {  path: "pagos",
-     component: PagoComponent, 
-      canActivate: [hasRoleGuard],
-      data : { role : "client"},
-    },
+  {
+    path: "pagos",
+    component: PagoComponent,
+    canActivate: [hasRoleGuard],
+    data: { role: "client" },
+  },
 
   {
     path: "confirmacion-pedido",
     component: ConfirmacionPedidoComponent,
     canActivate: [hasRoleGuard],
-    data : { role : "client"}
+    data: { role: "client" },
   },
 
   {
     path: "seguimiento-pedido",
     component: SeguimientoPedidoComponent,
     canActivate: [hasRoleGuard],
-    data : { role : "client" }
+    data: { role: "client" },
   },
 
   {

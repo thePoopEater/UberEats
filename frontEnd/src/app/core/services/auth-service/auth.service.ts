@@ -2,7 +2,7 @@ import { Location } from "@angular/common";
 import { Injectable, WritableSignal, inject, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable, of } from "rxjs";
+import { BehaviorSubject, firstValueFrom, Observable, of } from "rxjs";
 import { User, UserCreateDTO, UserResponse } from "../../models/class/user";
 import { env } from "../../enviroment/enviroment";
 import { LocalAdmin, LocalAdminCreate } from "../../models/class/local-admin";
@@ -14,17 +14,17 @@ import { JwtData } from "../../models/data-jwt";
 @Injectable({
   providedIn: "root",
 })
-
-
 export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(false);
   private dataJWT$ = inject(JwtDecoderService);
   constructor(private httpClient: HttpClient, private location: Location) {}
 
-  public login(email: string, password: string): Observable<UserResponse> {
+  public async login(email: string, password: string): Promise<UserResponse> {
     const user = new User(email, password);
     console.log(user);
-    return this.httpClient.post<UserResponse>(env.USER_LOGIN_POST_URL, user);
+    const userResponse: UserResponse = await firstValueFrom(
+      this.httpClient.post<UserResponse>(env.USER_LOGIN_POST_URL, user)
+    );
+    return userResponse;
   }
   public register(
     name: string,
