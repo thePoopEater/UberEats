@@ -29,7 +29,7 @@ export class AuthService {
     
     const hashedPassword = await hash(password, 10);
     const newUser = await this.userService.register({ ...data, password: hashedPassword });
-    if (role === 'client') {
+    if (role === role) {
       const newClient = new ClientEntity({
         userId: newUser.userId, addresses: [], orders: []     
       });

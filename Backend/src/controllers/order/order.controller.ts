@@ -9,6 +9,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Role } from 'src/auth/enums/role.enum';
 
 @Controller('order')
 @ApiBearerAuth()
@@ -26,8 +27,13 @@ export class OrderController {
         return order;
     }
 
+    @Get()
+    public async getAllOrder(): Promise<OrderEntity[]> {
+      return await this.orderService.getAllOrders();
+    }
+
     @Post()
-    @Roles('client')
+    @Roles(Role.CLIENT)
     public async postOrder(@Body(ValidationPipe) newOrder : OrderCreateDTO) : Promise<OrderResponseDTO> {
         if (this.orderService.createOrder(newOrder)){
             const response : OrderResponseDTO = {

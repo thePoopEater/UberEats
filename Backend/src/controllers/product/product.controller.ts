@@ -9,6 +9,7 @@ import { UpdateResult } from 'typeorm';
 import { ProductUpdateDTO } from './dto/product-update.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
+import { Role } from 'src/auth/enums/role.enum';
 
 @Controller('product')
 @ApiTags('Product')
@@ -20,7 +21,7 @@ export class ProductController {
 
     // Esta funcion guarda un Producto en el repositorio de los productos, recibe un dato de tipo ProductCreateDTO,
     // la funcion busca el id de local y le asigna un local a este producto.
-    @Roles('localAdmin')
+    @Roles(Role.LOCALADMIN)
     @Post()
     public async postProduct(@Body(ValidationPipe) newProduct : ProductCreateDTO) : Promise<ProductResponseDTO> {        
         const local = await this.localService.getLocal(newProduct.localId);
@@ -46,7 +47,7 @@ export class ProductController {
     }
 
     // Esta funcion actualiza un registro de algun producto, tiene como parametro lo que se quiere actualizar y un id.
-    @Roles('localAdmin')
+    @Roles(Role.LOCALADMIN)
     @Put(':id')
     public async putProduct(@Param('id', ParseIntPipe) productId : number, @Body() request : ProductUpdateDTO) : Promise<UpdateResult> {
         return this.productService.updateProduct(productId, request);

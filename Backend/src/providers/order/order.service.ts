@@ -52,4 +52,8 @@ export class OrderService {
         .addSelect('orderProduct.specification')
         .execute()
     }
+
+    public async getAllOrders():Promise<OrderEntity[]>{
+        return this.orderRepository.find();
+    }
 }

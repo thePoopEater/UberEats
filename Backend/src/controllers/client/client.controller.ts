@@ -10,6 +10,7 @@ import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Role } from 'src/auth/enums/role.enum';
 
 @Controller('client')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
@@ -41,22 +42,19 @@ export class ClientController {
         }
     }
 
-    @Roles('admin')
     @Get()
     public async getAllClients() : Promise<ClientEntity[]>{
         return await this.clientService.getAllClients();
     }
     //Función que retorna un cliente por ID.
-    @Roles('admin')
-    @Roles('client')
+    @Roles(Role.CLIENT)
     @Get(':id')
     public async getClient(@Param('id', ParseIntPipe) clientId : number) : Promise<ClientEntity> {
         const client : Promise<ClientEntity> = this.clientService.getClient(clientId);
         return client;
     }
 
-    @Roles('admin')
-    @Roles('client')
+    @Roles(Role.CLIENT)
     @Get('/order/:id')
     public async getOrders(@Param('id', ParseIntPipe) clientId : number) : Promise<OrderEntity[]>{
         return await this.orderService.findOrdersFromOneClient(clientId);

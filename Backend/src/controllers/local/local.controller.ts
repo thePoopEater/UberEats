@@ -13,6 +13,7 @@ import { OrderEntity } from 'src/database/entities/order.entity';
 import { OrderProductService } from 'src/providers/order-product/order-product.service';
 import { ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
+import { Role } from 'src/auth/enums/role.enum';
 
 @Controller('local')
 @ApiTags('Local')
@@ -27,7 +28,7 @@ export class LocalController {
     // Funcion para guardar un nuevo local en el repositorio de locales, tiene como parametro una peticion BODY de tipo LocalCreateDTO
     // esta a su vez esta compuesto de los siguientes datos : name, address, schedule, description (todos strings) 
     @Post()
-    @Roles('localAdmin')
+    @Roles(Role.LOCALADMIN)
     public async postLocal(@Body(ValidationPipe) request : LocalCreateDTO) : Promise<LocalResponseDTO> {
         if (request) { 
           await this.localService.create(request);
@@ -62,7 +63,7 @@ export class LocalController {
     // Esta funcion modifica la informacion de un local dado una id, esta informacion actualizada viene como parametro request de tipo LocalUpdateDTO,
     // , llama al repositorio de local y pide actualizar columnas de un registro.
     @Put(':id')
-    @Roles('localAdmin')
+    @Roles(Role.LOCALADMIN)
     public async putLocal(@Param('id', ParseIntPipe) idLocal : number, @Body() request : LocalUpdateDTO) : Promise<UpdateResult | LocalResponseDTO> {
         if (Object.keys(request).length == 0){
             throw new BadRequestException('Viene vacio');
@@ -88,7 +89,7 @@ export class LocalController {
   }
 
   @Get('/orders/:id')
-  @Roles('localAdmin')
+  @Roles(Role.LOCALADMIN)
   public async getAllOrders(@Param('id', ParseIntPipe) id: number): Promise<OrderEntity[]> {
     const local = await this.localService.getLocal(id);
     const orders = await this.orderService.findOrdersFromOneLocal(local);
