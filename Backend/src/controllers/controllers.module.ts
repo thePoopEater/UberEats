@@ -32,8 +32,10 @@ import { UserEntity } from 'src/database/entities/user.entity';
 import { UserService }  from 'src/providers/user/user.service';
 import { UserController } from './user/user.controller';
 
+import { DeliveryEntity } from 'src/database/entities/delivery.entity';
+
 @Module({
-    imports:[DatabaseModule, TypeOrmModule.forFeature([ClientEntity,ProductEntity,LocalEntity,OrderEntity,OrderProductEntity, AddressEntity, UserEntity])],
+    imports:[DatabaseModule, TypeOrmModule.forFeature([ClientEntity,ProductEntity,LocalEntity,OrderEntity,OrderProductEntity, AddressEntity, UserEntity, DeliveryEntity])],
     controllers: [ProductController,LocalController, OrderController, OrderProductController,ClientController, AddressController, UserController],
     providers:[ProductService,LocalService,OrderService,OrderProductService,ClientService,AddressService, UserService]
 })
