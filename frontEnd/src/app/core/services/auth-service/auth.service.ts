@@ -3,7 +3,7 @@ import { Injectable, WritableSignal, inject, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { BehaviorSubject, firstValueFrom, Observable, of } from "rxjs";
-import { User, UserCreateDTO, UserResponse } from "../../models/class/user";
+import { User, UserCreateDTO, UserResponse } from "../../models/class/User";
 import { env } from "../../enviroment/enviroment";
 import { LocalAdmin, LocalAdminCreate } from "../../models/class/local-admin";
 import { Response } from "../../models/class/response";
@@ -20,12 +20,16 @@ export class AuthService {
 
   public async login(email: string, password: string): Promise<UserResponse> {
     const user = new User(email, password);
-    console.log(user);
     const userResponse: UserResponse = await firstValueFrom(
       this.httpClient.post<UserResponse>(env.USER_LOGIN_POST_URL, user)
     );
+    if (userResponse) {
+      const decodeJWT = this.dataJWT$.decodetoken(userResponse.accessToken);
+      sessionStorage.setItem("role", decodeJWT.role);
+    }
     return userResponse;
   }
+
   public register(
     name: string,
     last_name: string,
@@ -46,24 +50,18 @@ export class AuthService {
     return this.httpClient.post<Response<LocalAdmin>>(env.API_URL, local_admin);
   }
 
-  public logout(): Observable<boolean> {
-    if (this.dataJWT$.dataPayload) this.dataJWT$.dataPayload = new JwtData();
-    return of(true);
+  public logout() {
+    sessionStorage.clear();
   }
 
   public isAuth(): Observable<boolean> {
-    if (this.dataJWT$.dataPayload) return of(true);
+    if (sessionStorage.getItem("role")) return of(true);
     return of(false);
   }
-  public isLoggedIn(): Observable<boolean> {
-    if (this.dataJWT$.dataPayload) {
-      return of(false);
-    }
-    return of(true);
-  }
+
   public getRole() {
-    if (this.dataJWT$.dataPayload.role) {
-      return this.dataJWT$.dataPayload.role;
+    if (sessionStorage.getItem("role")) {
+      return sessionStorage.getItem("role");
     }
     return "";
   }

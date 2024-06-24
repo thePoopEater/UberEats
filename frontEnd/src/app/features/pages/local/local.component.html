@@ -1,97 +1,17 @@
-<div class="botones-superiores">
-  
-  <!-- Volver atrás no al inicio-->
-  <a class="boton" routerLink="/inicio"> 
-    <img class="img-superior" src="assets\images\iconocerrar.png">
-  </a>
-
-  <div class ="botones-superiores-izq">
-    <button class="boton">
-      <img class="img-superior" src="assets\images\iconobuscarlocal.png">
-    </button>
-
-    <button class="boton">
-      <img class="img-superior" src="assets\images\iconocorazonlocal.png">
-    </button>
-
-    <button class="boton">
-      <img class="img-superior" src="assets\images\iconoinfolocal.png">
-    </button>
-  </div>
-
+<div style="padding:0 10rem 0 10rem;">
+  <h1>{{local.name}}</h1>
 </div>
-<div >
-  <img class = "img-encabezado" src="assets\images\encabezadorestaurante.jpeg">
-</div>
-
-<div>
-  <p class = "titulo">{{local.name}}</p>
-  <p class = "texto-superior"> 
-    <a style="color:black">4.5 </a>
-    <img class = "img-texto-superior" src="assets\images\estrellalocal.png"> 
-     (500+) · Costo de envío: CLP 500 · 2.2 km
-  </p>
-</div>
-
-<div class="tabla-contenedor">
-  <table>
-    <thead> 
-      <tr> 
-        <th>
-          Costo de envío: CLP 500
-          <div style="color: grey">
-            Precios y tarifas
+<div class="product-card-container" >
+  <div class="row row-cols-3 row-cols-md-2 g-4">
+    <div class="col" *ngFor="let product of this.products">
+      <div class="card">
+        <img src={{product.images}} class="card-img-top" style="width: 15em;height:12rem;padding:1rem;border-radius:1.7rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">{{product.description}}</p>
+            <a class="btn btn-success" routerLink="/producto/{{product.productId}}" >Pedir</a>
           </div>
-        </th> 
-        <th class="separator"></th> 
-        <th style="width: 500px;">
-          15-30 min
-          <div style="color: grey">
-            Hora de entrega
-          </div>
-        </th> 
-      </tr> 
-    </thead> 
-  </table>
-</div>
-
-
-
-
-
-
-
-
-<div>
-
-  <p class = "titulo-categoria">Promociones</p>
-      
-    <div *ngFor="let producto of this.products;" class="producto">
-      
-      <div class="productos-container">
-        
-        <!-- FALTA ARREGLAR EL ENRUTAMIENTO -->
-        <a class="enlace-producto" routerLink="/producto/{{producto.productId}}">          
-          <div class="info">
-          <h3 class="titulo-producto">{{ producto.name}} </h3>
-          <p class="precio-producto">${{ producto.price}}</p>
-          <p class="info-producto">{{ producto.description}}</p>
-          
         </div>
-        <img [src]="producto.images" alt="{{ producto.images }}">
-        
-        </a>
-      
-      </div>
-      <hr>
+        </div>
   </div>
-
-  <hr class="hr-final">
   
-
-  <div class="agregar-carrito-container" *ngIf="isCartEmpty">
-    <div class="button-add-car">
-      <button (click)="goToCart()"> ver carrito</button>
-    </div>
-  </div>
-</div>

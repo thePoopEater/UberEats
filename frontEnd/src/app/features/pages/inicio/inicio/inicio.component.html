@@ -1,16 +1,16 @@
 <div class="container-inicio">
     <app-super-local></app-super-local>
-    <div *ngFor="let local of getLocals()" >
-        <div class="card border-0">
-            <a class="" routerLink="/local/{{local.id}}">
-                <img src={{local.image}}
-                    class="card-img-top img-card" alt="test-img">
-                <div class="card-body">
-                    <h5 class="card-title text-3xl font-bold underline">{{local.name}}</h5>
-                    <p class="card-text">Costo de envío: CLP 1200 20-35min</p>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let local of getLocals()">
+          <div class="card" (click)="goToLocal(local.id)">
+            <img src={{local.image}} class="card-img-top" style="">
+            <div class="card-body">
+              <h5 class="card-title">{{local.name}}</h5>
+              <p class="card-text">{{local.category}}</p>
+              <p class="card-text">{{local.description}}</p>
+            </div>
                 </div>
-            </a>
-        </div>
+            </div>
+        <app-footer-home></app-footer-home>
     </div>
-    <app-footer-home></app-footer-home>
 </div>

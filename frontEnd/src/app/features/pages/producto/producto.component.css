@@ -53,22 +53,22 @@
 /*CSS Para la descripción */
 .description-prod h2, h3 {
     font-size: 1.2rem;
-    padding-left: .5rem;
+    padding-left: 0rem;
 }
 
 .description-prod p{
     font-size: 0.8rem;
     color:#5a6876cd; 
-    padding: .5rem 0;
-    padding-left: .5rem;
+    padding:  0;
+    padding-left: 0rem;
 }
 .description-prod h3 {
     color: #5a6876;
-    padding-left: .5rem;
+    padding-left: 0rem;
 }
 
 .description-prod {
-    padding: 1.5rem 0;
+    padding-top:1rem;
 }
 
 .description-prod, .compra-juntos, .special-inst {
@@ -80,7 +80,6 @@
 .aditional-ins{
     width: 96%;
     height: 8rem;
-    margin: 1rem .5rem;
     border: none;
     background-color: #F4F4F4;
     border-radius: 10px;
@@ -90,14 +89,16 @@
     font-size: 1rem;
 }
 .aditional-ins::placeholder {
-    font-size: 10px;
-    top: -12px;
+    font-size: .9rem;
+    top: -10px;
     left: 0;
 }
 
 textarea{
     resize:none;
-    font-size: 10px;
+    font-size: 1rem;
+    padding:0.5rem;
+    
 }
 
 textarea:focus {
@@ -115,13 +116,13 @@ textarea::-webkit-scrollbar {
 /*Boton mas menos*/
 
 .buttons-incDec-container {
-    padding: .5rem;
+    padding-bottom: 1.5rem;
 }
 .buttons-span {
     background-color: #D1D1D1;
-    width: 5rem;
-    height: 1.2rem;
-    border-radius: 15px;
+    width: 6rem;
+    height: 2rem;
+    border-radius: 10px;
 
     display: flex;
     align-items: center;
@@ -131,7 +132,7 @@ textarea::-webkit-scrollbar {
 .buttons-span span {
     width: 100%;
     text-align: center;
-    font-size: 10px;
+    font-size: 1rem;
     font-weight: 600;
 }
 
@@ -147,7 +148,7 @@ textarea::-webkit-scrollbar {
     color: grey ;
 }
 .buttons-span span.num {
-    font-size: 8px;
+    font-size: 1rem;
 }
 
 /* Suelen acompañarse*/
@@ -205,7 +206,7 @@ textarea::-webkit-scrollbar {
     align-items: center;
     justify-content: center;
     background-color: white;
-    padding-top: 0.5rem;
+    padding-top: .5rem;
 }
 
 .button-add-car button{
@@ -216,8 +217,5 @@ textarea::-webkit-scrollbar {
     height: 3rem;
 }
 
-.button-add-car {
-    margin-left: 6rem;
-    width: 95%;
-}
+
 

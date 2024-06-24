@@ -16,27 +16,26 @@ import { JwtDecoderService } from "../jwt-decoder/jwt-decoder.service";
   providedIn: "root",
 })
 export class OrderService {
-
   private readonly _cartService$ = inject(CarritoService);
   private readonly _dataJWT$ = inject(JwtDecoderService);
   constructor(private httpClient: HttpClient) {}
 
-  public createOrder (
+  public createOrder(
     localId: number,
     clientId: number,
     products: ProductOrder[]
-  ) : Observable<Response<Order>>  {
+  ): Observable<Response<Order>> {
     let token = "";
     if (this._dataJWT$.tokenJWT) {
       token = this._dataJWT$.tokenJWT;
     }
 
-    const header = new HttpHeaders().set('Authorization', 'Bearer ${token}');
+    const header = new HttpHeaders().set("Authorization", "Bearer ${token}");
     const order = new OrderCreateDTO(localId, clientId);
     console.log("el token", token);
-    return this.httpClient
-      .post<Response<Order>>(env.URL_POST_ORDER, order, {headers : header})
-      
+    return this.httpClient.post<Response<Order>>(env.URL_POST_ORDER, order, {
+      headers: header,
+    });
   }
 
   public async addProductToOrder(orderProduct: ProductOrder) {

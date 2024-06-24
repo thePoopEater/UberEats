@@ -11,5 +11,5 @@ export const authGuard: CanActivateFn = (route, state) => {
 export const loginGuard: CanActivateFn = (route, state) => {
   const auth = inject(AuthService);
 
-  return auth.isLoggedIn();
+  return auth.isAuth();
 };

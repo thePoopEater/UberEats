@@ -18,7 +18,6 @@ export class CarritoService {
   private productServ$ = inject(ProductosService);
   public total: number = 0;
 
-  // ????
   constructor(private local: Location) {
     let localData = localStorage.getItem(this.LOCAL_STORAGE_PRODUCT_KEY) + "";
     if (localData != "") {
@@ -87,7 +86,7 @@ export class CarritoService {
     let orderList: ProductOrder[] = this._cart.getCart();
     let producto: Product;
     for (let i = 0; i < orderList.length; i++) {
-      console.log("Id del producto",orderList[i].productId)
+      console.log("Id del producto", orderList[i].productId);
       this.productServ$
         .getProduct(orderList[i].productId.toString())
         .subscribe((param) => {

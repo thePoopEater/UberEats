@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormsModule, Validators } from "@angular/forms";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { AuthService } from "../../../../core/services/auth-service/auth.service";
-import { UserResponse } from "../../../../core/models/class/user";
+import { UserResponse } from "../../../../core/models/class/User";
 import { Router, RouterLink } from "@angular/router";
 import { firstValueFrom } from "rxjs";
 import { JwtDecoderService } from "../../../../core/services/jwt-decoder/jwt-decoder.service";
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
   public async login() {
     const email = this.loginForm.controls["email"].value;
     const password = this.loginForm.controls["password"].value;
+
     try {
       const userResponse: UserResponse = await this.authService.login(
         email,

@@ -10,20 +10,22 @@ import { AuthService } from "./core/services/auth-service/auth.service";
   styleUrl: "./app.component.css",
 })
 export class AppComponent {
-  isLoggedIn: WritableSignal<boolean> = signal(false);
-  title = "ubereats-fron-end";
+  isLoggedIn: boolean = false;
+  title = "ubereats-front-end";
   constructor(
     private readonly authService: AuthService,
-    private route: Router
+    private readonly route: Router
   ) {}
 
   ngOnInit() {
-    console.log(this.isLoggedIn());
+    this.authService.isAuth().subscribe((loggedIng) => {
+      this.isLoggedIn = loggedIng;
+    });
+    console.log(this.isLoggedIn);
   }
 
   public loginOut() {
     this.authService.logout();
-    this.isLoggedIn.set(false);
-    this.route.navigate(["/", "login"]);
+    this.route.navigate(["/", "home"]);
   }
 }

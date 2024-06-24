@@ -7,7 +7,7 @@ import { ProductosService } from "../../../core/services/producto-service/produc
 import { OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { CarritoService } from "../../../core/services/carrito-service/carrito.service";
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from "@angular/forms";
 @Component({
   selector: "app-producto",
   standalone: true,
@@ -16,48 +16,38 @@ import { FormsModule } from '@angular/forms';
   styleUrl: "./producto.component.css",
 })
 export class ProductoComponent implements OnInit {
-  constructor(
-    private route: ActivatedRoute, 
-    private http: HttpClient, 
-    private _location : Location,
-  ) {}
+  constructor(private route: ActivatedRoute, private _location: Location) {}
 
   // Recibir parametro producto
 
-
   // Variables cantidad prod
-  cant_prod = signal(0);
-  specifications = signal('');
+  cant_prod = signal(1);
+  specifications = signal("");
   button_plus_enable = true;
   button_sub_enable = true;
   // obtener de la base de datos el stock
   product_stock = 10;
-  product: Product = new Product;
+  product: Product = new Product();
   // info del producto
   price = 0;
   total_price = this.price;
-  productId: string = '';
+  productId: string = "";
   // test class product and send to cart
 
   private productServ = inject(ProductosService);
-  private cartSer$ = inject(CarritoService)
+  private cartSer$ = inject(CarritoService);
 
   ngOnInit() {
-    this.route.params.subscribe(
-      (params) => {
-        this.productId = params['{idProd}']
-      }
-    );
+    this.route.params.subscribe((params) => {
+      this.productId = params["{idProd}"];
+    });
     this.productServ.getProduct(this.productId).subscribe((resp) => {
       this.product = resp;
       this.price = this.product.price;
     });
-
-
-
   }
 
-  toBack(){
+  toBack() {
     this._location.back();
   }
   addProductCant() {
@@ -83,11 +73,15 @@ export class ProductoComponent implements OnInit {
   }
 
   addProductToCart() {
-    if(this.cant_prod() > 0){
-        this.cartSer$.addToCart(this.product, this.cant_prod(), this.specifications());
-    }else{
+    if (this.cant_prod() > 0) {
+      this.cartSer$.addToCart(
+        this.product,
+        this.cant_prod(),
+        this.specifications()
+      );
+    } else {
       console.log(this.specifications());
-      console.log("no hay productos seleccionados")
+      console.log("no hay productos seleccionados");
     }
   }
 }

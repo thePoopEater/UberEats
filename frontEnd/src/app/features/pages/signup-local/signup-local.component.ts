@@ -7,8 +7,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { AuthService } from "../../../core/services/auth-service/auth.service";
 import { Router } from "@angular/router";
+import { AuthService } from "../../../core/services/auth-service/auth.service";
 
 @Component({
   selector: "app-signup-local",
@@ -47,7 +47,6 @@ export class SignupLocalComponent {
     const email: string = this.signup_local_form.controls["email"].value;
     const password: string = this.signup_local_form.controls["password"].value;
     const address: string = this.signup_local_form.controls["address"].value;
-
     this.router.navigate(["local/admin"]);
   }
 }
