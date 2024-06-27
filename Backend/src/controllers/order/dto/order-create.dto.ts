@@ -8,7 +8,7 @@ export class OrderCreateDTO {
 
     @IsNotEmpty()
     @IsNumber()
-    clientId : number;
+    userId : number;
 
     @IsNotEmpty()
     @IsString()

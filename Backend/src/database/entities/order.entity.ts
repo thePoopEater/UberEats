@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany,ManyToOne} from 'typeorm';
 import { LocalEntity } from './local.entity';
 import { OrderProductEntity } from './order-products.entity';
-import { ClientEntity } from './client.entity';
+import { UserEntity } from './user.entity';
 
 @Entity({name :'order'})
 export class OrderEntity {
@@ -31,9 +31,9 @@ export class OrderEntity {
     @JoinColumn({name:'localId'})
     local : LocalEntity;
 
-    @ManyToOne(() => ClientEntity, (client) => client.orders)
-    @JoinColumn({name:'clientId'})
-    client: ClientEntity;
+    @ManyToOne(() => UserEntity, (user) => user.orders)
+    @JoinColumn({name:'userId'})
+    user: UserEntity;
 
     @OneToMany(() => OrderProductEntity, (orderProduct) => orderProduct.order)
     @JoinColumn({name:'orderId'})

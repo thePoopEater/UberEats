@@ -6,11 +6,9 @@ import { LocalEntity } from './entities/local.entity';
 import { ProductEntity } from './entities/product.entity';
 import { OrderProductEntity } from './entities/order-products.entity';
 import { OrderEntity } from './entities/order.entity';
-import { ClientEntity } from 'src/database/entities/client.entity';
 import { AddressEntity } from 'src/database/entities/address.entity';
 import { UserEntity } from 'src/database/entities/user.entity';
 import { RoutesEntity } from './entities/routes.entity';
-import { LocalAdminEntity } from './entities/local-admin.entity';
 
 // Este archivo establece la configuracion que tiene la base de datos para que 
 // el backend puede utilizarlo con objetos TYPEORM
@@ -32,7 +30,7 @@ import { LocalAdminEntity } from './entities/local-admin.entity';
             }),
             inject : [ConfigService],
         }),   
-        TypeOrmModule.forFeature([ClientEntity,LocalEntity,ProductEntity,OrderProductEntity,OrderEntity, AddressEntity, UserEntity, RoutesEntity, LocalAdminEntity]),
+        TypeOrmModule.forFeature([LocalEntity,ProductEntity,OrderProductEntity,OrderEntity, AddressEntity, UserEntity, RoutesEntity]),
     ],
     exports:[],
     providers: [],

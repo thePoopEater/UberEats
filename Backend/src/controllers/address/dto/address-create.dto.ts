@@ -2,7 +2,7 @@ import {IsNotEmpty, IsNumber, IsString} from "class-validator";
 export class AddressCreateDTO {
     @IsNotEmpty()
     @IsNumber()
-    clientId: number;
+    userId: number;
 
     @IsString()
     @IsNotEmpty()

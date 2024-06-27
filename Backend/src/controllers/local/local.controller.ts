@@ -84,6 +84,7 @@ export class LocalController {
 
 
   // Esta funcion retornar todos los locales guardados en el repositorio.
+  @Get()
   public async getAllLocals(): Promise<LocalEntity[]> {
     return await this.localService.getAllLocals();
   }

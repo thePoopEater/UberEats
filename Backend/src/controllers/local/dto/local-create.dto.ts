@@ -4,7 +4,7 @@ export class LocalCreateDTO {
     
     @IsNotEmpty()
     @IsNumber()
-    localAdminId : number;
+    userId : number;
 
     @IsNotEmpty()
     @IsString()

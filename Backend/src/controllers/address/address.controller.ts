@@ -3,13 +3,13 @@ import { AddressService } from 'src/providers/address/address.service';
 import { AddressCreateDTO } from './dto/address-create.dto';
 import { AddressResponseDTO } from './dto/address-response.dto';
 import { AddressEntity } from 'src/database/entities/address.entity';
-import { ClientEntity } from 'src/database/entities/client.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from 'src/auth/enums/role.enum';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/auth/decorators/roles.decorator';
+import { UserEntity } from 'src/database/entities/user.entity';
 
 @Controller('address')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
@@ -23,11 +23,11 @@ export class AddressController {
   @Roles(Role.CLIENT)
   @Post()
   async addDireccion(@Body(ValidationPipe) request: AddressCreateDTO): Promise<AddressResponseDTO> {
-    if (!request.clientId) {
+    if (!request.userId) {
       throw new BadRequestException("Ingresa un 'clienteId'");
     }
     const newAddress = new AddressEntity();
-    newAddress.client = { clientId: request.clientId } as ClientEntity; 
+    newAddress.user = { userId: request.userId } as UserEntity; 
     newAddress.name = request.name;
     newAddress.description = request.description;
 

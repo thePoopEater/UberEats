@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
-import { ClientEntity } from 'src/database/entities/client.entity';
+import { UserEntity } from './user.entity';
 
 @Entity({name:'address'})
 export class AddressEntity {
@@ -12,7 +12,7 @@ export class AddressEntity {
   @Column()
   description: string;
 
-  @ManyToOne(() => ClientEntity, (client) => client.addresses)
-  @JoinColumn({ name: 'clientId' })
-  client : ClientEntity; 
+  @ManyToOne(() => UserEntity, (user) => user.addresses)
+  @JoinColumn({ name: 'userId' })
+  user: UserEntity;
 }

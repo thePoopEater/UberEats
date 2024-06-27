@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn} from 'typeorm';
 import { ProductEntity } from './product.entity';
 import { OrderEntity } from './order.entity';
-import { LocalAdminEntity } from './local-admin.entity';
+import { UserEntity } from './user.entity';
 
 @Entity({name : 'local'})
 export class LocalEntity {
@@ -13,6 +13,9 @@ export class LocalEntity {
 
     @Column( {unique: true} )
     name : string;
+
+    @Column()
+    image: string;
 
     @Column()
     description : string;
@@ -32,8 +35,8 @@ export class LocalEntity {
     @OneToMany(() => ProductEntity, (product) => product.local)
     products : ProductEntity[]
 
-    @ManyToOne(()=>(LocalAdminEntity), (localAdmin)=> localAdmin.locals)
-    @JoinColumn({ name: 'localAdminId' })
-    localAdmin: LocalAdminEntity; 
+    @ManyToOne(()=>(UserEntity), (user)=> user.locals)
+    @JoinColumn({ name: 'userId' })
+    user: UserEntity; 
 
 }

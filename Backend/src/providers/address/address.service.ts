@@ -1,25 +1,25 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AddressEntity } from 'src/database/entities/address.entity';
-import { ClientEntity } from 'src/database/entities/client.entity';
+import { UserEntity } from 'src/database/entities/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class AddressService {
     constructor(
         @InjectRepository(AddressEntity) private readonly addressRepository: Repository<AddressEntity>,
-        @InjectRepository(ClientEntity) private readonly clientRepository: Repository<ClientEntity>,
+        @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
     ){}
     //función que permite crear una dirección en el repositorio, primero comprueba que exista 
     //el id del cliente ingresado para crear la dirección.
     public async addAddress (data : AddressEntity){
-        const client = await this.clientRepository.findOne({
-            where: { clientId: data.client?.clientId },
+        const user = await this.userRepository.findOne({
+            where: { userId: data.user?.userId },
           });  
-          if (!client) {
+          if (!user) {
             throw new NotFoundException("Cliente no encontrado");
           }
-          data.client = client; 
+          data.user = user; 
           return await this.addressRepository.save(data);
         
     }
