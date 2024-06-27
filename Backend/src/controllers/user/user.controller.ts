@@ -5,6 +5,7 @@ import { UserService } from 'src/providers/user/user.service';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { UserEntity } from 'src/database/entities/user.entity';
+import { LocalEntity } from 'src/database/entities/local.entity';
 
 
 @Controller('user')
@@ -34,6 +35,11 @@ export class UserController {
     @Get('/localAdmins/:id')
     public async getOneLocalAdmin(@Param('id', ParseIntPipe) localAdminId : number) : Promise<UserEntity> {
         return await this.userService.findLocalAdmin(localAdminId);
+    }
+
+    @Get('/local/:id')
+    public async getLocal(@Param('id', ParseIntPipe) idLocalAdmin : number): Promise<LocalEntity>{
+      return await this.userService.getLocal(idLocalAdmin);
     }
 
 }

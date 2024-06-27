@@ -8,6 +8,7 @@ import { LocalStrategy } from './strategy/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './strategy/jwt.strategy';
+import { LocalEntity } from 'src/database/entities/local.entity';
 
 @Module({
   imports: [JwtModule.registerAsync({
@@ -16,7 +17,7 @@ import { JwtStrategy } from './strategy/jwt.strategy';
       signOptions:{expiresIn:'15m'}
     }),
     inject: [ConfigService]
-}),TypeOrmModule.forFeature([UserEntity])], 
+}),TypeOrmModule.forFeature([UserEntity, LocalEntity])], 
   
   controllers: [AuthController],
   providers: [AuthService, UserService, LocalStrategy, JwtStrategy],

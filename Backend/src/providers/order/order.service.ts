@@ -50,7 +50,8 @@ export class OrderService {
     //VERIFICAR----
     public async findOrdersFromOneClient(userId : number) {
         const user = await this.userService.findClient(userId);
-        return this.orderRepository.findBy({user:user});
+        return this.orderRepository.findBy({user:
+            user});
     }
 
     public async findProductsFromOrder(id : number){
