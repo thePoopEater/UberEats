@@ -20,10 +20,11 @@ export class OrderService {
     public findOrder(id : number) : Promise<OrderEntity> {
         return this.orderRepository.findOneBy({orderId:id});
     }
+    //VERIFICAR----
     public async createOrder(order: OrderCreateDTO): Promise<OrderEntity> {
         const local = await this.localService.getLocal(order.localId);
         
-        const user = await this.userService.findUserByIdAndRole(order.userId, Role.CLIENT);
+        const user = await this.userService.buscarUserRole(order.userId, Role.CLIENT);
 
         if (local && user) {
             const newOrder = new OrderEntity(order);
@@ -46,6 +47,7 @@ export class OrderService {
         return orders;
     }
 
+    //VERIFICAR----
     public async findOrdersFromOneClient(userId : number) {
         const user = await this.userService.findClient(userId);
         return this.orderRepository.findBy({user:user});

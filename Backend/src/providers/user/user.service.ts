@@ -22,15 +22,32 @@ export class UserService {
   getAll() {
     return this.userRepository.find();
   }
-  public async findClient(id : number) : Promise<UserEntity> {
-    return await this.userRepository.findOneBy({userId: id});
-}
-
-async findUserByIdAndRole(userId: number, role: Role): Promise<UserEntity> {
+  
+async buscarUserRole(userId: number, role: Role): Promise<UserEntity> {
   const user = await this.userRepository.findOne({ where: { userId, role } });
   if (!user) {
       throw new NotFoundException(`Usuario no encontrado`);
   }
   return user;
 }
+
+//VERIFICAR----
+  public async findClient(id : number) : Promise<UserEntity> {
+    return await this.userRepository.findOneBy({userId: id, role: Role.CLIENT});
+}
+
+//VERIFICAR----
+public async findLocalAdmin(id : number) : Promise<UserEntity> {
+  return await this.userRepository.findOneBy({userId: id, role: Role.LOCALADMIN});
+}
+
+public getAllClients() {
+  return this.userRepository.find({where: {role: Role.CLIENT },});
+}
+
+public getAllLocalAdmins() {
+  return this.userRepository.find({where: {role: Role.LOCALADMIN },});
+}
+
+
 }

@@ -22,6 +22,7 @@ export class LocalService {
         if (buscarLocal) {
             throw new BadRequestException('Nombre del local ya existe');
         }
+        //VERIFICAR----
         const user = await this.userRepository.findOne({
             where: { userId: data.userId, role: Role.LOCALADMIN },
         });
