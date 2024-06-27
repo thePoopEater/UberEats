@@ -13,6 +13,11 @@ export class LocalCreateDTO {
     @IsNotEmpty()
     @IsString()
     address : string;
+
+    @IsNotEmpty()
+    @IsString()
+    image : string;
+
     
     @IsNotEmpty()
     @IsString()

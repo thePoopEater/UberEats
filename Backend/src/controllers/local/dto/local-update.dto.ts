@@ -9,6 +9,10 @@ export class LocalUpdateDTO{
     @IsOptional()
     @IsString()
     address : string;
+
+    @IsOptional()
+    @IsString()
+    image : string;
     
     @IsOptional()
     @IsString()
