@@ -10,4 +10,5 @@ export const env = {
   URL_LOCAL: "http://localhost:3000/local/",
   URL_ALL_PRODS_FROM_LOCAL: "http://localhost:3000/local/products/",
   URL_PROD: "http://localhost:3000/product/",
+  URL_GET_LOCAL_FROM_ADMIN : "http://localhost:3000/local-admin/local/"
 };

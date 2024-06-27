@@ -6,7 +6,7 @@ export class Local {
     schedule : string = '';
     description : string = '';
     category : string = '';
-    image : string = '';
+    img: string = '';
 
     // constructor(
     //     id : number,

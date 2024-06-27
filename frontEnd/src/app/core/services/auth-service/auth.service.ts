@@ -26,6 +26,7 @@ export class AuthService {
     if (userResponse) {
       const decodeJWT = this.dataJWT$.decodetoken(userResponse.accessToken);
       sessionStorage.setItem("role", decodeJWT.role);
+      sessionStorage.setItem("Token", userResponse.accessToken);
     }
     return userResponse;
   }
