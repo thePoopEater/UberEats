@@ -41,6 +41,6 @@ export class OrderEntity {
     orderProducts : OrderProductEntity[];
 
     @ManyToOne(() => DeliveryEntity, (delivery) => delivery.deliveryId)
-    @JoinColumn({name: 'deliveryID'})
+    @JoinColumn({name: 'deliveryId'})
     delivery : DeliveryEntity;
 }

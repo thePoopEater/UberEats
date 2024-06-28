@@ -13,20 +13,20 @@ export class DeliveryController {
     ){}
 
     @Post()
-    async postClient(@Body() request: DeliveryCreateDTO): Promise <DeliveryResponseDTO> {
+    async postDeliveryMan(@Body() request: DeliveryCreateDTO): Promise <DeliveryResponseDTO> {
         let response: DeliveryResponseDTO = {
             data: HttpStatus.OK,
             statusCode:200,
             statusDescription:"Cliente Agregado",
         };
         if (request) {
-            const newClient: DeliveryEntity = {
+            const newDeliveryMan: DeliveryEntity = {
                 username: request.username,
                 password:  request.password
             } as DeliveryEntity;
 
             try {
-                await this.deliveryService.create(newClient);
+                await this.deliveryService.create(newDeliveryMan);
                 return response;
             } catch (error : any) {
                 response = {
@@ -40,7 +40,7 @@ export class DeliveryController {
     }
 
     @Get()
-    public async getAllClients() : Promise<DeliveryEntity[]>{
+    public async getAllDeliverys() : Promise<DeliveryEntity[]>{
         try {
             return await this.deliveryService.getAllDelivery();
 
@@ -55,10 +55,10 @@ export class DeliveryController {
     }
     //Función que retorna un cliente por ID.
     @Get(':id')
-    public async getClient(@Param('id') clientId : number) : Promise<DeliveryEntity> {
+    public async getDeliveryMan(@Param('id') clientId : number) : Promise<DeliveryEntity> {
         try {
-            const client : Promise<DeliveryEntity> = this.deliveryService.getDelivery(clientId);
-            return client;
+            const deliveryMan : Promise<DeliveryEntity> = this.deliveryService.getDelivery(clientId);
+            return deliveryMan;
         } catch (error : any) {
             let response: DeliveryResponseDTO = {
                 data: HttpStatus.NOT_FOUND,
