@@ -6,6 +6,11 @@ import { Product } from "../../../core/models/class/product";
 import { ProductOrder } from "../../../core/models/class/product-order";
 import { BehaviorSubject } from "rxjs";
 import { signal } from "@angular/core";
+import { OrderService } from "../../../core/services/order-service/order.service";
+import { AuthService } from "../../../core/services/auth-service/auth.service";
+import { JwtDecoderService } from "../../../core/services/jwt-decoder/jwt-decoder.service";
+import { Order } from "../../../core/models/class/orders";
+import { JwtData } from "../../../core/models/data-jwt";
 @Component({
   selector: "app-carrito",
   standalone: true,
@@ -14,23 +19,23 @@ import { signal } from "@angular/core";
   imports: [CommonModule, RouterLink],
 })
 export class CarritoComponent implements OnInit {
-  private cartService$ = inject(CarritoService);
+  products: Product[] = [];
+  orderProducts: ProductOrder[] = [];
+  order: [Order, ProductOrder[]];
+  total: number = 0;
 
-  listaProd: WritableSignal<Product[]> = signal([]);
-  listaOrderProd: WritableSignal<ProductOrder[]> = signal([]);
-  public total: number = 0;
-
-  constructor() {}
-
-  ngOnInit() {
-    this.listaProd.set(this.cartService$.getProductsCart());
-    this.listaOrderProd.set(this.cartService$.getCart().getCart());
-    this.total = this.cartService$.total;
+  constructor(
+    private readonly orderService: OrderService,
+    private readonly userService: AuthService
+  ) {
+    this.order = this.orderService.getOrder(
+      this.userService.getTokenDecoded().sub
+    );
   }
+
+  ngOnInit() {}
+
   addToCart() {}
-
   deleteFromCart() {}
-  emptyCart() {
-    this.cartService$.cleanShoppingCart();
-  }
+  emptyCart() {}
 }

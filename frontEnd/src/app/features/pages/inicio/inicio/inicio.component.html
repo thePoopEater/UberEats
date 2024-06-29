@@ -1,16 +1,13 @@
 <div class="container-inicio">
-    <app-super-local></app-super-local>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col" *ngFor="let local of getLocals()">
           <div class="card" (click)="goToLocal(local.id)">
-            <img src={{local.image}} class="card-img-top" style="">
+            <img src={{local.description}} class="card-img-top" style="height:15rem;width:18rem;padding:2rem;">
             <div class="card-body">
               <h5 class="card-title">{{local.name}}</h5>
               <p class="card-text">{{local.category}}</p>
-              <p class="card-text">{{local.description}}</p>
             </div>
                 </div>
             </div>
-        <app-footer-home></app-footer-home>
     </div>
 </div>

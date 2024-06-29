@@ -49,7 +49,7 @@ export class LocalComponent implements OnInit {
         this.products = products_response;
       });
 
-    this.isCartEmpty = this.cartService.isCartWithOrder;
+    this.isCartEmpty = true;
   }
 
   goToCart() {

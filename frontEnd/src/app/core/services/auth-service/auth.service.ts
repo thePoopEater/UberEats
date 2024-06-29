@@ -16,17 +16,14 @@ import { JwtData } from "../../models/data-jwt";
 })
 export class AuthService {
   private dataJWT$ = inject(JwtDecoderService);
-  constructor(private httpClient: HttpClient, private location: Location) {}
+  constructor(private readonly httpClient: HttpClient) {}
 
   public async login(email: string, password: string): Promise<UserResponse> {
     const user = new User(email, password);
     const userResponse: UserResponse = await firstValueFrom(
       this.httpClient.post<UserResponse>(env.USER_LOGIN_POST_URL, user)
     );
-    if (userResponse) {
-      const decodeJWT = this.dataJWT$.decodetoken(userResponse.accessToken);
-      sessionStorage.setItem("role", decodeJWT.role);
-    }
+    sessionStorage.setItem("token", userResponse.accessToken);
     return userResponse;
   }
 
@@ -55,14 +52,23 @@ export class AuthService {
   }
 
   public isAuth(): Observable<boolean> {
-    if (sessionStorage.getItem("role")) return of(true);
+    if (sessionStorage.getItem("token")) return of(true);
     return of(false);
   }
 
-  public getRole() {
-    if (sessionStorage.getItem("role")) {
-      return sessionStorage.getItem("role");
+  public getRole(): string {
+    if (sessionStorage.getItem("token")) {
+      const jwtData = this.dataJWT$.decodetoken(
+        sessionStorage.getItem("token") + ""
+      );
+      return jwtData.role;
     }
     return "";
+  }
+  public getTokenDecoded(): JwtData {
+    return this.dataJWT$.decodetoken(sessionStorage.getItem("token") + "");
+  }
+  public getToken(): string {
+    return sessionStorage.getItem("token") + "";
   }
 }

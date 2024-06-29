@@ -1,54 +1,39 @@
-<div>
-  <a routerLink = "/inicio">
-    <img class = "botones-superiores" src="assets/images/imagenes-carrito/iconocerrarnegro.png">
-
-  </a>
-  <h1 class = "titulo-carrito">Nombre Restaurante</h1>
-</div>
-
-<div>
-  <div  class="producto">
-    <div class="productos-container">
-      <div class="enlace-producto">
-        <div class="enlace-producto enlace-producto__producto" *ngFor="let producto of listaProd()">
-          <img [src]="producto.images" alt="{{ producto.name }}">
-          <div class="info">
-            <h3 class="titulo-producto">{{ producto.name }}</h3>
-            <p class="precio-producto">${{ producto.price}}</p>
+<div style="padding:4rem 20rem;">
+  <h1>Carrito</h1>
+  <div>
+    <div class="producto">
+      <div class="productos-container">
+        <div class="enlace-producto">
+          <div class="enlace-producto enlace-producto__producto" *ngFor="let producto of this.order[1]">
+            <p>1</p>
+            <img src={{producto.orderId}} alt="{{ producto.orderId }}">
+            <div class="info">
+              <h3 class="titulo-producto">{{ producto.orderId }}</h3>
+              <p class="precio-producto">${{ producto.productId}}</p>
+            </div>
+            <small class="" style="padding-top: 1rem;">{{producto.specification}}</small>
           </div>
-
         </div>
-        <button class="btn btn-danger" (click)="emptyCart()">Vaciar Carrito</button>
       </div>
+      <hr>
+
     </div>
-    <hr>
+    
+    <hr class="hr-final">
+    
+  </div>
+  <div>
+    <div class="productos-container">
+      <p class="text-subtotal">Subtotal</p>
+      <p class="text-subtotal" style="margin-left: 250px;">$ {{total}}</p>
+    </div>
 
   </div>
-  
-  <hr class="hr-final">
-  
+      <ul>
+        <button class="btn btn-danger" (click)="emptyCart()">Vaciar Carrito</button>
+        <button class = "boton-continuar" routerLink="/pagos">Continuar</button>
+      </ul>
 </div>
-
-<div>
-
-  <div class="productos-container">
-    <p class="text-subtotal"> Subtotal</p>
-    <p class="text-subtotal" style="margin-left: 250px;">$ {{total}}</p>
-  </div>
-
-</div>
-
-<footer>
-  <section class="wrapper">
-        <nav>
-            <ul>
-
-              <button class = "boton-continuar" routerLink="/pagos">Continuar</button>
-                
-            </ul>
-    </nav>
-    </section>
-</footer>
 
 
 

@@ -12,27 +12,44 @@ import { CarritoService } from "../carrito-service/carrito.service";
 import { env } from "../../enviroment/enviroment";
 import { Observable } from "rxjs";
 import { JwtDecoderService } from "../jwt-decoder/jwt-decoder.service";
+import { Product } from "../../models/class/product";
+import { AuthService } from "../auth-service/auth.service";
 @Injectable({
   providedIn: "root",
 })
 export class OrderService {
-  private readonly _cartService$ = inject(CarritoService);
-  private readonly _dataJWT$ = inject(JwtDecoderService);
-  constructor(private httpClient: HttpClient) {}
+  // TODO: Eliminar esto despues
+  orderPrueba: Order = {
+    localId: 1,
+    clientId: 1,
+    date: new Date(),
+    state: "Carrito",
+    orderId: 1,
+    payMethod: "Efectivo",
+    amount: 100,
+  } as Order;
+
+  orderProductsPrueba: ProductOrder[] = [
+    { quantity: 1, specification: "eolpp", orderId: 1, productId: 1 },
+    { quantity: 1, specification: "eolpp", orderId: 1, productId: 2 },
+  ];
+
+  constructor(
+    private readonly httpClient: HttpClient,
+    private readonly userService: AuthService
+  ) {}
 
   public createOrder(
     localId: number,
     clientId: number,
-    products: ProductOrder[]
+    product: Product
   ): Observable<Response<Order>> {
-    let token = "";
-    if (this._dataJWT$.tokenJWT) {
-      token = this._dataJWT$.tokenJWT;
-    }
-
-    const header = new HttpHeaders().set("Authorization", "Bearer ${token}");
+    const userToken = this.userService.getToken();
+    const header = new HttpHeaders().set(
+      "Authorization",
+      `Bearer ${userToken}`
+    );
     const order = new OrderCreateDTO(localId, clientId);
-    console.log("el token", token);
     return this.httpClient.post<Response<Order>>(env.URL_POST_ORDER, order, {
       headers: header,
     });
@@ -66,5 +83,12 @@ export class OrderService {
     return throwError(
       () => new Error("Something bad happened; please try again later.")
     );
+  }
+  public getOrder(clientId: number): [Order, ProductOrder[]] {
+    return [this.orderPrueba, this.orderProductsPrueba];
+  }
+
+  public clientHasOrder(clientId: number): boolean {
+    return false;
   }
 }
