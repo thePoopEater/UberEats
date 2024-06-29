@@ -19,11 +19,13 @@ export class LocalAdminComponent {
   public local! : Local;
 
   ngOnInit() {
-    this.idLocalAdmin = this._tokenDecode.decodetoken(sessionStorage.getItem('Token')!).localAdminId;
+    console.log(this._tokenDecode.decodetoken(sessionStorage.getItem('Token')!));
+    this.idLocalAdmin = this._tokenDecode.decodetoken(sessionStorage.getItem('Token')!).sub;
 
     this._locals$.getLocalFromAdmin(this.idLocalAdmin).subscribe( (data) => {
       this.local = data
       console.log(data);
     });
   }
+
 }

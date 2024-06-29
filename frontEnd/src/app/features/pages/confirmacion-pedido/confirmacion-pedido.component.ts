@@ -34,7 +34,7 @@ export class ConfirmacionPedidoComponent implements OnInit {
 
   async generateAnOrder(){
     if(this._dataJWT$.dataPayload){
-      const clientId : number = this._dataJWT$.dataPayload.clientId as number;
+      const clientId : number = this._dataJWT$.dataPayload.sub as number;
       const prodOfCart : Product[] = this._cartService$.getProductsCart();
       const preOrderOfCart : ProductOrder[] = this._cartService$.getCart().getCart();
 

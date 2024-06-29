@@ -1,5 +1,4 @@
 export class JwtData {
-  clientId?: number;
+  sub!: number;
   role: string = "";
-  localAdminId!: number;
 }

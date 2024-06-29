@@ -20,6 +20,6 @@ export class LocalService {
 
   public getLocalFromAdmin(idAdminLocal : number ) : Observable<Local>{
     console.log("numbero id admin: ", idAdminLocal);
-    return this.http.get<Local>(env.URL_GET_LOCAL_FROM_ADMIN + idAdminLocal as string);
+    return this.http.get<Local>(env.URL_GET_LOCAL_FROM_ADMIN + idAdminLocal);
   }
 }

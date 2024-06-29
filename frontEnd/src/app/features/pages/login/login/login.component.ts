@@ -43,13 +43,13 @@ export class LoginComponent implements OnInit {
         password
       );
       const decodeJWT = this.jwtService.decodetoken(userResponse.accessToken);
-      console.log("Este es el token decodificado", decodeJWT.clientId);
+      console.log("Este es el token decodificado", decodeJWT);
 
-      if (decodeJWT.clientId !== undefined) {
+      if (decodeJWT.role === "client") {
         this.router.navigate(["/inicio"]);
       }
 
-      if (decodeJWT.localAdminId !== undefined) {
+      if (decodeJWT.role === "localAdmin") {
         this.router.navigate(["local/admin"]);
       }
     } catch (error) {

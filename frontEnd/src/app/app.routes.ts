@@ -50,6 +50,7 @@ export const routes: Routes = [
     path: "local/admin",
     component: LocalAdminComponent,
     data: { role: "localAdmin" },
+    
   },
   {
     path: "login",

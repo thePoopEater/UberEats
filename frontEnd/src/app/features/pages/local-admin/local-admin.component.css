@@ -1,0 +1,54 @@
+.header-local {
+    background-image : url("https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_956,h_638/v1688056218/assets/c8/c93654-b159-43ea-9cc8-987f4ca2b290/original/Uber-Eats-for-Merchants---Instagram.png");
+    height: 20rem;
+}
+
+
+.contenedor-datos {
+    display: flex;
+    padding: 1rem 0 0 0;
+    
+}
+
+main {
+    width: 100%;
+}
+.container-data {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.image-local{
+    max-width: 50%;
+}
+
+.image-local img {
+    margin: 2rem;
+    width: 18rem;
+    height: 15rem;
+}
+
+.datos1 {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-height: 100%;
+    margin-left: 2rem;
+}
+.datos-local {
+    width: 50%;
+    margin-left: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.datos1 button{
+    width: 6rem;
+    height: 4rem;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+
+}
