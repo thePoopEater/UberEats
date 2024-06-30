@@ -4,14 +4,14 @@
     <div class="producto">
       <div class="productos-container">
         <div class="enlace-producto">
-          <div class="enlace-producto enlace-producto__producto" *ngFor="let producto of this.order[1]">
-            <p>1</p>
-            <img src={{producto.orderId}} alt="{{ producto.orderId }}">
-            <div class="info">
-              <h3 class="titulo-producto">{{ producto.orderId }}</h3>
-              <p class="precio-producto">${{ producto.productId}}</p>
-            </div>
-            <small class="" style="padding-top: 1rem;">{{producto.specification}}</small>
+          <div style="display: flex;" *ngFor="let producto of this.order[1]">
+              <p>{{producto.orderProduct_quantity}}</p>
+              <img src={{producto.product_images}} alt="{{ producto.product_name }}">
+              <div class="info">
+                <h3 class="titulo-producto">{{ producto.product_name }}</h3>
+                <p class="precio-producto">${{ producto.product_price}}</p>      
+          </div>
+            <small class="" style="padding-top: 1rem;">{{producto.orderProduct_specification}}</small>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
   </div>
       <ul>
         <button class="btn btn-danger" (click)="emptyCart()">Vaciar Carrito</button>
-        <button class = "boton-continuar" routerLink="/pagos">Continuar</button>
+        <button class = "boton-continuar" (click)="confirmOrder()">Continuar</button>
       </ul>
 </div>
 

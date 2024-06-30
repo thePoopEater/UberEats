@@ -14,8 +14,9 @@ import { ProductOrder } from "../../../core/models/class/product-order";
 import { JwtDecoderService } from "../../../core/services/jwt-decoder/jwt-decoder.service";
 import { jwtDecode } from "jwt-decode";
 import { JwtData } from "../../../core/models/data-jwt";
-import { firstValueFrom } from "rxjs";
+import { firstValueFrom, lastValueFrom } from "rxjs";
 import { Order } from "../../../core/models/class/orders";
+import { ProductsFromOrder } from "../../../core/models/class/ProductsFromOrder";
 @Component({
   selector: "app-producto",
   standalone: true,
@@ -30,7 +31,7 @@ export class ProductoComponent implements OnInit {
     private productService: ProductosService,
     private orderService: OrderService,
     private userService: AuthService,
-    private jwtDecoder: JwtDecoderService
+    private carritoService: CarritoService
   ) {}
 
   // Recibir parametro producto
@@ -49,11 +50,9 @@ export class ProductoComponent implements OnInit {
   productId: number = 0;
   // test class product and send to cart
 
-  private cartSer$ = inject(CarritoService);
-
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.productId = params["{idProd}"];
+      this.productId = parseInt(params["{idProd}"]);
     });
     this.productService.getProduct(this.productId).subscribe((resp) => {
       this.product = resp;
@@ -91,9 +90,30 @@ export class ProductoComponent implements OnInit {
     const userId = jwtDecode.sub;
     const local_id = 1;
     // Si el usuario ya tiene una order, busca la orden y agrega este producto a esa orden
-    if (this.orderService.clientHasOrder(userId)) {
-      const order: Order = this.orderService.getOrder(userId)[0];
-      const order_id: number = order.orderId;
+    const clientHasOrder: boolean = await this.orderService.clientHasOrder(
+      userId
+    );
+    if (clientHasOrder) {
+      const order: [Order, ProductsFromOrder[]] =
+        await this.orderService.getOrder(userId);
+      const order_id: number = order[0].orderId;
+      console.log(order);
+      for (let orderProduct of order[1]) {
+        if (orderProduct.product_productId == this.productId) {
+          const productOrder = new ProductOrder(0, "", 0, 0);
+          productOrder.quantity = orderProduct.orderProduct_quantity + 1;
+          console.log(productOrder);
+          const response = await lastValueFrom(
+            this.orderService.updateProductOrder(
+              productOrder,
+              orderProduct.orderProduct_orderProductId
+            )
+          );
+          console.log(response);
+          alert("Se añadio una cantidad de ese producto a su pedido");
+          return;
+        }
+      }
 
       const orderProduct = new ProductOrder(
         this.cant_prod,
@@ -101,13 +121,25 @@ export class ProductoComponent implements OnInit {
         this.productId,
         order_id
       );
-      this.orderService.addProductToOrder(orderProduct);
-      // Si no tiene una orden crea un orden con el producto que acaba de agregar
+
+      console.log(this.orderService.addProductToOrder(orderProduct));
+
+      alert("Se ha añadido un producto a su pedido");
     } else {
+      // Si no tiene una orden crea un orden con el producto que acaba de agregar
       const response = await firstValueFrom(
-        this.orderService.createOrder(userId, local_id, this.product)
+        this.orderService.createOrder(userId, local_id)
       );
       console.log(response);
+      const orderProduct = new ProductOrder(
+        this.cant_prod,
+        this.specifications,
+        this.productId,
+        response.data.orderId
+      );
+
+      this.orderService.addProductToOrder(orderProduct);
+      alert("Se ha creado un nuevo pedido con el producto");
     }
   }
 }
