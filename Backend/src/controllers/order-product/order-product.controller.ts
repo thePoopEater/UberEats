@@ -5,6 +5,7 @@ import { OrderService } from 'src/providers/order/order.service';
 import { ProductService } from 'src/providers/product/product.service';
 import { OrderProductEntity } from 'src/database/entities/order-products.entity';
 import { OrderResponseDTO } from '../order/dto/order-response.dto';
+import { OrderProductResponseDTO } from './dto/order-product-response.dto';
 
 @Controller('orderProduct')
 export class OrderProductController {
@@ -72,7 +73,7 @@ export class OrderProductController {
         if (orderProduct) {
             const data = this.orderProductService.updateOrderProduct(idOrderProduct, newOrderProduct);
             if (data != undefined){
-                const response : OrderResponseDTO = {
+                const response : OrderProductResponseDTO = {
                     data : null,
                     statusCode : 200,
                     statusDescription : "Se ha actualizado el producto de la orden correctamente",

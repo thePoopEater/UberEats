@@ -3,10 +3,11 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { OrderCreateDTO } from "src/controllers/order/dto/order-create.dto";
 import { LocalEntity } from "src/database/entities/local.entity";
 import { OrderEntity } from "src/database/entities/order.entity";
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { LocalService } from "../local/local.service";
 import { UserService } from "../user/user.service";
 import { Role } from "src/auth/enums/role.enum";
+import { OrderUpdateDTO } from "src/controllers/order/dto/order-update.dto";
 @Injectable()
 export class OrderService {
     constructor(
@@ -73,5 +74,13 @@ export class OrderService {
 
     public async getAllOrders():Promise<OrderEntity[]>{
         return this.orderRepository.find();
+    }
+
+    public async updateOrder(orderId : number, order : OrderUpdateDTO): Promise<UpdateResult> {
+        const result : UpdateResult = await this.orderRepository.update(orderId, order);
+        if (result.affected == 0){
+            return undefined;
+        }
+        return result;
     }
 }

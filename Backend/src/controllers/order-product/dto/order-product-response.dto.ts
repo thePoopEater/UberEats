@@ -1,4 +1,4 @@
-export class ProductResponseDTO {
+export class OrderProductResponseDTO {
     data : any;
     statusCode : number;
     statusDescription : string;

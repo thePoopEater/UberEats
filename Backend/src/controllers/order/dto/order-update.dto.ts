@@ -6,13 +6,13 @@ export class OrderUpdateDTO {
     @IsString() 
     state : string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     address : string;
 
     @IsOptional()
     @IsString()
-    payMethod : number;
+    payMethod : string;
 
     @IsOptional()
     @IsNumber()

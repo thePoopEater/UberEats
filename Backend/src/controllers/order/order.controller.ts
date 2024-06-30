@@ -57,5 +57,25 @@ export class OrderController {
     public async getAllOrdersFromClient(@Param('id', ParseIntPipe) clientId : number){
       const result = await this.orderService.findOrdersFromOneClient(clientId);
       return result;
+    } 
+
+    @Put(':id')
+    public async updateOrder(@Param('id', ParseIntPipe) idOrder : number,
+    @Body(ValidationPipe) newOrder : OrderEntity){
+      const order = await this.orderService.findOrder(newOrder.orderId);
+      if (order){
+        const result = await this.orderService.updateOrder(idOrder, newOrder);
+        if(result != undefined){
+          const response: OrderResponseDTO = {
+            data : null,
+            statusCode : 200,
+            statusDescription : "La orden se actualizó correctamente",
+            error : null
+            }
+            return response;
+          }
+          if (!order)
+              throw new NotFoundException('No existe esa orden');
+          }
     }
   }
