@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn,ManyToOne} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn,ManyToOne, BeforeInsert, BeforeUpdate} from 'typeorm';
 import { ProductEntity } from './product.entity';
 import { OrderEntity } from './order.entity';
 
@@ -16,6 +16,9 @@ export class OrderProductEntity {
     product : ProductEntity;
 
     @Column()
+    productName: string
+
+    @Column()
     quantity : number;
 
     @Column()
@@ -24,4 +27,12 @@ export class OrderProductEntity {
     @ManyToOne(() => OrderEntity, (order) => order.orderProducts)
     @JoinColumn({name:'orderId'})
     order : OrderEntity;
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    updateProductName() {
+        if (this.product) {
+            this.productName = this.product.name;
+        }
+    }
 }
