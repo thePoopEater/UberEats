@@ -83,4 +83,10 @@ export class OrderService {
         }
         return result;
     }
+
+    public async deleteOrder(orderId: number) : Promise<OrderEntity>{
+        const result= await this.orderRepository.findOneBy({orderId:orderId});
+        await this.orderRepository.remove(result);
+        return result;
+    }
 }

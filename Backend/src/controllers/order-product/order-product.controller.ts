@@ -48,6 +48,9 @@ export class OrderProductController {
     public async deleteOrderProduct(@Param('id', ParseIntPipe) idOrderProduct : number, 
     @Body(ValidationPipe) newOrderProduct : OrderProductEntity){
         const orderProduct = await this.orderProductService.getOrderProduct(newOrderProduct.orderProductId);
+        if (!orderProduct){
+            throw new NotFoundException('No existe ese producto');
+        }
         if (orderProduct) {
             const data = this.orderProductService.deleteOrderProduct(idOrderProduct);
             if (data != undefined){
@@ -61,8 +64,6 @@ export class OrderProductController {
                 }
                 
                 }
-                if (!orderProduct)
-                    throw new NotFoundException('No existe ese producto');
                 
     } 
 
@@ -70,6 +71,9 @@ export class OrderProductController {
     public async updateOrderProduct(@Param('id', ParseIntPipe) idOrderProduct : number,
     @Body(ValidationPipe) newOrderProduct : OrderProductEntity){
         const orderProduct = await this.orderProductService.getOrderProduct(newOrderProduct.orderProductId);
+        if (!orderProduct){
+            throw new NotFoundException('No existe ese producto');
+        }
         if (orderProduct) {
             const data = this.orderProductService.updateOrderProduct(idOrderProduct, newOrderProduct);
             if (data != undefined){
@@ -81,9 +85,7 @@ export class OrderProductController {
                     }
                     return response;
                     }
-                    if (!orderProduct)
-                        throw new NotFoundException('No existe ese producto');
                     }
-                    }
+                }
                     
 }

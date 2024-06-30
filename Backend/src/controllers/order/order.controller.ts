@@ -1,4 +1,4 @@
-import {Controller,Get,Param,Put,Post,Body,NotFoundException, ValidationPipe, ParseIntPipe} from '@nestjs/common';
+import {Controller,Get,Param,Put,Post,Body,NotFoundException, ValidationPipe, ParseIntPipe, Delete} from '@nestjs/common';
 import { OrderService } from 'src/providers/order/order.service';
 import { OrderCreateDTO } from './dto/order-create.dto';
 import { OrderResponseDTO } from './dto/order-response.dto';
@@ -63,6 +63,9 @@ export class OrderController {
     public async updateOrder(@Param('id', ParseIntPipe) idOrder : number,
     @Body(ValidationPipe) newOrder : OrderEntity){
       const order = await this.orderService.findOrder(newOrder.orderId);
+      if (!order){
+        throw new NotFoundException('No existe esa orden');
+    }
       if (order){
         const result = await this.orderService.updateOrder(idOrder, newOrder);
         if(result != undefined){
@@ -74,8 +77,26 @@ export class OrderController {
             }
             return response;
           }
-          if (!order)
-              throw new NotFoundException('No existe esa orden');
           }
     }
+
+    @Delete(':id')
+    public async deleteOrder(@Param('id', ParseIntPipe) idOrder : number){
+      const order = await this.orderService.findOrder(idOrder);
+      if (!order){
+        throw new NotFoundException('No existe esa orden');
+      }
+      if (order){
+        const result = await this.orderService.deleteOrder(idOrder);
+        if(result != undefined){
+          const response: OrderResponseDTO = {
+            data : null,
+            statusCode : 200,
+            statusDescription : "La orden se eliminó correctamente",
+            error : null
+            }
+            return response;
+            }
+            }
   }
+}
