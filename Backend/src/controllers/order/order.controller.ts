@@ -1,4 +1,15 @@
-import {Controller,Get,Param,Put,Post,Body,NotFoundException, ValidationPipe, ParseIntPipe, Delete} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Put,
+  Post,
+  Body,
+  NotFoundException,
+  ValidationPipe,
+  ParseIntPipe,
+  Delete,
+} from '@nestjs/common';
 import { OrderService } from 'src/providers/order/order.service';
 import { OrderCreateDTO } from './dto/order-create.dto';
 import { OrderResponseDTO } from './dto/order-response.dto';
@@ -21,82 +32,88 @@ export class OrderController {
     private localService: LocalService,
   ) {}
 
-    @Get(':id')
-    public async getOrder(@Param('id') orderId : number)  {
-        const order = await this.orderService.findOrder(orderId);
-        return order;
-    }
+  @Get(':id')
+  public async getOrder(@Param('id') orderId: number) {
+    const order = await this.orderService.findOrder(orderId);
+    return order;
+  }
 
-    @Get()
-    public async getAllOrder(): Promise<OrderEntity[]> {
-      return await this.orderService.getAllOrders();
-    }
+  @Get()
+  public async getAllOrder(): Promise<OrderEntity[]> {
+    return await this.orderService.getAllOrders();
+  }
 
-    @Post()
-    @Roles(Role.CLIENT)
-    public async postOrder(@Body(ValidationPipe) newOrder : OrderCreateDTO) : Promise<OrderResponseDTO> {
-        if (this.orderService.createOrder(newOrder)){
-            const response : OrderResponseDTO = {
-                data : null,
-                statusCode : 200,
-                statusDescription : "Listo",
-                error : null
-            };
-            return response;   
-        }
-               
+  @Post()
+  @Roles(Role.CLIENT)
+  public async postOrder(
+    @Body(ValidationPipe) newOrder: OrderCreateDTO,
+  ): Promise<OrderResponseDTO> {
+    const createdOrder = await this.orderService.createOrder(newOrder);
+    if (createdOrder) {
+      const response: OrderResponseDTO = {
+        data: createdOrder,
+        statusCode: 200,
+        statusDescription: 'Listo',
+        error: null,
+      };
+      return response;
     }
-    @Get('/products/:id')
-    public async getAllProducts(@Param('id', ParseIntPipe) orderId : number){ 
-        const result = await this.orderService.findProductsFromOrder(orderId);
-        return result;
-    }
+  }
+  @Get('/products/:id')
+  public async getAllProducts(@Param('id', ParseIntPipe) orderId: number) {
+    const result = await this.orderService.findProductsFromOrder(orderId);
+    return result;
+  }
 
-    //devuelve todas las ordenes de un cliente
-    @Get('/client/:id')
-    public async getAllOrdersFromClient(@Param('id', ParseIntPipe) clientId : number){
-      const result = await this.orderService.findOrdersFromOneClient(clientId);
-      return result;
-    } 
+  //devuelve todas las ordenes de un cliente
+  @Get('/client/:id')
+  public async getAllOrdersFromClient(
+    @Param('id', ParseIntPipe) clientId: number,
+  ) {
+    const result = await this.orderService.findOrdersFromOneClient(clientId);
+    return result;
+  }
 
-    @Put(':id')
-    public async updateOrder(@Param('id', ParseIntPipe) idOrder : number,
-    @Body(ValidationPipe) newOrder : OrderEntity){
-      const order = await this.orderService.findOrder(newOrder.orderId);
-      if (!order){
-        throw new NotFoundException('No existe esa orden');
+  @Put(':id')
+  public async updateOrder(
+    @Param('id', ParseIntPipe) idOrder: number,
+    @Body(ValidationPipe) newOrder: OrderEntity,
+  ) {
+    const order = await this.orderService.findOrder(newOrder.orderId);
+    if (!order) {
+      throw new NotFoundException('No existe esa orden');
     }
-      if (order){
-        const result = await this.orderService.updateOrder(idOrder, newOrder);
-        if(result != undefined){
-          const response: OrderResponseDTO = {
-            data : null,
-            statusCode : 200,
-            statusDescription : "La orden se actualizó correctamente",
-            error : null
-            }
-            return response;
-          }
-          }
-    }
-
-    @Delete(':id')
-    public async deleteOrder(@Param('id', ParseIntPipe) idOrder : number){
-      const order = await this.orderService.findOrder(idOrder);
-      if (!order){
-        throw new NotFoundException('No existe esa orden');
+    if (order) {
+      const result = await this.orderService.updateOrder(idOrder, newOrder);
+      if (result != undefined) {
+        const response: OrderResponseDTO = {
+          data: null,
+          statusCode: 200,
+          statusDescription: 'La orden se actualizó correctamente',
+          error: null,
+        };
+        return response;
       }
-      if (order){
-        const result = await this.orderService.deleteOrder(idOrder);
-        if(result != undefined){
-          const response: OrderResponseDTO = {
-            data : null,
-            statusCode : 200,
-            statusDescription : "La orden se eliminó correctamente",
-            error : null
-            }
-            return response;
-            }
-            }
+    }
+  }
+
+  @Delete(':id')
+  public async deleteOrder(@Param('id', ParseIntPipe) idOrder: number) {
+    const order = await this.orderService.findOrder(idOrder);
+    if (!order) {
+      throw new NotFoundException('No existe esa orden');
+    }
+    if (order) {
+      const result = await this.orderService.deleteOrder(idOrder);
+      if (result != undefined) {
+        const response: OrderResponseDTO = {
+          data: null,
+          statusCode: 200,
+          statusDescription: 'La orden se eliminó correctamente',
+          error: null,
+        };
+        return response;
+      }
+    }
   }
 }
