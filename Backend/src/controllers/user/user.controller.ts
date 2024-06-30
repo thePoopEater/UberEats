@@ -39,7 +39,11 @@ export class UserController {
 
     @Get('/local/:id')
     public async getLocal(@Param('id', ParseIntPipe) idLocalAdmin : number): Promise<LocalEntity>{
-      return await this.userService.getLocal(idLocalAdmin);
+      const local= this.userService.getLocal(idLocalAdmin);
+      if (!local){
+        throw new Error('Local not found')
+      }
+      return local;
     }
 
 }

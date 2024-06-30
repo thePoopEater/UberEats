@@ -51,4 +51,11 @@ export class OrderController {
         const result = await this.orderService.findProductsFromOrder(orderId);
         return result;
     }
+
+    //devuelve todas las ordenes de un cliente
+    @Get('/client/:id')
+    public async getAllOrdersFromClient(@Param('id', ParseIntPipe) clientId : number){
+      const result = await this.orderService.findOrdersFromOneClient(clientId);
+      return result;
+    }
   }

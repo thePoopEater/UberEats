@@ -1,4 +1,4 @@
-import { Controller, Post, Body, NotFoundException, ValidationPipe, Delete, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Post, Body, NotFoundException, ValidationPipe, Delete, Param, ParseIntPipe, Put } from '@nestjs/common';
 import { OrderProductService } from 'src/providers/order-product/order-product.service';
 import { OrderProductCreateDTO } from './dto/order-product-create.dto';
 import { OrderService } from 'src/providers/order/order.service';
@@ -64,4 +64,25 @@ export class OrderProductController {
                     throw new NotFoundException('No existe ese producto');
                 
     } 
+
+    @Put(':id')
+    public async updateOrderProduct(@Param('id', ParseIntPipe) idOrderProduct : number,
+    @Body(ValidationPipe) newOrderProduct : OrderProductEntity){
+        const orderProduct = await this.orderProductService.getOrderProduct(newOrderProduct.orderProductId);
+        if (orderProduct) {
+            const data = this.orderProductService.updateOrderProduct(idOrderProduct, newOrderProduct);
+            if (data != undefined){
+                const response : OrderResponseDTO = {
+                    data : null,
+                    statusCode : 200,
+                    statusDescription : "Se ha actualizado el producto de la orden correctamente",
+                    error : null
+                    }
+                    return response;
+                    }
+                    if (!orderProduct)
+                        throw new NotFoundException('No existe ese producto');
+                    }
+                    }
+                    
 }

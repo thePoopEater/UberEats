@@ -57,7 +57,7 @@ public async getLocal (idLocalAdmin: number): Promise<LocalEntity> {
       }
       return local; 
   } catch (error:any){
-    throw new Error(error);
+    throw new Error('Este usuario no tiene ningún local asociado');
   }
 }
 

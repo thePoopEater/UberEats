@@ -50,8 +50,14 @@ export class OrderService {
     //VERIFICAR----
     public async findOrdersFromOneClient(userId : number) {
         const user = await this.userService.findClient(userId);
-        return this.orderRepository.findBy({user:
-            user});
+        if (!user){
+            throw new NotFoundException("No existe ese cliente");
+        }
+        const orders= await this.orderRepository.find ({where: {user}})
+        if (orders.length === 0){
+            throw new NotFoundException("Este cliente no registra pedidos");
+        }
+        return orders;
     }
 
     public async findProductsFromOrder(id : number){
