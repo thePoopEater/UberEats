@@ -4,7 +4,7 @@ import { Local } from "../../models/class/local";
 import { Observable } from "rxjs";
 import { env } from "../../enviroment/enviroment";
 import { Order } from "../../models/class/orders";
-import { ProductOrder } from "../../models/class/product-order";
+import { ProductOrder, ProductOrderResponse } from "../../models/class/product-order";
 
 @Injectable({
   providedIn: "root",
@@ -39,9 +39,9 @@ export class LocalService {
     })
   }
 
-  public getProductsFromOrder(idOrder : number, token : string) : Observable<ProductOrder[]>{
+  public getProductsFromOrder(idOrder : number, token : string) : Observable<ProductOrderResponse[]>{
     const header = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<ProductOrder[]>(env.URL_GET_PRODUCTS_FROM_ORDER + idOrder, {
+    return this.http.get<ProductOrderResponse[]>(env.URL_GET_PRODUCTS_FROM_ORDER + idOrder, {
       headers : header,
     });
   } 

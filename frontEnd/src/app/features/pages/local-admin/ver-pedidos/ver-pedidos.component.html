@@ -46,11 +46,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">Ppapas</th>
-            <th scope="row">2</th>
-            <th scope="row">$1000</th>
-            <th scope="row">$2000</th>
+          <tr *ngFor="let prod of products">
+            <th scope="row">{{prod.product_name}}</th>
+            <th scope="row">{{prod.orderProduct_quantity}}</th>
+            <th scope="row">$ {{prod.product_price}}</th>
+            <th scope="row">$ {{prod.product_price*prod.orderProduct_quantity}}</th>
           </tr>
         </tbody>
       </table>

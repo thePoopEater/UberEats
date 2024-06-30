@@ -3,7 +3,7 @@ import { LocalService } from '../../../../core/services/local-service/local.serv
 import { JwtDecoderService } from '../../../../core/services/jwt-decoder/jwt-decoder.service';
 import { Order } from '../../../../core/models/class/orders';
 import { CommonModule } from '@angular/common';
-import { ProductOrder } from '../../../../core/models/class/product-order';
+import { ProductOrder, ProductOrderResponse } from '../../../../core/models/class/product-order';
 
 @Component({
   selector: 'app-ver-pedidos',
@@ -20,7 +20,7 @@ export default class VerPedidosComponent {
 
   private idLocal!:number;
   public orderSelect! : Order;
-  public products!: ProductOrder[];
+  public products!: ProductOrderResponse[];
   public showDetails : boolean = false;
   public color = '';
 
@@ -54,11 +54,12 @@ export default class VerPedidosComponent {
       }
     )
     this.color = '#8c8c8c'
-    // this._localService$.getProductsFromOrder(idOrder, this.token).subscribe(
-    //   (data)=> {
-    //     this.products = data;
-    //   }
-    // )
+    this._localService$.getProductsFromOrder(idOrder, this.token).subscribe(
+       (data)=> {
+         this.products = data;
+         console.log(this.products);
+       }
+     )
 
     this.showDetails = true;
   }
