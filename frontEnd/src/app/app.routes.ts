@@ -18,7 +18,7 @@ import { SignupLocalComponent } from "./features/pages/signup-local/signup-local
 import { InicioComponent } from "./features/pages/inicio/inicio/inicio.component";
 import { LoginComponent } from "./features/pages/login/login/login.component";
 import { SignupComponent } from "./features/pages/signup/signup/signup.component";
-import { LocalAdminComponent } from "./features/pages/local-admin/local-admin.component";
+
 
 export const routes: Routes = [
   {
@@ -47,10 +47,7 @@ export const routes: Routes = [
     component: SignupLocalComponent,
   },
   {
-    path: "local/admin",
-    component: LocalAdminComponent,
-    data: { role: "localAdmin" },
-    
+    path: 'adminLocal', loadChildren: () => import('./features/pages/local-admin/local-admin.routes')
   },
   {
     path: "login",

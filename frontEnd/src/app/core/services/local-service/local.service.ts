@@ -1,8 +1,10 @@
 import { Injectable, signal } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Local } from "../../models/class/local";
 import { Observable } from "rxjs";
 import { env } from "../../enviroment/enviroment";
+import { Order } from "../../models/class/orders";
+import { ProductOrder } from "../../models/class/product-order";
 
 @Injectable({
   providedIn: "root",
@@ -22,4 +24,25 @@ export class LocalService {
     console.log("numbero id admin: ", idAdminLocal);
     return this.http.get<Local>(env.URL_GET_LOCAL_FROM_ADMIN + idAdminLocal);
   }
+
+  public getOrdersFromLocal(idLocal : number, token : string) : Observable<Order[]> {
+    const header = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    return this.http.get<Order[]>(env.URL_GET_ORDERS_FROM_LOCAL + idLocal, {
+      headers: header,
+    })
+  }
+
+  public getOrder(idOrder : number, token : string) : Observable<Order> {
+    const header = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    return this.http.get<Order>(env.URL_GET_ORDER + idOrder, {
+      headers: header,
+    })
+  }
+
+  public getProductsFromOrder(idOrder : number, token : string) : Observable<ProductOrder[]>{
+    const header = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<ProductOrder[]>(env.URL_GET_PRODUCTS_FROM_ORDER + idOrder, {
+      headers : header,
+    });
+  } 
 }

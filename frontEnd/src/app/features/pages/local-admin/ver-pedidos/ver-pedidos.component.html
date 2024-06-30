@@ -1,30 +1,62 @@
-<table class="table">
+<main>
+
+  <table class="table" >
     <thead class="thead-dark">
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">N° Orden</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Medio de Pago</th>
+        <th scope="col">Monto</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
+      <tr *ngFor="let order of  orderLocal">
+        <th scope="row">{{order.orderId}}</th>
+        <td>{{order.date}}</td>
+        <td>{{order.state}}</td>
+        <td>{{order.payMethod}}</td>
+        <td>${{order.amount}}</td>
+        <td><button class="btn btn-primary button" (click)="verDetalles(order.orderId)">Ver</button></td>
       </tr>
     </tbody>
   </table>
+
+
+
+  <div class="card modal-class" *ngIf="showDetails">
+    <div class="card-header">
+      Detalle de Orden
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">Orden: {{orderSelect.orderId}}</h4>
+      <h4 >Medio Pago</h4>
+      <p>{{orderSelect.payMethod}}</p>
+      <h2>Estado</h2>
+      <p>{{orderSelect.state}}</p>
+      <h4>Detalles</h4>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio</th>
+            <th scope="col">SubTotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Ppapas</th>
+            <th scope="row">2</th>
+            <th scope="row">$1000</th>
+            <th scope="row">$2000</th>
+          </tr>
+        </tbody>
+      </table>
+      <p class="card-text">{{orderSelect.amount}}</p>
+      <button class="btn btn-danger">Cancelar Orden</button>
+      <button class="btn btn-secondary" (click)="close()">Cerrar</button>
+    </div>
+  </div>
+  </main>

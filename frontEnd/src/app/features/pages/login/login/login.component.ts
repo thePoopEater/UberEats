@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       }
 
       if (decodeJWT.role === "localAdmin") {
-        this.router.navigate(["local/admin"]);
+        this.router.navigate(["adminLocal"]);
       }
     } catch (error) {
       console.error("Error al iniciar sesion", error);

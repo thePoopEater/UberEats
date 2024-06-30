@@ -1,0 +1,15 @@
+.button {
+    font-size: 15px;
+    width: 5rem;
+}
+
+main {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-class {
+    position: absolute;
+    justify-content: center;
+}
