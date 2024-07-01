@@ -28,5 +28,3 @@ export class OrderCreateDTO {
     this.amount = 0;
   }
 }
-
-// únicamente cuando se confirma el carrito se instancia la clase Order.

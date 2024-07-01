@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { CarritoService } from "../../../core/services/carrito-service/carrito.service";
 import { CommonModule } from "@angular/common";
 import { Product } from "../../../core/models/class/product";
 
@@ -13,8 +12,6 @@ import { Product } from "../../../core/models/class/product";
 })
 export class PagoComponent implements OnInit {
   constructor() {}
-
-  private readonly _cartService$ = inject(CarritoService);
 
   listProds: Product[] = [];
   ngOnInit() {

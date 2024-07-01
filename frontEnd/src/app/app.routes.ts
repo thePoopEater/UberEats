@@ -5,10 +5,7 @@ import { ProductoComponent } from "./features/pages/producto/producto.component"
 import { PagoComponent } from "./features/pages/pago/pago.component";
 import { ConfirmacionPedidoComponent } from "./features/pages/confirmacion-pedido/confirmacion-pedido.component";
 import { SeguimientoPedidoComponent } from "./features/pages/seguimiento-pedido/seguimiento-pedido.component";
-import {
-  authGuard,
-  loginGuard,
-} from "./core/auth/guards/login-guard/login.guard";
+import { authGuard } from "./core/auth/guards/login-guard/login.guard";
 import { NotFoundComponent } from "./features/pages/not-found/not-found/not-found.component";
 import { hasRoleGuard } from "./core/auth/guards/has-role-guard/has-role.guard";
 import { HomeComponent } from "./features/pages/home/home.component";
@@ -19,6 +16,9 @@ import { InicioComponent } from "./features/pages/inicio/inicio/inicio.component
 import { LoginComponent } from "./features/pages/login/login/login.component";
 import { SignupComponent } from "./features/pages/signup/signup/signup.component";
 import { LocalAdminComponent } from "./features/pages/local-admin/local-admin.component";
+import { ProfileComponent } from "./features/pages/profile/profile.component";
+import { OrdersUserComponent } from "./features/pages/orders-user/orders-user.component";
+import { ROLES } from "./core/enviroment/enviroment";
 
 export const routes: Routes = [
   {
@@ -60,49 +60,61 @@ export const routes: Routes = [
     path: "inicio",
     component: InicioComponent,
     canActivate: [hasRoleGuard],
-    data: { role: "client" },
+    data: { role: ROLES.CLIENT },
+  },
+  {
+    path: "profile",
+    component: ProfileComponent,
+    canActivate: [authGuard],
+    data: {},
+  },
+  {
+    path: "orders",
+    component: OrdersUserComponent,
+    canActivate: [hasRoleGuard],
+    data: { role: ROLES.CLIENT },
   },
 
   {
     path: "local/:{idLocal}",
     component: LocalComponent,
     canActivate: [hasRoleGuard],
-    data: { role: "client" },
+    data: { role: ROLES.CLIENT },
   },
 
   {
     path: "producto/:{idProd}",
     component: ProductoComponent,
     canActivate: [hasRoleGuard],
-    data: { role: "client" },
+    data: { role: ROLES.CLIENT },
   },
 
   {
     path: "carrito",
     component: CarritoComponent,
     canActivate: [hasRoleGuard],
-    data: { role: "client" },
+    data: { role: ROLES.CLIENT },
   },
 
   {
     path: "pagos",
     component: PagoComponent,
     canActivate: [hasRoleGuard],
-    data: { role: "client" },
+    data: { role: ROLES.CLIENT },
   },
 
   {
     path: "confirmacion-pedido",
     component: ConfirmacionPedidoComponent,
     canActivate: [hasRoleGuard],
-    data: { role: "client" },
+    data: { role: ROLES.CLIENT },
   },
 
   {
     path: "seguimiento-pedido",
     component: SeguimientoPedidoComponent,
     canActivate: [hasRoleGuard],
-    data: { role: "client" },
+    data: { role: ROLES.CLIENT },
   },
 
   {

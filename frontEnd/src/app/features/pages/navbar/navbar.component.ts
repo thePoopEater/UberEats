@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../../core/services/auth-service/auth.service";
 import { Router, RouterOutlet } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-navbar",
@@ -20,8 +21,9 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.isAuth().subscribe((loggedIn) => {
+    this.authService.isLoggedIn.subscribe((loggedIn) => {
       this.isLoggedIn = loggedIn;
+      console.log(loggedIn);
     });
   }
 

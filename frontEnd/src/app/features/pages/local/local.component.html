@@ -1,22 +1,22 @@
-<div style="padding:1rem 8.5rem;">
-  <img src={{local.description}} style="width:12rem;heigh:20rem;">
-</div>
-<div style="padding:1rem 8rem;" >
-  <div class="row row-cols-3 row-cols-md-2 g-1">
+<div style="padding:0.5rem 3rem;">
+  <img src={{local.description}} style="width:12rem;">
+
+  <h1>Productos</h1>
+  <div class="row row-cols-3 row-cols-md-1 g-1">
     <div class="" style="display: inline;" *ngFor="let product of this.products">
-      <a class="card mb-3" style="width: 32rem;" routerLink="/producto/{{product.productId}}">
-        <div class="row g-0">
-          <div class="col-md-8" style="width: 20rem;">
-            <div class="card-body" style="width: 30rem;">
-              <h5 class="card-title">{{product.name}}</h5>
-              <p class="card-text">{{product.price}}</p>
-              <small class="text-body-secondary">{{product.description}}</small>
+     
+      <a class="card mb-3" style="max-width: 540px;height:6.05rem;" routerLink="/producto/{{product.productId}}">
+        <div class="row no-gutters">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="fs-6">{{product.name}}</h5>
+                    <p class="fs-6" style="margin:0">${{product.price}}</p>
+                    <small class="text-body-secondary" style="font-size: 0.1rem;">{{product.description}}</small>
+                </div>
             </div>
-          </div>
-          <div class="col-md-4" style="padding:0.5rem 0.5rem;">
-            <img src={{product.images}}   style="width: 10rem;height:7rem;border-radius:1.7rem;">
-          </div>
+            <div class="col-md-4">
+                <img [src]=product.images class="card-img" alt="Completo" style="height:6rem;width: 8rem;">
+            </div>
         </div>
       </a>
   </div>
-  

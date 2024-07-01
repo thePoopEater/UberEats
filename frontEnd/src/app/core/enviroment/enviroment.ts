@@ -1,6 +1,8 @@
 export const env = {
   API_URL: "http://localhost:3000",
   USER_LOGIN_POST_URL: "http://localhost:3000/auth/login",
+  URL_GET_ALL_USER: "http://localhost:3000/user",
+  URL_PUT_USER: "http://localhost:3000/user/",
   USER_REGISTER_POST_URL: "http://localhost:3000/auth/register",
   LOCAL_ADMIN_REGISTER_URL: "http://localhost:3000/local-admin",
   URL_POST_ORDER: "http://localhost:3000/order",
@@ -14,4 +16,13 @@ export const env = {
   URL_GET_ORDER_PRODUCTS: "http://localhost:3000/order/products/",
   URL_PUT_ORDER_PRODUCT: "http://localhost:3000/orderProduct/",
   ULR_PUT_ORDER: "http://localhost:3000/order/",
+  URL_GET_ALL_ORDERS: "http://localhost:3000/order",
+  URL_POST_DELIVERY: "http://localhost:3000/delivery",
+  URL_POST_ADDRESS: "http://localhost:3000/address",
+  URL_GET_ALL_ADDRESS_USER: "http://localhost:3000/address/user/",
 };
+export enum ROLES {
+  LOCALADMIN = "localAdmin",
+  DELIVERY = "delivery",
+  CLIENT = "client",
+}

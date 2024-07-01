@@ -14,7 +14,6 @@ import {
   lastValueFrom,
   throwError,
 } from "rxjs";
-import { CarritoService } from "../carrito-service/carrito.service";
 import { env } from "../../enviroment/enviroment";
 import { Observable } from "rxjs";
 import { JwtDecoderService } from "../jwt-decoder/jwt-decoder.service";
@@ -26,12 +25,10 @@ import { ProductosService } from "../producto-service/productos.service";
   providedIn: "root",
 })
 export class OrderService {
-  // TODO: Eliminar esto despues
   orders: Order[] = [];
   constructor(
     private readonly httpClient: HttpClient,
-    private readonly userService: AuthService,
-    private readonly productService: ProductosService
+    private readonly userService: AuthService
   ) {}
 
   public createOrder(
@@ -84,12 +81,13 @@ export class OrderService {
     console.log(this.orders);
     if (this.orders) {
       for (let order of this.orders) {
-        console.log(order);
         if (order.state == "Carrito") {
           carrito_order = order;
+          console.log(order);
         }
       }
     }
+
     order_products = await this.getProductsFromOrder(carrito_order.orderId);
     return [carrito_order, order_products];
   }
@@ -158,6 +156,47 @@ export class OrderService {
         quantity: productOrder.quantity,
         specification: productOrder.specification,
       },
+      { headers: headers }
+    );
+  }
+
+  public async getPendingOrders(): Promise<Order[]> {
+    const orders = await lastValueFrom(this.getAllOrders());
+    let pendingOrders: Order[] = [];
+    for (let order of orders) {
+      if (order.state == "Pending") {
+        pendingOrders.push(order);
+      }
+    }
+    return pendingOrders;
+  }
+
+  public getAllOrders(): Observable<Order[]> {
+    const token = this.userService.getToken();
+    const headers = new HttpHeaders().set("Authorization", `Bearer ${token}`);
+    return this.httpClient.get<Order[]>(env.URL_GET_ALL_ORDERS, {
+      headers: headers,
+    });
+  }
+
+  public acceptOrderFromDelivery(orderId: number) {
+    const token = this.userService.getToken();
+    const headers = new HttpHeaders().set("Authorization", `Bearer ${token}`);
+    return this.httpClient.put(
+      env.ULR_PUT_ORDER + orderId,
+      { state: "Accepted" },
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  public cancelOrder(orderId: number) {
+    const token = this.userService.getToken();
+    const headers = new HttpHeaders().set("Authorization", `Bearer ${token}`);
+    return this.httpClient.put(
+      env.ULR_PUT_ORDER + orderId,
+      { state: "Cancel" },
       { headers: headers }
     );
   }

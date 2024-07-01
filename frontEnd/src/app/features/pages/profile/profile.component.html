@@ -1,0 +1,64 @@
+<div style="padding:3rem;">
+  <h1>Perfil</h1>
+  <div class="card" style="width: 30rem ;max-height:40rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{user.name}}  {{user.lastName}}</h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary">Correo: {{user.email}}</h6>
+      <div *ngIf="this.hasAdresses()">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <strong>Direcciones</strong>
+              </button>
+            </h2>
+            <div *ngFor="let direccion of this.direcciones">
+              <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <small>{{direccion.name}}</small>
+                </div>
+            </div>
+            </div>
+          </div>
+          
+       </div>
+       <div *ngIf="!this.hasAdresses()">
+        <h6 class="--bs-danger-text-emphasis
+        ">No tienes ninguna dirección</h6>
+       </div>
+      <div style="padding-top:1rem">
+        <button class="btn btn-success" >Editar </button>
+      <button type="button" style="margin-left: 1rem;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Añadir direccion
+      </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Direcciones</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div [formGroup]="this.formAddress">
+          <label class="form-label">Ingrese un nueva dirección</label>
+          <div class="input-group">    <input type="text" class="form-control" formControlName="name">
+        </div>
+        <label class="form-label">Descripcion</label>
+        <div class="input-group">    <input type="text" class="form-control" formControlName="description">
+      </div>
+      </div>
+     
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="addAddress()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

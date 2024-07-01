@@ -1,10 +1,11 @@
-<div style="padding:4rem 20rem;">
-  <h1>Carrito</h1>
-  <div>
-    <div class="producto">
+<div style="padding:2rem 20rem;">     
+  <div *ngIf="this.orderWithProducts.productsOrder.length != 0">
+    <h1>Carrito</h1>
+    <div>
+      <div class="producto">
       <div class="productos-container">
         <div class="enlace-producto">
-          <div style="display: flex;" *ngFor="let producto of this.order[1]">
+          <div style="display: flex;" *ngFor="let producto of this.orderWithProducts.productsOrder">
               <p>{{producto.orderProduct_quantity}}</p>
               <img src={{producto.product_images}} alt="{{ producto.product_name }}">
               <div class="info">
@@ -29,11 +30,32 @@
     </div>
 
   </div>
+  <h5>Direccion</h5>
+      <select class="form-select" aria-label="Default select example">
+        <option value="">Seleccione una direccion</option>
+          <option *ngFor="let address of this.addresses" [value]="address.name">
+            {{ address.name }}
+          </option>
+  
+      </select>
+      
+      <h5>Metodo de pago</h5>
+      <select class="form-select" id="">
+        <option value="">Efectivo</option>
+        <option value="">Tarjeta debito</option>
+        <option value="">Tarjeta credito</option>
+      </select>
       <ul>
         <button class="btn btn-danger" (click)="emptyCart()">Vaciar Carrito</button>
         <button class = "boton-continuar" (click)="confirmOrder()">Continuar</button>
       </ul>
-</div>
+   </div>
+    
+    </div>
+      <div *ngIf="this.orderWithProducts.productsOrder.length == 0" style="padding:2rem 20rem;">
+        <h1>No tienes carrito :/</h1>
+  </div>
+
 
 
 

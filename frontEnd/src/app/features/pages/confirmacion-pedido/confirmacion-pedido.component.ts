@@ -3,7 +3,6 @@ import { RouterLink } from "@angular/router";
 import { Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { OrderService } from "../../../core/services/order-service/order.service";
-import { CarritoService } from "../../../core/services/carrito-service/carrito.service";
 import { Product } from "../../../core/models/class/product";
 import { ProductOrder } from "../../../core/models/class/product-order";
 import { JwtDecoderService } from "../../../core/services/jwt-decoder/jwt-decoder.service";
@@ -23,8 +22,6 @@ export class ConfirmacionPedidoComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  private readonly _orderService$ = inject(OrderService);
-  private readonly _cartService$ = inject(CarritoService);
   private readonly _dataJWT$ = inject(JwtDecoderService);
   listProds: Product[] = [];
   ngOnInit() {

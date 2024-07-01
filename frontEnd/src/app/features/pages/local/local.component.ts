@@ -7,7 +7,6 @@ import { ActivatedRoute } from "@angular/router";
 import { Local } from "../../../core/models/class/local";
 import { Product } from "../../../core/models/class/product";
 import { HttpClient } from "@angular/common/http";
-import { CarritoService } from "../../../core/services/carrito-service/carrito.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -29,7 +28,6 @@ export class LocalComponent implements OnInit {
     private route: ActivatedRoute,
     private readonly productService: ProductosService,
     private readonly localService: LocalService,
-    private readonly cartService: CarritoService,
     private router: Router
   ) {}
 

@@ -1,18 +1,13 @@
-import { Component, signal, inject } from "@angular/core";
+import { Component } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
 import { Product } from "../../../core/models/class/product";
-import { LocalService } from "../../../core/services/local-service/local.service";
 import { ProductosService } from "../../../core/services/producto-service/productos.service";
 import { OnInit } from "@angular/core";
 import { Location } from "@angular/common";
-import { CarritoService } from "../../../core/services/carrito-service/carrito.service";
 import { FormsModule } from "@angular/forms";
 import { OrderService } from "../../../core/services/order-service/order.service";
 import { AuthService } from "../../../core/services/auth-service/auth.service";
 import { ProductOrder } from "../../../core/models/class/product-order";
-import { JwtDecoderService } from "../../../core/services/jwt-decoder/jwt-decoder.service";
-import { jwtDecode } from "jwt-decode";
 import { JwtData } from "../../../core/models/data-jwt";
 import { firstValueFrom, lastValueFrom } from "rxjs";
 import { Order } from "../../../core/models/class/orders";
@@ -30,8 +25,7 @@ export class ProductoComponent implements OnInit {
     private _location: Location,
     private productService: ProductosService,
     private orderService: OrderService,
-    private userService: AuthService,
-    private carritoService: CarritoService
+    private userService: AuthService
   ) {}
 
   // Recibir parametro producto
@@ -96,12 +90,16 @@ export class ProductoComponent implements OnInit {
     if (clientHasOrder) {
       const order: [Order, ProductsFromOrder[]] =
         await this.orderService.getOrder(userId);
+
       const order_id: number = order[0].orderId;
-      console.log(order);
+
+      console.log(order[0].orderId);
+
       for (let orderProduct of order[1]) {
         if (orderProduct.product_productId == this.productId) {
           const productOrder = new ProductOrder(0, "", 0, 0);
-          productOrder.quantity = orderProduct.orderProduct_quantity + 1;
+          productOrder.quantity =
+            orderProduct.orderProduct_quantity + this.cant_prod;
           console.log(productOrder);
           const response = await lastValueFrom(
             this.orderService.updateProductOrder(
@@ -121,8 +119,7 @@ export class ProductoComponent implements OnInit {
         this.productId,
         order_id
       );
-
-      console.log(this.orderService.addProductToOrder(orderProduct));
+      console.log(await this.orderService.addProductToOrder(orderProduct));
 
       alert("Se ha añadido un producto a su pedido");
     } else {
@@ -137,8 +134,8 @@ export class ProductoComponent implements OnInit {
         this.productId,
         response.data.orderId
       );
-
-      this.orderService.addProductToOrder(orderProduct);
+      console.log(orderProduct);
+      await this.orderService.addProductToOrder(orderProduct);
       alert("Se ha creado un nuevo pedido con el producto");
     }
   }

@@ -1,17 +1,10 @@
 import { Component, OnInit, WritableSignal, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterLink } from "@angular/router";
-import { CarritoService } from "../../../core/services/carrito-service/carrito.service";
-import { Product } from "../../../core/models/class/product";
-import { ProductOrder } from "../../../core/models/class/product-order";
-import { BehaviorSubject } from "rxjs";
-import { signal } from "@angular/core";
 import { OrderService } from "../../../core/services/order-service/order.service";
 import { AuthService } from "../../../core/services/auth-service/auth.service";
-import { JwtDecoderService } from "../../../core/services/jwt-decoder/jwt-decoder.service";
-import { Order } from "../../../core/models/class/orders";
-import { JwtData } from "../../../core/models/data-jwt";
-import { ProductsFromOrder } from "../../../core/models/class/ProductsFromOrder";
+import { Address } from "../../../core/models/class/address";
+import { OrderWithProducts } from "../../../core/models/class/OrderWithProducts";
 @Component({
   selector: "app-carrito",
   standalone: true,
@@ -20,9 +13,8 @@ import { ProductsFromOrder } from "../../../core/models/class/ProductsFromOrder"
   imports: [CommonModule, RouterLink],
 })
 export class CarritoComponent implements OnInit {
-  products: Product[] = [];
-  orderProducts: ProductOrder[] = [];
-  order: [Order, ProductsFromOrder[]] = [new Order(), []];
+  orderWithProducts: OrderWithProducts = new OrderWithProducts();
+  addresses: Address[] = [];
   total: number = 0;
   constructor(
     private readonly orderService: OrderService,
@@ -30,25 +22,40 @@ export class CarritoComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.order = await this.orderService.getOrder(
+    const order = await this.orderService.getOrder(
       this.userService.getTokenDecoded().sub
     );
+    this.orderWithProducts.order = order[0];
+    this.orderWithProducts.productsOrder = order[1];
 
-    for (let product of this.order[1]) {
+    for (let product of this.orderWithProducts.productsOrder) {
       this.total += product.product_price * product.orderProduct_quantity;
     }
+    this.userService
+      .getAddresses(this.userService.getTokenDecoded().sub)
+      .subscribe((address) => {
+        this.addresses = address;
+        console.log(this.addresses);
+      });
   }
 
-  async confirmOrder() {
+  public async confirmOrder() {
     console.log(
-      (await this.orderService.confirmOrder(this.order[0].orderId)).subscribe(
-        (response) => {
-          console.log(response);
-        }
-      )
+      (
+        await this.orderService.confirmOrder(
+          this.orderWithProducts.order.orderId
+        )
+      ).subscribe((response) => {
+        console.log(response);
+      })
     );
   }
-  addToCart() {}
-  deleteFromCart() {}
-  emptyCart() {}
+
+  emptyCart() {
+    this.orderService
+      .cancelOrder(this.orderWithProducts.order.orderId)
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
 }
