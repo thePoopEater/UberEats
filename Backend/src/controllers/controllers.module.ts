@@ -33,10 +33,12 @@ import { UserService }  from 'src/providers/user/user.service';
 import { UserController } from './user/user.controller';
 
 import { DeliveryEntity } from 'src/database/entities/delivery.entity';
+import { DeliveryService } from 'src/providers/delivery/delivery.service';
+import { DeliveryController } from './delivery/delivery.controller';
 
 @Module({
     imports:[DatabaseModule, TypeOrmModule.forFeature([ClientEntity,ProductEntity,LocalEntity,OrderEntity,OrderProductEntity, AddressEntity, UserEntity, DeliveryEntity])],
-    controllers: [ProductController,LocalController, OrderController, OrderProductController,ClientController, AddressController, UserController],
-    providers:[ProductService,LocalService,OrderService,OrderProductService,ClientService,AddressService, UserService]
+    controllers: [ProductController,LocalController, OrderController, OrderProductController,ClientController, AddressController, UserController, DeliveryController],
+    providers:[ProductService,LocalService,OrderService,OrderProductService,ClientService,AddressService, UserService, DeliveryService]
 })
 export class ControllersModule {}

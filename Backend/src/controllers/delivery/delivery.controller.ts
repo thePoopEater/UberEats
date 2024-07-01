@@ -1,7 +1,7 @@
 import { BadRequestException, Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { DeliveryEntity } from 'src/database/entities/delivery.entity';
-import { DeliveryService } from 'src/providers/delivery/delivery/delivery.service';
+import { DeliveryService } from 'src/providers/delivery/delivery.service';
 import { DeliveryCreateDTO } from './dto/delivery-create.dto';
 import { DeliveryResponseDTO } from './dto/delivery-response.dto';
 
@@ -55,9 +55,9 @@ export class DeliveryController {
     }
     //Función que retorna un cliente por ID.
     @Get(':id')
-    public async getDeliveryMan(@Param('id') clientId : number) : Promise<DeliveryEntity> {
+    public async getDeliveryMan(@Param('id') deliveryId : number) : Promise<DeliveryEntity> {
         try {
-            const deliveryMan : Promise<DeliveryEntity> = this.deliveryService.getDelivery(clientId);
+            const deliveryMan : Promise<DeliveryEntity> = this.deliveryService.getDelivery(deliveryId);
             return deliveryMan;
         } catch (error : any) {
             let response: DeliveryResponseDTO = {
