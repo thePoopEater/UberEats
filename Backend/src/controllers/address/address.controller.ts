@@ -56,15 +56,9 @@ export class AddressController {
   //Función que permite obtener todos las direcciones almacenadas en la tabla 'address'
   //de la base de datos.
   @Roles(Role.CLIENT)
-  @Get()
-  public async getAllAdress(): Promise<AddressEntity[]> {
-    return await this.addressService.getAllAddresses();
-  }
-
-  @Roles(Role.CLIENT)
   @Get('user/:id')
   public async getAllAdressesFromUser(@Param('id') userId: number) {
-    return this.getAllAdressesFromUser(userId);
+    return this.addressService.getAllAdressFromUser(userId);
   }
   //Función que permite obtener por un id específico una dirección.
   @Get(':id')

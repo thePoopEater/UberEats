@@ -48,7 +48,4 @@ export class AddressService {
     }
   }
   //Función que busca todas las direcciones del repositorio de 'address'.
-  public async getAllAddresses(): Promise<AddressEntity[]> {
-    return this.addressRepository.find();
-  }
 }
