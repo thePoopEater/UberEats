@@ -104,4 +104,22 @@ export class OrderService {
     await this.orderRepository.remove(result);
     return result;
   }
+  public async updateOrderStateToAccepted(
+    orderId: number,
+    orderUpdate: OrderUpdateDTO,
+  ) {
+    const user = await this.userService.findDelivery(orderUpdate.deliverId);
+    if (user) {
+      const existingOrder = await this.orderRepository.findOneBy({
+        orderId: orderId,
+      });
+
+      if (existingOrder) {
+        existingOrder.state = orderUpdate.state;
+        existingOrder.userDelivery = user;
+      }
+      const result = await this.orderRepository.save(existingOrder);
+      return result;
+    }
+  }
 }

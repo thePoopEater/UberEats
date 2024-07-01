@@ -43,6 +43,13 @@ export class UserService {
   public async findUser(id: number) {
     return await this.userRepository.findOneBy({ userId: id });
   }
+
+  public async findDelivery(idDeliver: number) {
+    return await this.userRepository.findOneBy({
+      userId: idDeliver,
+      role: Role.DELIVERY,
+    });
+  }
   public async findLocalAdmin(id: number): Promise<UserEntity> {
     return await this.userRepository.findOneBy({
       userId: id,

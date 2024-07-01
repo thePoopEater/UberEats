@@ -21,16 +21,14 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Role } from 'src/auth/enums/role.enum';
+import { OrderUpdateDTO } from './dto/order-update.dto';
 
 @Controller('order')
 @ApiBearerAuth()
 @ApiTags('Order')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 export class OrderController {
-  constructor(
-    private orderService: OrderService,
-    private localService: LocalService,
-  ) {}
+  constructor(private orderService: OrderService) {}
 
   @Get(':id')
   public async getOrder(@Param('id') orderId: number) {
@@ -77,9 +75,9 @@ export class OrderController {
   @Put(':id')
   public async updateOrder(
     @Param('id', ParseIntPipe) idOrder: number,
-    @Body(ValidationPipe) newOrder: OrderEntity,
+    @Body(ValidationPipe) newOrder: OrderUpdateDTO,
   ) {
-    const order = await this.orderService.findOrder(newOrder.orderId);
+    const order = await this.orderService.findOrder(idOrder);
     if (!order) {
       throw new NotFoundException('No existe esa orden');
     }
@@ -115,5 +113,12 @@ export class OrderController {
         return response;
       }
     }
+  }
+  @Put('/deliver/:id')
+  public async acceptOrder(
+    @Param('id') orderId: number,
+    @Body(ValidationPipe) newOrder: OrderUpdateDTO,
+  ) {
+    return this.orderService.updateOrderStateToAccepted(orderId, newOrder);
   }
 }
