@@ -1,17 +1,22 @@
-<div style="padding:0 10rem 0 10rem;">
-  <h1>{{local.name}}</h1>
-</div>
-<div class="product-card-container" >
-  <div class="row row-cols-3 row-cols-md-2 g-4">
-    <div class="col" *ngFor="let product of this.products">
-      <div class="card">
-        <img src={{product.images}} class="card-img-top" style="width: 15em;height:12rem;padding:1rem;border-radius:1.7rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{product.name}}</h5>
-            <p class="card-text">{{product.description}}</p>
-            <a class="btn btn-success" routerLink="/producto/{{product.productId}}" >Pedir</a>
-          </div>
+<div style="padding:0.5rem 3rem;">
+  <img src={{local.description}} style="width:12rem;">
+
+  <h1>Productos</h1>
+  <div class="row row-cols-3 row-cols-md-1 g-1">
+    <div class="" style="display: inline;" *ngFor="let product of this.products">
+     
+      <a class="card mb-3" style="max-width: 540px;height:6.05rem;" routerLink="/producto/{{product.productId}}">
+        <div class="row no-gutters">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="fs-6">{{product.name}}</h5>
+                    <p class="fs-6" style="margin:0">${{product.price}}</p>
+                    <small class="text-body-secondary" style="font-size: 0.1rem;">{{product.description}}</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <img [src]=product.images class="card-img" alt="Completo" style="height:6rem;width: 8rem;">
+            </div>
         </div>
-        </div>
+      </a>
   </div>
-  

@@ -1,54 +1,61 @@
-<div>
-  <a routerLink = "/inicio">
-    <img class = "botones-superiores" src="assets/images/imagenes-carrito/iconocerrarnegro.png">
-
-  </a>
-  <h1 class = "titulo-carrito">Nombre Restaurante</h1>
-</div>
-
-<div>
-  <div  class="producto">
-    <div class="productos-container">
-      <div class="enlace-producto">
-        <div class="enlace-producto enlace-producto__producto" *ngFor="let producto of listaProd()">
-          <img [src]="producto.images" alt="{{ producto.name }}">
-          <div class="info">
-            <h3 class="titulo-producto">{{ producto.name }}</h3>
-            <p class="precio-producto">${{ producto.price}}</p>
+<div style="padding:2rem 20rem;">     
+  <div *ngIf="this.orderWithProducts.productsOrder.length != 0">
+    <h1>Carrito</h1>
+    <div>
+      <div class="producto">
+      <div class="productos-container">
+        <div class="enlace-producto">
+          <div style="display: flex;" *ngFor="let producto of this.orderWithProducts.productsOrder">
+              <p>{{producto.orderProduct_quantity}}</p>
+              <img src={{producto.product_images}} alt="{{ producto.product_name }}">
+              <div class="info">
+                <h3 class="titulo-producto">{{ producto.product_name }}</h3>
+                <p class="precio-producto">${{ producto.product_price}}</p>      
           </div>
-
+            <small class="" style="padding-top: 1rem;">{{producto.orderProduct_specification}}</small>
+          </div>
         </div>
-        <button class="btn btn-danger" (click)="emptyCart()">Vaciar Carrito</button>
       </div>
+      <hr>
+
     </div>
-    <hr>
+    
+    <hr class="hr-final">
+    
+  </div>
+  <div>
+    <div class="productos-container">
+      <p class="text-subtotal">Subtotal</p>
+      <p class="text-subtotal" style="margin-left: 250px;">$ {{total}}</p>
+    </div>
 
   </div>
+  <h5>Direccion</h5>
+      <select class="form-select" aria-label="Default select example">
+        <option value="">Seleccione una direccion</option>
+          <option *ngFor="let address of this.addresses" [value]="address.name">
+            {{ address.name }}
+          </option>
   
-  <hr class="hr-final">
-  
-</div>
-
-<div>
-
-  <div class="productos-container">
-    <p class="text-subtotal"> Subtotal</p>
-    <p class="text-subtotal" style="margin-left: 250px;">$ {{total}}</p>
+      </select>
+      
+      <h5>Metodo de pago</h5>
+      <select class="form-select" id="">
+        <option value="">Efectivo</option>
+        <option value="">Tarjeta debito</option>
+        <option value="">Tarjeta credito</option>
+      </select>
+      <ul>
+        <button class="btn btn-danger" (click)="emptyCart()">Vaciar Carrito</button>
+        <button class = "boton-continuar" (click)="confirmOrder()">Continuar</button>
+      </ul>
+   </div>
+    
+    </div>
+      <div *ngIf="this.orderWithProducts.productsOrder.length == 0" style="padding:2rem 20rem;">
+        <h1>No tienes carrito :/</h1>
   </div>
 
-</div>
-
-<footer>
-  <section class="wrapper">
-        <nav>
-            <ul>
-
-              <button class = "boton-continuar" routerLink="/pagos">Continuar</button>
-                
-            </ul>
-    </nav>
-    </section>
-</footer>
 
 
 

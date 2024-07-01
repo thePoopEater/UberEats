@@ -1,13 +1,17 @@
-import { Component, signal, inject } from "@angular/core";
+import { Component } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
 import { Product } from "../../../core/models/class/product";
-import { LocalService } from "../../../core/services/local-service/local.service";
 import { ProductosService } from "../../../core/services/producto-service/productos.service";
 import { OnInit } from "@angular/core";
 import { Location } from "@angular/common";
-import { CarritoService } from "../../../core/services/carrito-service/carrito.service";
 import { FormsModule } from "@angular/forms";
+import { OrderService } from "../../../core/services/order-service/order.service";
+import { AuthService } from "../../../core/services/auth-service/auth.service";
+import { ProductOrder } from "../../../core/models/class/product-order";
+import { JwtData } from "../../../core/models/data-jwt";
+import { firstValueFrom, lastValueFrom } from "rxjs";
+import { Order } from "../../../core/models/class/orders";
+import { ProductsFromOrder } from "../../../core/models/class/ProductsFromOrder";
 @Component({
   selector: "app-producto",
   standalone: true,
@@ -16,13 +20,19 @@ import { FormsModule } from "@angular/forms";
   styleUrl: "./producto.component.css",
 })
 export class ProductoComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private _location: Location) {}
+  constructor(
+    private route: ActivatedRoute,
+    private _location: Location,
+    private productService: ProductosService,
+    private orderService: OrderService,
+    private userService: AuthService
+  ) {}
 
   // Recibir parametro producto
 
   // Variables cantidad prod
-  cant_prod = signal(1);
-  specifications = signal("");
+  cant_prod = 1;
+  specifications = "";
   button_plus_enable = true;
   button_sub_enable = true;
   // obtener de la base de datos el stock
@@ -31,17 +41,14 @@ export class ProductoComponent implements OnInit {
   // info del producto
   price = 0;
   total_price = this.price;
-  productId: string = "";
+  productId: number = 0;
   // test class product and send to cart
-
-  private productServ = inject(ProductosService);
-  private cartSer$ = inject(CarritoService);
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.productId = params["{idProd}"];
+      this.productId = parseInt(params["{idProd}"]);
     });
-    this.productServ.getProduct(this.productId).subscribe((resp) => {
+    this.productService.getProduct(this.productId).subscribe((resp) => {
       this.product = resp;
       this.price = this.product.price;
     });
@@ -51,9 +58,9 @@ export class ProductoComponent implements OnInit {
     this._location.back();
   }
   addProductCant() {
-    if (this.product_stock > 0 && this.product_stock > this.cant_prod()) {
+    if (this.product_stock > 0 && this.product_stock > this.cant_prod) {
       this.button_sub_enable = true;
-      this.cant_prod.set(this.cant_prod() + 1);
+      this.cant_prod = this.cant_prod + 1;
       this.total_price += this.product.price;
     } else {
       this.button_plus_enable = false;
@@ -61,8 +68,8 @@ export class ProductoComponent implements OnInit {
   }
 
   subProductCant() {
-    if (this.cant_prod() > 0) {
-      this.cant_prod.set(this.cant_prod() - 1);
+    if (this.cant_prod > 0) {
+      this.cant_prod = this.cant_prod - 1;
       this.total_price -= this.product.price;
       if (!this.button_plus_enable) {
         this.button_plus_enable = true;
@@ -72,16 +79,64 @@ export class ProductoComponent implements OnInit {
     }
   }
 
-  addProductToCart() {
-    if (this.cant_prod() > 0) {
-      this.cartSer$.addToCart(
-        this.product,
-        this.cant_prod(),
-        this.specifications()
+  async addProductToCart() {
+    const jwtDecode: JwtData = this.userService.getTokenDecoded();
+    const userId = jwtDecode.sub;
+    const local_id = 1;
+    // Si el usuario ya tiene una order, busca la orden y agrega este producto a esa orden
+    const clientHasOrder: boolean = await this.orderService.clientHasOrder(
+      userId
+    );
+    if (clientHasOrder) {
+      const order: [Order, ProductsFromOrder[]] =
+        await this.orderService.getOrder(userId);
+
+      const order_id: number = order[0].orderId;
+
+      console.log(order[0].orderId);
+
+      for (let orderProduct of order[1]) {
+        if (orderProduct.product_productId == this.productId) {
+          const productOrder = new ProductOrder(0, "", 0, 0);
+          productOrder.quantity =
+            orderProduct.orderProduct_quantity + this.cant_prod;
+          console.log(productOrder);
+          const response = await lastValueFrom(
+            this.orderService.updateProductOrder(
+              productOrder,
+              orderProduct.orderProduct_orderProductId
+            )
+          );
+          console.log(response);
+          alert("Se añadio una cantidad de ese producto a su pedido");
+          return;
+        }
+      }
+
+      const orderProduct = new ProductOrder(
+        this.cant_prod,
+        this.specifications,
+        this.productId,
+        order_id
       );
+      console.log(await this.orderService.addProductToOrder(orderProduct));
+
+      alert("Se ha añadido un producto a su pedido");
     } else {
-      console.log(this.specifications());
-      console.log("no hay productos seleccionados");
+      // Si no tiene una orden crea un orden con el producto que acaba de agregar
+      const response = await firstValueFrom(
+        this.orderService.createOrder(userId, local_id)
+      );
+      console.log(response);
+      const orderProduct = new ProductOrder(
+        this.cant_prod,
+        this.specifications,
+        this.productId,
+        response.data.orderId
+      );
+      console.log(orderProduct);
+      await this.orderService.addProductToOrder(orderProduct);
+      alert("Se ha creado un nuevo pedido con el producto");
     }
   }
 }

@@ -1,4 +1,4 @@
 export class JwtData {
-  sub!: number;
+  sub: number = 0;
   role: string = "";
 }

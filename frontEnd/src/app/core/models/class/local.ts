@@ -1,5 +1,4 @@
 export class Local {
-
     id : number = 0;
     name : string = '';
     address : string = '';
@@ -35,3 +34,4 @@ export class LocalUpdate {
     schedule : string = "";
     category : string = "";
 }
+

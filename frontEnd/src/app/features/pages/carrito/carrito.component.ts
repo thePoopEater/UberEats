@@ -1,11 +1,10 @@
 import { Component, OnInit, WritableSignal, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterLink } from "@angular/router";
-import { CarritoService } from "../../../core/services/carrito-service/carrito.service";
-import { Product } from "../../../core/models/class/product";
-import { ProductOrder } from "../../../core/models/class/product-order";
-import { BehaviorSubject } from "rxjs";
-import { signal } from "@angular/core";
+import { OrderService } from "../../../core/services/order-service/order.service";
+import { AuthService } from "../../../core/services/auth-service/auth.service";
+import { Address } from "../../../core/models/class/address";
+import { OrderWithProducts } from "../../../core/models/class/OrderWithProducts";
 @Component({
   selector: "app-carrito",
   standalone: true,
@@ -14,23 +13,49 @@ import { signal } from "@angular/core";
   imports: [CommonModule, RouterLink],
 })
 export class CarritoComponent implements OnInit {
-  private cartService$ = inject(CarritoService);
+  orderWithProducts: OrderWithProducts = new OrderWithProducts();
+  addresses: Address[] = [];
+  total: number = 0;
+  constructor(
+    private readonly orderService: OrderService,
+    private readonly userService: AuthService
+  ) {}
 
-  listaProd: WritableSignal<Product[]> = signal([]);
-  listaOrderProd: WritableSignal<ProductOrder[]> = signal([]);
-  public total: number = 0;
+  async ngOnInit() {
+    const order = await this.orderService.getOrder(
+      this.userService.getTokenDecoded().sub
+    );
+    this.orderWithProducts.order = order[0];
+    this.orderWithProducts.productsOrder = order[1];
 
-  constructor() {}
-
-  ngOnInit() {
-    this.listaProd.set(this.cartService$.getProductsCart());
-    this.listaOrderProd.set(this.cartService$.getCart().getCart());
-    this.total = this.cartService$.total;
+    for (let product of this.orderWithProducts.productsOrder) {
+      this.total += product.product_price * product.orderProduct_quantity;
+    }
+    this.userService
+      .getAddresses(this.userService.getTokenDecoded().sub)
+      .subscribe((address) => {
+        this.addresses = address;
+        console.log(this.addresses);
+      });
   }
-  addToCart() {}
 
-  deleteFromCart() {}
+  public async confirmOrder() {
+    console.log(
+      (
+        await this.orderService.confirmOrder(
+          this.orderWithProducts.order.orderId
+        )
+      ).subscribe((response) => {
+        console.log(response);
+      })
+    );
+  }
+
   emptyCart() {
-    this.cartService$.cleanShoppingCart();
+    this.orderService
+      .cancelOrder(this.orderWithProducts.order.orderId)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 }

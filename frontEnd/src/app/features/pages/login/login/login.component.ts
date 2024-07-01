@@ -43,14 +43,17 @@ export class LoginComponent implements OnInit {
         password
       );
       const decodeJWT = this.jwtService.decodetoken(userResponse.accessToken);
-      console.log("Este es el token decodificado", decodeJWT);
 
-      if (decodeJWT.role === "client") {
+      console.log("Este es el token decodificado", decodeJWT.role);
+      // Aca falta un enum para los roles
+      if (decodeJWT.role == "client") {
         this.router.navigate(["/inicio"]);
       }
-
-      if (decodeJWT.role === "localAdmin") {
-        this.router.navigate(["adminLocal"]);
+      if (decodeJWT.role == "delivery") {
+        this.router.navigate(["/deliver"]);
+      }
+      if (decodeJWT.role == "localAdmin") {
+        this.router.navigate(["local/admin"]);
       }
     } catch (error) {
       console.error("Error al iniciar sesion", error);

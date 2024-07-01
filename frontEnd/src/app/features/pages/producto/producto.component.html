@@ -1,44 +1,40 @@
-<div style="width:50rem;padding: 1rem;">
-  <div class="header-product">
-    <div class="button-back">
-      <a (click)="toBack()">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M5 12l14 0" />
-            <path d="M5 12l6 6" />
-            <path d="M5 12l6 -6" />
-          </svg>
-        </a>
-    </div>
-    <div class="image-product">
-      <img src={{product.images}} alt="product-img" />
-    </div>
-  </div>
-  <div class="description-prod">
-    <h2 class="title-prod">{{product.name}}</h2>
-    <h3>{{product.price}} clp</h3>
-    <p>{{product.description}}</p>
-  </div>
-  <div class="special-inst">
-    <h3>Instrucciones especiales</h3>
-      <textarea class="aditional-ins" type="text" placeholder="Agregar una nota (salsa adicional, sin cebolla, etc.)" id="instr-aditional" [(ngModel)] = 'specifications'></textarea>
-      <div class="buttons-incDec-container">
-        <div class="buttons-span">
-          <!-- Cambiar el color y desactivar boton minus y plus-->
-          <span class="minus" (click)="subProductCant()">-</span>
-          <span class="num">{{cant_prod()}}</span>
-          <span class="plus" (click)="addProductCant()">+</span>
-        </div>
+ <div style="padding:5rem;">
+  <div class="hstack gap-3" style="align-items: normal;">
   
+    <div class="header-product">
+      <div class="image-product">
+        <img src={{product.images}} alt="product-img" />
+      </div>
     </div>
-
-    <!-- Por cada producto -->
+  
+    <div style="padding-left:2rem;width:100%;">
+      <div class="description-prod">
+        <h2 class="title-prod">{{product.name}}</h2>
+        <h3>{{product.price}} clp</h3>
+        <p>{{product.description}}</p>
+      </div>
+      
+      <div class="special-inst">
+        <h3>Instrucciones especiales</h3>
+          <textarea class="aditional-ins" type="text" placeholder="Agregar una nota (salsa adicional, sin cebolla, etc.)" id="instr-aditional" [(ngModel)] = 'specifications'></textarea>
+      
+          <div class="buttons-incDec-container">
+      
+            <div class="buttons-span">
+              <!-- Cambiar el color y desactivar boton minus y plus-->
+              <span class="minus" (click)="subProductCant()">-</span>
+              <span class="num">{{cant_prod}}</span>
+              <span class="plus" (click)="addProductCant()">+</span>
+            </div>
+    
+        </div>
+    
+    </div>
+    
   </div>
-
-  <div class="button-add-car">
-      <button (click)="addProductToCart()"> Agregar {{cant_prod()}} al Carrito • CLP{{price * cant_prod()}}</button>
+  
   </div>
-
-
-
+    <div class="button-add-car" style="padding-top:2rem;">
+        <button (click)="addProductToCart()"> Agregar {{cant_prod}} al Carrito • CLP{{price * cant_prod}}</button>
+    </div>
 </div>

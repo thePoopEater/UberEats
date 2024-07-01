@@ -1,117 +1,124 @@
-<div style="padding:3rem;width:35rem" [formGroup] = "signup_delivery_form">
-    <h1>Registrarse como repartidor</h1>
-    <div class="form-group">
-        <div class="row">
-            <div class="col">
-                <label for="last_name_label">Nombre</label>
-                <input type="text" class="form-control" formControlName="name"
-                [ngClass]="{
+<div style="padding: 1rem 3rem;width:40rem" [formGroup]="signup_delivery_form">
+	<h1>Registrarse como repartidor</h1>
+	<div class="form-group">
+		<div class="row">
+			<div class="col">
+				<label for="last_name_label">Nombre</label>
+				<input type="text" class="form-control" formControlName="name" [ngClass]="{
                 'is-invalid': signup_delivery_form.get('name')?.touched && signup_delivery_form.get('name')?.invalid,
                 'is-valid': signup_delivery_form.get('name')?.touched && signup_delivery_form.get('name')?.valid
                 }">
-                <div *ngIf="signup_delivery_form.get('name')?.touched && signup_delivery_form.get('name')?.invalid" class="invalid-feedback">
-                    <div *ngIf="signup_delivery_form.get('name')?.errors?.['required']">El nombre es requerido.</div>
-                </div>
-                <div *ngIf="signup_delivery_form.get('name')?.touched && !signup_delivery_form.get('name')?.invalid" class="valid-feedback">
-                    <div class="is-valid">Se ve bien !</div>
-                </div>
-                <small id="name_help" class="form-text text-muted">Ingrese su nombre</small>
-        </div>
-        <div class="col">
-            <label for="last_name_label">Apellido</label>
-            <input type="text" class="form-control" formControlName="last_name"
-                [ngClass]="{
+				<div *ngIf="signup_delivery_form.get('name')?.touched && signup_delivery_form.get('name')?.invalid"
+					class="invalid-feedback">
+					<div *ngIf="signup_delivery_form.get('name')?.errors?.['required']">El nombre es
+						requerido.</div>
+				</div>
+				<div *ngIf="signup_delivery_form.get('name')?.touched && !signup_delivery_form.get('name')?.invalid"
+					class="valid-feedback">
+					<div class="is-valid">Se ve bien !</div>
+				</div>
+				<small id="name_help" class="form-text text-muted">Ingrese su nombre</small>
+			</div>
+			<div class="col">
+				<label for="last_name_label">Apellido</label>
+				<input type="text" class="form-control" formControlName="last_name" [ngClass]="{
                 'is-invalid': signup_delivery_form.get('last_name')?.touched && signup_delivery_form.get('last_name')?.invalid,
                 'is-valid': signup_delivery_form.get('last_name')?.touched && signup_delivery_form.get('last_name')?.valid
                 }">
-                <div *ngIf="signup_delivery_form.get('last_name')?.touched && signup_delivery_form.get('last_name')?.invalid" class="invalid-feedback">
-                    <div *ngIf="signup_delivery_form.get('last_name')?.errors?.['required']">El apellido es requerido.</div>
-                </div>
-                <div *ngIf="signup_delivery_form.get('last_name')?.touched && !signup_delivery_form.get('last_name')?.invalid" class="valid-feedback">
-                    <div class="is-valid">Se ve bien !</div>
-                </div>
-            <small id="last_name_help" class="form-text text-muted">Ingrese su apellido</small>       
-            </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="address_label">Tipo de vehiculo</label>
-        <select class="form-select" formControlName="type_vehicle"
-                [ngClass]="{
+				<div *ngIf="signup_delivery_form.get('last_name')?.touched && signup_delivery_form.get('last_name')?.invalid"
+					class="invalid-feedback">
+					<div *ngIf="signup_delivery_form.get('last_name')?.errors?.['required']">El
+						apellido es requerido.</div>
+				</div>
+				<div *ngIf="signup_delivery_form.get('last_name')?.touched && !signup_delivery_form.get('last_name')?.invalid"
+					class="valid-feedback">
+					<div class="is-valid">Se ve bien !</div>
+				</div>
+				<small id="last_name_help" class="form-text text-muted">Ingrese su apellido</small>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="address_label">Tipo de vehiculo</label>
+		<select class="form-select" formControlName="type_vehicle" [ngClass]="{
                 'is-invalid': signup_delivery_form.get('type_vehicle')?.touched && signup_delivery_form.get('type_vehicle')?.invalid,
                 'is-valid': signup_delivery_form.get('type_vehicle')?.touched && signup_delivery_form.get('type_vehicle')?.valid
                 }">
-        <option value="" disabled>Seleccione un tipo de vehiculo</option>
-        <option value="Auto">Auto</option>
-        <option value="Motocicleta">Motocicleta</option>
-        <option value="Bicicleta">Bicicleta</option>
-        </select>
-        <div *ngIf="signup_delivery_form.get('type_vehicle')?.touched && signup_delivery_form.get('type_vehicle')?.invalid" class="invalid-feedback">
-            Porfavor seleccione un tipo de vehiculo
-        </div>
-        <small id="address_help" class="form-text text-muted">Ingrese el tipo de vehiculo</small>
-    </div>
-        <!-- Email field-->
-        <div class="form-group">
-            <label for="email_label">Correo electronico</label>
-            <input type="email" class="form-control" formControlName="email"
-                [ngClass]="{
+			<option value="" disabled>Seleccione un tipo de vehiculo</option>
+			<option value="Auto">Auto</option>
+			<option value="Motocicleta">Motocicleta</option>
+			<option value="Bicicleta">Bicicleta</option>
+		</select>
+		<div *ngIf="signup_delivery_form.get('type_vehicle')?.touched && signup_delivery_form.get('type_vehicle')?.invalid"
+			class="invalid-feedback">
+			Porfavor seleccione un tipo de vehiculo
+		</div>
+		<small id="address_help" class="form-text text-muted">Ingrese el tipo de vehiculo</small>
+	</div>
+	<!-- Email field-->
+	<div class="form-group">
+		<label for="email_label">Correo electronico</label>
+		<input type="email" class="form-control" formControlName="email" [ngClass]="{
                 'is-invalid': signup_delivery_form.get('email')?.touched && signup_delivery_form.get('email')?.invalid,
                 'is-valid': signup_delivery_form.get('email')?.touched && signup_delivery_form.get('email')?.valid
                 }">
-            <div *ngIf="signup_delivery_form.get('email')?.touched && signup_delivery_form.get('email')?.invalid" class="invalid-feedback">
-                <div *ngIf="signup_delivery_form.get('email')?.errors?.['required']">El correo es requerido.</div>
-                <div *ngIf="signup_delivery_form.get('email')?.errors?.['email']">Ingrese un correo valido.</div>
-            </div>
-            <div *ngIf="signup_delivery_form.get('email')?.touched && !signup_delivery_form.get('email')?.invalid" class="valid-feedback">
-                <div class="is-valid">Se ve bien !</div>
-            </div>
-            <small class="form-text text-muted">Ingrese su correo</small>    
-        </div>
+		<div *ngIf="signup_delivery_form.get('email')?.touched && signup_delivery_form.get('email')?.invalid"
+			class="invalid-feedback">
+			<div *ngIf="signup_delivery_form.get('email')?.errors?.['required']">El correo es requerido.
+			</div>
+			<div *ngIf="signup_delivery_form.get('email')?.errors?.['email']">Ingrese un correo valido.
+			</div>
+		</div>
+		<div *ngIf="signup_delivery_form.get('email')?.touched && !signup_delivery_form.get('email')?.invalid"
+			class="valid-feedback">
+			<div class="is-valid">Se ve bien !</div>
+		</div>
+		<small class="form-text text-muted">Ingrese su correo</small>
+	</div>
 
-        <div class="form-group">
-            <label for="password_label">Contraseña</label>
-            <input type="password" class="form-control" id="password" formControlName="password"
-            [ngClass]="{
+	<div class="form-group">
+		<label for="password_label">Contraseña</label>
+		<input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{
             'is-invalid': signup_delivery_form.get('password')?.touched && signup_delivery_form.get('password')?.invalid,
             'is-valid': signup_delivery_form.get('password')?.touched && signup_delivery_form.get('password')?.valid
             }">
-            <div *ngIf="signup_delivery_form.get('password')?.touched && signup_delivery_form.get('password')?.invalid" class="invalid-feedback">
-                <div *ngIf="signup_delivery_form.get('password')?.errors?.['required']">La contraseña es requerida.</div>
-                <div *ngIf="signup_delivery_form.get('password')?.errors?.['minlength']">La contraseña debe tener almenos 6 caracteres.</div>
-            </div>
-            <div *ngIf="signup_delivery_form.get('password')?.touched && !signup_delivery_form.get('password')?.invalid" class="valid-feedback">
-                <div class="is-valid">Se ve bien !</div>
-            </div>
-            <small id="password_help" class="form-text text-muted">Escribe una contraseña segura para su cuenta</small>
-        </div>
-        
-        <div class="form-group">
-            <label for="address_label">Dirección</label>
-            <input
-                type="text"
-                class="form-control"
-                autocomplete="off"
-                formControlName="address"
-            [ngClass]="{
+		<div *ngIf="signup_delivery_form.get('password')?.touched && signup_delivery_form.get('password')?.invalid"
+			class="invalid-feedback">
+			<div *ngIf="signup_delivery_form.get('password')?.errors?.['required']">La contraseña es
+				requerida.</div>
+			<div *ngIf="signup_delivery_form.get('password')?.errors?.['minlength']">La contraseña debe
+				tener almenos 6 caracteres.</div>
+		</div>
+		<div *ngIf="signup_delivery_form.get('password')?.touched && !signup_delivery_form.get('password')?.invalid"
+			class="valid-feedback">
+			<div class="is-valid">Se ve bien !</div>
+		</div>
+		<small id="password_help" class="form-text text-muted">Escribe una contraseña segura para su
+			cuenta</small>
+	</div>
+
+	<div class="form-group">
+		<label for="address_label">Dirección</label>
+		<input type="text" class="form-control" autocomplete="off" formControlName="address" [ngClass]="{
                 'is-invalid': signup_delivery_form.get('address')?.touched && signup_delivery_form.get('address')?.invalid,
                 'is-valid': signup_delivery_form.get('address')?.touched && signup_delivery_form.get('address')?.valid
             }">
-            <div *ngIf="signup_delivery_form.get('address')?.touched && signup_delivery_form.get('address')?.invalid" class="invalid-feedback">
-                <div *ngIf="signup_delivery_form.get('address')?.errors?.['required']">La direccion es requerida.</div>
-            </div>
-            <div *ngIf="signup_delivery_form.get('address')?.touched && !signup_delivery_form.get('address')?.invalid" class="valid-feedback">
-                <div class="is-valid">Se ve bien !</div>
-            </div>
-            <small id="address_help" class="form-text text-muted">Ingrese su dirección</small>
-        </div>
-        <br>
-        <div class="form-group">
-            <button class="btn btn-success form-control" (click)="register()" 
-            [disabled]="signup_delivery_form.controls['email'].invalid || 
+		<div *ngIf="signup_delivery_form.get('address')?.touched && signup_delivery_form.get('address')?.invalid"
+			class="invalid-feedback">
+			<div *ngIf="signup_delivery_form.get('address')?.errors?.['required']">La direccion es
+				requerida.</div>
+		</div>
+		<div *ngIf="signup_delivery_form.get('address')?.touched && !signup_delivery_form.get('address')?.invalid"
+			class="valid-feedback">
+			<div class="is-valid">Se ve bien !</div>
+		</div>
+		<small id="address_help" class="form-text text-muted">Ingrese su dirección</small>
+	</div>
+	<br>
+	<div class="form-group">
+		<button class="btn btn-success form-control" (click)="register()" [disabled]="signup_delivery_form.controls['email'].invalid || 
             signup_delivery_form.controls['password'].invalid ||
-            signup_delivery_form.controls['address'].invalid"
-            >Registrarse</button>
-        </div>
-       
+            signup_delivery_form.controls['address'].invalid">Registrarse</button>
+	</div>
+
 </div>

@@ -9,15 +9,7 @@ import {
 } from "@angular/forms";
 import { AuthService } from "../../../core/services/auth-service/auth.service";
 import { Router } from "@angular/router";
-import {
-  catchError,
-  debounceTime,
-  distinctUntilChanged,
-  Observable,
-  of,
-  switchMap,
-} from "rxjs";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { ROLES } from "../../../core/enviroment/enviroment";
 
 @Component({
   selector: "app-signup-deliver",
@@ -27,8 +19,6 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
   styleUrl: "./signup-deliver.component.css",
 })
 export class SignupDeliverComponent {
-  public suggestions: any[] = [];
-  showSuggestions: boolean = false;
   signup_delivery_form: FormGroup = new FormGroup({
     email: new FormControl<string>("", [Validators.required, Validators.email]),
     name: new FormControl<string>("", Validators.required),
@@ -44,23 +34,22 @@ export class SignupDeliverComponent {
 
   constructor(
     private readonly authService: AuthService,
-    private router: Router,
-    private http: HttpClient
+    private router: Router
   ) {}
-  hideSuggestions() {
-    // Usar setTimeout para esperar que el evento mousedown en los elementos de la lista se complete
-    setTimeout(() => (this.showSuggestions = false), 200);
-  }
+
+  ngOnInit() {}
   public register() {
     const name = this.signup_delivery_form.controls["name"].value;
+    const last_name = this.signup_delivery_form.controls["last_name"].value;
     const password = this.signup_delivery_form.controls["password"].value;
-    const plate_number =
-      this.signup_delivery_form.controls["plate_number"].value;
-    const type_vehicle =
-      this.signup_delivery_form.controls["type_vehicle"].value;
+    const email = this.signup_delivery_form.controls["email"].value;
 
-    // this.authService.register(username,password,plate_number,run,kind_vehicle);
+    this.authService
+      .register(name, last_name, email, password, ROLES.DELIVERY)
+      .subscribe((response) => {
+        console.log(response);
+      });
+
     this.router.navigate(["deliver"]);
   }
-  ngOnInit() {}
 }

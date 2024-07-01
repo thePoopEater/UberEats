@@ -29,7 +29,7 @@
   }
 
   .enlace-producto {
-    display: flex;
+    display: inline;
     align-items: center;
     border-radius: 5px;
     text-decoration: none;
