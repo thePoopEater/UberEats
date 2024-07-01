@@ -1,4 +1,13 @@
-import { Controller,Post,Get,Body,Param,BadRequestException, ParseIntPipe, ValidationPipe } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Body,
+  Param,
+  BadRequestException,
+  ParseIntPipe,
+  ValidationPipe,
+} from '@nestjs/common';
 import { AddressService } from 'src/providers/address/address.service';
 import { AddressCreateDTO } from './dto/address-create.dto';
 import { AddressResponseDTO } from './dto/address-response.dto';
@@ -22,19 +31,21 @@ export class AddressController {
   //de la entidad address y client. Si el cliente se agregó correctamente se retorna el mensaje response.
   @Roles(Role.CLIENT)
   @Post()
-  async addDireccion(@Body(ValidationPipe) request: AddressCreateDTO): Promise<AddressResponseDTO> {
+  async addDireccion(
+    @Body(ValidationPipe) request: AddressCreateDTO,
+  ): Promise<AddressResponseDTO> {
     if (!request.userId) {
       throw new BadRequestException("Ingresa un 'clienteId'");
     }
     const newAddress = new AddressEntity();
-    newAddress.user = { userId: request.userId } as UserEntity; 
+    newAddress.user = { userId: request.userId } as UserEntity;
     newAddress.name = request.name;
     newAddress.description = request.description;
 
-    await this.addressService.addAddress(newAddress);
+    const addressResponse = await this.addressService.addAddress(newAddress);
 
     const response: AddressResponseDTO = {
-      data: null,
+      data: addressResponse,
       statusCode: 200,
       statusDescription: 'Dirección Agregada',
       error: null,
@@ -50,10 +61,13 @@ export class AddressController {
     return await this.addressService.getAllAddresses();
   }
 
-    //Función que permite obtener por un id específico una dirección.
-    @Get(':id')
-    public async getAddress(@Param('id', ParseIntPipe) addressId : number) : Promise<AddressEntity> {
-        const address : Promise<AddressEntity> = this.addressService.getAddress(addressId);
-        return address;
-    }
+  //Función que permite obtener por un id específico una dirección.
+  @Get(':id')
+  public async getAddress(
+    @Param('id', ParseIntPipe) addressId: number,
+  ): Promise<AddressEntity> {
+    const address: Promise<AddressEntity> =
+      this.addressService.getAddress(addressId);
+    return address;
+  }
 }

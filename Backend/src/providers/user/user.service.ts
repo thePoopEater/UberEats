@@ -25,40 +25,51 @@ export class UserService {
   getAll() {
     return this.userRepository.find();
   }
-  
-async buscarUserRole(userId: number, role: Role): Promise<UserEntity> {
-  const user = await this.userRepository.findOne({ where: { userId, role } });
-  if (!user) {
+
+  async buscarUserRole(userId: number, role: Role): Promise<UserEntity> {
+    const user = await this.userRepository.findOne({ where: { userId, role } });
+    if (!user) {
       throw new NotFoundException(`Usuario no encontrado`);
+    }
+    return user;
   }
-  return user;
-}
 
-  public async findClient(id : number) : Promise<UserEntity> {
-    return await this.userRepository.findOneBy({userId: id, role: Role.CLIENT});
-}
-public async findLocalAdmin(id : number) : Promise<UserEntity> {
-  return await this.userRepository.findOneBy({userId: id, role: Role.LOCALADMIN});
-}
+  public async findClient(id: number): Promise<UserEntity> {
+    return await this.userRepository.findOneBy({
+      userId: id,
+      role: Role.CLIENT,
+    });
+  }
+  public async findUser(id: number) {
+    return await this.userRepository.findOneBy({ userId: id });
+  }
+  public async findLocalAdmin(id: number): Promise<UserEntity> {
+    return await this.userRepository.findOneBy({
+      userId: id,
+      role: Role.LOCALADMIN,
+    });
+  }
 
-public getAllClients() {
-  return this.userRepository.find({where: {role: Role.CLIENT },});
-}
+  public getAllClients() {
+    return this.userRepository.find({ where: { role: Role.CLIENT } });
+  }
 
-public getAllLocalAdmins() {
-  return this.userRepository.find({where: {role: Role.LOCALADMIN },});
-}
+  public getAllLocalAdmins() {
+    return this.userRepository.find({ where: { role: Role.LOCALADMIN } });
+  }
 
-public async getLocal (idLocalAdmin: number): Promise<LocalEntity> {
-  try{
-    const local = await this.localRepository.createQueryBuilder('local').where('local.userId = :idLocalAdmin', { idLocalAdmin }).getOne();
-      if (!local){
+  public async getLocal(idLocalAdmin: number): Promise<LocalEntity> {
+    try {
+      const local = await this.localRepository
+        .createQueryBuilder('local')
+        .where('local.userId = :idLocalAdmin', { idLocalAdmin })
+        .getOne();
+      if (!local) {
         throw new NotFoundException('Local no encontrado');
       }
-      return local; 
-  } catch (error:any){
-    throw new Error('Este usuario no tiene ningún local asociado');
+      return local;
+    } catch (error: any) {
+      throw new Error('Este usuario no tiene ningún local asociado');
+    }
   }
-}
-
 }
