@@ -24,8 +24,13 @@ export class LocalService {
   }
 
   public getLocalFromAdmin(idAdminLocal: number): Observable<Local> {
+    const token = sessionStorage.getItem("token");
+    const header = new HttpHeaders().set("Authorization", `Bearer ${token}`);
     console.log("numbero id admin: ", idAdminLocal);
-    return this.http.get<Local>(env.URL_GET_LOCAL_FROM_ADMIN + idAdminLocal);
+
+    return this.http.get<Local>(env.URL_GET_LOCAL_FROM_ADMIN + idAdminLocal, {
+      headers: header,
+    });
   }
 
   public editLocal(idLocal: number, localData: LocalUpdate, token: string) {
