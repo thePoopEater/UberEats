@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'; //npm install --save @nestjs/swagger
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ValidationPipe, BadRequestException } from '@nestjs/common';
 
@@ -33,6 +33,8 @@ async function bootstrap() {
   const documentacion = SwaggerModule.createDocument(app, configuracion); //
   SwaggerModule.setup('api/doc', app, documentacion);
 
-  await app.listen(3000);
+  await app.listen(3000, '192.168.0.10', function(){
+      console.log('Listening to Port: ' + 3000);
+  });
 }
 bootstrap();

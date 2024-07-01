@@ -10,6 +10,7 @@ import {
 import { LocalEntity } from './local.entity';
 import { OrderProductEntity } from './order-products.entity';
 import { UserEntity } from './user.entity';
+import { DeliveryEntity } from './delivery.entity';
 
 @Entity({ name: 'order' })
 export class OrderEntity {

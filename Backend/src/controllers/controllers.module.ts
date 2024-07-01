@@ -28,14 +28,18 @@ import { UserEntity } from 'src/database/entities/user.entity';
 import { UserService }  from 'src/providers/user/user.service';
 import { UserController } from './user/user.controller';
 
+import { DeliveryEntity } from 'src/database/entities/delivery.entity';
+import { DeliveryService } from 'src/providers/delivery/delivery.service';
+import { DeliveryController } from './delivery/delivery.controller';
+
 import { RoutesEntity } from 'src/database/entities/routes.entity';
 import { RoutesController } from './routes/routes.controller';
 import { RoutesService } from 'src/providers/routes/routes.service';
 
 
 @Module({
-    imports:[DatabaseModule, TypeOrmModule.forFeature([ProductEntity,LocalEntity,OrderEntity,OrderProductEntity, AddressEntity, UserEntity, RoutesEntity])],
-    controllers: [ProductController,LocalController, OrderController, OrderProductController, AddressController, UserController, RoutesController],
-    providers:[ProductService,LocalService,OrderService,OrderProductService,AddressService, UserService, RoutesService]
+    imports:[DatabaseModule, TypeOrmModule.forFeature([ProductEntity,LocalEntity,OrderEntity,OrderProductEntity, AddressEntity, UserEntity, RoutesEntity, DeliveryEntity])],
+    controllers: [ProductController,LocalController, OrderController, OrderProductController, AddressController, UserController, RoutesController, DeliveryController],
+    providers:[ProductService,LocalService,OrderService,OrderProductService,AddressService, UserService, RoutesService, DeliveryService]
 })
 export class ControllersModule {}
