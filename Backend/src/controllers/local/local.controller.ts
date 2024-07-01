@@ -1,4 +1,14 @@
-import { Controller,Get,Post,Body,Param,Put,BadRequestException, ValidationPipe, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Put,
+  BadRequestException,
+  ValidationPipe,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { LocalCreateDTO } from './dto/local-create.dto';
 import { LocalResponseDTO } from './dto/local-response.dto';
@@ -22,66 +32,71 @@ export class LocalController {
     private localService: LocalService,
     private productService: ProductService,
     private orderService: OrderService,
-    private orderProductService: OrderProductService,
   ) {}
 
-    // Funcion para guardar un nuevo local en el repositorio de locales, tiene como parametro una peticion BODY de tipo LocalCreateDTO
-    // esta a su vez esta compuesto de los siguientes datos : name, address, schedule, description (todos strings) 
-    @Post()
-    @Roles(Role.LOCALADMIN)
-    public async postLocal(@Body(ValidationPipe) request : LocalCreateDTO) : Promise<LocalResponseDTO> {
-        if (request) { 
-          await this.localService.create(request);
-            const response : LocalResponseDTO = {
-                data : "Se creó un local",
-                statusCode: 200,
-                statusDescription : 'Listo',
-                error : null
-            } as LocalResponseDTO;
+  // Funcion para guardar un nuevo local en el repositorio de locales, tiene como parametro una peticion BODY de tipo LocalCreateDTO
+  // esta a su vez esta compuesto de los siguientes datos : name, address, schedule, description (todos strings)
+  @Post()
+  @Roles(Role.LOCALADMIN)
+  public async postLocal(
+    @Body(ValidationPipe) request: LocalCreateDTO,
+  ): Promise<LocalResponseDTO> {
+    if (request) {
+      await this.localService.create(request);
+      const response: LocalResponseDTO = {
+        data: 'Se creó un local',
+        statusCode: 200,
+        statusDescription: 'Listo',
+        error: null,
+      } as LocalResponseDTO;
 
       return response;
-
     }
   }
 
-    // Esta funcion retorna todos los productos de un local, tiene que como parametro la ID de este local,
-    // llama al local service y hace un peticion al repositorio de productos.
-    @Get('/products/:id')
-    public async getProducts(@Param('id', ParseIntPipe) localId : number) : Promise<ProductEntity[]>{
-        const products = this.productService.findAllProductsFromLocal(localId);
-        return products;
-    }
+  // Esta funcion retorna todos los productos de un local, tiene que como parametro la ID de este local,
+  // llama al local service y hace un peticion al repositorio de productos.
+  @Get('/products/:id')
+  public async getProducts(
+    @Param('id', ParseIntPipe) localId: number,
+  ): Promise<ProductEntity[]> {
+    const products = this.productService.findAllProductsFromLocal(localId);
+    return products;
+  }
 
-    // Esta funcion retorna la informacion de un local(id,nombre,descripcion,horario,dirección), tiene como parametro la ID
-    //, llama al local service y hace un peticion.
-    @Get(':id')
-    public async getInfo(@Param('id', ParseIntPipe) localId : number) : Promise<LocalEntity> {
-        const local : Promise<LocalEntity> = this.localService.getLocal(localId);
-        return local;
-    }
+  // Esta funcion retorna la informacion de un local(id,nombre,descripcion,horario,dirección), tiene como parametro la ID
+  //, llama al local service y hace un peticion.
+  @Get(':id')
+  public async getInfo(
+    @Param('id', ParseIntPipe) localId: number,
+  ): Promise<LocalEntity> {
+    const local: Promise<LocalEntity> = this.localService.getLocal(localId);
+    return local;
+  }
 
-    // Esta funcion modifica la informacion de un local dado una id, esta informacion actualizada viene como parametro request de tipo LocalUpdateDTO,
-    // , llama al repositorio de local y pide actualizar columnas de un registro.
-    @Put(':id')
-    @Roles(Role.LOCALADMIN)
-    public async putLocal(@Param('id', ParseIntPipe) idLocal : number, @Body() request : LocalUpdateDTO) : Promise<UpdateResult | LocalResponseDTO> {
-        if (Object.keys(request).length == 0){
-            throw new BadRequestException('Viene vacio');
-        }
-        const servResponse = await this.localService.updateLocal(idLocal,request);
-        if (servResponse != undefined){
-            const response : LocalResponseDTO = {
-                data : null,
-                statusCode: 200,
-                statusDescription:'Listo',
-                error : null
-                } as LocalResponseDTO;
-            return response;
-        }
-        return servResponse;
-        
+  // Esta funcion modifica la informacion de un local dado una id, esta informacion actualizada viene como parametro request de tipo LocalUpdateDTO,
+  // , llama al repositorio de local y pide actualizar columnas de un registro.
+  @Put(':id')
+  @Roles(Role.LOCALADMIN)
+  public async putLocal(
+    @Param('id', ParseIntPipe) idLocal: number,
+    @Body() request: LocalUpdateDTO,
+  ): Promise<UpdateResult | LocalResponseDTO> {
+    if (Object.keys(request).length == 0) {
+      throw new BadRequestException('Viene vacio');
     }
-
+    const servResponse = await this.localService.updateLocal(idLocal, request);
+    if (servResponse != undefined) {
+      const response: LocalResponseDTO = {
+        data: null,
+        statusCode: 200,
+        statusDescription: 'Listo',
+        error: null,
+      } as LocalResponseDTO;
+      return response;
+    }
+    return servResponse;
+  }
 
   // Esta funcion retornar todos los locales guardados en el repositorio.
   @Get()
@@ -91,7 +106,9 @@ export class LocalController {
 
   @Get('/orders/:id')
   @Roles(Role.LOCALADMIN)
-  public async getAllOrders(@Param('id', ParseIntPipe) id: number): Promise<OrderEntity[]> {
+  public async getAllOrders(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<OrderEntity[]> {
     const local = await this.localService.getLocal(id);
     const orders = await this.orderService.findOrdersFromOneLocal(local);
     return orders;

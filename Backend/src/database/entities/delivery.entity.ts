@@ -1,25 +1,31 @@
-import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { OrderEntity } from './order.entity';
 
-@Entity({name : 'delivery'})
+@Entity({ name: 'delivery' })
 export class DeliveryEntity {
-    constructor(private data : Partial<DeliveryEntity>) {
-        Object.assign(this, data);
-    }
+  constructor(private data: Partial<DeliveryEntity>) {
+    Object.assign(this, data);
+  }
 
-    @PrimaryGeneratedColumn()
-    deliveryId: number;
+  @PrimaryGeneratedColumn()
+  deliveryId: number;
 
-    @Column()
-    username: string;
+  @Column()
+  username: string;
 
-    @Column()
-    password: string;
+  @Column()
+  password: string;
 
-    @Column({ default: false })
-    activity: boolean;
+  @Column({ default: false })
+  activity: boolean;
 
-    @OneToMany(() => OrderEntity, (order) => order.delivery)
-    @JoinColumn({name : 'orderId'})
-    orders : OrderEntity[];
+  @OneToMany(() => OrderEntity, (order) => order.userDelivery)
+  @JoinColumn({ name: 'orderId' })
+  orders: OrderEntity[];
 }

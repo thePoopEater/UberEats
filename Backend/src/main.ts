@@ -33,8 +33,6 @@ async function bootstrap() {
   const documentacion = SwaggerModule.createDocument(app, configuracion); //
   SwaggerModule.setup('api/doc', app, documentacion);
 
-  await app.listen(3000, '192.168.0.10', function(){
-      console.log('Listening to Port: ' + 3000);
-  });
+  await app.listen(3000);
 }
 bootstrap();
