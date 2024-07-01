@@ -1,5 +1,5 @@
 export class Order {
-  deliverId: number = 0;
+  deliveryId: number = 0;
   orderId: number = 0;
   localId: number = 0;
   userId: number = 0;
@@ -24,8 +24,8 @@ export class OrderCreateDTO {
     this.userId = userId;
     this.date = new Date();
     this.state = "Carrito";
-    this.address = "Falta";
-    this.payMethod = "Falta";
+    this.address = "";
+    this.payMethod = "";
     this.amount = 0;
   }
 }

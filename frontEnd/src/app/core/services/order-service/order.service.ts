@@ -21,6 +21,7 @@ import { Product } from "../../models/class/product";
 import { AuthService } from "../auth-service/auth.service";
 import { ProductsFromOrder } from "../../models/class/ProductsFromOrder";
 import { ProductosService } from "../producto-service/productos.service";
+import { Address } from "../../models/class/address";
 @Injectable({
   providedIn: "root",
 })
@@ -92,7 +93,11 @@ export class OrderService {
     return [carrito_order, order_products];
   }
 
-  public async confirmOrder(order_id: number): Promise<Observable<any>> {
+  public async confirmOrder(
+    order_id: number,
+    address: string,
+    payMethod: string
+  ): Promise<Observable<any>> {
     let amount: number = 0;
     const token = this.userService.getToken();
     const headers = new HttpHeaders().set("Authorization", `Bearer ${token}`);
@@ -104,7 +109,12 @@ export class OrderService {
     }
     return this.httpClient.put<any>(
       env.ULR_PUT_ORDER + order_id,
-      { state: "Pending", amount: amount },
+      {
+        state: "Pending",
+        amount: amount,
+        address: address,
+        payMethod: payMethod,
+      } as Order,
       { headers: headers }
     );
   }
@@ -153,7 +163,7 @@ export class OrderService {
     let ordersDeliver: Order[] = [];
     for (let order of orders) {
       console.log(order, deliverId);
-      if (order.deliverId == deliverId) {
+      if (order.deliveryId == deliverId) {
         ordersDeliver.push(order);
       }
     }
@@ -184,7 +194,7 @@ export class OrderService {
     return pendingOrders;
   }
 
-  public getAllOrders(): Observable<Order[]> {
+  public getAllOrders() {
     const token = this.userService.getToken();
     const headers = new HttpHeaders().set("Authorization", `Bearer ${token}`);
     return this.httpClient.get<Order[]>(env.URL_GET_ALL_ORDERS, {

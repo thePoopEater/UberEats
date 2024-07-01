@@ -41,6 +41,10 @@ export class NavbarComponent implements OnInit {
       if (this.authService.getRole() == ROLES.DELIVERY) {
         this.router.navigate(["/", "deliver"]);
       }
+
+      if (this.authService.getRole() == ROLES.LOCALADMIN) {
+        this.router.navigate(["/", "adminLocal"]);
+      }
     } else {
       this.router.navigate(["/", "home"]);
     }

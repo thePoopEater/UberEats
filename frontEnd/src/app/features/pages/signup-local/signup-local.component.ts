@@ -9,6 +9,7 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "../../../core/services/auth-service/auth.service";
+import { ROLES } from "../../../core/enviroment/enviroment";
 
 @Component({
   selector: "app-signup-local",
@@ -47,6 +48,11 @@ export class SignupLocalComponent {
     const email: string = this.signup_local_form.controls["email"].value;
     const password: string = this.signup_local_form.controls["password"].value;
     const address: string = this.signup_local_form.controls["address"].value;
-    this.router.navigate(["local/admin"]);
+    console.log(name, last_name, email, password);
+    this.authService
+      .register(name, last_name, email, password, ROLES.LOCALADMIN)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 }

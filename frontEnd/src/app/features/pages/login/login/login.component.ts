@@ -6,6 +6,7 @@ import { UserResponse } from "../../../../core/models/class/User";
 import { Router, RouterLink } from "@angular/router";
 import { firstValueFrom } from "rxjs";
 import { JwtDecoderService } from "../../../../core/services/jwt-decoder/jwt-decoder.service";
+import { ROLES } from "../../../../core/enviroment/enviroment";
 
 @Component({
   selector: "app-login",
@@ -46,14 +47,14 @@ export class LoginComponent implements OnInit {
 
       console.log("Este es el token decodificado", decodeJWT.role);
       // Aca falta un enum para los roles
-      if (decodeJWT.role == "client") {
+      if (decodeJWT.role == ROLES.CLIENT) {
         this.router.navigate(["/inicio"]);
       }
-      if (decodeJWT.role == "delivery") {
+      if (decodeJWT.role == ROLES.DELIVERY) {
         this.router.navigate(["/deliver"]);
       }
-      if (decodeJWT.role == "localAdmin") {
-        this.router.navigate(["local/admin"]);
+      if (decodeJWT.role == ROLES.LOCALADMIN) {
+        this.router.navigate(["/adminLocal"]);
       }
     } catch (error) {
       console.error("Error al iniciar sesion", error);

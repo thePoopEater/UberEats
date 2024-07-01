@@ -2,7 +2,7 @@
 
 <div *ngFor="let order of this.ordersWithProducts" style="padding:1rem 2rem;">
 
-    <div *ngIf="order.order.state== 'Cancel'"class="card border-danger mb-3" style="width: 45rem;">
+    <div class="card" style="width: 45rem;">
         <div class="row" style="padding:1rem;">
             <div class="col-md-6">
                 <h3 class="card-subtitle mb-2 text-body-secondary" style="padding-top:1rem ;"><strong>Estado: </strong>{{order.order.state}}</h3>
@@ -25,50 +25,5 @@
         </div>
     </div>
 
-    <div  *ngIf="order.order.state== 'Pending'" class="card border-warning mb-3" style="width: 45rem;">
-        <div class="row" style="padding:1rem;">
-            <div class="col-md-6">
-                <h3 class="card-subtitle mb-2 text-body-secondary" style="padding-top:1rem ;"><strong>Estado: </strong>{{order.order.state}}</h3>
-                <h6 class="card-subtitle mb-2 text-body-secondary" style="padding-top:0.5rem ;"><strong>Order Id:</strong>  {{order.order.orderId}}</h6>
-                <h6 class="card-subtitle mb-2" style="padding-top:0.5rem ;"><strong>Dirección:  </strong> {{order.order.address}}</h6>
-                <h6 class="card-subtitle mb-2" style="padding-top:0.5rem ;"><strong>Total:   </strong> {{order.order.amount}}</h6>
-            </div>
-            <div class="col-md-5">
-                <h5 class="card-title">Productos del pedido</h5>
-                <ul class="list-group" >
-                    <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let product of order.productsOrder">
-                      <div class="ms-2 me-auto">
-                        <div class="fw-bold">{{product.product_name}}</div>
-                        {{product.product_price}}
-                      </div>
-                      <span class="badge text-bg-primary">{{product.orderProduct_quantity}}</span>
-                    </li>
-                  </ul>
-            </div>          
-        </div>
-    </div>
-
-    <div *ngIf="order.order.state== 'Selected'" class="card border-success mb-3" style="width: 45rem;">
-        <div class="row" style="padding:1rem;">
-            <div class="col-md-6">
-                <h3 class="card-subtitle mb-2 text-body-secondary" style="padding-top:1rem ;"><strong>Estado: </strong>{{order.order.state}}</h3>
-                <h6 class="card-subtitle mb-2 text-body-secondary" style="padding-top:0.5rem ;"><strong>Order Id:</strong>  {{order.order.orderId}}</h6>
-                <h6 class="card-subtitle mb-2" style="padding-top:0.5rem ;"><strong>Dirección:  </strong> {{order.order.address}}</h6>
-                <h6 class="card-subtitle mb-2" style="padding-top:0.5rem ;"><strong>Total:   </strong> {{order.order.amount}}</h6>
-            </div>
-            <div class="col-md-5">
-                <h5 class="card-title">Productos del pedido</h5>
-                <ul class="list-group" >
-                    <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let product of order.productsOrder">
-                      <div class="ms-2 me-auto">
-                        <div class="fw-bold">{{product.product_name}}</div>
-                        {{product.product_price}}
-                      </div>
-                      <span class="badge text-bg-primary">{{product.orderProduct_quantity}}</span>
-                    </li>
-                  </ul>
-            </div>          
-        </div>
-    </div>
           
 </div>

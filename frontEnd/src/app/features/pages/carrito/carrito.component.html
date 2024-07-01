@@ -31,7 +31,7 @@
 
   </div>
   <h5>Direccion</h5>
-      <select class="form-select" aria-label="Default select example">
+      <select class="form-select" aria-label="Default select example" #address>
         <option value="">Seleccione una direccion</option>
           <option *ngFor="let address of this.addresses" [value]="address.name">
             {{ address.name }}
@@ -40,14 +40,14 @@
       </select>
       
       <h5>Metodo de pago</h5>
-      <select class="form-select" id="">
+      <select class="form-select" id="" #payMethod>
         <option value="">Efectivo</option>
         <option value="">Tarjeta debito</option>
         <option value="">Tarjeta credito</option>
       </select>
       <ul>
         <button class="btn btn-danger" (click)="emptyCart()">Vaciar Carrito</button>
-        <button class = "boton-continuar" (click)="confirmOrder()">Continuar</button>
+        <button class = "boton-continuar" (click)="confirmOrder(payMethod.value,address.value)">Continuar</button>
       </ul>
    </div>
     

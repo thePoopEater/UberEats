@@ -39,11 +39,14 @@ export class CarritoComponent implements OnInit {
       });
   }
 
-  public async confirmOrder() {
+  public async confirmOrder(address: string, payMethod: string) {
+    console.log(address, payMethod);
     console.log(
       (
         await this.orderService.confirmOrder(
-          this.orderWithProducts.order.orderId
+          this.orderWithProducts.order.orderId,
+          address,
+          payMethod
         )
       ).subscribe((response) => {
         console.log(response);
