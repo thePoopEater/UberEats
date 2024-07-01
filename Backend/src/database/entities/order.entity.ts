@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany,ManyToOne} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToMany,ManyToOne} from 'typeorm';
 import { LocalEntity } from './local.entity';
 import { OrderProductEntity } from './order-products.entity';
 import { UserEntity } from './user.entity';
+import { DeliveryEntity } from './delivery.entity';
 
 @Entity({name :'order'})
 export class OrderEntity {
@@ -38,4 +39,8 @@ export class OrderEntity {
     @OneToMany(() => OrderProductEntity, (orderProduct) => orderProduct.order)
     @JoinColumn({name:'orderId'})
     orderProducts : OrderProductEntity[];
+
+    @ManyToOne(() => DeliveryEntity, (delivery) => delivery.deliveryId)
+    @JoinColumn({name: 'deliveryId'})
+    delivery : DeliveryEntity;
 }
