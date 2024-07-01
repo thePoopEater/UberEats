@@ -15,7 +15,7 @@ import { LocalEntity } from 'src/database/entities/local.entity';
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => ({
         secret: configService.get('JWT_SECRET'),
-        signOptions: { expiresIn: '15m' },
+        signOptions: { expiresIn: '1h' },
       }),
       inject: [ConfigService],
     }),
