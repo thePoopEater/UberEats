@@ -7,10 +7,12 @@ export const env = {
   URL_GET_ORDER: "http://localhost:3000/order/",
   URL_POST_ORDER_PRODUCT: "http://localhost:3000/order-product",
   URL_ALL_LOCAL: "http://localhost:3000/local",
+  URL_EDIT_LOCAL: "http://localhost:3000/local/",
   URL_LOCAL: "http://localhost:3000/local/",
   URL_ALL_PRODS_FROM_LOCAL: "http://localhost:3000/local/products/",
   URL_PROD: "http://localhost:3000/product/",
   URL_GET_LOCAL_FROM_ADMIN : "http://localhost:3000/local/",
   URL_GET_ORDERS_FROM_LOCAL : "http://localhost:3000/local/orders/",
-  URL_GET_PRODUCTS_FROM_ORDER : "http://localhost:3000/order/products/"
+  URL_GET_PRODUCTS_FROM_ORDER : "http://localhost:3000/order/products/",
+  URL_DEL_ORDER : "http://localhost:3000/order/"
 };

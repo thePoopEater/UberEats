@@ -1,1 +1,38 @@
-<p>editar-datos works!</p>
+<div class="container">
+
+  <form [formGroup]="editDataForm"> 
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Name</label>
+      <input type="text" formControlName="nameLocal" class="form-control" id="inputEmail4" placeholder="Nombre de local" >
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Dirección</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="addresHelp" placeholder="" formControlName="address" >
+      </div>
+    <div class="form-group">
+      <label for="inputAddress">Link image</label>
+      <input type="text" formControlName="image" class="form-control" id="inputAddress">
+    </div>
+    <div class="form-group">
+      <label for="inputAddress2">Descripción</label>
+      <input type="text" formControlName="description" class="form-control" id="inputAddress2" >
+    </div>
+    <div class="form-group">
+      <label for="inputAddress3">Horario</label>
+      <input type="text" formControlName="schedule" class="form-control" id="inputAddress3" >
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="inputState">Categoria</label>
+        <select id="inputState" class="form-control" formControlName="category">
+          <option selected>{{local.category}}</option>
+          <option>Comida rápida</option>
+          <option>Restaurant</option>
+          <option>Sushi</option>
+          <option>Comida Peruana</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="editData()">Editar Datos</button>
+  </form>
+</div>

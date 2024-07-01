@@ -1,10 +1,11 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, Input} from "@angular/core";
 import { Local } from "../../../core/models/class/local";
 import { LocalService } from "../../../core/services/local-service/local.service";
 import { JwtDecoderService } from "../../../core/services/jwt-decoder/jwt-decoder.service";
 import { OnInit } from "@angular/core";
 import { RouterModule } from "@angular/router";
-
+import { Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 @Component({
   selector: "app-local-admin",
   standalone: true,
@@ -13,9 +14,13 @@ import { RouterModule } from "@angular/router";
   styleUrl: "./local-admin.component.css",
 })
 export default class LocalAdminComponent {
+
+  constructor(
+    private readonly router : Router,
+  ){}
   private readonly _locals$ = inject(LocalService);
   private readonly _tokenDecode = inject(JwtDecoderService);
-
+  @Input("idLocal") idLocal!: string;
   private idLocalAdmin!: number;
   public local! : Local;
 
@@ -29,4 +34,7 @@ export default class LocalAdminComponent {
     });
   }
 
+  public goToEdit(idLocal : number){
+    this.router.navigateByUrl("adminLocal/editar/"+idLocal);
+  }
 }

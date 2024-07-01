@@ -27,3 +27,11 @@ export class Local {
     // }
 
 }
+
+export class LocalUpdate {
+    name : string = "";
+    address : string = "";
+    image : string = "";
+    schedule : string = "";
+    category : string = "";
+}

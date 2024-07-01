@@ -11,6 +11,10 @@ export const routes : Routes = [
     {
         path: 'pedidos',
         loadComponent: () => import('./ver-pedidos/ver-pedidos.component')
+    },
+    {
+        path: 'editar/:idLocal',
+        loadComponent: () => import('./editar-datos/editar-datos.component')
     }
 ]
 

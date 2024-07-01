@@ -26,10 +26,9 @@ export default class VerPedidosComponent {
 
   public orderLocal : Order[] = [];
   private readonly token : string = sessionStorage.getItem('Token')!;
+  private readonly idAdmin : number = this._jwtDecoderService$.decodetoken(this.token).sub
   ngOnInit(){
-    const idAdmin = this._jwtDecoderService$.decodetoken(this.token).sub;
-    console.log(idAdmin);
-    this._localService$.getLocalFromAdmin(idAdmin).subscribe(
+    this._localService$.getLocalFromAdmin(this.idAdmin).subscribe(
       (data) => {
         this.idLocal = data.id;
         this._localService$.getOrdersFromLocal(this.idLocal, this.token).subscribe(
@@ -65,6 +64,18 @@ export default class VerPedidosComponent {
   }
 
   public close() {
+    this.showDetails = false;
+  }
+
+  public cancelarOrden(idOrder : number){
+    this._localService$.delOrder(idOrder, this.token);
+    this.orderSelect = new Order();
+
+    this._localService$.getOrdersFromLocal(this.idAdmin, this.token).subscribe(
+      (data ) => {
+        this.orderLocal = data;
+      }
+    )
     this.showDetails = false;
   }
 }

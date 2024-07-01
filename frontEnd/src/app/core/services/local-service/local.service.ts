@@ -1,6 +1,6 @@
 import { Injectable, signal } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Local } from "../../models/class/local";
+import { Local, LocalUpdate } from "../../models/class/local";
 import { Observable } from "rxjs";
 import { env } from "../../enviroment/enviroment";
 import { Order } from "../../models/class/orders";
@@ -25,6 +25,19 @@ export class LocalService {
     return this.http.get<Local>(env.URL_GET_LOCAL_FROM_ADMIN + idAdminLocal);
   }
 
+  public editLocal(idLocal : number, localData: LocalUpdate, token : string){
+    const header = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const body = {
+      "name": localData.name,
+      "address": localData.address,
+      "image": localData.image,
+      "schedule": localData.schedule,
+      "category": localData.category,
+    }
+    console.log("hola sigo aqui")
+    return this.http.put<any>(env.URL_EDIT_LOCAL + idLocal, body, {headers : header}) 
+  }
+
   public getOrdersFromLocal(idLocal : number, token : string) : Observable<Order[]> {
     const header = new HttpHeaders().set('Authorization', `Bearer ${token}`)
     return this.http.get<Order[]>(env.URL_GET_ORDERS_FROM_LOCAL + idLocal, {
@@ -45,4 +58,11 @@ export class LocalService {
       headers : header,
     });
   } 
+
+  public delOrder(idOrder : number, token : string){
+    const header = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete(env.URL_DEL_ORDER, {
+      headers : header,
+    })
+  }
 }
