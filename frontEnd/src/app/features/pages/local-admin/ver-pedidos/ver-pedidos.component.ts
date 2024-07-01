@@ -45,7 +45,7 @@ export default class VerPedidosComponent {
 
   public verDetalles(idOrder : number)
   {
-    console.log(idOrder);
+    console.log("id order:",idOrder);
     this._localService$.getOrder(idOrder, this.token).subscribe(
       (data) => {
         this.orderSelect = data;
