@@ -11,16 +11,19 @@
         <li class="nav-item"*ngIf=isLoggedIn>
           <a class="nav-link" href="/profile">Perfil</a>
       </li>
-      <li class="nav-item"*ngIf=isLoggedIn>
-        <a class="nav-link" href="/orders">Pedidos</a>
-    </li>
+        <li class="nav-item"*ngIf="isLoggedIn && isUser()">
+          <a class="nav-link" href="/orders">Pedidos</a>
+      </li>
+        <li class="nav-item"*ngIf="isLoggedIn && isDeviler()">
+          <a class="nav-link" href="/orders/deliver">Pedidos</a>
+      </li>
         <li class="nav-item"*ngIf=!isLoggedIn>
               <a class="nav-link" href="/signup">Registrarse</a>
           </li>
           <li class="nav-item"*ngIf=!isLoggedIn>
               <a class="nav-link" href="/login">Iniciar sesion</a>
           </li>
-          <li class="nav-item" *ngIf= isLoggedIn>
+          <li class="nav-item" *ngIf=" isLoggedIn && isUser()">
             <a class="nav-link" href="/carrito">Carrito</a>
         </li>
         

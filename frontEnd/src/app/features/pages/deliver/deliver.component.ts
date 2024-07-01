@@ -5,6 +5,7 @@ import { CommonModule } from "@angular/common";
 import { ProductsFromOrder } from "../../../core/models/class/ProductsFromOrder";
 import { Product } from "../../../core/models/class/product";
 import { OrderWithProducts } from "../../../core/models/class/OrderWithProducts";
+import { AuthService } from "../../../core/services/auth-service/auth.service";
 
 @Component({
   selector: "app-deliver",
@@ -15,7 +16,10 @@ import { OrderWithProducts } from "../../../core/models/class/OrderWithProducts"
 })
 export class DeliverComponent {
   orders: OrderWithProducts[] = [];
-  constructor(private orderService: OrderService) {}
+  constructor(
+    private orderService: OrderService,
+    private deliveryService: AuthService
+  ) {}
   async ngOnInit() {
     const orders = await this.orderService.getPendingOrders();
 
@@ -31,9 +35,14 @@ export class DeliverComponent {
   }
 
   public selectOrder(orderId: number) {
-    this.orderService.acceptOrderFromDelivery(orderId).subscribe((response) => {
-      console.log(response);
-    });
+    this.orderService
+      .acceptOrderFromDelivery(
+        orderId,
+        this.deliveryService.getTokenDecoded().sub
+      )
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
   public async getLocalFromOrder() {}

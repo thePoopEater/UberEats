@@ -1,4 +1,4 @@
-import { Injectable, inject } from "@angular/core";
+import { DestroyRef, Injectable, inject } from "@angular/core";
 import { Order, OrderCreateDTO } from "../../models/class/orders";
 import {
   HttpClient,
@@ -147,6 +147,19 @@ export class OrderService {
       headers: headers,
     });
   }
+  public async getOrdersDeliver(deliverId: number) {
+    console.log(await lastValueFrom(this.getAllOrders()));
+    const orders: Order[] = await lastValueFrom(this.getAllOrders());
+    let ordersDeliver: Order[] = [];
+    for (let order of orders) {
+      console.log(order, deliverId);
+      if (order.deliverId == deliverId) {
+        ordersDeliver.push(order);
+      }
+    }
+    return ordersDeliver;
+  }
+
   public updateProductOrder(productOrder: ProductOrder, product_id: number) {
     const token = this.userService.getToken();
     const headers = new HttpHeaders().set("Authorization", `Bearer ${token}`);
@@ -179,12 +192,13 @@ export class OrderService {
     });
   }
 
-  public acceptOrderFromDelivery(orderId: number) {
+  public acceptOrderFromDelivery(orderId: number, deliveryId: number) {
     const token = this.userService.getToken();
     const headers = new HttpHeaders().set("Authorization", `Bearer ${token}`);
+    console.log(deliveryId);
     return this.httpClient.put(
-      env.ULR_PUT_ORDER + orderId,
-      { state: "Accepted" },
+      env.ULR_PUT_ORDER_ACCEPTED + orderId,
+      { state: "Accepted", deliveryId: deliveryId },
       {
         headers: headers,
       }

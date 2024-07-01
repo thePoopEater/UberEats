@@ -3,6 +3,7 @@ import { AuthService } from "../../../core/services/auth-service/auth.service";
 import { Router, RouterOutlet } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { Observable } from "rxjs";
+import { ROLES } from "../../../core/enviroment/enviroment";
 
 @Component({
   selector: "app-navbar",
@@ -23,7 +24,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.authService.isLoggedIn.subscribe((loggedIn) => {
       this.isLoggedIn = loggedIn;
-      console.log(loggedIn);
     });
   }
 
@@ -34,9 +34,21 @@ export class NavbarComponent implements OnInit {
 
   public renavigate() {
     if (this.authService.isAuth()) {
-      this.router.navigate(["/", "inicio"]);
+      if (this.authService.getRole() == ROLES.CLIENT) {
+        this.router.navigate(["/", "inicio"]);
+      }
+
+      if (this.authService.getRole() == ROLES.DELIVERY) {
+        this.router.navigate(["/", "deliver"]);
+      }
     } else {
       this.router.navigate(["/", "home"]);
     }
+  }
+  public isUser() {
+    return this.authService.getRole() == ROLES.CLIENT;
+  }
+  public isDeviler() {
+    return this.authService.getRole() == ROLES.DELIVERY;
   }
 }

@@ -1,4 +1,5 @@
 export class Order {
+  deliverId: number = 0;
   orderId: number = 0;
   localId: number = 0;
   userId: number = 0;

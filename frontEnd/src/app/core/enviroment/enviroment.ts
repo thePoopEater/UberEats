@@ -15,6 +15,7 @@ export const env = {
   URL_ORDERS_USER: "http://localhost:3000/order/client/",
   URL_GET_ORDER_PRODUCTS: "http://localhost:3000/order/products/",
   URL_PUT_ORDER_PRODUCT: "http://localhost:3000/orderProduct/",
+  ULR_PUT_ORDER_ACCEPTED: "http://localhost:3000/order/deliver/",
   ULR_PUT_ORDER: "http://localhost:3000/order/",
   URL_GET_ALL_ORDERS: "http://localhost:3000/order",
   URL_POST_DELIVERY: "http://localhost:3000/delivery",

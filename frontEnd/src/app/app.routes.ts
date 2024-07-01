@@ -19,6 +19,7 @@ import { LocalAdminComponent } from "./features/pages/local-admin/local-admin.co
 import { ProfileComponent } from "./features/pages/profile/profile.component";
 import { OrdersUserComponent } from "./features/pages/orders-user/orders-user.component";
 import { ROLES } from "./core/enviroment/enviroment";
+import { OrdersDeliverComponent } from "./features/pages/orders-deliver/orders-deliver.component";
 
 export const routes: Routes = [
   {
@@ -41,6 +42,8 @@ export const routes: Routes = [
   {
     path: "deliver",
     component: DeliverComponent,
+    canActivate: [hasRoleGuard],
+    data: { role: ROLES.DELIVERY },
   },
   {
     path: "signup/local",
@@ -74,7 +77,12 @@ export const routes: Routes = [
     canActivate: [hasRoleGuard],
     data: { role: ROLES.CLIENT },
   },
-
+  {
+    path: "orders/deliver",
+    component: OrdersDeliverComponent,
+    canActivate: [hasRoleGuard],
+    data: { role: ROLES.DELIVERY },
+  },
   {
     path: "local/:{idLocal}",
     component: LocalComponent,

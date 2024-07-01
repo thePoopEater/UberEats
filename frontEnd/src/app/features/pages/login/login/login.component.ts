@@ -48,7 +48,9 @@ export class LoginComponent implements OnInit {
       if (decodeJWT.role == "client") {
         this.router.navigate(["/inicio"]);
       }
-
+      if (decodeJWT.role == "delivery") {
+        this.router.navigate(["/deliver"]);
+      }
       if (decodeJWT.role == "localAdmin") {
         this.router.navigate(["local/admin"]);
       }
