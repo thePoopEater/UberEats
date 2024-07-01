@@ -61,7 +61,7 @@ export class LocalService {
 
   public delOrder(idOrder : number, token : string){
     const header = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.delete(env.URL_DEL_ORDER, {
+    return this.http.put(env.URL_DEL_ORDER, {"state": "Cancelado"}, {
       headers : header,
     })
   }

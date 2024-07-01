@@ -1,6 +1,22 @@
+
 .header-local {
-    background-image : url("https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_956,h_638/v1688056218/assets/c8/c93654-b159-43ea-9cc8-987f4ca2b290/original/Uber-Eats-for-Merchants---Instagram.png");
+    width: 100%;
+    background-image: url("https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_956,h_638/v1688056218/assets/c8/c93654-b159-43ea-9cc8-987f4ca2b290/original/Uber-Eats-for-Merchants---Instagram.png");
+    background-position: center;
+    background-size: cover;
+
+    background-image : linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url("https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_956,h_638/v1688056218/assets/c8/c93654-b159-43ea-9cc8-987f4ca2b290/original/Uber-Eats-for-Merchants---Instagram.png");
     height: 20rem;
+
+}
+.map {
+    float: right;
+    margin-top: -7rem;
+    margin-right: 5rem;
+}
+.title-local {
+    color: #fff;
+    padding: 2rem;
 }
 
 
@@ -37,6 +53,7 @@ main {
     align-items: center;
     max-height: 100%;
     margin-left: 2rem;
+    justify-content: space-evenly;
 }
 .datos-local {
     width: 50%;
@@ -50,5 +67,5 @@ main {
     height: 4rem;
     margin-top: 0.5rem;
     margin-left: 1rem;
-
 }
+
