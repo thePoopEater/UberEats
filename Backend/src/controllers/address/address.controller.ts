@@ -61,6 +61,11 @@ export class AddressController {
     return await this.addressService.getAllAddresses();
   }
 
+  @Roles(Role.CLIENT)
+  @Get('user/:id')
+  public async getAllAdressesFromUser(@Param('id') userId: number) {
+    return this.getAllAdressesFromUser(userId);
+  }
   //Función que permite obtener por un id específico una dirección.
   @Get(':id')
   public async getAddress(
