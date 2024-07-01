@@ -1,0 +1,65 @@
+<main>
+
+  <table class="table" >
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">N° Orden</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Medio de Pago</th>
+        <th scope="col">Monto</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of  orderLocal">
+        <th scope="row">{{order.orderId}}</th>
+        <td>{{order.date}}</td>
+        <td>{{order.state}}</td>
+        <td>{{order.payMethod}}</td>
+        <td>${{order.amount}}</td>
+        <td><button class="btn btn-primary button" (click)="verDetalles(order.orderId)">Ver</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+  <div class="card modal-class" *ngIf="showDetails">
+    <div class="card-header">
+      Detalle de Orden
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">Orden: {{orderSelect.orderId}}</h4>
+      <h4 >Medio Pago</h4>
+      <p>{{orderSelect.payMethod}}</p>
+      <h2>Estado</h2>
+      <p>{{orderSelect.state}}</p>
+      <h4>Detalles</h4>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio</th>
+            <th scope="col">SubTotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prod of products">
+            <th scope="row">{{prod.product_name}}</th>
+            <th scope="row">{{prod.orderProduct_quantity}}</th>
+            <th scope="row">$ {{prod.product_price}}</th>
+            <th scope="row">$ {{prod.product_price*prod.orderProduct_quantity}}</th>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Monto total</h4>
+      <p class="card-text">{{orderSelect.amount}}</p>
+      <div class="buttons">
+        <button class="btn btn-danger">Cancelar Orden</button>
+        <button class="btn btn-secondary" (click)="close()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+  </main>

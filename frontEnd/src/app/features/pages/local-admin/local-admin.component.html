@@ -1,1 +1,45 @@
-<h1>Vista del administrador del local</h1>
+<!-- Se muestra los datos del local -->
+<div class="header-local">
+    <h1 class="title-local">{{local.name}}</h1>
+
+</div>
+
+<main class="contenedor-datos">
+
+    <div class="container-data">
+
+        <div class="image-local">
+            <img class="img-fluid" src="{{local.image}}" alt="local">
+        </div>
+        
+        <div class="datos1">
+            
+            <button type="button" class="btn btn-success" routerLink="pedidos"> Ver pedidos</button>
+            <button type="button" class="btn btn-secondary" (click)="goToEdit(local.id)"> Editar Datos</button>
+        </div>
+    </div>
+
+    <!-- Datos de la tienda -->
+    <aside class="datos-local">
+        <div class="">
+
+            <div class="description">
+                <h2>Descripción</h2>
+                <p>{{local.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo atque exercitationem veniam officiis inventore aliquid harum in, ab, illum nihil fuga architecto quibusdam amet, optio fugiat incidunt tempore aperiam praesentium?</p>
+            </div>
+            <div class="direccion">
+                <h2>Dirección</h2>
+                <p>{{local.address}} </p>
+            </div>
+            <div class="horario-atencion">
+                <h2>Horario</h2>
+                <p>{{local.schedule}}</p>
+            </div>
+
+            <div class="categoria">
+                <h2>Categoria</h2>
+                <p>{{local.category}} lore</p>
+            </div>
+        </div>
+    </aside>
+</main>

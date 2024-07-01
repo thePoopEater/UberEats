@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LocalService } from '../../../../../core/services/local-service/local.service';
+import { jwtDecode } from 'jwt-decode';
+import { Local } from '../../../../../core/models/class/local';
+import { JwtDecoderService } from '../../../../../core/services/jwt-decoder/jwt-decoder.service';
 
 @Component({
   selector: 'app-inicio',
@@ -9,4 +13,8 @@ import { Component } from '@angular/core';
 })
 export class InicioComponent {
 
+
 }
+
+
+

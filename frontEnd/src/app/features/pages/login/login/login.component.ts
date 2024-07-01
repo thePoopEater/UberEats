@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
         password
       );
       const decodeJWT = this.jwtService.decodetoken(userResponse.accessToken);
+
       console.log("Este es el token decodificado", decodeJWT.role);
       // Aca falta un enum para los roles
       if (decodeJWT.role == "client") {

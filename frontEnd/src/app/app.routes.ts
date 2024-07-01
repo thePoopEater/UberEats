@@ -49,11 +49,12 @@ export const routes: Routes = [
     path: "signup/local",
     component: SignupLocalComponent,
   },
+
   {
-    path: "local/admin",
-    component: LocalAdminComponent,
-    data: { role: "localAdmin" },
+    path: 'adminLocal', loadChildren: () => import('./features/pages/local-admin/local-admin.routes'),
+    data: {role : "adminLocal"}
   },
+
   {
     path: "login",
     component: LoginComponent,
